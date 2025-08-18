@@ -7,40 +7,40 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		007C26DE2E5354DC00720E08 /* PBXContainerItemProxy */ = {
+		007C27322E5360D100720E08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 007C26C82E5354DB00720E08 /* Project object */;
+			containerPortal = 007C271C2E5360D000720E08 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 007C26CF2E5354DB00720E08;
+			remoteGlobalIDString = 007C27232E5360D000720E08;
 			remoteInfo = "Minotaur-s";
 		};
-		007C26E82E5354DC00720E08 /* PBXContainerItemProxy */ = {
+		007C273C2E5360D100720E08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 007C26C82E5354DB00720E08 /* Project object */;
+			containerPortal = 007C271C2E5360D000720E08 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 007C26CF2E5354DB00720E08;
+			remoteGlobalIDString = 007C27232E5360D000720E08;
 			remoteInfo = "Minotaur-s";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		007C26D02E5354DB00720E08 /* Minotaur-s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		007C26DD2E5354DC00720E08 /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		007C26E72E5354DC00720E08 /* Minotaur-sUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		007C27242E5360D000720E08 /* Minotaur-s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		007C27312E5360D100720E08 /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		007C273B2E5360D100720E08 /* Minotaur-sUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		007C26D22E5354DB00720E08 /* Minotaur-s */ = {
+		007C27262E5360D000720E08 /* Minotaur-s */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Minotaur-s";
 			sourceTree = "<group>";
 		};
-		007C26E02E5354DC00720E08 /* Minotaur-sTests */ = {
+		007C27342E5360D100720E08 /* Minotaur-sTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Minotaur-sTests";
 			sourceTree = "<group>";
 		};
-		007C26EA2E5354DC00720E08 /* Minotaur-sUITests */ = {
+		007C273E2E5360D100720E08 /* Minotaur-sUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Minotaur-sUITests";
 			sourceTree = "<group>";
@@ -48,21 +48,21 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		007C26CD2E5354DB00720E08 /* Frameworks */ = {
+		007C27212E5360D000720E08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C26DA2E5354DC00720E08 /* Frameworks */ = {
+		007C272E2E5360D100720E08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C26E42E5354DC00720E08 /* Frameworks */ = {
+		007C27382E5360D100720E08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,22 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		007C26C72E5354DB00720E08 = {
+		007C271B2E5360D000720E08 = {
 			isa = PBXGroup;
 			children = (
-				007C26D22E5354DB00720E08 /* Minotaur-s */,
-				007C26E02E5354DC00720E08 /* Minotaur-sTests */,
-				007C26EA2E5354DC00720E08 /* Minotaur-sUITests */,
-				007C26D12E5354DB00720E08 /* Products */,
+				007C27262E5360D000720E08 /* Minotaur-s */,
+				007C27342E5360D100720E08 /* Minotaur-sTests */,
+				007C273E2E5360D100720E08 /* Minotaur-sUITests */,
+				007C27252E5360D000720E08 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		007C26D12E5354DB00720E08 /* Products */ = {
+		007C27252E5360D000720E08 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				007C26D02E5354DB00720E08 /* Minotaur-s.app */,
-				007C26DD2E5354DC00720E08 /* Minotaur-sTests.xctest */,
-				007C26E72E5354DC00720E08 /* Minotaur-sUITests.xctest */,
+				007C27242E5360D000720E08 /* Minotaur-s.app */,
+				007C27312E5360D100720E08 /* Minotaur-sTests.xctest */,
+				007C273B2E5360D100720E08 /* Minotaur-sUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,134 +95,134 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		007C26CF2E5354DB00720E08 /* Minotaur-s */ = {
+		007C27232E5360D000720E08 /* Minotaur-s */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 007C26F12E5354DC00720E08 /* Build configuration list for PBXNativeTarget "Minotaur-s" */;
+			buildConfigurationList = 007C27452E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-s" */;
 			buildPhases = (
-				007C26CC2E5354DB00720E08 /* Sources */,
-				007C26CD2E5354DB00720E08 /* Frameworks */,
-				007C26CE2E5354DB00720E08 /* Resources */,
+				007C27202E5360D000720E08 /* Sources */,
+				007C27212E5360D000720E08 /* Frameworks */,
+				007C27222E5360D000720E08 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				007C26D22E5354DB00720E08 /* Minotaur-s */,
+				007C27262E5360D000720E08 /* Minotaur-s */,
 			);
 			name = "Minotaur-s";
 			packageProductDependencies = (
 			);
 			productName = "Minotaur-s";
-			productReference = 007C26D02E5354DB00720E08 /* Minotaur-s.app */;
+			productReference = 007C27242E5360D000720E08 /* Minotaur-s.app */;
 			productType = "com.apple.product-type.application";
 		};
-		007C26DC2E5354DC00720E08 /* Minotaur-sTests */ = {
+		007C27302E5360D100720E08 /* Minotaur-sTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 007C26F42E5354DC00720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */;
+			buildConfigurationList = 007C27482E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */;
 			buildPhases = (
-				007C26D92E5354DC00720E08 /* Sources */,
-				007C26DA2E5354DC00720E08 /* Frameworks */,
-				007C26DB2E5354DC00720E08 /* Resources */,
+				007C272D2E5360D100720E08 /* Sources */,
+				007C272E2E5360D100720E08 /* Frameworks */,
+				007C272F2E5360D100720E08 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				007C26DF2E5354DC00720E08 /* PBXTargetDependency */,
+				007C27332E5360D100720E08 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				007C26E02E5354DC00720E08 /* Minotaur-sTests */,
+				007C27342E5360D100720E08 /* Minotaur-sTests */,
 			);
 			name = "Minotaur-sTests";
 			packageProductDependencies = (
 			);
 			productName = "Minotaur-sTests";
-			productReference = 007C26DD2E5354DC00720E08 /* Minotaur-sTests.xctest */;
+			productReference = 007C27312E5360D100720E08 /* Minotaur-sTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		007C26E62E5354DC00720E08 /* Minotaur-sUITests */ = {
+		007C273A2E5360D100720E08 /* Minotaur-sUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 007C26F72E5354DC00720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */;
+			buildConfigurationList = 007C274B2E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */;
 			buildPhases = (
-				007C26E32E5354DC00720E08 /* Sources */,
-				007C26E42E5354DC00720E08 /* Frameworks */,
-				007C26E52E5354DC00720E08 /* Resources */,
+				007C27372E5360D100720E08 /* Sources */,
+				007C27382E5360D100720E08 /* Frameworks */,
+				007C27392E5360D100720E08 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				007C26E92E5354DC00720E08 /* PBXTargetDependency */,
+				007C273D2E5360D100720E08 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				007C26EA2E5354DC00720E08 /* Minotaur-sUITests */,
+				007C273E2E5360D100720E08 /* Minotaur-sUITests */,
 			);
 			name = "Minotaur-sUITests";
 			packageProductDependencies = (
 			);
 			productName = "Minotaur-sUITests";
-			productReference = 007C26E72E5354DC00720E08 /* Minotaur-sUITests.xctest */;
+			productReference = 007C273B2E5360D100720E08 /* Minotaur-sUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		007C26C82E5354DB00720E08 /* Project object */ = {
+		007C271C2E5360D000720E08 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					007C26CF2E5354DB00720E08 = {
+					007C27232E5360D000720E08 = {
 						CreatedOnToolsVersion = 16.4;
 					};
-					007C26DC2E5354DC00720E08 = {
+					007C27302E5360D100720E08 = {
 						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 007C26CF2E5354DB00720E08;
+						TestTargetID = 007C27232E5360D000720E08;
 					};
-					007C26E62E5354DC00720E08 = {
+					007C273A2E5360D100720E08 = {
 						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 007C26CF2E5354DB00720E08;
+						TestTargetID = 007C27232E5360D000720E08;
 					};
 				};
 			};
-			buildConfigurationList = 007C26CB2E5354DB00720E08 /* Build configuration list for PBXProject "Minotaur-s" */;
+			buildConfigurationList = 007C271F2E5360D000720E08 /* Build configuration list for PBXProject "Minotaur-s" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 007C26C72E5354DB00720E08;
+			mainGroup = 007C271B2E5360D000720E08;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 007C26D12E5354DB00720E08 /* Products */;
+			productRefGroup = 007C27252E5360D000720E08 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				007C26CF2E5354DB00720E08 /* Minotaur-s */,
-				007C26DC2E5354DC00720E08 /* Minotaur-sTests */,
-				007C26E62E5354DC00720E08 /* Minotaur-sUITests */,
+				007C27232E5360D000720E08 /* Minotaur-s */,
+				007C27302E5360D100720E08 /* Minotaur-sTests */,
+				007C273A2E5360D100720E08 /* Minotaur-sUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		007C26CE2E5354DB00720E08 /* Resources */ = {
+		007C27222E5360D000720E08 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C26DB2E5354DC00720E08 /* Resources */ = {
+		007C272F2E5360D100720E08 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C26E52E5354DC00720E08 /* Resources */ = {
+		007C27392E5360D100720E08 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -232,21 +232,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		007C26CC2E5354DB00720E08 /* Sources */ = {
+		007C27202E5360D000720E08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C26D92E5354DC00720E08 /* Sources */ = {
+		007C272D2E5360D100720E08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C26E32E5354DC00720E08 /* Sources */ = {
+		007C27372E5360D100720E08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -256,20 +256,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		007C26DF2E5354DC00720E08 /* PBXTargetDependency */ = {
+		007C27332E5360D100720E08 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 007C26CF2E5354DB00720E08 /* Minotaur-s */;
-			targetProxy = 007C26DE2E5354DC00720E08 /* PBXContainerItemProxy */;
+			target = 007C27232E5360D000720E08 /* Minotaur-s */;
+			targetProxy = 007C27322E5360D100720E08 /* PBXContainerItemProxy */;
 		};
-		007C26E92E5354DC00720E08 /* PBXTargetDependency */ = {
+		007C273D2E5360D100720E08 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 007C26CF2E5354DB00720E08 /* Minotaur-s */;
-			targetProxy = 007C26E82E5354DC00720E08 /* PBXContainerItemProxy */;
+			target = 007C27232E5360D000720E08 /* Minotaur-s */;
+			targetProxy = 007C273C2E5360D100720E08 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		007C26EF2E5354DC00720E08 /* Debug */ = {
+		007C27432E5360D100720E08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -332,7 +332,7 @@
 			};
 			name = Debug;
 		};
-		007C26F02E5354DC00720E08 /* Release */ = {
+		007C27442E5360D100720E08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -388,14 +388,13 @@
 			};
 			name = Release;
 		};
-		007C26F22E5354DC00720E08 /* Debug */ = {
+		007C27462E5360D100720E08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -416,14 +415,13 @@
 			};
 			name = Debug;
 		};
-		007C26F32E5354DC00720E08 /* Release */ = {
+		007C27472E5360D100720E08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -444,7 +442,7 @@
 			};
 			name = Release;
 		};
-		007C26F52E5354DC00720E08 /* Debug */ = {
+		007C27492E5360D100720E08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -462,7 +460,7 @@
 			};
 			name = Debug;
 		};
-		007C26F62E5354DC00720E08 /* Release */ = {
+		007C274A2E5360D100720E08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -480,7 +478,7 @@
 			};
 			name = Release;
 		};
-		007C26F82E5354DC00720E08 /* Debug */ = {
+		007C274C2E5360D100720E08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -496,7 +494,7 @@
 			};
 			name = Debug;
 		};
-		007C26F92E5354DC00720E08 /* Release */ = {
+		007C274D2E5360D100720E08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -515,43 +513,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		007C26CB2E5354DB00720E08 /* Build configuration list for PBXProject "Minotaur-s" */ = {
+		007C271F2E5360D000720E08 /* Build configuration list for PBXProject "Minotaur-s" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C26EF2E5354DC00720E08 /* Debug */,
-				007C26F02E5354DC00720E08 /* Release */,
+				007C27432E5360D100720E08 /* Debug */,
+				007C27442E5360D100720E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		007C26F12E5354DC00720E08 /* Build configuration list for PBXNativeTarget "Minotaur-s" */ = {
+		007C27452E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-s" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C26F22E5354DC00720E08 /* Debug */,
-				007C26F32E5354DC00720E08 /* Release */,
+				007C27462E5360D100720E08 /* Debug */,
+				007C27472E5360D100720E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		007C26F42E5354DC00720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */ = {
+		007C27482E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C26F52E5354DC00720E08 /* Debug */,
-				007C26F62E5354DC00720E08 /* Release */,
+				007C27492E5360D100720E08 /* Debug */,
+				007C274A2E5360D100720E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		007C26F72E5354DC00720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */ = {
+		007C274B2E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C26F82E5354DC00720E08 /* Debug */,
-				007C26F92E5354DC00720E08 /* Release */,
+				007C274C2E5360D100720E08 /* Debug */,
+				007C274D2E5360D100720E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 007C26C82E5354DB00720E08 /* Project object */;
+	rootObject = 007C271C2E5360D000720E08 /* Project object */;
 }
