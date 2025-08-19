@@ -13,6 +13,7 @@ targets:
         SWIFT_VERSION: 5.0
         MARKETING_VERSION: 1.0
         CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
 
   Minotaur-sTests:
     type: bundle.unit-test
@@ -25,6 +26,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-sTests
         SWIFT_VERSION: 5.0
+        GENERATE_INFOPLIST_FILE: YES
 
   Minotaur-sUITests:
     type: bundle.ui-testing
@@ -37,3 +39,4 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-sUITests
         SWIFT_VERSION: 5.0
+        GENERATE_INFOPLIST_FILE: YES
