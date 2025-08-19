@@ -1,0 +1,9 @@
+# Ignorar o projeto gerado pelo XcodeGen
+*.xcodeproj
+
+# Ignorar dados de build do Xcode
+DerivedData/
+build/
+
+# Ignorar arquivos temporários
+*.xcurserdata

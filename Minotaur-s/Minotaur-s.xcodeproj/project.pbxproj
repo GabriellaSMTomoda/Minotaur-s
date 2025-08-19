@@ -6,277 +6,267 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		20873234D9580ED11E906771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA30FD7AE96E1563818BCD3 /* ContentView.swift */; };
+		2FF161EF5EF3648F377FD0E0 /* Minotaur_sUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */; };
+		40BF5F6F180E9F12F923B802 /* Minotaur_sUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F87DCE3DDD718A66DBE0185 /* Minotaur_sUITests.swift */; };
+		6386AC99785A76FAD6DB3C5F /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C71714F7AD76C70DE31F51 /* GameView.swift */; };
+		6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803F9AED4600A8448D843247 /* Assets.xcassets */; };
+		911AD7D23044E0C773BAE61B /* Minotaur_sApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */; };
+		948B8FA52CDAFE3C0C0D6041 /* Minotaur_sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C8965D55192F706B6420 /* Minotaur_sTests.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
-		007C27322E5360D100720E08 /* PBXContainerItemProxy */ = {
+		A996723B8A2C39EC0DEAEF12 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 007C271C2E5360D000720E08 /* Project object */;
+			containerPortal = AFE26FB2410B1E147BA9D36A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 007C27232E5360D000720E08;
+			remoteGlobalIDString = EBECEBA5C8E08608C34EC3A7;
 			remoteInfo = "Minotaur-s";
 		};
-		007C273C2E5360D100720E08 /* PBXContainerItemProxy */ = {
+		FF6FDAF5B3D4271F23A8F13B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 007C271C2E5360D000720E08 /* Project object */;
+			containerPortal = AFE26FB2410B1E147BA9D36A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 007C27232E5360D000720E08;
+			remoteGlobalIDString = EBECEBA5C8E08608C34EC3A7;
 			remoteInfo = "Minotaur-s";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		007C27242E5360D000720E08 /* Minotaur-s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		007C27312E5360D100720E08 /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		007C273B2E5360D100720E08 /* Minotaur-sUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0DA30FD7AE96E1563818BCD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7CA9113A9946C3F11CBF7A15 /* Minotaur-sUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "Minotaur-sUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F87DCE3DDD718A66DBE0185 /* Minotaur_sUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITests.swift; sourceTree = "<group>"; };
+		803F9AED4600A8448D843247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8295FC063DF268891CDC90CE /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sApp.swift; sourceTree = "<group>"; };
+		ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F643C8965D55192F706B6420 /* Minotaur_sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sTests.swift; sourceTree = "<group>"; };
+		F7C71714F7AD76C70DE31F51 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		007C27262E5360D000720E08 /* Minotaur-s */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Minotaur-s";
-			sourceTree = "<group>";
-		};
-		007C27342E5360D100720E08 /* Minotaur-sTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
+/* Begin PBXGroup section */
+		15B32B4BAFF6FE65C51A9ADC /* Minotaur-sTests */ = {
+			isa = PBXGroup;
+			children = (
+				F643C8965D55192F706B6420 /* Minotaur_sTests.swift */,
+			);
 			path = "Minotaur-sTests";
 			sourceTree = "<group>";
 		};
-		007C273E2E5360D100720E08 /* Minotaur-sUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Minotaur-sUITests";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		007C27212E5360D000720E08 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		007C272E2E5360D100720E08 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		007C27382E5360D100720E08 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		007C271B2E5360D000720E08 = {
+		A88232B0AD47B35858B6E851 = {
 			isa = PBXGroup;
 			children = (
-				007C27262E5360D000720E08 /* Minotaur-s */,
-				007C27342E5360D100720E08 /* Minotaur-sTests */,
-				007C273E2E5360D100720E08 /* Minotaur-sUITests */,
-				007C27252E5360D000720E08 /* Products */,
+				C11268176EFDA6AFC93D4DE5 /* Minotaur-s */,
+				15B32B4BAFF6FE65C51A9ADC /* Minotaur-sTests */,
+				EC1DE4C96DC5210A68C4BEA1 /* Minotaur-sUITests */,
+				E9F57EE700D1263C2DA96BA8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		007C27252E5360D000720E08 /* Products */ = {
+		C11268176EFDA6AFC93D4DE5 /* Minotaur-s */ = {
 			isa = PBXGroup;
 			children = (
-				007C27242E5360D000720E08 /* Minotaur-s.app */,
-				007C27312E5360D100720E08 /* Minotaur-sTests.xctest */,
-				007C273B2E5360D100720E08 /* Minotaur-sUITests.xctest */,
+				803F9AED4600A8448D843247 /* Assets.xcassets */,
+				0DA30FD7AE96E1563818BCD3 /* ContentView.swift */,
+				F7C71714F7AD76C70DE31F51 /* GameView.swift */,
+				BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */,
+			);
+			path = "Minotaur-s";
+			sourceTree = "<group>";
+		};
+		E9F57EE700D1263C2DA96BA8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */,
+				8295FC063DF268891CDC90CE /* Minotaur-sTests.xctest */,
+				7CA9113A9946C3F11CBF7A15 /* Minotaur-sUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EC1DE4C96DC5210A68C4BEA1 /* Minotaur-sUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7F87DCE3DDD718A66DBE0185 /* Minotaur_sUITests.swift */,
+				0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */,
+			);
+			path = "Minotaur-sUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		007C27232E5360D000720E08 /* Minotaur-s */ = {
+		2671FB1DFC1F46D51C7CDCBA /* Minotaur-sTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 007C27452E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-s" */;
+			buildConfigurationList = 17D8A36D7010D120B53F5AA5 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */;
 			buildPhases = (
-				007C27202E5360D000720E08 /* Sources */,
-				007C27212E5360D000720E08 /* Frameworks */,
-				007C27222E5360D000720E08 /* Resources */,
+				78AC142F3CA6AC91FAC63FD2 /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				007C27262E5360D000720E08 /* Minotaur-s */,
-			);
-			name = "Minotaur-s";
-			packageProductDependencies = (
-			);
-			productName = "Minotaur-s";
-			productReference = 007C27242E5360D000720E08 /* Minotaur-s.app */;
-			productType = "com.apple.product-type.application";
-		};
-		007C27302E5360D100720E08 /* Minotaur-sTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 007C27482E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */;
-			buildPhases = (
-				007C272D2E5360D100720E08 /* Sources */,
-				007C272E2E5360D100720E08 /* Frameworks */,
-				007C272F2E5360D100720E08 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				007C27332E5360D100720E08 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				007C27342E5360D100720E08 /* Minotaur-sTests */,
+				F7958A7F9A091A901BD3FBE4 /* PBXTargetDependency */,
 			);
 			name = "Minotaur-sTests";
 			packageProductDependencies = (
 			);
 			productName = "Minotaur-sTests";
-			productReference = 007C27312E5360D100720E08 /* Minotaur-sTests.xctest */;
+			productReference = 8295FC063DF268891CDC90CE /* Minotaur-sTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		007C273A2E5360D100720E08 /* Minotaur-sUITests */ = {
+		AF41407F6C2AE134FDA2EFE6 /* Minotaur-sUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 007C274B2E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */;
+			buildConfigurationList = FAF2899B0B785E2B79F0D521 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */;
 			buildPhases = (
-				007C27372E5360D100720E08 /* Sources */,
-				007C27382E5360D100720E08 /* Frameworks */,
-				007C27392E5360D100720E08 /* Resources */,
+				8BA863210D96F8CF38955C95 /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				007C273D2E5360D100720E08 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				007C273E2E5360D100720E08 /* Minotaur-sUITests */,
+				05E1F1509F2150A5F1F6490D /* PBXTargetDependency */,
 			);
 			name = "Minotaur-sUITests";
 			packageProductDependencies = (
 			);
 			productName = "Minotaur-sUITests";
-			productReference = 007C273B2E5360D100720E08 /* Minotaur-sUITests.xctest */;
+			productReference = 7CA9113A9946C3F11CBF7A15 /* Minotaur-sUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		EBECEBA5C8E08608C34EC3A7 /* Minotaur-s */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35E24FBD065004614C04F21E /* Build configuration list for PBXNativeTarget "Minotaur-s" */;
+			buildPhases = (
+				34535AE799958938CFB251A6 /* Sources */,
+				ECB3BB9297AC8B912A5658A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Minotaur-s";
+			packageProductDependencies = (
+			);
+			productName = "Minotaur-s";
+			productReference = ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		007C271C2E5360D000720E08 /* Project object */ = {
+		AFE26FB2410B1E147BA9D36A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1640;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					007C27232E5360D000720E08 = {
-						CreatedOnToolsVersion = 16.4;
-					};
-					007C27302E5360D100720E08 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 007C27232E5360D000720E08;
-					};
-					007C273A2E5360D100720E08 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 007C27232E5360D000720E08;
+					AF41407F6C2AE134FDA2EFE6 = {
+						TestTargetID = EBECEBA5C8E08608C34EC3A7;
 					};
 				};
 			};
-			buildConfigurationList = 007C271F2E5360D000720E08 /* Build configuration list for PBXProject "Minotaur-s" */;
+			buildConfigurationList = D835090DF2E050DF338CFC30 /* Build configuration list for PBXProject "Minotaur-s" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = 007C271B2E5360D000720E08;
+			mainGroup = A88232B0AD47B35858B6E851;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 007C27252E5360D000720E08 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				007C27232E5360D000720E08 /* Minotaur-s */,
-				007C27302E5360D100720E08 /* Minotaur-sTests */,
-				007C273A2E5360D100720E08 /* Minotaur-sUITests */,
+				EBECEBA5C8E08608C34EC3A7 /* Minotaur-s */,
+				2671FB1DFC1F46D51C7CDCBA /* Minotaur-sTests */,
+				AF41407F6C2AE134FDA2EFE6 /* Minotaur-sUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		007C27222E5360D000720E08 /* Resources */ = {
+		ECB3BB9297AC8B912A5658A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		007C272F2E5360D100720E08 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		007C27392E5360D100720E08 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		007C27202E5360D000720E08 /* Sources */ = {
+		34535AE799958938CFB251A6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20873234D9580ED11E906771 /* ContentView.swift in Sources */,
+				6386AC99785A76FAD6DB3C5F /* GameView.swift in Sources */,
+				911AD7D23044E0C773BAE61B /* Minotaur_sApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C272D2E5360D100720E08 /* Sources */ = {
+		78AC142F3CA6AC91FAC63FD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				948B8FA52CDAFE3C0C0D6041 /* Minotaur_sTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		007C27372E5360D100720E08 /* Sources */ = {
+		8BA863210D96F8CF38955C95 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40BF5F6F180E9F12F923B802 /* Minotaur_sUITests.swift in Sources */,
+				2FF161EF5EF3648F377FD0E0 /* Minotaur_sUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		007C27332E5360D100720E08 /* PBXTargetDependency */ = {
+		05E1F1509F2150A5F1F6490D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 007C27232E5360D000720E08 /* Minotaur-s */;
-			targetProxy = 007C27322E5360D100720E08 /* PBXContainerItemProxy */;
+			target = EBECEBA5C8E08608C34EC3A7 /* Minotaur-s */;
+			targetProxy = FF6FDAF5B3D4271F23A8F13B /* PBXContainerItemProxy */;
 		};
-		007C273D2E5360D100720E08 /* PBXTargetDependency */ = {
+		F7958A7F9A091A901BD3FBE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 007C27232E5360D000720E08 /* Minotaur-s */;
-			targetProxy = 007C273C2E5360D100720E08 /* PBXContainerItemProxy */;
+			target = EBECEBA5C8E08608C34EC3A7 /* Minotaur-s */;
+			targetProxy = A996723B8A2C39EC0DEAEF12 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		007C27432E5360D100720E08 /* Debug */ = {
+		3C1D6AA272E07FFEB64EEE6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-sTests";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Minotaur-s.app/Minotaur-s";
+			};
+			name = Debug;
+		};
+		4B7EB4565A78B4EFCB59C627 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -306,14 +296,13 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -321,25 +310,60 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		007C27442E5360D100720E08 /* Release */ = {
+		64B4A25D0971F8A8004CD859 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-sTests";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Minotaur-s.app/Minotaur-s";
+			};
+			name = Release;
+		};
+		93F38D43F0C9ADEBBF0E146C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-s";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A0822EACE49A818F3ECC03FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -369,8 +393,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -378,178 +401,108 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		007C27462E5360D100720E08 /* Debug */ = {
+		B091C3422355BD46F6CB9CD0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-s";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Release;
 		};
-		007C27472E5360D100720E08 /* Release */ = {
+		F3BB196BBE3B63280A912417 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-s";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		007C27492E5360D100720E08 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-sTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Minotaur-s.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Minotaur-s";
-			};
-			name = Debug;
-		};
-		007C274A2E5360D100720E08 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-sTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Minotaur-s.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Minotaur-s";
-			};
-			name = Release;
-		};
-		007C274C2E5360D100720E08 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-sUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Minotaur-s";
-			};
-			name = Debug;
-		};
-		007C274D2E5360D100720E08 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-sUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Minotaur-s";
 			};
 			name = Release;
+		};
+		F8C69FF134723F0AC9B3C1CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "gabriellasmt-gmail.com.Minotaur-sUITests";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Minotaur-s";
+			};
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		007C271F2E5360D000720E08 /* Build configuration list for PBXProject "Minotaur-s" */ = {
+		17D8A36D7010D120B53F5AA5 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C27432E5360D100720E08 /* Debug */,
-				007C27442E5360D100720E08 /* Release */,
+				3C1D6AA272E07FFEB64EEE6E /* Debug */,
+				64B4A25D0971F8A8004CD859 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		007C27452E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-s" */ = {
+		35E24FBD065004614C04F21E /* Build configuration list for PBXNativeTarget "Minotaur-s" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C27462E5360D100720E08 /* Debug */,
-				007C27472E5360D100720E08 /* Release */,
+				93F38D43F0C9ADEBBF0E146C /* Debug */,
+				B091C3422355BD46F6CB9CD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		007C27482E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */ = {
+		D835090DF2E050DF338CFC30 /* Build configuration list for PBXProject "Minotaur-s" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C27492E5360D100720E08 /* Debug */,
-				007C274A2E5360D100720E08 /* Release */,
+				4B7EB4565A78B4EFCB59C627 /* Debug */,
+				A0822EACE49A818F3ECC03FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		007C274B2E5360D100720E08 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */ = {
+		FAF2899B0B785E2B79F0D521 /* Build configuration list for PBXNativeTarget "Minotaur-sUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				007C274C2E5360D100720E08 /* Debug */,
-				007C274D2E5360D100720E08 /* Release */,
+				F8C69FF134723F0AC9B3C1CA /* Debug */,
+				F3BB196BBE3B63280A912417 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 007C271C2E5360D000720E08 /* Project object */;
+	rootObject = AFE26FB2410B1E147BA9D36A /* Project object */;
 }
