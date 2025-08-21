@@ -1,0 +1,43 @@
+name: Minotaur-s
+options:
+  bundleIdPrefix: gabriellasmt-gmail.com
+targets:
+  Minotaur-s:
+    type: application
+    platform: iOS
+    sources:
+      - Minotaur-s
+    settings:
+      base:
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-s
+        SWIFT_VERSION: 5.0
+        MARKETING_VERSION: 1.0
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+
+  Minotaur-sTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Minotaur-sTests
+    dependencies:
+      - target: Minotaur-s
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-sTests
+        SWIFT_VERSION: 5.0
+        GENERATE_INFOPLIST_FILE: YES
+
+  Minotaur-sUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - Minotaur-sUITests
+    dependencies:
+      - target: Minotaur-s
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-sUITests
+        SWIFT_VERSION: 5.0
+        GENERATE_INFOPLIST_FILE: YES
