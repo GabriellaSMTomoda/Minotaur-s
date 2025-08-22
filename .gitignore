@@ -1,0 +1,28 @@
+# Xcode
+#
+# Build artifacts and temporary files
+build/
+DerivedData/
+
+# User settings
+*.pbxuser
+!default.pbxuser
+xcuserdata/
+
+# Schemes
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+
+
+
+# XcodeGen
+# The .xcodeproj is generated and should not be committed
+*.xcodeproj
+
+# Misc
+**/.DS_Store
+*.swp
+*.swo
+*.orig

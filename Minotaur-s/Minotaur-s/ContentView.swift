@@ -10,7 +10,12 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack { // permite navegação
+
+            
             VStack {
+                Text("NOME DO APP")
+                    .font(.title3)
+
                 NavigationLink(destination: GameView()) {
                     Text("Start")
                         .font(.title)
@@ -19,20 +24,21 @@ struct ContentView: View {
                         .background(Color.blue)
                         .cornerRadius(10)
                         .padding()
-                    Text("TUTORIAL")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 60)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .padding()
                 }
-
-                }
+                
+                //                NavigationLink(destination: TutorialView()) {
+                //                    Text("Tutorial")
+                //                        .font(.title)
+                //                        .foregroundColor(.white)
+                //                        .frame(maxWidth: .infinity, minHeight: 60)
+                //                        .background(Color.blue)
+                //                        .cornerRadius(10)
+                //                        .padding()
+                //                }
             }
-            .navigationTitle("Menu") // opcional
         }
     }
+}
 
 
 #Preview {
