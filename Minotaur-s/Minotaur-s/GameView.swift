@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct GameView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @StateObject private var gameState = GameState()
     @State private var facts: [Fact] = FactLoader.loadFacts()
     @State private var mostrarPopup = false
     @State private var respostaCorreta = false
     
+    // Novo: popup final
+    @State private var fimDePartida = false
+    
     var body: some View {
         ZStack {
             VStack {
                 if !gameState.partidaFacts.isEmpty {
-                    let fact = gameState.partidaFacts[gameState.currentIndex]
+//                    let fact = gameState.partidaFacts[gameState.currentIndex]
                     
                     // Indicador de progresso
                     Text("Notícia \(gameState.currentIndex + 1) de \(gameState.partidaFacts.count)")
@@ -25,8 +30,7 @@ struct GameView: View {
                         .padding(.top)
                     
                     Text(facts[gameState.currentIndex].titulo)
-                        .font(.title2)
-                        .padding()
+                        .font(.title2) .padding()
                     Text(facts[gameState.currentIndex].resumo)
                         .padding()
                 }
@@ -56,15 +60,16 @@ struct GameView: View {
                 .padding()
                 
                 Button("PULAR") {
-                    gameState.pulouQuestao()
+                    gameState.pulos += 1
+                    checkFim()
                 }
                 .font(.title)
             }
             .padding()
             
-            // POP-UP customizado
+            // POP-UP de resposta
             if mostrarPopup {
-                Color.black.opacity(0.4) // fundo escuro
+                Color.black.opacity(0.4)
                     .ignoresSafeArea()
                 
                 VStack(spacing: 20) {
@@ -78,14 +83,65 @@ struct GameView: View {
                     
                     Button("Próxima questão") {
                         mostrarPopup = false
-                        gameState.nextFact()
+                        checkFim()
                     }
+
                     .font(.title2)
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(12)
                 }
-                .frame(width: UIScreen.main.bounds.width * 4/5, height: UIScreen.main.bounds.height * 2/3)
+                .frame(width: UIScreen.main.bounds.width * 4/5,
+                       height: UIScreen.main.bounds.height * 2/3)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(radius: 10)
+            }
+            
+            // POP-UP final
+            if fimDePartida {
+                
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                
+                VStack(spacing: 30) {
+                    Text("🎉 Fim da partida!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    
+                    Text("Acertos: \(gameState.acertos)\nErros: \(gameState.erros)\nPulos: \(gameState.pulos)")
+                        .multilineTextAlignment(.center)
+                    
+                    NavigationLink(destination: GameReportView()) {
+                        Text("📊 Ver relatório")
+                            .font(.title2)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
+                    }
+                    
+                    Button("🔄 Jogar novamente") {
+                        fimDePartida = false
+                        gameState.partida()
+                    }
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                    
+                    Button("🏠 Tela inicial") {
+                        dismiss()   //volta para ContentView
+                    }
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .background(Color.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                }
+                .padding()
+                .frame(width: UIScreen.main.bounds.width * 4/5)
                 .background(Color.white)
                 .cornerRadius(20)
                 .shadow(radius: 10)
@@ -115,9 +171,19 @@ struct GameView: View {
             gameState.erros += 1
         }
     }
+    
+    // Checa se chegou ao fim
+    func checkFim() {
+        if gameState.currentIndex == gameState.partidaFacts.count - 1{
+            fimDePartida = true
+        } else {
+            gameState.nextFact()
+        }
+    }
 }
 
 #Preview {
     GameView()
 }
 
+// SALVAR OS DADOS

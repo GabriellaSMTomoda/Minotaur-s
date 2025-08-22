@@ -29,28 +29,10 @@ class GameState: ObservableObject {
         // salva apenas os IDs para referência futura
         partidaIDs = partidaFacts.map { $0.id }
     }
-    
-    func acertou() {
-        acertos += 1
-        nextFact()
-    }
-    
-    func errou() {
-        erros += 1
-        nextFact()
-    }
-    
-    func pulouQuestao() {
-        pulos += 1
-        nextFact()
-    }
-    
+        
     func nextFact() {
         if currentIndex < partidaFacts.count - 1 {
             currentIndex += 1
-        } else {
-            currentIndex = 0
-//            print("Fim da partida! IDs jogados: \(partidaIDs)")
         }
     }
     
