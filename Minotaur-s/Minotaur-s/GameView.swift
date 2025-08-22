@@ -186,4 +186,6 @@ struct GameView: View {
     GameView()
 }
 
+
 // SALVAR OS DADOS
+

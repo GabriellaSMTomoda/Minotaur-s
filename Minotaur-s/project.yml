@@ -9,7 +9,9 @@ targets:
       - Minotaur-s
     settings:
       base:
+
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
+
         PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-s
         SWIFT_VERSION: 5.0
         MARKETING_VERSION: 1.0

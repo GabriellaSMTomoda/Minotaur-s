@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationStack { // permite navegação
+
             
             VStack {
                 Text("NOME DO APP")
@@ -39,9 +40,8 @@ struct ContentView: View {
     }
 }
 
+
 #Preview {
     ContentView()
 }
-
-
 
