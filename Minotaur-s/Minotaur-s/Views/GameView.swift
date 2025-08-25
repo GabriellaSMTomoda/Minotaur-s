@@ -20,51 +20,77 @@ struct GameView: View {
     
     var body: some View {
         ZStack {
-            VStack {
-                if !gameState.partidaFacts.isEmpty {
-//                    let fact = gameState.partidaFacts[gameState.currentIndex]
-                    
-                    // Indicador de progresso
-                    Text("Notícia \(gameState.currentIndex + 1) de \(gameState.partidaFacts.count)")
-                        .font(.headline)
-                        .padding(.top)
-                    
-                    Text(facts[gameState.currentIndex].titulo)
-                        .font(.title2) .padding()
-                    Text(facts[gameState.currentIndex].resumo)
-                        .padding()
-                }
-                
-                Spacer()
-                
-                // Botões de resposta
+            Color("background")
+                .ignoresSafeArea() // ocupa toda a tela
+            VStack(spacing: 0) {
+                // HEADER (faixa azul)
                 HStack {
-                    Button("FALSO") {
-                        checkAnswer(userSaysTrue: false)
-                    }
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, minHeight: 60)
-                    .background(Color.red)
-                    .cornerRadius(10)
+                    Image(systemName: "newspaper.fill") // ícone
+                        .foregroundColor(Color("background"))
                     
-                    Button("VERDADE") {
-                        checkAnswer(userSaysTrue: true)
+                    Text("APP NEWS")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("background"))
+                    Spacer()
+                    
+                    // Contador à direita
+                    Text("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)")
+                        .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(Color("background"))                }
+                .padding(.horizontal)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity)
+                .background(Color("azul"))
+                
+                // --- Conteúdo da tela ---
+                VStack {
+                    if !gameState.partidaFacts.isEmpty {
+                        Text(facts[gameState.currentIndex].titulo)
+                            .font(.title2)
+                            .padding()
+                        
+                        Text(facts[gameState.currentIndex].resumo)
+                            .padding()
+                    }
+                    
+                    Spacer()
+                }
+
+                    
+                    // Botões de resposta
+                    HStack {
+                        Button("FALSO") {
+                            checkAnswer(userSaysTrue: false)
+                        }
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(Color("background"))
+                        .frame(maxWidth: .infinity, minHeight: 60)
+                        .background(Color("vermelho"))
+                        .cornerRadius(20)
+                        
+                        Button("REAL") {
+                            checkAnswer(userSaysTrue: true)
+                        }
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(Color("background"))
+                        .frame(maxWidth: .infinity, minHeight: 60)
+                        .background(Color("azul"))
+                        .cornerRadius(20)
+                    }
+                    .padding()
+                    
+                    Button("Pular") {
+                        gameState.pulos += 1
+                        checkFim()
                     }
                     .font(.title)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, minHeight: 60)
-                    .background(Color.green)
-                    .cornerRadius(10)
+                    .bold()
+                    .foregroundColor(Color("cinza"))
+                    
                 }
-                .padding()
-                
-                Button("PULAR") {
-                    gameState.pulos += 1
-                    checkFim()
-                }
-                .font(.title)
-            }
             .padding()
             
             // POP-UP de resposta
@@ -73,27 +99,43 @@ struct GameView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: 20) {
-                    Text(respostaCorreta ? "Correto ✅" : "Errado ❌")
+//                    Text(respostaCorreta ? "CORRETO" : "ERRADO")
+//                        .font(.largeTitle)
+//                        .fontWeight(.bold)
+//                        .padding()
+                    
+                    Text(respostaCorreta ? "CORRETO" : "ERRADO")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)   // espaço vertical da faixa
+                        .background(respostaCorreta ? Color("azul") : Color("vermelho")) // cor da faixa
+                        .foregroundColor(Color("background"))  // cor do texto
+
+
                     
                     Text(facts[gameState.currentIndex].motivo)
                         .padding()
                     
-                    Button("Próxima questão") {
+                    Spacer()
+                    
+                    Button("PRÓXIMA") {
                         mostrarPopup = false
                         checkFim()
                     }
 
                     .font(.title2)
+                    .bold()
+                    .foregroundColor(Color("background")) // cor do texto
                     .padding()
-                    .background(Color.gray.opacity(0.2))
+                    .background(Color("azul"))
                     .cornerRadius(12)
+                    .padding([.leading, .trailing, .bottom], 20) // margem interna do popup
+
                 }
                 .frame(width: UIScreen.main.bounds.width * 4/5,
                        height: UIScreen.main.bounds.height * 2/3)
-                .background(Color.white)
+                .background(Color("background"))
                 .cornerRadius(20)
                 .shadow(radius: 10)
             }
@@ -105,29 +147,38 @@ struct GameView: View {
                     .ignoresSafeArea()
                 
                 VStack(spacing: 30) {
-                    Text("🎉 Fim da partida!")
+                    Text("FIM DA PARTIDA")
                         .font(.largeTitle)
                         .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)   // espaço vertical da faixa
+                        .background(Color("azul")) // cor da faixa
+                        .foregroundColor(Color("background"))  // cor do texto
                     
-                    Text("Acertos: \(gameState.acertos)\nErros: \(gameState.erros)\nPulos: \(gameState.pulos)")
-                        .multilineTextAlignment(.center)
+                    
+ //++++++++++DEBBUGUER, NAO APAGAR+++++++++++++++++
+                    
+//                    Text("Acertos: \(gameState.acertos)\nErros: \(gameState.erros)\nPulos: \(gameState.pulos)")
+//                        .multilineTextAlignment(.center)
                     
                     NavigationLink(destination: GameReportView()) {
-                        Text("📊 Ver relatório")
+                        Text("REVISÃO")
                             .font(.title2)
+                            .bold()
                             .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Color.blue)
+                            .background(Color("azul"))
                             .foregroundColor(.white)
                             .cornerRadius(12)
                     }
                     
-                    Button("🔄 Jogar novamente") {
+                    Button("JOGAR DE NOVO") {
                         fimDePartida = false
                         gameState.partida()
                         GamePersistence.clear()
 
                     }
                     .font(.title2)
+                    .bold()
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .background(Color.green)
                     .foregroundColor(.white)
@@ -138,6 +189,7 @@ struct GameView: View {
                         dismiss()   //volta para ContentView
                     }
                     .font(.title2)
+                    .bold()
                     .frame(maxWidth: .infinity, minHeight: 50)
                     .background(Color.gray)
                     .foregroundColor(.white)
@@ -145,7 +197,7 @@ struct GameView: View {
                 }
                 .padding()
                 .frame(width: UIScreen.main.bounds.width * 4/5)
-                .background(Color.white)
+                .background(Color("background"))
                 .cornerRadius(20)
                 .shadow(radius: 10)
             }

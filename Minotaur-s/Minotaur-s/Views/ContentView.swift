@@ -6,41 +6,49 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
     var body: some View {
-        NavigationStack { // permite navegação
+        NavigationStack {
+            ZStack {
+                Color("background")
+                    .ignoresSafeArea() // ocupa toda a tela
 
-            
-            VStack {
-                Text("NOME DO APP")
-                    .font(.title3)
-
-                NavigationLink(destination: GameView()) {
-                    Text("Start")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 60)
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                VStack {
+                    Text("Real ou Falso?")
+                        .font(.system(size: 80, weight: .bold))
+                        .foregroundColor(Color("azul"))
                         .padding()
+
+                    NavigationLink(destination: GameView()) {
+                        Text("JOGAR")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color("background"))
+                            .frame(maxWidth: .infinity, minHeight: 60)
+                            .background(Color("azul"))
+                            .cornerRadius(20)
+                            .padding()
+                    }
+                    
+                    NavigationLink(destination: GameView()) {
+                        Text("COMO JOGAR")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color("background"))
+                            .frame(maxWidth: .infinity, minHeight: 60)
+                            .background(Color("vermelho"))
+                            .cornerRadius(20)
+                            .padding()
+                    }
                 }
-                
-                //                NavigationLink(destination: TutorialView()) {
-                //                    Text("Tutorial")
-                //                        .font(.title)
-                //                        .foregroundColor(.white)
-                //                        .frame(maxWidth: .infinity, minHeight: 60)
-                //                        .background(Color.blue)
-                //                        .cornerRadius(10)
-                //                        .padding()
-                //                }
             }
         }
     }
 }
 
-
+#Preview {
+    ContentView()
+}
 #Preview {
     ContentView()
 }
