@@ -124,6 +124,8 @@ struct GameView: View {
                     Button("🔄 Jogar novamente") {
                         fimDePartida = false
                         gameState.partida()
+                        GamePersistence.clear()
+
                     }
                     .font(.title2)
                     .frame(maxWidth: .infinity, minHeight: 50)
@@ -132,6 +134,7 @@ struct GameView: View {
                     .cornerRadius(12)
                     
                     Button("🏠 Tela inicial") {
+                        GamePersistence.clear()
                         dismiss()   //volta para ContentView
                     }
                     .font(.title2)
@@ -147,12 +150,28 @@ struct GameView: View {
                 .shadow(radius: 10)
             }
         }
+//        .onAppear {
+//            if gameState.partidaFacts.isEmpty {
+//                gameState.facts = FactLoader.loadFacts()
+//                gameState.partida()
+//            }
+//        }
+        
         .onAppear {
+            gameState.facts = FactLoader.loadFacts()
+            
+            // tenta carregar progresso salvo
+            GamePersistence.load(into: gameState)
+            
+            // se não tinha partida salva, inicia nova
             if gameState.partidaFacts.isEmpty {
-                gameState.facts = FactLoader.loadFacts()
                 gameState.partida()
             }
         }
+        .onDisappear {
+            GamePersistence.save(gameState: gameState)
+        }
+
     }
     
     // Verifica se o usuário acertou ou errou

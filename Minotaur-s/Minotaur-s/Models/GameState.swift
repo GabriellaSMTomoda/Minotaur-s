@@ -16,7 +16,7 @@ class GameState: ObservableObject {
     var facts: [Fact] = []              // banco completo
     @Published var partidaFacts: [Fact] = [] // apenas as 10 escolhidas
     
-    // Novo: IDs das notícias usadas na partida
+    // IDs das notícias usadas na partida
     @Published var partidaIDs: [UUID] = []
     
     // Inicia uma nova partida
@@ -45,3 +45,4 @@ class GameState: ObservableObject {
     }
 }
 
+// salvar game state
