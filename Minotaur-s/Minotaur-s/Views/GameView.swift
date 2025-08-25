@@ -51,11 +51,11 @@ struct GameView: View {
                         VStack(spacing: 16) {
                             Text(facts[gameState.currentIndex].titulo)
                                 .font(.title2.bold())
-                                .multilineTextAlignment(.center)
+                                .multilineTextAlignment(.leading)
                                 .padding()
 
                             Text(facts[gameState.currentIndex].resumo)
-                                .multilineTextAlignment(.center)
+                                .multilineTextAlignment(.leading)
                                 .padding(.horizontal)
                         }
                         .frame(maxWidth: .infinity) // centraliza no eixo horizontal
@@ -120,7 +120,7 @@ struct GameView: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 10)   // espaço vertical da faixa
-                        .background(respostaCorreta ? Color("azul") : Color("vermelho")) // cor da faixa
+                        .background(respostaCorreta ? Color("verde") : Color("vermelho")) // cor da faixa
                         .foregroundColor(Color("background"))  // cor do texto
 
 
