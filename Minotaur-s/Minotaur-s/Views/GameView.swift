@@ -42,20 +42,31 @@ struct GameView: View {
                 .padding(.vertical, 12)
                 .frame(maxWidth: .infinity)
                 .background(Color("azul"))
-                
+                                
                 // --- Conteúdo da tela ---
                 VStack {
-                    if !gameState.partidaFacts.isEmpty {
-                        Text(facts[gameState.currentIndex].titulo)
-                            .font(.title2)
-                            .padding()
-                        
-                        Text(facts[gameState.currentIndex].resumo)
-                            .padding()
+                    Spacer() // empurra para baixo quando o texto for pequeno
+
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            Text(facts[gameState.currentIndex].titulo)
+                                .font(.title2.bold())
+                                .multilineTextAlignment(.center)
+                                .padding()
+
+                            Text(facts[gameState.currentIndex].resumo)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal)
+                        }
+                        .frame(maxWidth: .infinity) // centraliza no eixo horizontal
                     }
-                    
-                    Spacer()
+
+                    Spacer() // empurra para cima quando o texto for pequeno
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+
+
 
                     
                     // Botões de resposta
