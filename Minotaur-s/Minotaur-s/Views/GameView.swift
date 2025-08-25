@@ -114,20 +114,19 @@ struct GameView: View {
 //                        .font(.largeTitle)
 //                        .fontWeight(.bold)
 //                        .padding()
-                    
-                    Text(respostaCorreta ? "CORRETO" : "ERRADO")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)   // espaço vertical da faixa
-                        .background(respostaCorreta ? Color("verde") : Color("vermelho")) // cor da faixa
-                        .foregroundColor(Color("background"))  // cor do texto
+                        Text(respostaCorreta ? "CORRETO" : "ERRADO")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)   // espaço vertical da faixa
+                            .background(respostaCorreta ? Color("verde") : Color("vermelho")) // cor da faixa
+                            .foregroundColor(Color("background"))  // cor do texto
 
-
-                    
-                    Text(facts[gameState.currentIndex].motivo)
-                        .padding()
-                    
+                    ScrollView {
+                        Text(facts[gameState.currentIndex].motivo)
+                            .padding()
+                    }
+                        
                     Spacer()
                     
                     Button("PRÓXIMA") {
