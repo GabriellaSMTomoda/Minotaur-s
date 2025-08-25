@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0017FE982E5BE29600DF2FC5 /* GamePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FE972E5BE28C00DF2FC5 /* GamePersistence.swift */; };
-		1591C737E49946FAF8F3856A /* BancoDeDados.tsv in Resources */ = {isa = PBXBuildFile; fileRef = E3E3E7EF057DF29AFF0F3B41 /* BancoDeDados.tsv */; };
+		0017FE9A2E5C84BE00DF2FC5 /* BancoDeDados.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 0017FE992E5C84BE00DF2FC5 /* BancoDeDados.tsv */; };
 		1647A94E9B772EC4D3C45CC7 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49D682742CCCA326138BD9D /* GameState.swift */; };
 		1DC34596B77CBDD45253C0AA /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430D01A5A4310F0BF66B4BDC /* GameReportView.swift */; };
 		20873234D9580ED11E906771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA30FD7AE96E1563818BCD3 /* ContentView.swift */; };
@@ -42,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		0017FE972E5BE28C00DF2FC5 /* GamePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePersistence.swift; sourceTree = "<group>"; };
+		0017FE992E5C84BE00DF2FC5 /* BancoDeDados.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = BancoDeDados.tsv; sourceTree = "<group>"; };
 		05E7E41FCBC76A9D4FC737D5 /* AppNameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNameApp.swift; sourceTree = "<group>"; };
 		0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0DA30FD7AE96E1563818BCD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		8295FC063DF268891CDC90CE /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1D3905E980A405A1F61641C /* FactLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactLoader.swift; sourceTree = "<group>"; };
 		BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sApp.swift; sourceTree = "<group>"; };
-		E3E3E7EF057DF29AFF0F3B41 /* BancoDeDados.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = BancoDeDados.tsv; sourceTree = "<group>"; };
 		E49D682742CCCA326138BD9D /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F643C8965D55192F706B6420 /* Minotaur_sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sTests.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		0017FE952E5BE26100DF2FC5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E3E3E7EF057DF29AFF0F3B41 /* BancoDeDados.tsv */,
+				0017FE992E5C84BE00DF2FC5 /* BancoDeDados.tsv */,
 				0017FE972E5BE28C00DF2FC5 /* GamePersistence.swift */,
 				B1D3905E980A405A1F61641C /* FactLoader.swift */,
 			);
@@ -237,7 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */,
-				1591C737E49946FAF8F3856A /* BancoDeDados.tsv in Resources */,
+				0017FE9A2E5C84BE00DF2FC5 /* BancoDeDados.tsv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
