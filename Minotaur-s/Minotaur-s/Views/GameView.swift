@@ -28,7 +28,7 @@ struct GameView: View {
                     Image(systemName: "newspaper.fill") // ícone
                         .foregroundColor(Color("background"))
                     
-                    Text("APP NEWS")
+                    Text("FATO OU FARSA?")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(Color("background"))
@@ -37,12 +37,14 @@ struct GameView: View {
                     // Contador à direita
                     Text("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)")
                         .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color("background"))                }
+                    .foregroundColor(Color("background"))
+                }
                 .padding(.horizontal)
                 .padding(.vertical, 12)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: 150, alignment: .bottom)
                 .background(Color("azul"))
-                                
+                .ignoresSafeArea(.all)
+
                 // --- Conteúdo da tela ---
                 VStack {
                     Spacer() // empurra para baixo quando o texto for pequeno
@@ -67,12 +69,12 @@ struct GameView: View {
 
 
 
-
+//            Text(facts[gameState.currentIndex].binario)
                     
                     // Botões de resposta
                     HStack {
-                        Button("FALSO") {
-                            checkAnswer(userSaysTrue: false)
+                        Button("FARSA") {
+                            checkAnswer(userSaysTrue: false, resposta: facts[gameState.currentIndex].binario)
                         }
                         .font(.title)
                         .bold()
@@ -81,8 +83,8 @@ struct GameView: View {
                         .background(Color("vermelho"))
                         .cornerRadius(20)
                         
-                        Button("REAL") {
-                            checkAnswer(userSaysTrue: true)
+                        Button("FATO") {
+                            checkAnswer(userSaysTrue: true, resposta: facts[gameState.currentIndex].binario)
                         }
                         .font(.title)
                         .bold()
@@ -100,9 +102,11 @@ struct GameView: View {
                     .font(.title)
                     .bold()
                     .foregroundColor(Color("cinza"))
+                    .frame(maxWidth: .infinity, maxHeight: 75, alignment: .top)
                     
                 }
-            .padding()
+//            .padding()
+            
             
             // POP-UP de resposta
             if mostrarPopup {
@@ -212,6 +216,7 @@ struct GameView: View {
                 .shadow(radius: 10)
             }
         }
+        .ignoresSafeArea()
 //        .onAppear {
 //            if gameState.partidaFacts.isEmpty {
 //                gameState.facts = FactLoader.loadFacts()
@@ -237,13 +242,23 @@ struct GameView: View {
     }
     
     // Verifica se o usuário acertou ou errou
-    func checkAnswer(userSaysTrue: Bool) {
+    func checkAnswer(userSaysTrue: Bool, resposta: String) {
         guard !gameState.partidaFacts.isEmpty else { return }
         
-        let rating = gameState.partidaFacts[gameState.currentIndex].binario.lowercased()
-        let isTrue = rating == "true" || rating == "verdadeiro"
+        let rating = resposta
+        var respostaBI : Bool
         
-        respostaCorreta = (userSaysTrue == isTrue)
+        if rating == "verdadeiro" {
+            respostaBI = true
+        } else {
+            respostaBI = false
+        }
+        
+        if userSaysTrue == respostaBI {
+            respostaCorreta = true
+        } else {
+            respostaCorreta = false
+        }
         mostrarPopup = true
         
         if respostaCorreta {
