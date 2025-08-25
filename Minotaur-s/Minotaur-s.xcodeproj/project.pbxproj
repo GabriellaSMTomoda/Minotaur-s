@@ -3,16 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0017FE982E5BE29600DF2FC5 /* GamePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FE972E5BE28C00DF2FC5 /* GamePersistence.swift */; };
+		1591C737E49946FAF8F3856A /* BancoDeDados.tsv in Resources */ = {isa = PBXBuildFile; fileRef = E3E3E7EF057DF29AFF0F3B41 /* BancoDeDados.tsv */; };
+		1647A94E9B772EC4D3C45CC7 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49D682742CCCA326138BD9D /* GameState.swift */; };
+		1DC34596B77CBDD45253C0AA /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430D01A5A4310F0BF66B4BDC /* GameReportView.swift */; };
 		20873234D9580ED11E906771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA30FD7AE96E1563818BCD3 /* ContentView.swift */; };
 		2FF161EF5EF3648F377FD0E0 /* Minotaur_sUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */; };
 		40BF5F6F180E9F12F923B802 /* Minotaur_sUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F87DCE3DDD718A66DBE0185 /* Minotaur_sUITests.swift */; };
 		6386AC99785A76FAD6DB3C5F /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C71714F7AD76C70DE31F51 /* GameView.swift */; };
 		6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803F9AED4600A8448D843247 /* Assets.xcassets */; };
+		7EB9C180B593FC5660860742 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744B66E6F7060B811017DD2F /* Fact.swift */; };
+		8FB0BBA66BB61E7989002503 /* AppNameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E7E41FCBC76A9D4FC737D5 /* AppNameApp.swift */; };
 		911AD7D23044E0C773BAE61B /* Minotaur_sApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */; };
+		9319A2A6A55A4C57B4B73FE4 /* FactLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D3905E980A405A1F61641C /* FactLoader.swift */; };
 		948B8FA52CDAFE3C0C0D6041 /* Minotaur_sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C8965D55192F706B6420 /* Minotaur_sTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,19 +41,55 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0017FE972E5BE28C00DF2FC5 /* GamePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePersistence.swift; sourceTree = "<group>"; };
+		05E7E41FCBC76A9D4FC737D5 /* AppNameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNameApp.swift; sourceTree = "<group>"; };
 		0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0DA30FD7AE96E1563818BCD3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		430D01A5A4310F0BF66B4BDC /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
+		744B66E6F7060B811017DD2F /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
 		7CA9113A9946C3F11CBF7A15 /* Minotaur-sUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "Minotaur-sUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F87DCE3DDD718A66DBE0185 /* Minotaur_sUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITests.swift; sourceTree = "<group>"; };
 		803F9AED4600A8448D843247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8295FC063DF268891CDC90CE /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1D3905E980A405A1F61641C /* FactLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactLoader.swift; sourceTree = "<group>"; };
 		BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sApp.swift; sourceTree = "<group>"; };
+		E3E3E7EF057DF29AFF0F3B41 /* BancoDeDados.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = BancoDeDados.tsv; sourceTree = "<group>"; };
+		E49D682742CCCA326138BD9D /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F643C8965D55192F706B6420 /* Minotaur_sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sTests.swift; sourceTree = "<group>"; };
 		F7C71714F7AD76C70DE31F51 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		0017FE942E5BE25600DF2FC5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E49D682742CCCA326138BD9D /* GameState.swift */,
+				744B66E6F7060B811017DD2F /* Fact.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0017FE952E5BE26100DF2FC5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E3E3E7EF057DF29AFF0F3B41 /* BancoDeDados.tsv */,
+				0017FE972E5BE28C00DF2FC5 /* GamePersistence.swift */,
+				B1D3905E980A405A1F61641C /* FactLoader.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0017FE962E5BE26B00DF2FC5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0DA30FD7AE96E1563818BCD3 /* ContentView.swift */,
+				430D01A5A4310F0BF66B4BDC /* GameReportView.swift */,
+				F7C71714F7AD76C70DE31F51 /* GameView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		15B32B4BAFF6FE65C51A9ADC /* Minotaur-sTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,9 +111,11 @@
 		C11268176EFDA6AFC93D4DE5 /* Minotaur-s */ = {
 			isa = PBXGroup;
 			children = (
+				0017FE962E5BE26B00DF2FC5 /* Views */,
+				0017FE952E5BE26100DF2FC5 /* Services */,
+				0017FE942E5BE25600DF2FC5 /* Models */,
+				05E7E41FCBC76A9D4FC737D5 /* AppNameApp.swift */,
 				803F9AED4600A8448D843247 /* Assets.xcassets */,
-				0DA30FD7AE96E1563818BCD3 /* ContentView.swift */,
-				F7C71714F7AD76C70DE31F51 /* GameView.swift */,
 				BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */,
 			);
 			path = "Minotaur-s";
@@ -176,7 +221,6 @@
 			);
 			mainGroup = A88232B0AD47B35858B6E851;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -193,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */,
+				1591C737E49946FAF8F3856A /* BancoDeDados.tsv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +248,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB0BBA66BB61E7989002503 /* AppNameApp.swift in Sources */,
 				20873234D9580ED11E906771 /* ContentView.swift in Sources */,
+				7EB9C180B593FC5660860742 /* Fact.swift in Sources */,
+				9319A2A6A55A4C57B4B73FE4 /* FactLoader.swift in Sources */,
+				1DC34596B77CBDD45253C0AA /* GameReportView.swift in Sources */,
+				1647A94E9B772EC4D3C45CC7 /* GameState.swift in Sources */,
+				0017FE982E5BE29600DF2FC5 /* GamePersistence.swift in Sources */,
 				6386AC99785A76FAD6DB3C5F /* GameView.swift in Sources */,
 				911AD7D23044E0C773BAE61B /* Minotaur_sApp.swift in Sources */,
 			);
@@ -347,6 +398,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -421,6 +473,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
