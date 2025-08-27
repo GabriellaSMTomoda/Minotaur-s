@@ -21,26 +21,27 @@ struct GameView: View {
             VStack(spacing: 0) {
                 // HEADER
                 HStack {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .font(.largeTitle)
+                        .foregroundColor(Color("background"))
+                        .scaleEffect(x: -1, y: 1)
+                    Spacer()
                     Image("icon")
                         .font(.largeTitle)
                         .foregroundColor(Color("background"))
-//                    
-//                    Text("FATO OU FARSA?")
-//                        .font(.largeTitle)
-//                        .fontWeight(.bold)
-//                        .lineLimit(1)
-//                        .foregroundColor(Color("background"))
+                        .frame(maxWidth: .infinity)
+                    Spacer(minLength: 57)
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 12)
-                .frame(maxWidth: .infinity, maxHeight: 138, alignment: .bottom)
+                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 138, alignment: .bottom)
                 .background(Color("azul"))
                 
                 // --- Conteúdo da tela ---
                 VStack {
                     Spacer(minLength: 10)
                     Text("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)   ")
-                        .frame(maxWidth: .infinity, maxHeight: 85, alignment: .trailing)
+                        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 85, alignment: .trailing)
 //                        .font(.system(size: 40, weight: .bold))
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -104,6 +105,7 @@ struct GameView: View {
                     Spacer(minLength: 25)
                 }
                 .padding()
+                .frame(width: UIScreen.main.bounds.width)
                 Button("Pular") {
                     gameState.pulos += 1
                     checkFim()
