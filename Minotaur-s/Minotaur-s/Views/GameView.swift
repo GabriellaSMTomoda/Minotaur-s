@@ -26,63 +26,55 @@ struct GameView: View {
                 // HEADER (faixa azul)
                 HStack {
                     Image(systemName: "newspaper.fill") // ícone
+                        .font(.largeTitle)
                         .foregroundColor(Color("background"))
                     
                     Text("FATO OU FARSA?")
-                        .font(.title2)
+                        .font(.largeTitle)
                         .fontWeight(.bold)
+                        .lineLimit(1)
                         .foregroundColor(Color("background"))
-                    Spacer()
-                    
-                    // Contador à direita
-                    Text("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)")
-                        .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color("background"))
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 12)
-                .frame(maxWidth: .infinity, maxHeight: 150, alignment: .bottom)
+                .frame(maxWidth: .infinity, maxHeight: 125, alignment: .bottom)
                 .background(Color("azul"))
                 .ignoresSafeArea(.all)
 
                 // --- Conteúdo da tela ---
                 VStack {
-                    Spacer() // empurra para baixo quando o texto for pequeno
-
+                    // Contador à direita
+                    Text("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)   ")
+                        .frame(maxWidth: .infinity, maxHeight: 85, alignment: .trailing)
+//                        .font(.system(size: 40, weight: .bold))
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("azul"))
+                    Spacer()
                     ScrollView {
                         VStack(spacing: 16) {
-                            Text(facts[gameState.currentIndex].titulo)
-                                .font(.title2.bold())
-                                .multilineTextAlignment(.leading)
-                                .padding()
-
-                            Text(facts[gameState.currentIndex].resumo)
-                                .multilineTextAlignment(.leading)
-                                .padding(.horizontal)
+                            if let fact = gameState.factAtual {
+                                Text(fact.titulo)
+                                    .font(.title2.bold())
+                                    .multilineTextAlignment(.leading)
+                                    .padding()
+                                Text(fact.resumo)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.horizontal)
+                            }
                         }
-                        .frame(maxWidth: .infinity) // centraliza no eixo horizontal
+                        .frame(maxWidth: .infinity)
+                        //
                     }
-
-                    Spacer() // empurra para cima quando o texto for pequeno
+                    Spacer()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-
-
-//            Text(facts[gameState.currentIndex].binario)
+                
+            Text(facts[gameState.currentIndex].binario)
                     
                     // Botões de resposta
                     HStack {
-                        Button("FARSA") {
-                            checkAnswer(userSaysTrue: false, resposta: facts[gameState.currentIndex].binario)
-                        }
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(Color("background"))
-                        .frame(maxWidth: .infinity, minHeight: 60)
-                        .background(Color("vermelho"))
-                        .cornerRadius(20)
-                        
                         Button("FATO") {
                             checkAnswer(userSaysTrue: true, resposta: facts[gameState.currentIndex].binario)
                         }
@@ -91,6 +83,16 @@ struct GameView: View {
                         .foregroundColor(Color("background"))
                         .frame(maxWidth: .infinity, minHeight: 60)
                         .background(Color("azul"))
+                        .cornerRadius(20)
+                        Spacer(minLength: 15)
+                        Button("FARSA") {
+                            checkAnswer(userSaysTrue: false, resposta: facts[gameState.currentIndex].binario)
+                        }
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(Color("background"))
+                        .frame(maxWidth: .infinity, minHeight: 60)
+                        .background(Color("vermelho"))
                         .cornerRadius(20)
                     }
                     .padding()
@@ -102,7 +104,7 @@ struct GameView: View {
                     .font(.title)
                     .bold()
                     .foregroundColor(Color("cinza"))
-                    .frame(maxWidth: .infinity, maxHeight: 75, alignment: .top)
+                    .frame(maxWidth: .infinity, maxHeight: 130, alignment: .top)
                     
                 }
 //            .padding()
