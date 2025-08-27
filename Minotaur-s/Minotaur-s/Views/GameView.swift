@@ -54,9 +54,7 @@ struct GameView: View {
                                     Text(fact.assunto)
                                         .font(.headline)
                                         .foregroundColor(Color("background"))
-                                        .lineLimit(1)
-                                        .multilineTextAlignment(.center)
-                                        .frame(maxWidth: 150, minHeight: 30)
+                                        .frame(maxWidth: 190, maxHeight: 30)
                                         .background(Color("vermelho"))
                                         .cornerRadius(20)
                                         .padding(.horizontal)
@@ -88,7 +86,7 @@ struct GameView: View {
                     .foregroundColor(Color("background"))
                     .frame(maxWidth: .infinity, minHeight: 63)
                     .background(Color("azul"))
-                    .cornerRadius(20)
+                    .cornerRadius(22)
                     
                     Spacer(minLength: 25)
                     
@@ -101,7 +99,7 @@ struct GameView: View {
                     .foregroundColor(Color("background"))
                     .frame(maxWidth: .infinity, minHeight: 63)
                     .background(Color("vermelho"))
-                    .cornerRadius(20)
+                    .cornerRadius(22)
                     Spacer(minLength: 25)
                 }
                 .padding()
