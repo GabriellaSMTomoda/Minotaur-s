@@ -2,8 +2,6 @@
 //  GameView.swift
 //  Minotaur-s
 //
-//  Created by Gabriella San Martino Tomoda on 18/08/25.
-//
 
 import SwiftUI
 
@@ -174,7 +172,7 @@ struct GameView: View {
                         .background(Color("azul"))
                         .foregroundColor(Color("background"))
                     
-                    NavigationLink(destination: GameReportView()) {
+                    NavigationLink(destination: GameReportView().environmentObject(gameState)) {
                         Text("REVISÃO")
                             .font(.title2)
                             .bold()
@@ -186,8 +184,8 @@ struct GameView: View {
                     
                     Button("JOGAR DE NOVO") {
                         fimDePartida = false
-                        gameState.partida()
                         GamePersistence.clear()
+                        gameState.partida()
                     }
                     .font(.title2)
                     .bold()
@@ -240,6 +238,9 @@ struct GameView: View {
         let isTrue = rating == "true" || rating == "verdadeiro"
         respostaCorreta = (userSaysTrue == isTrue)
         mostrarPopup = true
+        
+        gameState.registrarResultado(para: fact.id, acertou: respostaCorreta)
+        
         if respostaCorreta {
             gameState.acertos += 1
         } else {
