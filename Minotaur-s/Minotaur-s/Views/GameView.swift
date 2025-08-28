@@ -21,10 +21,12 @@ struct GameView: View {
             VStack(spacing: 0) {
                 // HEADER
                 HStack {
-                    Image(systemName: "rectangle.portrait.and.arrow.right")
-                        .font(.largeTitle)
-                        .foregroundColor(Color("background"))
-                        .scaleEffect(x: -1, y: 1)
+                    Button(action: {dismiss()}) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .font(.largeTitle)
+                            .foregroundColor(Color("background"))
+                            .scaleEffect(x: -1, y: 1)
+                    }
                     Spacer()
                     Image("icon")
                         .font(.largeTitle)
@@ -226,6 +228,9 @@ struct GameView: View {
         .onDisappear {
             GamePersistence.save(gameState: gameState)
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
     }
     
     // Verifica se o usuário acertou ou errou
