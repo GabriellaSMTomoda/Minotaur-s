@@ -42,6 +42,8 @@ struct ContentView: View {
                     }
                 }
             }
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
@@ -49,5 +51,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-
 
