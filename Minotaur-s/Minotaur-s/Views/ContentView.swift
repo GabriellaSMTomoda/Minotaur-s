@@ -10,7 +10,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("background")
+                Color("background") 
                     .ignoresSafeArea() // ocupa toda a tela
 
                 VStack {
@@ -49,7 +49,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-#Preview {
-    ContentView()
-}
+
 
