@@ -17,36 +17,40 @@ struct GameView: View {
         ZStack {
             Color("background")
                 .ignoresSafeArea()
-            VStack(spacing: 0) {
+            VStack() {
                 // HEADER
                 HStack {
                     Button(action: {sairPopup = true} ) {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                        Image(systemName: "chevron.backward")
                             .font(.largeTitle)
                             .foregroundColor(Color("background"))
-                            .scaleEffect(x: -1, y: 1)
+                            .frame(minWidth: 120, alignment: .leading)
                     }
-                    Spacer()
-                    Image("icon")
+                    Text("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)   ")
+                        .frame(alignment: .trailing)
+                        .font(.system(size: 50, weight: .bold))
                         .font(.largeTitle)
+                        .fontWeight(.bold)
                         .foregroundColor(Color("background"))
-                        .frame(maxWidth: .infinity)
-                    Spacer(minLength: 57)
+                    Button("Pular") {
+                        gameState.pulos += 1
+                        checkFim()
+                    }
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(Color("cinza"))
+                    .padding(.horizontal)
+//                    .frame(maxWidth: .infinity, maxHeight: 130, alignment: .top)
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 12)
-                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 138, alignment: .bottom)
+                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 125, alignment: .bottom)
                 .background(Color("azul"))
                 
                 // --- Conteúdo da tela ---
                 VStack {
                     Spacer(minLength: 10)
-                    Text("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)   ")
-                        .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 85, alignment: .trailing)
-//                        .font(.system(size: 40, weight: .bold))
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("azul"))
+                    
                     Spacer()
                     ScrollView {
                         VStack(spacing: 16) {
@@ -105,17 +109,8 @@ struct GameView: View {
                 }
                 .padding()
                 .frame(width: UIScreen.main.bounds.width)
-                Button("Pular") {
-                    gameState.pulos += 1
-                    checkFim()
-                }
-                .font(.title)
-                .bold()
-                .foregroundColor(Color("cinza"))
-                .frame(maxWidth: .infinity, maxHeight: 130, alignment: .top)
-                //                    .padding()
             }
-            .ignoresSafeArea(.all)
+            .ignoresSafeArea(.all, edges: .top)
             
             // POP-UP de resposta
             if mostrarPopup {
