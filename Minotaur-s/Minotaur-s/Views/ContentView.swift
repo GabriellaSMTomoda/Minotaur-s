@@ -14,7 +14,7 @@ struct ContentView: View {
                     .ignoresSafeArea() // ocupa toda a tela
 
                 VStack {
-                    Text("Real ou Falso?")
+                    Text("Fato ou Farsa?")
                         .font(.system(size: 80, weight: .bold))
                         .foregroundColor(Color("azul"))
                         .padding()
