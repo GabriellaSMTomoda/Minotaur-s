@@ -11,6 +11,7 @@ struct GameView: View {
     @State private var mostrarPopup = false
     @State private var respostaCorreta = false
     @State private var fimDePartida = false
+    @State private var sairPopup = false
     
     var body: some View {
         ZStack {
@@ -19,7 +20,7 @@ struct GameView: View {
             VStack(spacing: 0) {
                 // HEADER
                 HStack {
-                    Button(action: {dismiss()}) {
+                    Button(action: {sairPopup = true} ) {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                             .font(.largeTitle)
                             .foregroundColor(Color("background"))
@@ -153,6 +154,44 @@ struct GameView: View {
                 }
                 .frame(width: UIScreen.main.bounds.width * 4/5,
                        height: UIScreen.main.bounds.height * 2/3)
+                .background(Color("background"))
+                .cornerRadius(20)
+                .shadow(radius: 10)
+            }
+            
+            // POP-UP de saida
+            if sairPopup {
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                
+                VStack() {
+                    Spacer(minLength: 5)
+                    Button("CONTINUAR") {
+                        sairPopup = false
+                    }
+                    .font(.title2)
+                    .bold()
+                    .frame(maxWidth: UIScreen.main.bounds.width * 5/7, minHeight: 30)
+                    .foregroundColor(Color("background"))
+                    .padding()
+                    .background(Color("azul"))
+                    .cornerRadius(22)
+                    .padding([.leading, .trailing, .bottom], 20)
+                    
+                    Button("SAIR") {
+                        dismiss()
+                    }
+                    .font(.title2)
+                    .bold()
+                    .frame(maxWidth: UIScreen.main.bounds.width * 5/7, minHeight: 30)
+                    .foregroundColor(Color("background"))
+                    .padding()
+                    .background(Color("vermelho"))
+                    .cornerRadius(22)
+                    .padding([.leading, .trailing, .bottom], 20)
+                }
+                .frame(width: UIScreen.main.bounds.width * 6/7,
+                       height: UIScreen.main.bounds.height * 3/14)
                 .background(Color("background"))
                 .cornerRadius(20)
                 .shadow(radius: 10)
