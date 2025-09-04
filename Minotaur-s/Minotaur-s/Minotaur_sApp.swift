@@ -11,7 +11,7 @@
  struct Minotaur_sApp: App {
      var body: some Scene {
          WindowGroup {
-             ContentView()
+             GameView()
          }
      }
  }
