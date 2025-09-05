@@ -7,7 +7,7 @@
 import Foundation
 class FactLoader {
   static func loadFacts() -> [Fact] {
-    guard let url = Bundle.main.url(forResource: "BancoDeDados", withExtension: "tsv"),
+    guard let url = Bundle.main.url(forResource: "Banco_Noticias - Banco_Noticias", withExtension: "tsv"),
        let content = try? String(contentsOf: url, encoding: .utf8) else {
       return []
     }
@@ -19,13 +19,14 @@ class FactLoader {
       if columns.count >= 9 {
         let fact = Fact(
           url: columns[1],
-          autor: columns[2],
+          fonte: columns[2],
           data: columns[3],
           motivo: columns[4],
           resumo: columns[5],
           titulo: columns[6],
           binario: columns[7],
-          assunto: columns[8]
+          assunto: columns[8],
+          autor: columns[9]
         )
         facts.append(fact)
       }
