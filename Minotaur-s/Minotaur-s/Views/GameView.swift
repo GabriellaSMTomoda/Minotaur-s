@@ -223,18 +223,18 @@ struct GameView: View {
             }
             .navigationTitle("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        popupAppIntent = true
-                    }) {
-                        Image(systemName: "ellipsis.bubble")
-                        //.frame(width: 40, height: 40)
-                            .foregroundColor(.white) // cor do ícone
-                    }
-                    //.bold()
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button(action: {
+//                        popupAppIntent = true
+//                    }) {
+//                        Image(systemName: "ellipsis.bubble")
+//                        //.frame(width: 40, height: 40)
+//                            .foregroundColor(.white) // cor do ícone
+//                    }
+//                    //.bold()
+//                }
+//            }
         }
     }
     // Verifica se o usuário acertou ou errou
