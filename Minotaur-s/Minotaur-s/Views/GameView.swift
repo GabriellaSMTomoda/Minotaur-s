@@ -129,7 +129,7 @@ struct GameView: View {
                     }
                     .frame(width: UIScreen.main.bounds.width * 5/6,
                            height: UIScreen.main.bounds.height * 3/4)
-                    .background(Color("revisao_pop"))
+                    .background(Color("pop"))
                     .cornerRadius(20)
                 }
                 // POP-UP de resposta
@@ -141,13 +141,14 @@ struct GameView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
+                            .frame(height: 55)
                             .background(respostaCorreta ? Color("verde") : Color("vermelho"))
                             .foregroundColor(Color.white)
                         ScrollView{
                             if let fact = gameState.factAtual {
                                 Text(fact.motivo)
                                     .foregroundColor(Color("texto"))
-                                    .padding()
+                                    .padding(.horizontal)
                             }
                         }
                         Button("PRÓXIMA") {
@@ -163,7 +164,7 @@ struct GameView: View {
                     }
                     .frame(width: UIScreen.main.bounds.width * 4/5,
                            height: UIScreen.main.bounds.height * 2/3)
-                    .background(Color("revisao_pop"))
+                    .background(Color("pop"))
                     .cornerRadius(20)
                     .shadow(radius: 10)
                 }
@@ -204,7 +205,7 @@ struct GameView: View {
                         .padding(.bottom)
                     }
                     .frame(width: UIScreen.main.bounds.width * 5/6)
-                    .background(Color("revisao_pop"))
+                    .background(Color("pop"))
                     .cornerRadius(20)
                     .shadow(radius: 10)
                 }
@@ -239,8 +240,8 @@ struct GameView: View {
     // Verifica se o usuário acertou ou errou
     func checkAnswer(userSaysTrue: Bool) {
         guard let fact = gameState.factAtual else { return }
-        let rating = fact.binario.lowercased()
-        let isTrue = rating == "true" || rating == "verdadeiro"
+        let rating = fact.binario
+        let isTrue = rating == "true" || rating == "FATO"
         respostaCorreta = (userSaysTrue == isTrue)
         mostrarPopup = true
         gameState.registrarResultado(para: fact.id, acertou: respostaCorreta)
