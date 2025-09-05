@@ -26,21 +26,42 @@ struct GameView: View {
                         ScrollView {
                             VStack() {
                                 if let fact = gameState.factAtual {
+                                    HStack{
+                                        Spacer(minLength: 17)
+                                        Text(fact.assunto)
+                                            .font(.caption2.bold())
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 6)
+                                            .background(Color("vermelho"))
+                                            .cornerRadius(12)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.bottom, 4)
+                                    }
                                     Text(fact.titulo)
                                         .font(.title.bold())
                                         .multilineTextAlignment(.leading)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding()
                                         .foregroundColor(Color("texto"))
-                                    Text(fact.resumo)
-                                        .multilineTextAlignment(.leading)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal)
-                                        .foregroundColor(Color("texto"))
-                                    Text("Fonte: \(fact.autor)")
+                                        .padding(.bottom)
+                                    Text("Fonte: \(fact.fonte)")
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                        .padding()
                                         .foregroundColor(Color("texto"))
+                                        .font(.callout)
+                                        .padding(.horizontal)
+                                    Text("Autor: \(fact.autor)")
+                                        .frame(maxWidth: .infinity, alignment: .callout)
+                                        .foregroundColor(Color("texto"))
+                                        .font(.caption)
+                                        .padding(.horizontal)
+                                    Text(fact.resumo)
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(Color("texto"))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.title2)
+                                        .padding(.horizontal)
+                                        .padding(.bottom)
                                 }
                             }
                             .frame(maxWidth: .infinity)
@@ -48,17 +69,9 @@ struct GameView: View {
                         Spacer()
                         // Botões de resposta
                         HStack {
-                            Button("FALSO") {
-                                checkAnswer(userSaysTrue: false)
-                            }
-                            .font(.title)
-                            .bold()
-                            .foregroundColor(Color.white)
-                            .frame(minWidth: 160, maxHeight: 64)
-                            .background(Color("vermelho"))
-                            .cornerRadius(20)
+                            
                             //            Spacer().frame(width: 15)
-                            Button("REAL") {
+                            Button("FATO") {
                                 checkAnswer(userSaysTrue: true)
                             }
                             .font(.title)
@@ -67,11 +80,22 @@ struct GameView: View {
                             .frame(minWidth: 160, maxHeight: 64)
                             .background(Color("azul"))
                             .cornerRadius(20)
+                            Button("FARSA") {
+                                checkAnswer(userSaysTrue: false)
+                            }
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color.white)
+                            .frame(minWidth: 160, maxHeight: 64)
+                            .background(Color("vermelho"))
+                            .cornerRadius(20)
                         }
+                        .padding(.bottom, 2)
                         Button("Pular") {
                             gameState.pulos += 1
                             checkFim()
                         }
+                        .padding(.bottom, -20)
                         .bold()
                         .foregroundColor(Color("cinza"))
                     }
@@ -91,6 +115,7 @@ struct GameView: View {
                         ScrollView{
                             Text("idjidjidj")
                                 .padding()
+                                .foregroundColor(Color("texto"))
                         }
                         Button("ENTENDI") {
                             popupAppIntent = false
@@ -117,7 +142,7 @@ struct GameView: View {
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
                             .background(respostaCorreta ? Color("verde") : Color("vermelho"))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.white)
                         ScrollView{
                             if let fact = gameState.factAtual {
                                 Text(fact.motivo)
@@ -149,18 +174,18 @@ struct GameView: View {
                     VStack(spacing: 20) {
                         Text("FIM DA PARTIDA")
                             .font(.largeTitle)
-                            .foregroundColor(.white)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
                             .frame(height: 64)
                             .background(Color("azul"))
+                            .foregroundColor(Color.white)
                         NavigationLink(destination: GameReportView().environmentObject(gameState)) {
                             Text("REVISÃO")
                                 .font(.title2)
-                                .foregroundColor(.white)
                                 .bold()
                                 .frame(width: 264, height: 64)
                                 .background(Color("azul"))
+                                .foregroundColor(.white)
                                 .cornerRadius(12)
                         }
                         .padding(.horizontal)
@@ -176,19 +201,9 @@ struct GameView: View {
                         .foregroundColor(.white)
                         .cornerRadius(12)
                         .padding(.horizontal)
-                        Button("SAIR") {
-                            GamePersistence.clear()
-                            dismiss()
-                        }
-                        .font(.title2)
-                        .bold()
-                        .frame(width: 264, height: 64)
-                        .background(Color("vermelho"))
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        .padding([.leading, .trailing, .bottom])
+                        .padding(.bottom)
                     }
-                    .frame(width: UIScreen.main.bounds.width * 4/5)
+                    .frame(width: UIScreen.main.bounds.width * 5/6)
                     .background(Color("revisao_pop"))
                     .cornerRadius(20)
                     .shadow(radius: 10)
@@ -206,25 +221,26 @@ struct GameView: View {
                 GamePersistence.save(gameState: gameState)
             }
             .navigationTitle("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)")
-            .navigationBarTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("logo") {
+                    Button(action: {
                         popupAppIntent = true
+                    }) {
+                        Image(systemName: "ellipsis.bubble")
+                        //.frame(width: 40, height: 40)
+                            .foregroundColor(.white) // cor do ícone
                     }
-                    .foregroundColor(.white)
-                    .bold()
+                    //.bold()
                 }
             }
         }
     }
-    
     // Verifica se o usuário acertou ou errou
     func checkAnswer(userSaysTrue: Bool) {
         guard let fact = gameState.factAtual else { return }
         let rating = fact.binario.lowercased()
-        let isTrue = rating == "FATO" || rating == "verdadeiro"
+        let isTrue = rating == "true" || rating == "verdadeiro"
         respostaCorreta = (userSaysTrue == isTrue)
         mostrarPopup = true
         gameState.registrarResultado(para: fact.id, acertou: respostaCorreta)
@@ -243,7 +259,11 @@ struct GameView: View {
         }
     }
 }
-
 #Preview {
     GameView()
 }
+
+
+
+
+

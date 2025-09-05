@@ -178,7 +178,7 @@ struct Card: View {
                             .frame(minWidth: 120, minHeight: 30, alignment: .center)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color("texto"), lineWidth: 5)
+                                    .stroke(Color("texto"), lineWidth: 3)
                             )
                         Spacer()
                     }
@@ -239,110 +239,3 @@ struct Card: View {
         Spacer(minLength: 10)
     }
 }
-
-//
-//import SwiftUI
-//struct GameReportView: View {
-//  @EnvironmentObject private var gameState: GameState
-//  @State private var expandedFactID: UUID? = nil
-//  var body: some View {
-//    NavigationStack {
-//      ZStack {
-//        Color("background")
-//          .ignoresSafeArea()
-//        ScrollView {
-//          VStack(spacing: 16) {
-//            ForEach(gameState.partidaFacts) { fact in
-//              VStack(spacing: 0) {
-//                HStack(spacing: 0) {
-//                  // Linha vertical que se expande
-//                  Rectangle()
-//                    .fill(corResultado(para: fact.id))
-//                    .frame(width: 18)
-//                  // Conteúdo principal
-//                  VStack(alignment: .leading, spacing: 0) {
-//                    ZStack(alignment: .topTrailing) {
-//                      // Botão para expandir/recolher
-//                      Button(action: {
-//                        if expandedFactID == fact.id {
-//                          expandedFactID = nil
-//                        } else {
-//                          expandedFactID = fact.id
-//                        }
-//                      }) {
-//                        HStack {
-//                          Text(fact.titulo)
-//                            .font(.system(size: 24, weight: .medium))
-//                            .foregroundColor(.black)
-//                            .padding()
-//                            //.frame(maxWidth: .infinity, alignment: .leading)
-//                          Spacer()
-//                          // Ícone no canto inferior direito
-//                          Image(systemName: expandedFactID == fact.id ? "chevron.up" : "chevron.down")
-//                            .foregroundColor(.gray)
-//                            .padding(.trailing, 16)
-//                            .padding(.bottom, 16)
-//                        }
-//                      }
-//                      // Label FATO ou FARSA no canto superior direito
-//                      Image(ehVerdadeiro(fact.binario) ? "fato" : "farsa")
-//                        .resizable() // ← FALTANDO
-//                        .scaledToFit() // ← FALTANDO
-//                        .frame(width: 107, height: 57) // Diminui o tamanho
-//                        .offset(x: 12, y: 0)
-//                    }
-//                    // Conteúdo expandido
-//                    if expandedFactID == fact.id {
-//                      VStack(alignment: .leading, spacing: 8) {
-//                        Text("Explicação:")
-//                          .font(.system(size: 24, weight: .medium))
-//                          .foregroundColor(.black)
-//                          .padding(.horizontal)
-//                        Text(fact.motivo)
-//                          .foregroundColor(.black)
-//                          .padding(.horizontal)
-//                          .padding(.bottom, 12)
-//                      }
-//                    }
-//                  }
-//                }
-//              }
-//              .background(Color.white)
-//              .cornerRadius(12)
-//              .overlay(
-//                RoundedRectangle(cornerRadius: 12)
-//                  .stroke(Color.gray, lineWidth: 0.5)
-//              )
-//            }
-//          }
-//          .padding()
-//        }
-//      }
-//      .toolbar {
-//        ToolbarItem(placement: .principal) {
-//          Text("REVISÃO")
-//            .font(.system(size: 32, weight: .bold))
-//            .foregroundColor(.white)
-//        }
-//      }
-//      .navigationBarTitleDisplayMode(.inline)
-//      .toolbarBackground(Color("azul"), for: .navigationBar)
-//      .toolbarBackground(.visible, for: .navigationBar)
-//    }
-//  }
-//  private func ehVerdadeiro(_ binario: String) -> Bool {
-//    let rating = binario.lowercased()
-//    return rating == "true" || rating == "verdadeiro"
-//  }
-//  private func corResultado(para factID: UUID) -> Color {
-//    if let acertou = gameState.resultados[factID] {
-//      return acertou ? Color("verde") : Color("vermelho")
-//    }
-//    return Color.gray
-//  }
-//}
-//#Preview {
-//  GameReportView()
-//    .environmentObject(GameState())
-//}
-
