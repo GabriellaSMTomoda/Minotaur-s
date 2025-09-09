@@ -7,7 +7,7 @@
 import Foundation
 class FactLoader {
   static func loadFacts() -> [Fact] {
-    guard let url = Bundle.main.url(forResource: "Banco_Noticias - Banco_Noticias", withExtension: "tsv"),
+    guard let url = Bundle.main.url(forResource: "Banco_Dados", withExtension: "tsv"),
        let content = try? String(contentsOf: url, encoding: .utf8) else {
       return []
     }
