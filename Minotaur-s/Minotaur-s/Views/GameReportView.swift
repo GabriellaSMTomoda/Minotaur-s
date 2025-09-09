@@ -56,6 +56,8 @@ struct GameReportView: View {
                 Spacer()
             }
             .padding(.leading)
+            .accessibilityLabel("ACERTOS")
+            .accessibilitySortPriority(0)
             Spacer()
             
             //#####IF nenhum, popup de "0 erros, sem acertos"
@@ -85,6 +87,8 @@ struct GameReportView: View {
                 Text("Erros")
                     .font(.title2)
                     .fontWeight(.medium)
+                    .accessibilityLabel("ERROS")
+                    .accessibilitySortPriority(1)
                 Spacer()
             }
             .padding(.leading)
@@ -115,6 +119,8 @@ struct GameReportView: View {
                 Text("Pulos")
                     .font(.title2)
                     .fontWeight(.medium)
+                    .accessibilityLabel("PULOS")
+                    .accessibilitySortPriority(2)
                 Spacer()
             }
             .padding(.leading)
@@ -172,10 +178,14 @@ struct Card: View {
                         Spacer(minLength: 10)
                         Text("Esta notícia é:")
                             .foregroundColor(Color("texto"))
+                            .accessibilityLabel("Esta notícia é:")
+                            .accessibilitySortPriority(6)
                         Spacer()
                         Text(binario)
                             .foregroundColor(Color("texto"))
                             .frame(minWidth: 120, minHeight: 30, alignment: .center)
+                            .accessibilityLabel("\(binario)")
+                            .accessibilitySortPriority(5)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color("texto"), lineWidth: 3)
@@ -197,9 +207,14 @@ struct Card: View {
                         .foregroundColor(Color("texto"))
                         .padding()
                         .frame(width: UIScreen.main.bounds.width * 8/9, alignment: .leading)
+                        .accessibilityLabel("Título da notícia: \(titulo)")
+                        .accessibilitySortPriority(4)
                     Text(expandedFactID == id ? "" : "Ver Mais")
                         .foregroundColor(.gray)
                         .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .trailing)
+                        .accessibilityLabel("Botão Ver Mais")
+                        .accessibilityHint("Aperte para ver mais sobre a notícia")
+                        .accessibilitySortPriority(3)
                     Spacer()
                 }
                 .frame(width: UIScreen.main.bounds.width * 8/9)
@@ -222,6 +237,8 @@ struct Card: View {
                             .foregroundColor(Color("texto"))
                             .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .leading)
                             .fontWeight(.bold)
+                            .accessibilityLabel("EXPLICAÇÃO")
+                            .accessibilitySortPriority(0)
                         Spacer()
                     }
                     Spacer()
@@ -229,6 +246,8 @@ struct Card: View {
                         .foregroundColor(Color("texto"))
                         .padding(.horizontal)
                         .padding(.bottom, 12)
+                        .accessibilityLabel("Motivo pelo qual a notícia é \(binario): \(motivo)")
+                        .accessibilitySortPriority(1)
                     Spacer()
                 }
                 .frame(width: UIScreen.main.bounds.width * 8/9)
