@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0051044B2E6FA69E0068D118 /* Banco_Noticias - Banco_Noticias.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 0051044A2E6FA69E0068D118 /* Banco_Noticias - Banco_Noticias.tsv */; };
 		2FD09A6D05A1415CB1BF7247 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CF54EB57A7CFD4A61DD37 /* GameView.swift */; };
 		2FF161EF5EF3648F377FD0E0 /* Minotaur_sUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */; };
 		31479711E40E2DC5784EEC03 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C88C837C02BD4C80FFF837B /* Fact.swift */; };
@@ -18,7 +19,6 @@
 		948B8FA52CDAFE3C0C0D6041 /* Minotaur_sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C8965D55192F706B6420 /* Minotaur_sTests.swift */; };
 		C55F4D93089419682A7F0C2F /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DAD2FA3DDE89BD1DB0964 /* GameState.swift */; };
 		C817AE2DCCAEC99869837C10 /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */; };
-		E5C079582E6B0241002E5DE5 /* Banco_Noticias - Banco_Noticias.tsv in Resources */ = {isa = PBXBuildFile; fileRef = E5C079572E6B0241002E5DE5 /* Banco_Noticias - Banco_Noticias.tsv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		0017FEA52E65D01A00DF2FC5 /* Minotaur-sRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Minotaur-sRelease.entitlements"; sourceTree = "<group>"; };
+		0051044A2E6FA69E0068D118 /* Banco_Noticias - Banco_Noticias.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Banco_Noticias - Banco_Noticias.tsv"; sourceTree = "<group>"; };
 		0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
 		770DAD2FA3DDE89BD1DB0964 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		BD7D8A4FC41C94C0498057A8 /* GamePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePersistence.swift; sourceTree = "<group>"; };
 		C07CF54EB57A7CFD4A61DD37 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		E5C079552E6A97B4002E5DE5 /* BancoDeDados.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = BancoDeDados.tsv; sourceTree = "<group>"; };
-		E5C079572E6B0241002E5DE5 /* Banco_Noticias - Banco_Noticias.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Banco_Noticias - Banco_Noticias.tsv"; sourceTree = "<group>"; };
 		ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F643C8965D55192F706B6420 /* Minotaur_sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +70,7 @@
 		3600CFCF374A62B1A8D61A95 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E5C079572E6B0241002E5DE5 /* Banco_Noticias - Banco_Noticias.tsv */,
+				0051044A2E6FA69E0068D118 /* Banco_Noticias - Banco_Noticias.tsv */,
 				E5C079552E6A97B4002E5DE5 /* BancoDeDados.tsv */,
 				B7B9A5E575AAE2736CA049BB /* FactLoader.swift */,
 				BD7D8A4FC41C94C0498057A8 /* GamePersistence.swift */,
@@ -238,7 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */,
-				E5C079582E6B0241002E5DE5 /* Banco_Noticias - Banco_Noticias.tsv in Resources */,
+				0051044B2E6FA69E0068D118 /* Banco_Noticias - Banco_Noticias.tsv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
