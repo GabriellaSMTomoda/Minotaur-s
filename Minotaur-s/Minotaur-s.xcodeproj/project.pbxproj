@@ -3,10 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0017FE9C2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 0017FE9B2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv */; };
+		0017FE9E2E65C46F00DF2FC5 /* QuestionsDayLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FE9D2E65C42D00DF2FC5 /* QuestionsDayLoader.swift */; };
+		0017FEA02E65C50300DF2FC5 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FE9F2E65C4FE00DF2FC5 /* Question.swift */; };
+		0017FF1E2E673B9500DF2FC5 /* PerguntaDoDiaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FF1D2E673B7700DF2FC5 /* PerguntaDoDiaView.swift */; };
+		0017FF232E68693200DF2FC5 /* QuestionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FF222E68692F00DF2FC5 /* QuestionSession.swift */; };
+		0017FF282E686DB200DF2FC5 /* PerguntaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FF272E686DA700DF2FC5 /* PerguntaStorage.swift */; };
 		2FD09A6D05A1415CB1BF7247 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CF54EB57A7CFD4A61DD37 /* GameView.swift */; };
 		2FF161EF5EF3648F377FD0E0 /* Minotaur_sUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */; };
 		31479711E40E2DC5784EEC03 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C88C837C02BD4C80FFF837B /* Fact.swift */; };
@@ -14,6 +20,7 @@
 		40BF5F6F180E9F12F923B802 /* Minotaur_sUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F87DCE3DDD718A66DBE0185 /* Minotaur_sUITests.swift */; };
 		45DDC27FE971ACD00E24806D /* FactLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B9A5E575AAE2736CA049BB /* FactLoader.swift */; };
 		6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 803F9AED4600A8448D843247 /* Assets.xcassets */; };
+		8549411F6B8EB14490681906 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA7A6D486FCC86FB5D3FBF /* ContentView.swift */; };
 		911AD7D23044E0C773BAE61B /* Minotaur_sApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */; };
 		948B8FA52CDAFE3C0C0D6041 /* Minotaur_sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C8965D55192F706B6420 /* Minotaur_sTests.swift */; };
 		C55F4D93089419682A7F0C2F /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DAD2FA3DDE89BD1DB0964 /* GameState.swift */; };
@@ -39,7 +46,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0017FE9B2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = PerguntasDoDia.tsv; sourceTree = "<group>"; };
+		0017FE9D2E65C42D00DF2FC5 /* QuestionsDayLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsDayLoader.swift; sourceTree = "<group>"; };
+		0017FE9F2E65C4FE00DF2FC5 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		0017FEA52E65D01A00DF2FC5 /* Minotaur-sRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Minotaur-sRelease.entitlements"; sourceTree = "<group>"; };
+		0017FF1D2E673B7700DF2FC5 /* PerguntaDoDiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerguntaDoDiaView.swift; sourceTree = "<group>"; };
+		0017FF222E68692F00DF2FC5 /* QuestionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSession.swift; sourceTree = "<group>"; };
+		0017FF272E686DA700DF2FC5 /* PerguntaStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerguntaStorage.swift; sourceTree = "<group>"; };
 		0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
 		770DAD2FA3DDE89BD1DB0964 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
@@ -57,6 +70,10 @@
 		ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minotaur-s.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F643C8965D55192F706B6420 /* Minotaur_sTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0017FEA12E65C82200DF2FC5 /* Intents */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Intents; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXGroup section */
 		15B32B4BAFF6FE65C51A9ADC /* Minotaur-sTests */ = {
@@ -83,6 +100,8 @@
 		38F290B2CC4D5DD2E59FB30F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0017FF222E68692F00DF2FC5 /* QuestionSession.swift */,
+				0017FE9F2E65C4FE00DF2FC5 /* Question.swift */,
 				9C88C837C02BD4C80FFF837B /* Fact.swift */,
 				770DAD2FA3DDE89BD1DB0964 /* GameState.swift */,
 			);
@@ -103,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				0017FEA52E65D01A00DF2FC5 /* Minotaur-sRelease.entitlements */,
+				0017FEA12E65C82200DF2FC5 /* Intents */,
 				803F9AED4600A8448D843247 /* Assets.xcassets */,
 				BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */,
 				38F290B2CC4D5DD2E59FB30F /* Models */,
@@ -134,6 +154,8 @@
 		EEEE0870FDD87D8E220DB6E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0017FF1D2E673B7700DF2FC5 /* PerguntaDoDiaView.swift */,
+				CEDA7A6D486FCC86FB5D3FBF /* ContentView.swift */,
 				618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */,
 				C07CF54EB57A7CFD4A61DD37 /* GameView.swift */,
 			);
@@ -189,6 +211,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0017FEA12E65C82200DF2FC5 /* Intents */,
 			);
 			name = "Minotaur-s";
 			packageProductDependencies = (
@@ -252,9 +277,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0017FF1E2E673B9500DF2FC5 /* PerguntaDoDiaView.swift in Sources */,
+				8549411F6B8EB14490681906 /* ContentView.swift in Sources */,
 				31479711E40E2DC5784EEC03 /* Fact.swift in Sources */,
+				0017FF232E68693200DF2FC5 /* QuestionSession.swift in Sources */,
 				45DDC27FE971ACD00E24806D /* FactLoader.swift in Sources */,
+				0017FE9E2E65C46F00DF2FC5 /* QuestionsDayLoader.swift in Sources */,
 				339DACD1B3AF7C43737EB8D7 /* GamePersistence.swift in Sources */,
+				0017FEA02E65C50300DF2FC5 /* Question.swift in Sources */,
+				0017FF282E686DB200DF2FC5 /* PerguntaStorage.swift in Sources */,
 				C817AE2DCCAEC99869837C10 /* GameReportView.swift in Sources */,
 				C55F4D93089419682A7F0C2F /* GameState.swift in Sources */,
 				2FD09A6D05A1415CB1BF7247 /* GameView.swift in Sources */,
