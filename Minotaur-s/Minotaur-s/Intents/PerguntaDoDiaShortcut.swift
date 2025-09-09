@@ -16,10 +16,16 @@ struct AppShortcuts: AppShortcutsProvider {
             intent: PerguntaDoDiaIntent(),
             phrases: [
                 "Mostre a pergunta do dia do \(.applicationName)",
-                "Mostre a pergunta do dia no \(.applicationName)",
+                "Mostre a pergunta no dia no \(.applicationName)",
 
                 "Qual é a pergunta do dia do \(.applicationName)",
-                "Qual é a pergunta do dia no \(.applicationName)",
+                "Qual é a pergunta no dia no \(.applicationName)",
+                
+                "Qual a pergunta do dia do \(.applicationName)",
+                "Qual a pergunta no dia no \(.applicationName)",
+                
+                "Qual a pergunta do  \(.applicationName)",
+                "Qual a pergunta no  \(.applicationName)",
                 
                 "Qual é a notícia do dia do \(.applicationName)",
                 "Qual é a notícia do dia no \(.applicationName)",
@@ -27,6 +33,8 @@ struct AppShortcuts: AppShortcutsProvider {
                 "Qual é a notícia do \(.applicationName)",
                 "Qual é a notícia no \(.applicationName)",
 
+                "Qual a notícia do \(.applicationName)",
+                "Qual a notícia no \(.applicationName)",
             ],
             shortTitle: "Mostrar pergunta do dia",
             systemImageName: "newspaper"
@@ -36,10 +44,8 @@ struct AppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: ResponderPerguntaIntent(),
             phrases: [
-                "Responder a pergunta do dia no \(.applicationName)",
                 "Minha resposta é \(\.$resposta) no \(.applicationName)",
-                "Dizer que é \(\.$resposta) no \(.applicationName)",
-                "Essa notícia é \(\.$resposta) no \(.applicationName)"
+
             ],
             shortTitle: "Responder pergunta",
             systemImageName: "checkmark.circle"
