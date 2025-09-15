@@ -4,6 +4,9 @@ struct GameReportView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var expandedFactID: UUID? = nil
+    @State private var isNavigationBarHidden: Bool = true
+       
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationStack {
@@ -24,23 +27,29 @@ struct GameReportView: View {
             }
             .navigationTitle("Revisão")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                // Botão de voltar customizado sem texto
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        HStack(spacing: 2) {
-                            Image(systemName: "chevron.left")
-                                .fontWeight(.bold)
-                        }
+            .navigationBarBackButtonHidden(self.isNavigationBarHidden)
+            .navigationBarItems(leading:
+                Button(action: { dismiss() } ) {
+                    HStack(spacing: 2) {
+                        Image(systemName: "chevron.left")
+                            .fontWeight(.bold)
                     }
                 }
-            }
+            )
+            .gesture(DragGesture().onEnded { value in
+                if value.translation.width > 70 {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            })
             .toolbarColorScheme(.dark)
             .toolbarBackground(Color("azul"), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
+            .onAppear() {
+                self.isNavigationBarHidden = true
+            }
+            .onDisappear() {
+                self.isNavigationBarHidden = false
+            }
         }
     }
     
