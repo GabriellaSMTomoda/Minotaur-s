@@ -48,8 +48,9 @@ struct GameReportView: View {
     var acertosSection: some View {
         VStack{
             HStack{
-                Image(systemName: "circle.fill")
+                Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.green)
+                    .font(.title)
                 Text("Acertos")
                     .font(.title2)
                     .fontWeight(.medium)
@@ -82,8 +83,9 @@ struct GameReportView: View {
     var errosSection: some View {
         VStack{
             HStack{
-                Image(systemName: "circle.fill")
+                Image(systemName: "x.circle.fill")
                     .foregroundColor(.red)
+                    .font(.title)
                 Text("Erros")
                     .font(.title2)
                     .fontWeight(.medium)
@@ -116,6 +118,7 @@ struct GameReportView: View {
             HStack{
                 Image(systemName: "circle.fill")
                     .foregroundColor(.gray)
+                    .font(.title)
                 Text("Pulos")
                     .font(.title2)
                     .fontWeight(.medium)

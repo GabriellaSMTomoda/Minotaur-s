@@ -170,7 +170,7 @@ struct GameView: View {
                         .tint(Color("azul"))
                         .font(.title2)
                         .bold()
-                        .foregroundColor(Color("pop"))
+                        .foregroundColor(Color.white)
                         .padding(.bottom)
                     }
                     .frame(width: UIScreen.main.bounds.width * 5/6,
