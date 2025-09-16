@@ -163,7 +163,8 @@ struct GameReportView: View {
 }
 //----------------------------------------------------------------
 struct Card: View {
-    
+
+    @Environment(\.colorScheme) var colorScheme
     @State private var expandedFactID: UUID? = nil
     
     let id: UUID
@@ -189,15 +190,17 @@ struct Card: View {
                             .foregroundColor(Color("texto"))
                             .accessibilityLabel("Esta notícia é:")
                             .accessibilitySortPriority(6)
-                        Spacer()
-                        Text(binario)
-                            .foregroundColor(Color("texto"))
-                            .frame(minWidth: 120, minHeight: 30, alignment: .center)
-                            .accessibilityLabel("\(binario)")
-                            .accessibilitySortPriority(5)
+                        Spacer(minLength: 10)
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(binario == "FATO" ? Color("azul") : Color("vermelho"), lineWidth: 10)
+                            .frame(maxWidth: 120, minHeight: 30, alignment: .center)
+                            .background(binario == "FATO" ? Color("azul") : Color("vermelho"))
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color("texto"), lineWidth: 3)
+                                Text(binario)
+                                    .foregroundColor(colorScheme == .dark ? Color("texto") : .white)
+                                    .fontWeight(.bold)
+                                    .accessibilityLabel("\(binario)")
+                                    .accessibilitySortPriority(5)
                             )
                         Spacer()
                     }
