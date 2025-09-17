@@ -14,18 +14,18 @@ class GameState: ObservableObject {
   @Published var partidaFacts: [Fact] = [] // apenas as 10 escolhidas
   @Published var partidaIDs: [UUID] = []
   @Published var resultados: [UUID: Bool] = [:]  //armazena se acertou por ID
- // Inicia uma nova partida
- func partida() {
+// Inicia uma nova partida
+func partida() {
   resetar()
- }
- // Avança para a próxima notícia
- func nextFact() {
+}
+// Avança para a próxima notícia
+func nextFact() {
   if currentIndex < partidaFacts.count - 1 {
    currentIndex += 1
   }
- }
- // Reseta o jogo e seleciona 10 notícias aleatórias
- func resetar() {
+}
+// Reseta o jogo e seleciona 10 notícias aleatórias
+func resetar() {
   acertos = 0
   erros = 0
   pulos = 0
@@ -38,14 +38,15 @@ class GameState: ObservableObject {
   // Salva apenas os IDs para referência futura
   partidaIDs = partidaFacts.map { $0.id }
   partidaFacts.forEach { print($0.id) }
- }
+}
   func registrarResultado(para factID: UUID, acertou: Bool) {
       resultados[factID] = acertou
     }
- // Acesso ao fato atual
- var factAtual: Fact? {
+// Acesso ao fato atual
+var factAtual: Fact? {
   guard currentIndex < partidaFacts.count else { return nil }
   return partidaFacts[currentIndex]
- }
+}
 }
 // salvar game state
+

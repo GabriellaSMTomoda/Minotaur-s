@@ -1,4 +1,3 @@
-//
 // FactLoader.swift
 // Minotaur-s
 //
@@ -34,3 +33,5 @@ class FactLoader {
     return facts
   }
 }
+
+
