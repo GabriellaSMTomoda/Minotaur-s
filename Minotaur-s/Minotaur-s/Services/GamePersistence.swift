@@ -3,6 +3,7 @@
 //  Minotaur-s
 //
 //  Created by Gabriella San Martino Tomoda on 24/08/25.
+//  Modificado para não recriar facts durante o load (ids ficam estáveis).
 //
 
 import Foundation
@@ -47,8 +48,6 @@ struct GamePersistence {
         gameState.pulos = decoded.pulos
         gameState.currentIndex = decoded.currentIndex
         
-        // Reconstrói a lista de fatos da partida
-        gameState.facts = FactLoader.loadFacts()
         gameState.partidaFacts = gameState.facts.filter { decoded.partidaIDs.contains($0.id) }
         gameState.partidaIDs = decoded.partidaIDs
     }

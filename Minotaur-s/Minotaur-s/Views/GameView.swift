@@ -1,4 +1,5 @@
 import SwiftUI
+
 struct GameView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var gameState = GameState()
@@ -6,6 +7,7 @@ struct GameView: View {
     @State private var respostaCorreta = false
     @State private var fimDePartida = false
     @State private var popupAppIntent = false
+
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -15,11 +17,10 @@ struct GameView: View {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
+
     var body: some View {
         NavigationStack {
             ZStack {
-                //Color("background")
-                // .ignoresSafeArea()
                 VStack(spacing: 0) {
                     VStack {
                         Spacer()
@@ -78,8 +79,6 @@ struct GameView: View {
                         Spacer()
                         // Botões de resposta
                         HStack {
-                            
-                            //            Spacer().frame(width: 15)
                             Button("FATO") {
                                 checkAnswer(userSaysTrue: true)
                             }
@@ -120,6 +119,7 @@ struct GameView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding()
                 }
+
                 if popupAppIntent {
                     Color.black.opacity(0.4)
                         .ignoresSafeArea()
@@ -145,10 +145,7 @@ struct GameView: View {
                             }) {
                                 Text("Abrir Ajustes da Siri")
                                     .fontWeight(.bold)
-//                                    .foregroundColor(.white)
                                     .padding()
-//                                    .frame(maxWidth: .infinity, maxHeight: 20)
-//                                    .background(Color("azul"))
                                     .cornerRadius(10)
                                     .padding()
                             }
@@ -178,6 +175,7 @@ struct GameView: View {
                     .background(Color("pop"))
                     .cornerRadius(20)
                 }
+
                 // POP-UP de resposta
                 if mostrarPopup {
                     Color.black.opacity(0.4)
@@ -221,6 +219,7 @@ struct GameView: View {
                     .cornerRadius(20)
                     .shadow(radius: 10)
                 }
+
                 // POP-UP final
                 if fimDePartida {
                     Color.black.opacity(0.4)
@@ -271,10 +270,17 @@ struct GameView: View {
                     .shadow(radius: 10)
                 }
             }
-            //.navigationBarBackButtonHidden(true)
             .onAppear {
-                gameState.facts = FactLoader.loadFacts()
+                // Carrega facts somente se ainda não estiverem carregados.
+                if gameState.facts.isEmpty {
+                    gameState.facts = FactLoader.loadFacts()
+                }
+
+                // Agora tenta restaurar o estado salvo. Como facts já estão carregados,
+                // a reconstrução de partidaFacts por IDs vai funcionar.
                 GamePersistence.load(into: gameState)
+
+                // Se por algum motivo não houve partida salva, inicia uma nova.
                 if gameState.partidaFacts.isEmpty {
                     gameState.partida()
                 }
@@ -290,14 +296,13 @@ struct GameView: View {
                         popupAppIntent = true
                     }) {
                         Image(systemName: "info.circle")
-                        //.frame(width: 40, height: 40)
-                            .foregroundColor(.white) // cor do ícone
+                            .foregroundColor(.white)
                     }
-                    //.bold()
                 }
             }
         }
     }
+
     // Verifica se o usuário acertou ou errou
     func checkAnswer(userSaysTrue: Bool) {
         guard let fact = gameState.factAtual else { return }
@@ -312,6 +317,7 @@ struct GameView: View {
             gameState.erros += 1
         }
     }
+
     // Checa se chegou ao fim da partida
     func checkFim() {
         if gameState.currentIndex == gameState.partidaFacts.count - 1 {
@@ -321,6 +327,8 @@ struct GameView: View {
         }
     }
 }
+
 #Preview {
     GameView()
 }
+
