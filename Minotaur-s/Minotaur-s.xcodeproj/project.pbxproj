@@ -432,7 +432,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2DK23BZ7KB;
+				DEVELOPMENT_TEAM = TUC4R5H9Y8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Fato ou Farsa";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -513,7 +513,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Minotaur-s/Minotaur-sRelease.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2DK23BZ7KB;
+				DEVELOPMENT_TEAM = TUC4R5H9Y8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Fato ou Farsa";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
