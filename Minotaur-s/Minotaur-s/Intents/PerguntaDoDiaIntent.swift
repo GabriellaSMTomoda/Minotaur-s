@@ -3,11 +3,10 @@
 //  Minotaur-s
 //
 //  Created by Gabriella San Martino Tomoda on 01/09/25.
-
+//
 
 import AppIntents
 import SwiftUI
-
 
 struct PerguntaDoDiaIntent: AppIntent {
     static var title: LocalizedStringResource = "Pergunta do Dia"
@@ -18,36 +17,60 @@ struct PerguntaDoDiaIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
-        // Carrega todas as perguntas
-        let questions = QuestionsDayLoader.loadQuestions()
-        guard let question = questions.randomElement() else {
-            return .result(dialog: "Não há perguntas disponíveis no momento.")
+        let hoje = DateFormatterStorage.shared.stringFromDate(Date())
+        
+        
+        // ===================DEBBUGUER====================================
+        // Força o "hoje" para ontem
+//        let hoje = DateFormatterStorage.shared.stringFromDate(
+//            Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+//        )
+        // =================================================================
+        
+        let emptyQuestion = Question(titulo: "", fonte: "", binario: "", motivo: "", autor: "", link: "")
+
+        if let (perguntaSalva, data) = PerguntaStorage.shared.carregarPergunta() {
+            if data == hoje {
+                // mesma data → mantém
+                let dialogo = IntentDialog("""
+                Você já recebeu a pergunta de hoje!
+                Título: \(perguntaSalva.titulo)
+                Fonte: \(perguntaSalva.fonte)
+                Autor: \(perguntaSalva.autor)
+
+                Essa notícia é fato ou farsa?
+                """)
+                QuestionSession.shared.currentQuestion = perguntaSalva
+                return .result(dialog: dialogo, view: PerguntaDoDiaView(question: perguntaSalva))
+            } else {
+                // nova data → limpa
+                QuestionSession.shared.currentQuestion = nil
+            }
         }
 
-        // Salva a pergunta **em memória e no storage**
-        QuestionSession.shared.currentQuestion = question
-        PerguntaStorage.shared.salvarPergunta(question)
 
-                //=======================DEBUGGER ==================
-                        print("ahhhhhh")
-                        print(question)
-        
-        
-                //=================================================
-        
+        // Caso não exista, sorteia uma nova pergunta
+        let questions = QuestionsDayLoader.loadQuestions()
+        guard let question = questions.randomElement() else {
+            // Se não houver perguntas, retorna uma View mínima vazia
+            let dialogo = IntentDialog("Não há perguntas disponíveis no momento.")
+            return .result(dialog: dialogo, view: PerguntaDoDiaView(question: emptyQuestion))
+        }
+
+        // Salva a pergunta do dia
+        PerguntaStorage.shared.salvarPergunta(question, data: hoje)
+        QuestionSession.shared.currentQuestion = question
+
         // Monta o diálogo
         let dialogo = IntentDialog("""
         Título: \(question.titulo)
-        
         Fonte: \(question.fonte)
         Autor: \(question.autor)
 
         Essa notícia é fato ou farsa?
         """)
 
-//        return .result(dialog: dialogo, view: PerguntaDoDiaView(question: question))
-        return .result(dialog: dialogo)
-
+        return .result(dialog: dialogo, view: PerguntaDoDiaView(question: question))
     }
 }
 

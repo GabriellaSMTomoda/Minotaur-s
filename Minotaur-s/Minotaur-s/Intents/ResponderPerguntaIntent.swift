@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import SwiftUI
 
 enum RespostaUsuario: String, AppEnum, CaseIterable {
     case fato = "Fato"
@@ -46,40 +47,31 @@ struct ResponderPerguntaIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
-        // Primeiro tenta carregar da sessão em memória
-        let question = QuestionSession.shared.currentQuestion ?? PerguntaStorage.shared.carregarPergunta()
-
-        guard let questionAtiva = question else {
-            return .result(dialog: "Nenhuma pergunta ativa no momento. Peça uma nova.")
+        // Tenta pegar a pergunta da sessão
+        guard let question = QuestionSession.shared.currentQuestion ?? PerguntaStorage.shared.carregarPergunta()?.question else {
+            let emptyQuestion = Question(titulo: "", fonte: "", binario: "", motivo: "", autor: "", link: "")
+            let dialogo = IntentDialog("Nenhuma pergunta ativa no momento. Peça a Pergunta do Dia primeiro.")
+            return .result(dialog: dialogo, view: PerguntaDoDiaView(question: emptyQuestion))
         }
 
-        // Normaliza respostas
         let respostaNormalizada = normalizarResposta(resposta.rawValue)
-        let binarioNormalizado = normalizarResposta(questionAtiva.binario)
-
+        let binarioNormalizado = normalizarResposta(question.binario)
         let acertou = (respostaNormalizada == binarioNormalizado)
-        
-        // =========== DEBBUGUER ===============
-        
-        print("bahhhhhh")
-        print(questionAtiva)
-        
-        // ==========================
-        
+
         let dialogo: IntentDialog
         if acertou {
             dialogo = IntentDialog("""
             ✅ Você acertou! Era mesmo \(binarioNormalizado.capitalized).
-            Motivo: \(questionAtiva.motivo)
+            Motivo: \(question.motivo)
             """)
         } else {
             dialogo = IntentDialog("""
             ❌ Não foi dessa vez. A resposta correta era \(binarioNormalizado.capitalized).
-            Motivo: \(questionAtiva.motivo)
+            Motivo: \(question.motivo)
             """)
         }
 
-        return .result(dialog: dialogo, view: PerguntaDoDiaView(question: questionAtiva))
-        
+        return .result(dialog: dialogo, view: PerguntaDoDiaView(question: question))
     }
 }
+

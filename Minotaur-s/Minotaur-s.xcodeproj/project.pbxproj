@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0017FE9C2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 0017FE9B2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv */; };
 		0017FE9E2E65C46F00DF2FC5 /* QuestionsDayLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FE9D2E65C42D00DF2FC5 /* QuestionsDayLoader.swift */; };
 		0017FEA02E65C50300DF2FC5 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FE9F2E65C4FE00DF2FC5 /* Question.swift */; };
 		0017FF1E2E673B9500DF2FC5 /* PerguntaDoDiaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FF1D2E673B7700DF2FC5 /* PerguntaDoDiaView.swift */; };
 		0017FF232E68693200DF2FC5 /* QuestionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FF222E68692F00DF2FC5 /* QuestionSession.swift */; };
 		0017FF282E686DB200DF2FC5 /* PerguntaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0017FF272E686DA700DF2FC5 /* PerguntaStorage.swift */; };
+
+		00E5B4202E7853490017DF24 /* DateFormatterStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E5B41F2E7853460017DF24 /* DateFormatterStorage.swift */; };
+
+		00D7784B2E7AF48C00084622 /* PerguntasDoDia.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 00D7784A2E7AF48C00084622 /* PerguntasDoDia.tsv */; };
+
 		2FD09A6D05A1415CB1BF7247 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CF54EB57A7CFD4A61DD37 /* GameView.swift */; };
 		2FF161EF5EF3648F377FD0E0 /* Minotaur_sUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */; };
 		31479711E40E2DC5784EEC03 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C88C837C02BD4C80FFF837B /* Fact.swift */; };
@@ -46,13 +50,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0017FE9B2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = PerguntasDoDia.tsv; sourceTree = "<group>"; };
 		0017FE9D2E65C42D00DF2FC5 /* QuestionsDayLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsDayLoader.swift; sourceTree = "<group>"; };
 		0017FE9F2E65C4FE00DF2FC5 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		0017FEA52E65D01A00DF2FC5 /* Minotaur-sRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Minotaur-sRelease.entitlements"; sourceTree = "<group>"; };
 		0017FF1D2E673B7700DF2FC5 /* PerguntaDoDiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerguntaDoDiaView.swift; sourceTree = "<group>"; };
 		0017FF222E68692F00DF2FC5 /* QuestionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSession.swift; sourceTree = "<group>"; };
 		0017FF272E686DA700DF2FC5 /* PerguntaStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerguntaStorage.swift; sourceTree = "<group>"; };
+
+		00E5B41F2E7853460017DF24 /* DateFormatterStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterStorage.swift; sourceTree = "<group>"; };
+
+		00D7784A2E7AF48C00084622 /* PerguntasDoDia.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = PerguntasDoDia.tsv; sourceTree = "<group>"; };
+
 		0A83EA9C5E3F0ACD9B240A91 /* Minotaur_sUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
 		770DAD2FA3DDE89BD1DB0964 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
@@ -87,10 +95,11 @@
 		3600CFCF374A62B1A8D61A95 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				00E5B41F2E7853460017DF24 /* DateFormatterStorage.swift */,
 				E54B47DC2E70787D00C33F6D /* Banco_Dados.tsv */,
 				0017FF272E686DA700DF2FC5 /* PerguntaStorage.swift */,
+				00D7784A2E7AF48C00084622 /* PerguntasDoDia.tsv */,
 				0017FE9D2E65C42D00DF2FC5 /* QuestionsDayLoader.swift */,
-				0017FE9B2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv */,
 				B7B9A5E575AAE2736CA049BB /* FactLoader.swift */,
 				BD7D8A4FC41C94C0498057A8 /* GamePersistence.swift */,
 			);
@@ -264,8 +273,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0017FE9C2E65C3EC00DF2FC5 /* PerguntasDoDia.tsv in Resources */,
 				6B7CE0B7BA860A062CB507D2 /* Assets.xcassets in Resources */,
+				00D7784B2E7AF48C00084622 /* PerguntasDoDia.tsv in Resources */,
 				E54B47DD2E70787D00C33F6D /* Banco_Dados.tsv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +288,7 @@
 			files = (
 				0017FF1E2E673B9500DF2FC5 /* PerguntaDoDiaView.swift in Sources */,
 				8549411F6B8EB14490681906 /* ContentView.swift in Sources */,
+				00E5B4202E7853490017DF24 /* DateFormatterStorage.swift in Sources */,
 				31479711E40E2DC5784EEC03 /* Fact.swift in Sources */,
 				0017FF232E68693200DF2FC5 /* QuestionSession.swift in Sources */,
 				45DDC27FE971ACD00E24806D /* FactLoader.swift in Sources */,
@@ -432,7 +442,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TUC4R5H9Y8;
+				DEVELOPMENT_TEAM = 2DK23BZ7KB;
+
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Fato ou Farsa";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -513,7 +524,8 @@
 				CODE_SIGN_ENTITLEMENTS = "Minotaur-s/Minotaur-sRelease.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TUC4R5H9Y8;
+				DEVELOPMENT_TEAM = 2DK23BZ7KB;
+
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Fato ou Farsa";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -523,7 +535,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+
 				PRODUCT_BUNDLE_IDENTIFIER = com.julia.fatoufarsa2025;
+
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
