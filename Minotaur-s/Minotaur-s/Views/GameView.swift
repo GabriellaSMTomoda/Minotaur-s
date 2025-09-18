@@ -1,4 +1,5 @@
 import SwiftUI
+
 struct GameView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var gameState = GameState()
@@ -6,6 +7,7 @@ struct GameView: View {
     @State private var respostaCorreta = false
     @State private var fimDePartida = false
     @State private var popupAppIntent = false
+
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -15,11 +17,10 @@ struct GameView: View {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
+
     var body: some View {
         NavigationStack {
             ZStack {
-                //Color("background")
-                // .ignoresSafeArea()
                 VStack(spacing: 0) {
                     VStack {
                         Spacer()
@@ -37,6 +38,8 @@ struct GameView: View {
                                             .cornerRadius(12)
                                             .frame(maxWidth: .infinity, alignment: .leading)
                                             .padding(.bottom, 4)
+                                            .accessibilityLabel("Assunto: \(fact.assunto).")
+                                            .accessibilitySortPriority(1)
                                     }
                                     Text(fact.titulo)
                                         .font(.title.bold())
@@ -45,16 +48,22 @@ struct GameView: View {
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal)
                                         .padding(.bottom)
+                                        .accessibilityLabel("Título: \(fact.titulo).")
+                                        .accessibilitySortPriority(0)
                                     Text("Fonte: \(fact.fonte)")
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .foregroundColor(Color("texto"))
                                         .font(.callout)
                                         .padding(.horizontal)
+                                        .accessibilityLabel("Fonte: \(fact.fonte).")
+                                        .accessibilitySortPriority(3)
                                     Text("Autor: \(fact.autor)")
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .foregroundColor(Color("texto"))
                                         .font(.callout)
                                         .padding(.horizontal)
+                                        .accessibilityLabel("Autor: \(fact.autor).")
+                                        .accessibilitySortPriority(4)
                                     Text(fact.resumo)
                                         .multilineTextAlignment(.leading)
                                         .foregroundColor(Color("texto"))
@@ -62,15 +71,14 @@ struct GameView: View {
                                         .font(.title2)
                                         .padding(.horizontal)
                                         .padding(.bottom)
+                                        .accessibilityLabel("Resumo: \(fact.resumo).")
+                                        .accessibilitySortPriority(2)
                                 }
                             }
-                            .frame(maxWidth: .infinity)
                         }
                         Spacer()
                         // Botões de resposta
                         HStack {
-                            
-                            //            Spacer().frame(width: 15)
                             Button("FATO") {
                                 checkAnswer(userSaysTrue: true)
                             }
@@ -80,6 +88,9 @@ struct GameView: View {
                             .frame(minWidth: 160, maxHeight: 64)
                             .background(Color("azul"))
                             .cornerRadius(20)
+                            .accessibilityLabel("FATO")
+                            .accessibilityHint("Toque para confirmar que a notícia é verdadeira.")
+                            .accessibilitySortPriority(5)
                             Button("FARSA") {
                                 checkAnswer(userSaysTrue: false)
                             }
@@ -89,6 +100,9 @@ struct GameView: View {
                             .frame(minWidth: 160, maxHeight: 64)
                             .background(Color("vermelho"))
                             .cornerRadius(20)
+                            .accessibilityLabel("FARSA")
+                            .accessibilityHint("Toque para confirmar que a notícia NÃO é verdadeira.")
+                            .accessibilitySortPriority(6)
                         }
                         .padding(.bottom, 2)
                         Button("Pular") {
@@ -98,10 +112,14 @@ struct GameView: View {
                         .padding(.bottom, -20)
                         .bold()
                         .foregroundColor(Color("cinza"))
+                        .accessibilityLabel("PULAR")
+                        .accessibilityHint("Toque para pular a notícia.")
+                        .accessibilitySortPriority(7)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding()
                 }
+
                 if popupAppIntent {
                     Color.black.opacity(0.4)
                         .ignoresSafeArea()
@@ -127,10 +145,7 @@ struct GameView: View {
                             }) {
                                 Text("Abrir Ajustes da Siri")
                                     .fontWeight(.bold)
-//                                    .foregroundColor(.white)
                                     .padding()
-//                                    .frame(maxWidth: .infinity, maxHeight: 20)
-//                                    .background(Color("azul"))
                                     .cornerRadius(10)
                                     .padding()
                             }
@@ -152,7 +167,7 @@ struct GameView: View {
                         .tint(Color("azul"))
                         .font(.title2)
                         .bold()
-                        .foregroundColor(Color("pop"))
+                        .foregroundColor(Color.white)
                         .padding(.bottom)
                     }
                     .frame(width: UIScreen.main.bounds.width * 5/6,
@@ -160,6 +175,7 @@ struct GameView: View {
                     .background(Color("pop"))
                     .cornerRadius(20)
                 }
+
                 // POP-UP de resposta
                 if mostrarPopup {
                     Color.black.opacity(0.4)
@@ -169,13 +185,18 @@ struct GameView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
+                            .frame(height: 55)
                             .background(respostaCorreta ? Color("verde") : Color("vermelho"))
                             .foregroundColor(Color.white)
+                            .accessibilityLabel(respostaCorreta ? "ACERTOU" : "ERROU")
+                            .accessibilitySortPriority(8)
                         ScrollView{
                             if let fact = gameState.factAtual {
                                 Text(fact.motivo)
                                     .foregroundColor(Color("texto"))
-                                    .padding()
+                                    .padding(.horizontal)
+                                    .accessibilityLabel("Explicação do motivo: \(fact.motivo)")
+                                    .accessibilitySortPriority(9)
                             }
                         }
                         Button("PRÓXIMA") {
@@ -188,6 +209,9 @@ struct GameView: View {
                         .bold()
                         .foregroundColor(Color.white)
                         .padding(.bottom)
+                        .accessibilityLabel("PRÓXIMA")
+                        .accessibilityHint("Aperte para ver a próxima pergunta")
+                        .accessibilitySortPriority(10)
                     }
                     .frame(width: UIScreen.main.bounds.width * 4/5,
                            height: UIScreen.main.bounds.height * 2/3)
@@ -195,6 +219,7 @@ struct GameView: View {
                     .cornerRadius(20)
                     .shadow(radius: 10)
                 }
+
                 // POP-UP final
                 if fimDePartida {
                     Color.black.opacity(0.4)
@@ -207,6 +232,8 @@ struct GameView: View {
                             .frame(height: 64)
                             .background(Color("azul"))
                             .foregroundColor(Color.white)
+                            .accessibilityLabel("Fim da Partida")
+                            .accessibilitySortPriority(11)
                         NavigationLink(destination: GameReportView().environmentObject(gameState)) {
                             Text("REVISÃO")
                                 .font(.title2)
@@ -215,6 +242,9 @@ struct GameView: View {
                                 .background(Color("azul"))
                                 .foregroundColor(.white)
                                 .cornerRadius(12)
+                                .accessibilityLabel("REVISÃO")
+                                .accessibilityHint("Aperte para ver os erros e acertos desta partida")
+                                .accessibilitySortPriority(12)
                         }
                         .padding(.horizontal)
                         Button("JOGAR DE NOVO") {
@@ -230,6 +260,9 @@ struct GameView: View {
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.bottom)
+                        .accessibilityLabel("JOGAR DE NOVO")
+                        .accessibilityHint("Aperte para Jogar um novo jogo")
+                        .accessibilitySortPriority(13)
                     }
                     .frame(width: UIScreen.main.bounds.width * 5/6)
                     .background(Color("pop"))
@@ -237,10 +270,17 @@ struct GameView: View {
                     .shadow(radius: 10)
                 }
             }
-            //.navigationBarBackButtonHidden(true)
             .onAppear {
-                gameState.facts = FactLoader.loadFacts()
+                // Carrega facts somente se ainda não estiverem carregados.
+                if gameState.facts.isEmpty {
+                    gameState.facts = FactLoader.loadFacts()
+                }
+
+                // Agora tenta restaurar o estado salvo. Como facts já estão carregados,
+                // a reconstrução de partidaFacts por IDs vai funcionar.
                 GamePersistence.load(into: gameState)
+
+                // Se por algum motivo não houve partida salva, inicia uma nova.
                 if gameState.partidaFacts.isEmpty {
                     gameState.partida()
                 }
@@ -256,19 +296,18 @@ struct GameView: View {
                         popupAppIntent = true
                     }) {
                         Image(systemName: "info.circle")
-                        //.frame(width: 40, height: 40)
-                            .foregroundColor(.white) // cor do ícone
+                            .foregroundColor(.white)
                     }
-                    //.bold()
                 }
             }
         }
     }
+
     // Verifica se o usuário acertou ou errou
     func checkAnswer(userSaysTrue: Bool) {
         guard let fact = gameState.factAtual else { return }
-        let rating = fact.binario.lowercased()
-        let isTrue = rating == "true" || rating == "verdadeiro"
+        let rating = fact.binario
+        let isTrue = rating == "true" || rating == "FATO"
         respostaCorreta = (userSaysTrue == isTrue)
         mostrarPopup = true
         gameState.registrarResultado(para: fact.id, acertou: respostaCorreta)
@@ -278,6 +317,7 @@ struct GameView: View {
             gameState.erros += 1
         }
     }
+
     // Checa se chegou ao fim da partida
     func checkFim() {
         if gameState.currentIndex == gameState.partidaFacts.count - 1 {
@@ -287,11 +327,8 @@ struct GameView: View {
         }
     }
 }
+
 #Preview {
     GameView()
 }
-
-
-
-
 
