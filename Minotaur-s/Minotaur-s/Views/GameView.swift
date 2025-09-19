@@ -7,6 +7,7 @@ struct GameView: View {
     @State private var respostaCorreta = false
     @State private var fimDePartida = false
     @State private var popupAppIntent = false
+    @State private var explicacao_inicial = false
 
     init() {
         let appearance = UINavigationBarAppearance()
@@ -16,6 +17,12 @@ struct GameView: View {
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
+        // Verificar primeiro lançamento no init
+        if !UserDefaults.standard.bool(forKey: "firstLaunch") {
+            // Marcar que já foi lançado uma vez
+            UserDefaults.standard.set(true, forKey: "firstLaunch")
+        }
     }
 
     var body: some View {
@@ -269,8 +276,51 @@ struct GameView: View {
                     .cornerRadius(20)
                     .shadow(radius: 10)
                 }
+                
+                if explicacao_inicial {
+                    Color.black.opacity(0.9)
+                        .ignoresSafeArea()
+                    VStack() {
+                        Text("Seja bem vindo!")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 55)
+                            .foregroundColor(Color.white)
+                            .accessibilityLabel("Explicação inicial do jogo")
+                            .accessibilitySortPriority(8)
+                        ScrollView{
+                            Text("Nosso jogo consiste em 10 notícias falsas ou verdadeiras, onde você precisa escolher se ela é um FATO ou uma FARSA.\n\nObserve atentamente o título e o resumo de cada matéria, e assim tente entender o motivo pelo qual cada notícia é falsa ou verdadeira.\n\nMas não se preocupe, você não precisa saber tudo de cara! A cada acerto e erro, você vai receber dicas para melhorar seu desempenho.\n\nVocê está pronto para começar?\n\nAperte no botão \"OK\" para continuar!")
+                                .foregroundColor(Color.white)
+                                .font(.title2)
+                                .padding(.horizontal)
+                                .accessibilityLabel("")
+                                .accessibilitySortPriority(9)
+                        }
+                        //            }
+                        Button("OK") {
+                            explicacao_inicial = false
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(Color("vermelho"))
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(Color.white)
+                        .padding(.bottom)
+                        .accessibilityLabel("OK")
+                        .accessibilityHint("Aperte para continuar")
+                        .accessibilitySortPriority(10)
+                        Spacer(minLength: 80)
+                    }
+                }
             }
             .onAppear {
+                // Verificar se é o primeiro lançamento e mostrar explicação
+                if !UserDefaults.standard.bool(forKey: "firstLaunchHasShown") {
+                    explicacao_inicial = true
+                    UserDefaults.standard.set(true, forKey: "firstLaunchHasShown")
+                }
+                    
                 // Carrega facts somente se ainda não estiverem carregados.
                 if gameState.facts.isEmpty {
                     gameState.facts = FactLoader.loadFacts()
