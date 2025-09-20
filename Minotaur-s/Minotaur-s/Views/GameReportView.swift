@@ -1,5 +1,6 @@
 import SwiftUI
 struct GameReportView: View {
+    
     @EnvironmentObject private var gameState: GameState
     @Environment(\.dismiss) private var dismiss
     
@@ -80,7 +81,9 @@ struct GameReportView: View {
                             binario: fact.binario,
                             titulo: fact.titulo,
                             resumo: fact.resumo,
-                            motivo: fact.motivo
+                            motivo: fact.motivo,
+                            fonte: fact.fonte,
+                            autor: fact.autor
                         )
                     }
                 }
@@ -113,7 +116,9 @@ struct GameReportView: View {
                             binario: fact.binario,
                             titulo: fact.titulo,
                             resumo: fact.resumo,
-                            motivo: fact.motivo
+                            motivo: fact.motivo,
+                            fonte: fact.fonte,
+                            autor: fact.autor
                         )
                     }
                 }
@@ -145,7 +150,9 @@ struct GameReportView: View {
                         binario: fact.binario,
                         titulo: fact.titulo,
                         resumo: fact.resumo,
-                        motivo: fact.motivo
+                        motivo: fact.motivo,
+                        fonte: fact.fonte,
+                        autor: fact.autor
                     )
                 }
             }
@@ -172,6 +179,8 @@ struct Card: View {
     let titulo: String
     let resumo: String
     let motivo: String
+    let fonte: String
+    let autor: String
     
     var body: some View {
         VStack(spacing: 0) {
@@ -244,22 +253,43 @@ struct Card: View {
                     //                        .frame(width: UIScreen.main.bounds.width * 8/9, alignment: .leading)
                     //                    Spacer()
                     HStack {
-                        Spacer(minLength: 38)
+                        Spacer(minLength: 22)
+                        Text("Fonte: \(fonte)")
+                            .foregroundColor(Color("texto"))
+                            .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .leading)
+                            //.fontWeight(.bold)
+                            .accessibilityLabel("Fonte: \(fonte)")
+                            .accessibilitySortPriority(0)
+                        Spacer()
+                    }
+                    HStack {
+                        Spacer(minLength: 22)
+                        Text("Autor: \(autor)")
+                            .foregroundColor(Color("texto"))
+                            .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .leading)
+                            //.fontWeight(.bold)
+                            .accessibilityLabel("Autor: \(autor)")
+                            .accessibilitySortPriority(1)
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        Spacer(minLength: 22)
                         Text("Explicação:")
                             .foregroundColor(Color("texto"))
                             .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .leading)
                             .fontWeight(.bold)
                             .accessibilityLabel("EXPLICAÇÃO")
-                            .accessibilitySortPriority(0)
+                            .accessibilitySortPriority(2)
                         Spacer()
                     }
-                    Spacer()
+                   // Spacer()
                     Text(motivo)
                         .foregroundColor(Color("texto"))
                         .padding(.horizontal)
                         .padding(.bottom, 12)
                         .accessibilityLabel("Motivo pelo qual a notícia é \(binario): \(motivo)")
-                        .accessibilitySortPriority(1)
+                        .accessibilitySortPriority(3)
                     Spacer()
                 }
                 .frame(width: UIScreen.main.bounds.width * 8/9)

@@ -1,12 +1,14 @@
 import SwiftUI
 
 struct GameView: View {
+    
     @Environment(\.dismiss) private var dismiss
     @StateObject private var gameState = GameState()
     @State private var mostrarPopup = false
     @State private var respostaCorreta = false
     @State private var fimDePartida = false
     @State private var popupAppIntent = false
+    @State private var mostrarConfirmacaoSair = false
 
     init() {
         let appearance = UINavigationBarAppearance()
@@ -259,10 +261,26 @@ struct GameView: View {
                         .foregroundColor(.white)
                         .cornerRadius(12)
                         .padding(.horizontal)
-                        .padding(.bottom)
                         .accessibilityLabel("JOGAR DE NOVO")
                         .accessibilityHint("Aperte para Jogar um novo jogo")
                         .accessibilitySortPriority(13)
+                        
+                        Button("SAIR") {
+                            fimDePartida = true
+                            GamePersistence.clear()
+                            dismiss()
+                        }
+                        .font(.title2)
+                        .bold()
+                        .frame(width: 264, height: 64)
+                        .background(Color("vermelho"))
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                        .padding(.bottom)
+                        .accessibilityLabel("SAIR")
+                        .accessibilityHint("Aperte para voltar a tela inicial")
+                        .accessibilitySortPriority(14)
                     }
                     .frame(width: UIScreen.main.bounds.width * 5/6)
                     .background(Color("pop"))
@@ -291,6 +309,17 @@ struct GameView: View {
             .navigationTitle("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        mostrarConfirmacaoSair = true
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                }
+                
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         popupAppIntent = true
@@ -300,6 +329,13 @@ struct GameView: View {
                     }
                 }
             }
+            .navigationBarBackButtonHidden(true)
+            .alert("Deseja realmente sair do jogo?", isPresented: $mostrarConfirmacaoSair) {
+                                Button("Cancelar", role: .cancel) {}
+                                Button("Sair", role: .destructive) {
+                                    dismiss()
+                                }
+                            }
         }
     }
 
