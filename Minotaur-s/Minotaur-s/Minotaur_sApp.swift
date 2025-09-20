@@ -7,12 +7,13 @@
 import AppIntents
 import SwiftUI
 
+
  @main
  struct Minotaur_sApp: App {
      
      var body: some Scene {
          WindowGroup {
-             GameView()
+             ContentView()
          }
      }
  }

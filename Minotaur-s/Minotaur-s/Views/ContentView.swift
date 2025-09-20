@@ -1,54 +1,66 @@
-//
-//  ContentView.swift
-//  Minotaur-s
-//
-//  Created by Gabriella San Martino Tomoda on 18/08/25.
-//
-
 import SwiftUI
+
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme // Variável de ambiente para detectar o modo claro/escuro
+
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("background") 
-                    .ignoresSafeArea() // ocupa toda a tela
+                Color("background")
+                    .ignoresSafeArea()
 
-                VStack(spacing: 15) {
-                    Image("icon_app")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: UIScreen.main.bounds.width * 1/2, maxHeight: UIScreen.main.bounds.width * 1/2)
-                        .cornerRadius(20)
-//                    Text("Fato ou Farsa?")
-//                        .font(.system(size: 80, weight: .bold))
-//                        .foregroundColor(Color("azul"))
-//                        .padding()
-//                    Spacer(minLength: 5)
+                GeometryReader { geometry in
+                    VStack {
+                        // Título do app
+                        VStack(spacing: 8) {
+                            HStack(spacing: 0) {
+                                Image("Fato")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: geometry.size.width * 0.18)
+                                
+                                Text("ato ou")
+                                    .font(.system(size: geometry.size.width * 0.13, weight: .bold))
+                            }
+                            HStack {
+                                Image("farsa")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: geometry.size.width * 0.18)
+                                
+                                Text("arsa")
+                                    .font(.system(size: geometry.size.width * 0.13, weight: .bold))
+                            }
+                        }
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .padding(.top, geometry.size.height * 0.25) // Coloca o título mais para cima
 
-                    NavigationLink(destination: GameView()) {
-                        Text("JOGAR")
-                            .font(.title)
-                            .bold()
-                            .foregroundColor(Color("background"))
-                            .frame(maxWidth: .infinity, minHeight: 70)
-                            .background(Color("azul"))
-                            .cornerRadius(22)
-                            .padding()
+                        Spacer() // Espaço para empurrar os botões para o centro
+                        
+                        // Botões
+                        VStack(spacing: 20) {
+                            NavigationLink(destination: GameView()) {
+                                Text("JOGAR")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .foregroundColor(Color.white)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: geometry.size.height * 0.1)
+                                    .background(Color("azul"))
+                                    .cornerRadius(20)
+                                    .padding(.horizontal, geometry.size.width * 0.1)
+                                    .accessibilityLabel("JOGAR")
+                            }
+                            
+                        }
+                        .offset(y:-88)
+                        
+                        Spacer() // Espaço para centralizar os botões
                     }
-                    
-                    NavigationLink(destination: GameView()) {
-                        Text("COMO JOGAR")
-                            .font(.title)
-                            .bold()
-                            .foregroundColor(Color("background"))
-                            .frame(maxWidth: .infinity, minHeight: 70)
-                            .background(Color("vermelho"))
-                            .cornerRadius(22)
-                            .padding()
-                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
-            .navigationBarTitle("")
+            .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
         }
