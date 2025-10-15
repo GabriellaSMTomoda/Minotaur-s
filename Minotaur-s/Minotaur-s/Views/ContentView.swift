@@ -40,7 +40,7 @@ struct ContentView: View {
                         // Botões
                         VStack(spacing: 20) {
                             NavigationLink(destination: GameView()) {
-                                Text("JOGAR")
+                                Text("Jogar")
                                     .font(.largeTitle)
                                     .bold()
                                     .foregroundColor(Color.white)
@@ -49,9 +49,21 @@ struct ContentView: View {
                                     .background(Color("azul"))
                                     .cornerRadius(20)
                                     .padding(.horizontal, geometry.size.width * 0.1)
-                                    .accessibilityLabel("JOGAR")
+                                    .accessibilityLabel("Jogar")
                             }
                             
+                            NavigationLink(destination: VerificadorView()) {
+                                Text("Verificador")
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .foregroundColor(Color.white)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: geometry.size.height * 0.1)
+                                    .background(Color("azul"))
+                                    .cornerRadius(20)
+                                    .padding(.horizontal, geometry.size.width * 0.1)
+                                    .accessibilityLabel("Verificador")
+                            }
                         }
                         .offset(y:-88)
                         
@@ -70,4 +82,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-

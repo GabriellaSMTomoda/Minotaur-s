@@ -4,147 +4,36 @@ struct GameReportView: View {
     @EnvironmentObject private var gameState: GameState
     @Environment(\.dismiss) private var dismiss
     
-    @State private var expandedFactID: UUID? = nil
-    @State private var isNavigationBarHidden: Bool = true
-       
-    @Environment(\.presentationMode) var presentationMode
-    
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color("background")
-                    .ignoresSafeArea()
-                
-                ScrollView {
-                    VStack() {
-                        Spacer(minLength: 15)
-                        acertosSection
-                        Spacer(minLength: 20)
-                        errosSection
-                        Spacer(minLength: 20)
-                        pulosSection
-                    }
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    acertosSection
+                    errosSection
+                    pulosSection
                 }
+                .padding(.vertical, 16)
             }
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("Revisão")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(self.isNavigationBarHidden)
-            .navigationBarItems(leading:
-                Button(action: { dismiss() } ) {
-                    HStack(spacing: 2) {
-                        Image(systemName: "chevron.left")
-                            .fontWeight(.bold)
-                    }
-                }
-            )
-            .gesture(DragGesture().onEnded { value in
-                if value.translation.width > 70 {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            })
-            .toolbarColorScheme(.dark)
             .toolbarBackground(Color("azul"), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
-            .onAppear() {
-                self.isNavigationBarHidden = true
-            }
-            .onDisappear() {
-                self.isNavigationBarHidden = false
-            }
+            .toolbarColorScheme(.dark, for: .navigationBar)
         }
     }
     
     // Seção de acertos
-    var acertosSection: some View {
-        VStack{
-            HStack{
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-                    .font(.title)
-                Text("Acertos")
-                    .font(.title2)
-                    .fontWeight(.medium)
-                Spacer()
-            }
-            .padding(.leading)
-            .accessibilityLabel("ACERTOS")
-            .accessibilitySortPriority(0)
-            Spacer()
+    private var acertosSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "Acertos", systemImage: "checkmark.circle.fill", tint: .green)
             
-            //#####IF nenhum, popup de "0 erros, sem acertos"
+            let acertos = gameState.partidaFacts.filter { gameState.resultados[$0.id] == true }
             
-            ForEach(gameState.partidaFacts) { fact in
-                if let acertou = gameState.resultados[fact.id] {
-                    if acertou {
-                        Card(
-                            id: fact.id,
-                            binario: fact.binario,
-                            titulo: fact.titulo,
-                            resumo: fact.resumo,
-                            motivo: fact.motivo,
-                            fonte: fact.fonte,
-                            autor: fact.autor
-                        )
-                    }
-                }
-            }
-        }
-    }
-    
-    // Seção de erros
-    var errosSection: some View {
-        VStack{
-            HStack{
-                Image(systemName: "x.circle.fill")
-                    .foregroundColor(.red)
-                    .font(.title)
-                Text("Erros")
-                    .font(.title2)
-                    .fontWeight(.medium)
-                    .accessibilityLabel("ERROS")
-                    .accessibilitySortPriority(1)
-                Spacer()
-            }
-            .padding(.leading)
-            Spacer()
-            
-            ForEach(gameState.partidaFacts) { fact in
-                if let acertou = gameState.resultados[fact.id] {
-                    if !acertou {
-                        Card(
-                            id: fact.id,
-                            binario: fact.binario,
-                            titulo: fact.titulo,
-                            resumo: fact.resumo,
-                            motivo: fact.motivo,
-                            fonte: fact.fonte,
-                            autor: fact.autor
-                        )
-                    }
-                }
-            }
-        }
-    }
-    
-    // Seção de pulos
-    var pulosSection: some View {
-        VStack{
-            HStack{
-                Image(systemName: "circle.fill")
-                    .foregroundColor(.gray)
-                    .font(.title)
-                Text("Pulos")
-                    .font(.title2)
-                    .fontWeight(.medium)
-                    .accessibilityLabel("PULOS")
-                    .accessibilitySortPriority(2)
-                Spacer()
-            }
-            .padding(.leading)
-            Spacer()
-            
-            ForEach(gameState.partidaFacts) { fact in
-                if gameState.resultados[fact.id] == nil {
+            if acertos.isEmpty {
+                EmptySectionMessage(message: "Você não acertou nenhuma questão.", systemImage: "")
+            } else {
+                ForEach(acertos) { fact in
                     Card(
                         id: fact.id,
                         binario: fact.binario,
@@ -159,16 +48,104 @@ struct GameReportView: View {
         }
     }
     
-    private func ehVerdadeiro(_ binario: String) -> Bool {
-        let rating = binario/*.lowercased()*/
-        return rating == "FATO" || rating == "verdadeiro"
+    // Seção de erros
+    private var errosSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "Erros", systemImage: "x.circle.fill", tint: .red)
+            
+            let erros = gameState.partidaFacts.filter { gameState.resultados[$0.id] == false }
+            
+            if erros.isEmpty {
+                EmptySectionMessage(message: "Você não errou nenhuma questão.", systemImage: "")
+            } else {
+                ForEach(erros) { fact in
+                    Card(
+                        id: fact.id,
+                        binario: fact.binario,
+                        titulo: fact.titulo,
+                        resumo: fact.resumo,
+                        motivo: fact.motivo,
+                        fonte: fact.fonte,
+                        autor: fact.autor
+                    )
+                }
+            }
+        }
+    }
+    
+    // Seção de pulos
+    private var pulosSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "Pulos", systemImage: "circle.fill", tint: .gray)
+            
+            let pulos = gameState.partidaFacts.filter { gameState.resultados[$0.id] == nil }
+            
+            if pulos.isEmpty {
+                EmptySectionMessage(message: "Você não pulou nenhuma questão.", systemImage: "")
+            } else {
+                ForEach(pulos) { fact in
+                    Card(
+                        id: fact.id,
+                        binario: fact.binario,
+                        titulo: fact.titulo,
+                        resumo: fact.resumo,
+                        motivo: fact.motivo,
+                        fonte: fact.fonte,
+                        autor: fact.autor
+                    )
+                }
+            }
+        }
     }
 }
+
 #Preview {
     GameReportView()
         .environmentObject(GameState())
 }
-//----------------------------------------------------------------
+
+// Helpers
+private struct SectionHeader: View {
+    let title: String
+    let systemImage: String
+    let tint: Color
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: systemImage)
+                .foregroundStyle(tint)
+                .imageScale(.large)
+            Text(title)
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundStyle(Color("texto"))
+            Spacer()
+        }
+        .padding(.horizontal)
+        .accessibilityAddTraits(.isHeader)
+    }
+}
+
+private struct EmptySectionMessage: View {
+    let message: String
+    let systemImage: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: systemImage)
+                .foregroundStyle(.secondary)
+            Text(message)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.leading)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+        .accessibilityLabel(message)
+    }
+}
+
 struct Card: View {
 
     @Environment(\.colorScheme) var colorScheme
@@ -182,121 +159,107 @@ struct Card: View {
     let fonte: String
     let autor: String
     
+    private var isExpanded: Bool { expandedFactID == id }
+    
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             Button(action: {
-                if expandedFactID == id {
-                    expandedFactID = nil
-                } else {
-                    expandedFactID = id
-                }
+                expandedFactID = isExpanded ? nil : id
             }) {
-                VStack {
-                    Spacer(minLength: 10)
-                    HStack(spacing: 0) {
-                        Spacer(minLength: 10)
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(spacing: 12) {
                         Text("Esta notícia é:")
-                            .foregroundColor(Color("texto"))
-                            .accessibilityLabel("Esta notícia é:")
-                            .accessibilitySortPriority(6)
-                        Spacer(minLength: 10)
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(binario == "FATO" ? Color("azul") : Color("vermelho"), lineWidth: 10)
-                            .frame(maxWidth: 120, minHeight: 30, alignment: .center)
-                            .background(binario == "FATO" ? Color("azul") : Color("vermelho"))
-                            .overlay(
-                                Text(binario)
-                                    .foregroundColor(colorScheme == .dark ? Color("texto") : .white)
-                                    .fontWeight(.bold)
-                                    .accessibilityLabel("\(binario)")
-                                    .accessibilitySortPriority(5)
-                            )
+                            .foregroundStyle(Color("texto"))
+                            .font(.subheadline)
+                        Pill(text: binario, isFato: binario == "FATO", colorScheme: colorScheme)
                         Spacer()
                     }
-                    .background(
-                        Rectangle()
-                            .frame(height: 1)
-                            .foregroundColor(Color("texto"))
-                            .offset(y: 10),
-                        alignment: .bottom
-                    )
+                    
+                    Divider()
                     
                     Text(titulo)
                         .multilineTextAlignment(.leading)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("texto"))
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width * 8/9, alignment: .leading)
-                        .accessibilityLabel("Título da notícia: \(titulo)")
-                        .accessibilitySortPriority(4)
-                    Text(expandedFactID == id ? "" : "Ver Mais")
-                        .foregroundColor(.gray)
-                        .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .trailing)
-                        .accessibilityLabel("Botão Ver Mais")
-                        .accessibilityHint("Aperte para ver mais sobre a notícia")
-                        .accessibilitySortPriority(3)
-                    Spacer()
+                        .font(.headline)
+                        .foregroundStyle(Color("texto"))
+                    
+                    if !isExpanded {
+                        Text("Ver mais")
+                            .font(.footnote)
+                            .foregroundStyle(.gray)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .accessibilityLabel("Mostrar detalhes")
+                    }
                 }
-                .frame(width: UIScreen.main.bounds.width * 8/9)
+                .padding(16)
             }
             
-            // Conteúdo expandido
-            if expandedFactID == id {
-                VStack(spacing: 0) {
-                    Spacer(minLength: 10)
-                    //                    Text(resumo)
-                    //                        .multilineTextAlignment(.leading)
-                    //                        .font(.title3)
-                    //                        .foregroundColor(Color("texto"))
-                    //                        .padding()
-                    //                        .frame(width: UIScreen.main.bounds.width * 8/9, alignment: .leading)
-                    //                    Spacer()
-                    HStack {
-                        Spacer(minLength: 22)
-                        Text("Fonte: \(fonte)")
-                            .foregroundColor(Color("texto"))
-                            .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .leading)
-                            //.fontWeight(.bold)
-                            .accessibilityLabel("Fonte: \(fonte)")
-                            .accessibilitySortPriority(0)
-                        Spacer()
+            if isExpanded {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("Fonte:")
+                            .fontWeight(.semibold)
+                        Text(fonte)
                     }
-                    HStack {
-                        Spacer(minLength: 22)
-                        Text("Autor: \(autor)")
-                            .foregroundColor(Color("texto"))
-                            .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .leading)
-                            //.fontWeight(.bold)
-                            .accessibilityLabel("Autor: \(autor)")
-                            .accessibilitySortPriority(1)
-                        Spacer()
+                    .font(.subheadline)
+                    .foregroundStyle(Color("texto"))
+                    
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("Autor:")
+                            .fontWeight(.semibold)
+                        Text(autor)
                     }
+                    .font(.subheadline)
+                    .foregroundStyle(Color("texto"))
+                    
+                    Text("Explicação:")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color("texto"))
+                        .padding(.top, 4)
+                    
+                    Text(motivo)
+                        .font(.body)
+                        .foregroundStyle(Color("texto"))
                     
                     HStack {
-                        Spacer(minLength: 22)
-                        Text("Explicação:")
-                            .foregroundColor(Color("texto"))
-                            .frame(width: UIScreen.main.bounds.width * 7/9, alignment: .leading)
-                            .fontWeight(.bold)
-                            .accessibilityLabel("EXPLICAÇÃO")
-                            .accessibilitySortPriority(2)
                         Spacer()
+                        Button {
+                            expandedFactID = nil
+                        } label: {
+                            Text("Ver menos")
+                                .font(.footnote)
+                                .foregroundStyle(.gray)
+                                .accessibilityLabel("Ocultar detalhes")
+                        }
                     }
-                   // Spacer()
-                    Text(motivo)
-                        .foregroundColor(Color("texto"))
-                        .padding(.horizontal)
-                        .padding(.bottom, 12)
-                        .accessibilityLabel("Motivo pelo qual a notícia é \(binario): \(motivo)")
-                        .accessibilitySortPriority(3)
-                    Spacer()
+                    .padding(.top, 8)
                 }
-                .frame(width: UIScreen.main.bounds.width * 8/9)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 16)
             }
         }
-        .background(Color("revisao_pop"))
-        .cornerRadius(12)
-        Spacer(minLength: 10)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .padding(.horizontal)
+        .padding(.top, 8)
+        .accessibilityElement(children: .contain)
     }
 }
+
+private struct Pill: View {
+    let text: String
+    let isFato: Bool
+    let colorScheme: ColorScheme
+    
+    var body: some View {
+        Text(text)
+            .font(.subheadline).bold()
+            .foregroundColor(colorScheme == .dark ? Color("texto") : .white)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background((isFato ? Color("azul") : Color("vermelho")))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .accessibilityLabel(text)
+    }
+}
+

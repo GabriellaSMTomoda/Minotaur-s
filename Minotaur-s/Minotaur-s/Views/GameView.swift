@@ -1,5 +1,36 @@
 import SwiftUI
 
+// PreferenceKey to capture frames of views for spotlight tutorial
+struct ViewFrameKey: PreferenceKey {
+    static var defaultValue: [String: CGRect] = [:]
+    static func reduce(value: inout [String: CGRect], nextValue: () -> [String: CGRect]) {
+        value.merge(nextValue(), uniquingKeysWith: { $1 })
+    }
+}
+
+// Lightweight callout card to reduce SwiftUI type-checking complexity
+private struct CalloutCard: View {
+    let title: String
+    let message: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.headline)
+                .foregroundColor(Color("texto"))
+            Text(message)
+                .font(.subheadline)
+                .foregroundColor(Color("texto").opacity(0.9))
+        }
+        .padding(12)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(.thinMaterial)
+        )
+        .shadow(color: Color.black.opacity(0.2), radius: 6, y: 4)
+    }
+}
+
 struct GameView: View {
     
     @Environment(\.dismiss) private var dismiss
@@ -12,23 +43,9 @@ struct GameView: View {
     @State private var mostrarConfirmacaoSair = false
 //=======
     @State private var explicacao_inicial = false
+    @State private var tutorialStep: Int = 0
+    @State private var frames: [String: CGRect] = [:]
 //>>>>>>> main
-
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(named: "azul") // fundo azul
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white] // título branco
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        
-        // Verificar primeiro lançamento no init
-        if !UserDefaults.standard.bool(forKey: "firstLaunch") {
-            // Marcar que já foi lançado uma vez
-            UserDefaults.standard.set(true, forKey: "firstLaunch")
-        }
-    }
 
     var body: some View {
         NavigationStack {
@@ -38,6 +55,8 @@ struct GameView: View {
                         Spacer()
                         ScrollView {
                             VStack() {
+                                // Capture frame for news area
+                                
                                 if let fact = gameState.factAtual {
                                     HStack{
                                         Spacer(minLength: 17)
@@ -87,11 +106,14 @@ struct GameView: View {
                                         .accessibilitySortPriority(2)
                                 }
                             }
+                            .background(GeometryReader { proxy in
+                                Color.clear.preference(key: ViewFrameKey.self, value: ["newsArea": proxy.frame(in: .global)])
+                            })
                         }
                         Spacer()
                         // Botões de resposta
                         HStack {
-                            Button("FATO") {
+                            Button("Fato") {
                                 checkAnswer(userSaysTrue: true)
                             }
                             .font(.title)
@@ -100,10 +122,10 @@ struct GameView: View {
                             .frame(minWidth: 160, maxHeight: 64)
                             .background(Color("azul"))
                             .cornerRadius(20)
-                            .accessibilityLabel("FATO")
+                            .accessibilityLabel("Fato")
                             .accessibilityHint("Toque para confirmar que a notícia é verdadeira.")
                             .accessibilitySortPriority(5)
-                            Button("FARSA") {
+                            Button("Farsa") {
                                 checkAnswer(userSaysTrue: false)
                             }
                             .font(.title)
@@ -112,31 +134,38 @@ struct GameView: View {
                             .frame(minWidth: 160, maxHeight: 64)
                             .background(Color("vermelho"))
                             .cornerRadius(20)
-                            .accessibilityLabel("FARSA")
+                            .accessibilityLabel("Farsa")
                             .accessibilityHint("Toque para confirmar que a notícia NÃO é verdadeira.")
                             .accessibilitySortPriority(6)
                         }
                         .padding(.bottom, 2)
+                        .background(GeometryReader { proxy in
+                            Color.clear.preference(key: ViewFrameKey.self, value: ["answerButtons": proxy.frame(in: .global)])
+                        })
                         Button("Pular") {
                             gameState.pulos += 1
                             checkFim()
                         }
-                        .padding(.bottom, -20)
+                        .padding(.top, 8)
                         .bold()
                         .foregroundColor(Color("cinza"))
                         .accessibilityLabel("PULAR")
                         .accessibilityHint("Toque para pular a notícia.")
                         .accessibilitySortPriority(7)
+                        .background(GeometryReader { proxy in
+                            Color.clear.preference(key: ViewFrameKey.self, value: ["skipButton": proxy.frame(in: .global)])
+                        })
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding()
                 }
+                .allowsHitTesting(!explicacao_inicial)
 
                 if popupAppIntent {
                     Color.black.opacity(0.4)
                         .ignoresSafeArea()
                     VStack {
-                        Text("NOTÍCIA DO DIA")
+                        Text("Notícia do dia")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, minHeight: 20)
@@ -151,17 +180,18 @@ struct GameView: View {
                             .padding()
                             .foregroundColor(Color("texto"))
                             Button(action: {
-                                if let url = URL(string: "App-Prefs:root=APPLE_INTELLIGENCE") {
+                                if let url = URL(string: UIApplication.openSettingsURLString) {
                                     UIApplication.shared.open(url)
                                 }
                             }) {
                                 Text("Abrir Ajustes da Siri")
                                     .fontWeight(.bold)
-                                    .padding()
-                                    .cornerRadius(10)
-                                    .padding()
                             }
-                            .frame(maxHeight: 12)
+                            //.buttonStyle(.borderedProminent)
+                            //.tint(Color("azul"))
+                            .accessibilityLabel("Abrir Ajustes do app nas Configurações")
+                            .accessibilityHint("Abre as Configurações do iPhone para ajustar permissões e preferências do app")
+                            .padding()
                             Text("""
                                  2) Para jogar a Pergunta do Dia, basta dizer:
                                  “E aí Siri, qual a notícia do dia no Fato ou Farsa?”
@@ -172,15 +202,23 @@ struct GameView: View {
                             .padding()
                             .foregroundColor(Color("texto"))
                         }
-                        Button("ENTENDI") {
+                        Button("Entendi") {
                             popupAppIntent = false
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(Color("azul"))
+                        //.buttonStyle(.borderedProminent)
+                        //.tint(Color("azul"))
+                        //.font(.title2)
+                        //.bold()
+                        //.foregroundColor(Color.white)
+                                                
                         .font(.title2)
                         .bold()
                         .foregroundColor(Color.white)
+                        .frame(minWidth: 140, maxHeight: 54)
+                        .background(Color("azul"))
+                        .cornerRadius(20)
                         .padding(.bottom)
+
                     }
                     .frame(width: UIScreen.main.bounds.width * 5/6,
                            height: UIScreen.main.bounds.height * 3/4)
@@ -193,7 +231,7 @@ struct GameView: View {
                     Color.black.opacity(0.4)
                         .ignoresSafeArea()
                     VStack() {
-                        Text(respostaCorreta ? "ACERTOU" : "ERROU")
+                        Text(respostaCorreta ? "Acertou" : "Errou")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
@@ -211,16 +249,24 @@ struct GameView: View {
                                     .accessibilitySortPriority(9)
                             }
                         }
-                        Button("PRÓXIMA") {
+                        Button("Próxima") {
                             mostrarPopup = false
                             checkFim()
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(Color("azul"))
                         .font(.title2)
                         .bold()
                         .foregroundColor(Color.white)
+                        .frame(minWidth: 140, maxHeight: 54)
+                        .background(Color("azul"))
+                        .cornerRadius(20)
                         .padding(.bottom)
+
+                        //.buttonStyle(.borderedProminent)
+                        //.tint(Color("azul"))
+                        //.font(.title2)
+                        //.bold()
+                        //.foregroundColor(Color.white)
+                        //.padding(.bottom)
                         .accessibilityLabel("PRÓXIMA")
                         .accessibilityHint("Aperte para ver a próxima pergunta")
                         .accessibilitySortPriority(10)
@@ -237,7 +283,7 @@ struct GameView: View {
                     Color.black.opacity(0.4)
                         .ignoresSafeArea()
                     VStack(spacing: 20) {
-                        Text("FIM DA PARTIDA")
+                        Text("Fim da partida")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity)
@@ -247,7 +293,7 @@ struct GameView: View {
                             .accessibilityLabel("Fim da Partida")
                             .accessibilitySortPriority(11)
                         NavigationLink(destination: GameReportView().environmentObject(gameState)) {
-                            Text("REVISÃO")
+                            Text("Revisar")
                                 .font(.title2)
                                 .bold()
                                 .frame(width: 264, height: 64)
@@ -259,7 +305,7 @@ struct GameView: View {
                                 .accessibilitySortPriority(12)
                         }
                         .padding(.horizontal)
-                        Button("JOGAR DE NOVO") {
+                        Button("Jogar de novo") {
                             fimDePartida = false
                             GamePersistence.clear()
                             gameState.partida()
@@ -275,7 +321,7 @@ struct GameView: View {
                         .accessibilityHint("Aperte para Jogar um novo jogo")
                         .accessibilitySortPriority(13)
                         
-                        Button("SAIR") {
+                        Button("Sair") {
                             fimDePartida = true
                             GamePersistence.clear()
                             dismiss()
@@ -299,46 +345,103 @@ struct GameView: View {
                 }
                 
                 if explicacao_inicial {
-                    Color.black.opacity(0.9)
-                        .ignoresSafeArea()
-                    VStack() {
-                        Text("Seja bem vindo!")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 55)
-                            .foregroundColor(Color.white)
-                            .accessibilityLabel("Explicação inicial do jogo")
-                            .accessibilitySortPriority(8)
-                        ScrollView{
-                            Text("Nosso jogo consiste em 10 notícias falsas ou verdadeiras, onde você precisa escolher se ela é um FATO ou uma FARSA.\n\nObserve atentamente o título e o resumo de cada matéria, e assim tente entender o motivo pelo qual cada notícia é falsa ou verdadeira.\n\nMas não se preocupe, você não precisa saber tudo de cara! A cada acerto e erro, você vai receber dicas para melhorar seu desempenho.\n\nVocê está pronto para começar?\n\nAperte no botão \"OK\" para continuar!")
-                                .foregroundColor(Color.white)
-                                .font(.title2)
+                    ZStack {
+                        Color.black.opacity(0.6)
+                            .ignoresSafeArea()
+
+                        VStack(spacing: 0) {
+                            // Top-right skip
+                            HStack {
+                                Spacer()
+                                Button("Pular tutorial") {
+                                    explicacao_inicial = false
+                                }
+                                .font(.callout.weight(.semibold))
+                                .foregroundColor(.white.opacity(0.95))
                                 .padding(.horizontal)
-                                .accessibilityLabel("")
-                                .accessibilitySortPriority(9)
+                                .padding(.top, 8)
+                            }
+
+                            Spacer(minLength: 0)
+
+                            // Tutorial card
+                            VStack(spacing: 16) {
+                                // Image for current step (tutorial1, tutorial2, tutorial3)
+                                Image("tutorial\(tutorialStep + 1)")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(maxWidth: 520)
+                                    .cornerRadius(12)
+                                    .accessibilityHidden(true)
+
+                                // Text for current step
+                                Group {
+                                    switch tutorialStep {
+                                    case 0:
+                                        Text("Leia o título e resumo da notícia, analisando se  é um fato ou uma farsa")
+                                    case 1:
+                                        Text("Toque em \"Fato\", \"Farsa\" ou \"Pular\" de acordo com o que você analisou")
+                                    default:
+                                        Text("Depois de marcar 10 questões, você pode revisar tudo o que errou ou acertou!")
+                                    }
+                                }
+                                .font(.headline)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color("texto"))
+                                .padding(.horizontal)
+                            }
+                            .padding(20)
+                            .frame(maxWidth: min(UIScreen.main.bounds.width * 0.9, 600))
+                            .background(Color("pop"))
+                            .cornerRadius(20)
+                            .shadow(radius: 10)
+                            .padding(.horizontal)
+
+                            // Step indicators
+                            HStack(spacing: 6) {
+                                ForEach(0..<3, id: \.self) { idx in
+                                    Circle()
+                                        .fill(idx == tutorialStep ? Color.white : Color.white.opacity(0.4))
+                                        .frame(width: 8, height: 8)
+                                }
+                            }
+                            .padding(.top, 12)
+
+                            // Bottom controls
+                            HStack(spacing: 12) {
+                                if tutorialStep > 0 {
+                                    Button("Voltar") {
+                                        withAnimation(.easeInOut) { tutorialStep = max(0, tutorialStep - 1) }
+                                    }
+                                    .buttonStyle(.bordered)
+                                    .foregroundColor(.white)
+                                }
+
+                                Button(tutorialStep == 2 ? "Começar" : "Próximo") {
+                                    withAnimation(.easeInOut) {
+                                        if tutorialStep < 2 { tutorialStep += 1 } else { explicacao_inicial = false }
+                                    }
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(tutorialStep == 2 ? Color("vermelho") : Color("azul"))
+                                .foregroundColor(.white)
+                            }
+                            .font(.headline)
+                            .padding(.vertical, 20)
+
+                            Spacer(minLength: 24)
                         }
-                        //            }
-                        Button("OK") {
-                            explicacao_inicial = false
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(Color("vermelho"))
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .padding(.bottom)
-                        .accessibilityLabel("OK")
-                        .accessibilityHint("Aperte para continuar")
-                        .accessibilitySortPriority(10)
-                        Spacer(minLength: 80)
                     }
                 }
+            }
+            .onPreferenceChange(ViewFrameKey.self) { newValues in
+                frames.merge(newValues, uniquingKeysWith: { $1 })
             }
             .onAppear {
                 // Verificar se é o primeiro lançamento e mostrar explicação
                 if !UserDefaults.standard.bool(forKey: "firstLaunchHasShown") {
                     explicacao_inicial = true
+                    tutorialStep = 0
                     UserDefaults.standard.set(true, forKey: "firstLaunchHasShown")
                 }
                     
@@ -361,6 +464,9 @@ struct GameView: View {
             }
             .navigationTitle("\(gameState.currentIndex + 1)/\(gameState.partidaFacts.count)")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(explicacao_inicial ? Color.black.opacity(0.6) : Color("azul"), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -370,6 +476,7 @@ struct GameView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     }
+                    .disabled(explicacao_inicial)
                 }
                 
                 
@@ -380,6 +487,7 @@ struct GameView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.white)
                     }
+                    .disabled(explicacao_inicial)
                 }
             }
             .navigationBarBackButtonHidden(true)
@@ -390,6 +498,50 @@ struct GameView: View {
                                 }
                             }
         }
+    }
+
+    // Computes the rect to highlight for the current tutorial step
+    private func highlightRectForCurrentStep(in screen: CGRect) -> CGRect {
+        switch tutorialStep {
+        case 0:
+            return frames["newsArea"] ?? .zero
+        case 1:
+            return frames["answerButtons"] ?? .zero
+        case 2:
+            // Prefer skip button; if missing, fall back to answer buttons
+            return frames["skipButton"] ?? frames["answerButtons"] ?? .zero
+        default:
+            return .zero
+        }
+    }
+
+    // Computes a stable callout position around an anchor rect, respecting safe areas
+    private func calloutPosition(anchor: CGRect, screen: CGRect, safe: EdgeInsets) -> CGPoint {
+        // Horizontal clamping margins
+        let hMargin: CGFloat = 24
+        // Vertical spacing between the anchor and the callout
+        let vGap: CGFloat = 56
+        // Safe area guards
+        let minTopY = screen.minY + safe.top + 60
+        let maxBottomY = screen.maxY - safe.bottom - 60
+
+        // Available space above and below the anchor
+        let availableAbove = anchor.minY - minTopY
+        let availableBelow = maxBottomY - anchor.maxY
+        let placeAbove = availableAbove > availableBelow
+
+        // X centered on anchor, clamped to margins
+        let clampedX = min(max(anchor.midX, screen.minX + hMargin), screen.maxX - hMargin)
+
+        // Y placed above or below with a consistent gap
+        let y: CGFloat
+        if placeAbove {
+            y = max(anchor.minY - vGap, minTopY)
+        } else {
+            y = min(anchor.maxY + vGap, maxBottomY)
+        }
+
+        return CGPoint(x: clampedX, y: y)
     }
 
     // Verifica se o usuário acertou ou errou
