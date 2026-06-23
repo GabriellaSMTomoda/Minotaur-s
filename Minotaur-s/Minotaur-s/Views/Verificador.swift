@@ -229,6 +229,7 @@ struct VerificadorView: View {
 
     // MARK: - Pipeline simplificado
 
+    @MainActor
     private func runCheck() async {
         errorMessage = nil
         isResponding = true
@@ -271,8 +272,8 @@ struct VerificadorView: View {
                     explanation = "Verifique a veracidade no link:  \n\(list)"
                 }
             case .unverified:
-                verdictLine = "Notícia parece Falsa."
-                explanation = "Não encontramos confirmação suficiente em domínios confiáveis entre os primeiros resultados."
+                verdictLine = "Não foi possível verificar."
+                explanation = "Não encontramos confirmação nem desmentido em fontes confiáveis. Isso não significa que a notícia seja falsa — verifique diretamente em veículos confiáveis."
             }
 
             let disclaimer = "Atenção: este veredito é apenas indicativo. Para ter mais certeza, verifique diretamente em veículos confiáveis."
@@ -366,7 +367,12 @@ struct VerificadorView: View {
         request.setValue("Mozilla/5.0", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 8
 
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
+            // Ex.: 403 quando a Fact Check Tools API está desabilitada no projeto Google Cloud
+            // ou quando a chave está restrita. Tratar como indisponível para cair na busca web.
+            throw URLError(.badServerResponse)
+        }
         let decoded = try JSONDecoder().decode(FactCheckResponse.self, from: data)
         let allReviews = (decoded.claims ?? []).flatMap { $0.claimReview ?? [] }
         return allReviews
@@ -414,10 +420,18 @@ struct VerificadorView: View {
 
     private func fetchSearchResults(query: String, maxCount: Int = 8) async throws -> [WebSearchResult] {
         let q = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
-        let url = URL(string: "https://duckduckgo.com/html/?q=\(q)&kl=wt-wt")!
+        // Usa o host canônico de scraping do DuckDuckGo. O antigo "duckduckgo.com/html/"
+        // passou a responder 302/sem resultados dependendo de IP, região e rate-limit,
+        // o que fazia a verificação funcionar em um dispositivo/rede e falhar em outro.
+        let url = URL(string: "https://html.duckduckgo.com/html/?q=\(q)&kl=wt-wt")!
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0", forHTTPHeaderField: "User-Agent")
-        let (data, _) = try await URLSession.shared.data(for: request)
+        request.setValue("pt-BR,pt;q=0.9", forHTTPHeaderField: "Accept-Language")
+        request.timeoutInterval = 8
+        let (data, response) = try await URLSession.shared.data(for: request)
+        if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
+            throw URLError(.badServerResponse)
+        }
         let html = String(data: data, encoding: .utf8) ?? ""
 
         let pattern = "uddg=([^&\"]+)"
@@ -525,13 +539,16 @@ struct VerificadorView: View {
     }
 
     private func fetchPageTitle(for urlString: String) async -> String? {
-        guard let url = URL(string: urlString) else { return nil }
+        // Só busca páginas via HTTPS: o App Transport Security bloqueia HTTP (cleartext)
+        // por padrão, então tentar http:// falharia silenciosamente em qualquer dispositivo.
+        guard let url = URL(string: urlString), url.scheme?.lowercased() == "https" else { return nil }
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 5
 
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await URLSession.shared.data(for: request)
+            if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) { return nil }
             guard let html = String(data: data, encoding: .utf8) else { return nil }
 
             let pattern = "<title[^>]*>(.*?)</title>"
