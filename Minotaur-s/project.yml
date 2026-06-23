@@ -11,6 +11,7 @@ targets:
       base:
 
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        IPHONEOS_DEPLOYMENT_TARGET: 17.0
 
         PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-s
         SWIFT_VERSION: 5.0
@@ -28,6 +29,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-sTests
+        IPHONEOS_DEPLOYMENT_TARGET: 17.0
         SWIFT_VERSION: 5.0
         GENERATE_INFOPLIST_FILE: YES
 
@@ -41,5 +43,6 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: gabriellasmt-gmail.com.Minotaur-sUITests
+        IPHONEOS_DEPLOYMENT_TARGET: 17.0
         SWIFT_VERSION: 5.0
         GENERATE_INFOPLIST_FILE: YES

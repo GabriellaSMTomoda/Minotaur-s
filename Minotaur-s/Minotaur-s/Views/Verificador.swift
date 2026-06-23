@@ -1,14 +1,8 @@
 import SwiftUI
 import Foundation
+#if canImport(FoundationModels)
 import FoundationModels
-import Playgrounds
-
-// Estrutura mínima para extrair a ideia principal
-@Generable(description: "Extração da ideia geral da notícia")
-struct ClaimExtraction {
-    @Guide(description: "Resumo curto da ideia principal em 1 frase objetiva")
-    var mainIdea: String
-}
+#endif
 
 // Representa um resultado simples de busca na web
 struct WebSearchResult {
@@ -60,8 +54,6 @@ struct VerificadorView: View {
     @State private var isResponding: Bool = false
     @State private var errorMessage: String?
 
-    // Modelo do sistema
-    private let model = SystemLanguageModel.default
     // Chave da API Google Fact Check Tools
     private let factCheckAPIKey: String? = "AIzaSyAXdwJ8ydNZgDLpH1CjD04j21Z8ag5qKFM"
 
@@ -146,7 +138,7 @@ struct VerificadorView: View {
                         .padding(.vertical, -4)
                         .accessibilityLabel("Verificar")
                         .accessibilityHint("Toque para verificar se a notícia é verdadeira.")
-                        .disabled(!isModelAvailable || isResponding || newsText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                        .disabled(isResponding || newsText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     }
                     
                     GroupBox("Resultado") {
@@ -194,32 +186,39 @@ struct VerificadorView: View {
     // MARK: - Subviews
 
     private var availabilityBanner: some View {
-        switch model.availability {
-        case .available:
-            return AnyView(
-                HStack(spacing: 8) {
-                    Image(systemName: "checkmark.seal.fill").foregroundStyle(.green)
-                    Text("Modelo disponível no dispositivo")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Spacer()
-                }
-            )
-        case .unavailable(.deviceNotEligible):
-            return AnyView(unavailableView(text: "Este dispositivo não é elegível para Apple Intelligence."))
-        case .unavailable(.appleIntelligenceNotEnabled):
-            return AnyView(unavailableView(text: "Ative o Apple Intelligence em Ajustes para usar o modelo."))
-        case .unavailable(.modelNotReady):
-            return AnyView(unavailableView(text: "O modelo está baixando ou ainda não está pronto."))
-        case .unavailable(let other):
-            return AnyView(unavailableView(text: "Modelo indisponível: \(String(describing: other))"))
+#if canImport(FoundationModels)
+        if #available(iOS 26.0, *) {
+            switch SystemLanguageModel.default.availability {
+            case .available:
+                return AnyView(
+                    HStack(spacing: 8) {
+                        Image(systemName: "checkmark.seal.fill").foregroundStyle(.green)
+                        Text("Modelo disponível no dispositivo")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer()
+                    }
+                )
+            case .unavailable(.deviceNotEligible):
+                return AnyView(fallbackView(text: "Apple Intelligence indisponível neste dispositivo. Usando resumo local e busca web."))
+            case .unavailable(.appleIntelligenceNotEnabled):
+                return AnyView(fallbackView(text: "Apple Intelligence desativado. Usando resumo local e busca web."))
+            case .unavailable(.modelNotReady):
+                return AnyView(fallbackView(text: "Modelo local ainda não está pronto. Usando resumo local e busca web."))
+            case .unavailable:
+                return AnyView(fallbackView(text: "Modelo local indisponível. Usando resumo local e busca web."))
+            @unknown default:
+                return AnyView(fallbackView(text: "Modelo local indisponível. Usando resumo local e busca web."))
+            }
         }
+#endif
+        return AnyView(fallbackView(text: "Modelo local indisponível. Usando resumo local e busca web."))
     }
 
-    private func unavailableView(text: String) -> some View {
+    private func fallbackView(text: String) -> some View {
         HStack(spacing: 8) {
-            Image(systemName: "xmark.octagon.fill").foregroundStyle(.red)
+            Image(systemName: "info.circle").foregroundStyle(.secondary)
             Text(text)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
@@ -228,15 +227,9 @@ struct VerificadorView: View {
         }
     }
 
-    private var isModelAvailable: Bool {
-        if case .available = model.availability { return true }
-        return false
-    }
-
     // MARK: - Pipeline simplificado
 
     private func runCheck() async {
-        guard isModelAvailable else { return }
         errorMessage = nil
         isResponding = true
         output = ""
@@ -244,8 +237,7 @@ struct VerificadorView: View {
 
         do {
             // 1) Extrair ideia principal
-            let session = LanguageModelSession(instructions: instructions)
-            let idea = try await extractMainIdea(session: session, text: newsText)
+            let idea = await extractMainIdea(text: newsText)
 
             // 2) Consultar checagens (Google Fact Check). Se não houver veredito, buscar na web.
             let verdict: Verdict
@@ -292,24 +284,39 @@ struct VerificadorView: View {
         }
     }
 
-    private func extractMainIdea(session: LanguageModelSession, text: String) async throws -> String {
+    private func extractMainIdea(text: String) async -> String {
+#if canImport(FoundationModels)
+        if #available(iOS 26.0, *),
+           case .available = SystemLanguageModel.default.availability {
+            do {
+                let session = LanguageModelSession(instructions: instructions)
+                return try await extractMainIdeaWithFoundationModels(session: session, text: text)
+            } catch {
+                return safeFallbackSummary(from: text)
+            }
+        }
+#endif
+        return safeFallbackSummary(from: text)
+    }
+
+#if canImport(FoundationModels)
+    @available(iOS 26.0, *)
+    private func extractMainIdeaWithFoundationModels(session: LanguageModelSession, text: String) async throws -> String {
         let prompt = """
         Notícia do usuário:
         \(text)
 
         Tarefa: Extraia a ideia principal em 1 frase clara, objetiva e específica.
         """
-        let stream = session.streamResponse(to: prompt, generating: ClaimExtraction.self)
-        var idea = ""
-        for try await partial in stream {
-            idea = partial.content.mainIdea ?? idea
-        }
+        let response = try await session.respond(to: prompt)
+        let idea = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
         // Se o modelo recusou ou não preencheu, use um fallback local seguro
         if idea.isEmpty || looksLikeSafetyRefusal(idea) {
             return safeFallbackSummary(from: text)
         }
         return idea
     }
+#endif
 
     private func looksLikeSafetyRefusal(_ s: String) -> Bool {
         let markers = [
@@ -545,4 +552,3 @@ struct VerificadorView: View {
 #Preview {
     VerificadorView()
 }
-
