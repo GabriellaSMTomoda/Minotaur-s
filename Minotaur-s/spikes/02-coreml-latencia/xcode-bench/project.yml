@@ -1,0 +1,35 @@
+# Projeto de MEDIÇÃO (não é o app principal). Gera um app iOS mínimo que
+# carrega os .mlpackage do Spike 2 e mede a latência de inferência.
+#
+# Uso:
+#   1) Rode as conversões (convert_embeddings.py / convert_nli.py) — os
+#      .mlpackage ficam em ../build/.
+#   2) xcodegen generate   (dentro desta pasta)
+#   3) Abra CoreMLBench.xcodeproj, selecione um iPhone REAL e rode.
+#
+# Os .mlpackage em ../build são adicionados ao target; o Xcode os compila
+# para .mlmodelc automaticamente. São `optional` para o projeto gerar mesmo
+# antes de os modelos existirem.
+name: CoreMLBench
+options:
+  bundleIdPrefix: com.spike.coremlbench
+targets:
+  CoreMLBench:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Sources
+      - path: ../build/Embeddings_int8.mlpackage
+        buildPhase: resources
+        optional: true
+      - path: ../build/NLI_int8.mlpackage
+        buildPhase: resources
+        optional: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.spike.coremlbench
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"

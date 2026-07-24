@@ -1,0 +1,15 @@
+{
+  "id": "symanto/xlm-roberta-base-snli-mnli-anli-xnli",
+  "converts": true,
+  "num_labels": 3,
+  "id2label": {
+    "0": "ENTAILMENT",
+    "1": "NEUTRAL",
+    "2": "CONTRADICTION"
+  },
+  "fp16_mb": 530.6,
+  "int8_mb": 266.4,
+  "logits_cos": 1.0,
+  "argmax_match": true,
+  "error": null
+}

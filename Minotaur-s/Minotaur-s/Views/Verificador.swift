@@ -175,7 +175,7 @@ struct VerificadorView: View {
                     Spacer(minLength: 0)
                 }
                 .padding()
-                .navigationTitle("Verificador de fatos")
+                .navigationTitle("Verificar Notícia")
                 .toolbarBackground(Color("azul"), for: .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar)
                 .toolbarColorScheme(.dark, for: .navigationBar)

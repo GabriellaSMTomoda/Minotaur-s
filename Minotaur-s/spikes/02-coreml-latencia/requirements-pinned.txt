@@ -1,0 +1,9 @@
+# Toolchain de conversão alinhado ao que o coremltools 9.0 suporta.
+# Motivo: torch 2.13 (instalado no anaconda base) não é testado pelo coremltools
+# 9.0 (máx. testado: 2.7.0) e produziu uma cascata de ops/dtypes incompatíveis
+# na conversão do DeBERTa. Este venv isolado usa versões suportadas.
+torch==2.7.0
+transformers==4.46.3
+sentencepiece
+coremltools==9.0
+numpy<2.3
