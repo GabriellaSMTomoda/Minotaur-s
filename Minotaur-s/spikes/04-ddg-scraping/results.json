@@ -1,0 +1,21 @@
+{
+  "phase_a": [
+    {
+      "query": "Governo federal anuncia isenção imposto renda quem ganha site:g1.globo.com OR site:oglobo.globo.com OR site:folha.uol.com.br",
+      "status_code": 202,
+      "elapsed_s": 0.17,
+      "body_len": 14439,
+      "blocked": true,
+      "block_reason": "HTTP 202 inesperado",
+      "result_count": 0,
+      "result_hosts": [],
+      "n_domains": 3,
+      "query_len": 124,
+      "hosts_matching_subset": 0,
+      "hosts_total": 0
+    }
+  ],
+  "phase_b": [],
+  "stopped_early": true,
+  "stop_reason": "bloqueio detectado na fase A"
+}

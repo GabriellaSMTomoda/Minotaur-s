@@ -1,0 +1,962 @@
+[
+  {
+    "domain": "g1.globo.com",
+    "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/24/governo-lula-atuou-para-convencer-federacao-pp-uniao-brasil-a-ficar-neutra-e-nao-apoiar-flavio-bolsonaro.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.18,
+    "final_url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/24/governo-lula-atuou-para-convencer-federacao-pp-uniao-brasil-a-ficar-neutra-e-nao-apoiar-flavio-bolsonaro.ghtml",
+    "content_length": 1313642,
+    "html_file": "html/g1.globo.com/1d68b83ae2.html",
+    "error": null
+  },
+  {
+    "domain": "g1.globo.com",
+    "url": "https://g1.globo.com/politica/blog/natuza-nery/post/2026/07/24/crise-michelle-flavio-bolsonaro-video-juntos.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.21,
+    "final_url": "https://g1.globo.com/politica/blog/natuza-nery/post/2026/07/24/crise-michelle-flavio-bolsonaro-video-juntos.ghtml",
+    "content_length": 1322207,
+    "html_file": "html/g1.globo.com/b7d75b2297.html",
+    "error": null
+  },
+  {
+    "domain": "g1.globo.com",
+    "url": "https://g1.globo.com/economia/noticia/2026/07/24/durigan-expert-xp.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.2,
+    "final_url": "https://g1.globo.com/economia/noticia/2026/07/24/durigan-expert-xp.ghtml",
+    "content_length": 1544518,
+    "html_file": "html/g1.globo.com/94f70780c2.html",
+    "error": null
+  },
+  {
+    "domain": "oglobo.globo.com",
+    "url": "https://oglobo.globo.com/brasil/noticia/2026/07/24/foie-gras-lula-sanciona-lei-e-o-brasil-torna-se-o-segundo-pais-da-america-latina-a-banir-integralmente-o-produto.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.32,
+    "final_url": "https://oglobo.globo.com/brasil/noticia/2026/07/24/foie-gras-lula-sanciona-lei-e-o-brasil-torna-se-o-segundo-pais-da-america-latina-a-banir-integralmente-o-produto.ghtml",
+    "content_length": 1201055,
+    "html_file": "html/oglobo.globo.com/c040cb49a6.html",
+    "error": null
+  },
+  {
+    "domain": "oglobo.globo.com",
+    "url": "https://oglobo.globo.com/brasil/noticia/2026/07/24/governo-sanciona-lei-que-autoriza-mulheres-a-comprarem-spray-de-pimenta-para-defesa-pessoal.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.35,
+    "final_url": "https://oglobo.globo.com/brasil/noticia/2026/07/24/governo-sanciona-lei-que-autoriza-mulheres-a-comprarem-spray-de-pimenta-para-defesa-pessoal.ghtml",
+    "content_length": 1199995,
+    "html_file": "html/oglobo.globo.com/9c454ce19c.html",
+    "error": null
+  },
+  {
+    "domain": "oglobo.globo.com",
+    "url": "https://oglobo.globo.com/brasil/noticia/2026/07/23/igreja-presbiteriana-unida-aprova-inclusao-de-pessoas-lgbtqiapn-como-membros-e-pastores.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.36,
+    "final_url": "https://oglobo.globo.com/brasil/noticia/2026/07/23/igreja-presbiteriana-unida-aprova-inclusao-de-pessoas-lgbtqiapn-como-membros-e-pastores.ghtml",
+    "content_length": 1194430,
+    "html_file": "html/oglobo.globo.com/1d6f48b430.html",
+    "error": null
+  },
+  {
+    "domain": "uol.com.br",
+    "url": "https://noticias.uol.com.br/colunas/josias-de-souza/2026/07/24/reina-a-paz-entre-flavio-e-sua-madrasta-ate-a-proxima-briga.htm",
+    "status_code": 403,
+    "elapsed_s": 0.07,
+    "final_url": "https://noticias.uol.com.br/colunas/josias-de-souza/2026/07/24/reina-a-paz-entre-flavio-e-sua-madrasta-ate-a-proxima-briga.htm",
+    "content_length": 551,
+    "html_file": null,
+    "error": "HTTP 403"
+  },
+  {
+    "domain": "uol.com.br",
+    "url": "https://economia.uol.com.br/noticias/redacao/2026/07/24/o-que-muda-com-a-nova-ferramenta-do-uol-que-reune-pesquisas-eleitorais.htm",
+    "status_code": 403,
+    "elapsed_s": 0.07,
+    "final_url": "https://economia.uol.com.br/noticias/redacao/2026/07/24/o-que-muda-com-a-nova-ferramenta-do-uol-que-reune-pesquisas-eleitorais.htm",
+    "content_length": 551,
+    "html_file": null,
+    "error": "HTTP 403"
+  },
+  {
+    "domain": "uol.com.br",
+    "url": "https://noticias.uol.com.br/colunas/carlos-madeiro/2026/07/24/pi-homem-movimenta-r-600-mi-zera-conta-e-culpa-perda-em-bolsa-por-calote.htm",
+    "status_code": 403,
+    "elapsed_s": 0.07,
+    "final_url": "https://noticias.uol.com.br/colunas/carlos-madeiro/2026/07/24/pi-homem-movimenta-r-600-mi-zera-conta-e-culpa-perda-em-bolsa-por-calote.htm",
+    "content_length": 571,
+    "html_file": null,
+    "error": "HTTP 403"
+  },
+  {
+    "domain": "folha.uol.com.br",
+    "url": "https://www1.folha.uol.com.br/colunas/adriana-fernandes/2026/07/a-contencao-dos-bolsonaros.shtml",
+    "status_code": 200,
+    "elapsed_s": 0.17,
+    "final_url": "https://www1.folha.uol.com.br/colunas/adriana-fernandes/2026/07/a-contencao-dos-bolsonaros.shtml",
+    "content_length": 314553,
+    "html_file": "html/folha.uol.com.br/c4e4e8eb0f.html",
+    "error": null
+  },
+  {
+    "domain": "folha.uol.com.br",
+    "url": "https://www1.folha.uol.com.br/colunas/conrado-hubner-mendes/2026/07/tse-propoe-selo-maria-vai-com-as-urnas.shtml",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www1.folha.uol.com.br/colunas/conrado-hubner-mendes/2026/07/tse-propoe-selo-maria-vai-com-as-urnas.shtml",
+    "content_length": 318126,
+    "html_file": "html/folha.uol.com.br/0ba4b65a0e.html",
+    "error": null
+  },
+  {
+    "domain": "folha.uol.com.br",
+    "url": "https://www1.folha.uol.com.br/blogs/brasilia-hoje/2026/07/aliados-de-lula-exploram-investigacao-de-dinheiro-de-vorcaro-a-dark-horse-para-atacar-flavio.shtml",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www1.folha.uol.com.br/blogs/brasilia-hoje/2026/07/aliados-de-lula-exploram-investigacao-de-dinheiro-de-vorcaro-a-dark-horse-para-atacar-flavio.shtml",
+    "content_length": 282403,
+    "html_file": "html/folha.uol.com.br/5f7c8d6d0d.html",
+    "error": null
+  },
+  {
+    "domain": "estadao.com.br",
+    "url": "https://www.estadao.com.br/brasil/laco-de-cv-e-deputado-do-rio-mostra-ser-urgente-tirar-da-politica-os-condenados-por-crime-organizado/",
+    "status_code": 200,
+    "elapsed_s": 0.23,
+    "final_url": "https://www.estadao.com.br/brasil/laco-de-cv-e-deputado-do-rio-mostra-ser-urgente-tirar-da-politica-os-condenados-por-crime-organizado/",
+    "content_length": 771521,
+    "html_file": "html/estadao.com.br/ff963b46d3.html",
+    "error": null
+  },
+  {
+    "domain": "estadao.com.br",
+    "url": "https://www.estadao.com.br/politica/blog-do-fausto-macedo/pgr-denuncia-desembargador-th-joias-e-ex-presidente-da-assembleia-do-rio-em-investigacao-sobre-o-cv/",
+    "status_code": 200,
+    "elapsed_s": 0.12,
+    "final_url": "https://www.estadao.com.br/politica/blog-do-fausto-macedo/pgr-denuncia-desembargador-th-joias-e-ex-presidente-da-assembleia-do-rio-em-investigacao-sobre-o-cv/",
+    "content_length": 787183,
+    "html_file": "html/estadao.com.br/40adbdd80d.html",
+    "error": null
+  },
+  {
+    "domain": "estadao.com.br",
+    "url": "https://www.estadao.com.br/brasil/de-agencia-antimafia-a-fast-track-de-processos-veja-propostas-para-combater-avanco-de-pcc-e-cv/",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://www.estadao.com.br/brasil/de-agencia-antimafia-a-fast-track-de-processos-veja-propostas-para-combater-avanco-de-pcc-e-cv/",
+    "content_length": 739847,
+    "html_file": "html/estadao.com.br/5d7cf2bbbe.html",
+    "error": null
+  },
+  {
+    "domain": "cnnbrasil.com.br",
+    "url": "https://www.cnnbrasil.com.br/internacional/israel-prepara-grande-operacao-militar-na-cisjordania-apos-mortes/",
+    "status_code": 200,
+    "elapsed_s": 0.17,
+    "final_url": "https://www.cnnbrasil.com.br/internacional/israel-prepara-grande-operacao-militar-na-cisjordania-apos-mortes/",
+    "content_length": 385360,
+    "html_file": "html/cnnbrasil.com.br/3bd7d00885.html",
+    "error": null
+  },
+  {
+    "domain": "cnnbrasil.com.br",
+    "url": "https://www.cnnbrasil.com.br/internacional/ira-diz-que-ataque-dos-eua-teve-quartel-da-guarda-revolucionaria-como-alvo/",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www.cnnbrasil.com.br/internacional/ira-diz-que-ataque-dos-eua-teve-quartel-da-guarda-revolucionaria-como-alvo/",
+    "content_length": 385004,
+    "html_file": "html/cnnbrasil.com.br/5c865695e3.html",
+    "error": null
+  },
+  {
+    "domain": "cnnbrasil.com.br",
+    "url": "https://www.cnnbrasil.com.br/internacional/navios-sauditas-passam-por-bab-el-mandeb-apesar-de-ameacas-dos-houthis/",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www.cnnbrasil.com.br/internacional/navios-sauditas-passam-por-bab-el-mandeb-apesar-de-ameacas-dos-houthis/",
+    "content_length": 370534,
+    "html_file": "html/cnnbrasil.com.br/ef686a02f7.html",
+    "error": null
+  },
+  {
+    "domain": "veja.abril.com.br",
+    "url": "https://veja.abril.com.br/brasil/brasileiras-ja-podem-comprar-spray-de-pimenta-para-defesa-pessoal/",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://veja.abril.com.br/brasil/brasileiras-ja-podem-comprar-spray-de-pimenta-para-defesa-pessoal/",
+    "content_length": 257156,
+    "html_file": "html/veja.abril.com.br/8217544267.html",
+    "error": null
+  },
+  {
+    "domain": "veja.abril.com.br",
+    "url": "https://veja.abril.com.br/brasil/ex-prefeito-e-esposa-sao-favoritos-contra-aliados-de-lula-e-alcolumbre-no-amapa-diz-pesquisa/",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://veja.abril.com.br/brasil/ex-prefeito-e-esposa-sao-favoritos-contra-aliados-de-lula-e-alcolumbre-no-amapa-diz-pesquisa/",
+    "content_length": 260671,
+    "html_file": "html/veja.abril.com.br/e880827961.html",
+    "error": null
+  },
+  {
+    "domain": "veja.abril.com.br",
+    "url": "https://veja.abril.com.br/brasil/inqueritos-contra-autoridades-explodem-no-stj-apos-mudanca-da-regra-do-foro-no-supremo/",
+    "status_code": 200,
+    "elapsed_s": 0.15,
+    "final_url": "https://veja.abril.com.br/brasil/inqueritos-contra-autoridades-explodem-no-stj-apos-mudanca-da-regra-do-foro-no-supremo/",
+    "content_length": 285263,
+    "html_file": "html/veja.abril.com.br/589df3429d.html",
+    "error": null
+  },
+  {
+    "domain": "valor.globo.com",
+    "url": "https://valor.globo.com/brasil/noticia/2026/07/24/consumo-sustentou-economia-do-brasil-diz-fmi.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.43,
+    "final_url": "https://valor.globo.com/brasil/noticia/2026/07/24/consumo-sustentou-economia-do-brasil-diz-fmi.ghtml",
+    "content_length": 783098,
+    "html_file": "html/valor.globo.com/0ba3ecabef.html",
+    "error": null
+  },
+  {
+    "domain": "valor.globo.com",
+    "url": "https://valor.globo.com/brasil/noticia/2026/07/24/eua-confirmam-tarifa-por-trabalho-forcado.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.3,
+    "final_url": "https://valor.globo.com/brasil/noticia/2026/07/24/eua-confirmam-tarifa-por-trabalho-forcado.ghtml",
+    "content_length": 783556,
+    "html_file": "html/valor.globo.com/67c9b0e478.html",
+    "error": null
+  },
+  {
+    "domain": "valor.globo.com",
+    "url": "https://valor.globo.com/brasil/noticia/2026/07/23/fiscal-preocupa-mas-dimensao-do-problema-divide-economistas.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.49,
+    "final_url": "https://valor.globo.com/brasil/noticia/2026/07/23/fiscal-preocupa-mas-dimensao-do-problema-divide-economistas.ghtml",
+    "content_length": 786771,
+    "html_file": "html/valor.globo.com/9769cbd4e8.html",
+    "error": null
+  },
+  {
+    "domain": "exame.com",
+    "url": "https://exame.com/invest/mercados/sete-magnificas-perdem-r-45-tri-em-um-dia-com-temor-por-gastos-em-ia/",
+    "status_code": 200,
+    "elapsed_s": 0.17,
+    "final_url": "https://exame.com/invest/mercados/sete-magnificas-perdem-r-45-tri-em-um-dia-com-temor-por-gastos-em-ia/",
+    "content_length": 230645,
+    "html_file": "html/exame.com/c88d6d58bc.html",
+    "error": null
+  },
+  {
+    "domain": "exame.com",
+    "url": "https://exame.com/invest/mercados/ibovespa-volta-a-cair-com-pressao-de-vale-petrobras-e-bancos/",
+    "status_code": 200,
+    "elapsed_s": 0.17,
+    "final_url": "https://exame.com/invest/mercados/ibovespa-volta-a-cair-com-pressao-de-vale-petrobras-e-bancos/",
+    "content_length": 243319,
+    "html_file": "html/exame.com/c8313725e6.html",
+    "error": null
+  },
+  {
+    "domain": "exame.com",
+    "url": "https://exame.com/invest/mercados/petroleo-e-juros-por-que-a-estagflacao-voltou-a-preocupar-o-mercado/",
+    "status_code": 200,
+    "elapsed_s": 2.05,
+    "final_url": "https://exame.com/invest/mercados/petroleo-e-juros-por-que-a-estagflacao-voltou-a-preocupar-o-mercado/",
+    "content_length": 234872,
+    "html_file": "html/exame.com/5cdd85977d.html",
+    "error": null
+  },
+  {
+    "domain": "r7.com",
+    "url": "https://noticias.r7.com/economia/piora-o-que-ja-estava-ruim-afirma-setor-de-calcados-sobre-nova-tarifa-dos-eua-24072026",
+    "status_code": 200,
+    "elapsed_s": 0.22,
+    "final_url": "https://noticias.r7.com/economia/piora-o-que-ja-estava-ruim-afirma-setor-de-calcados-sobre-nova-tarifa-dos-eua-24072026/",
+    "content_length": 1504885,
+    "html_file": "html/r7.com/62aaf1cfd7.html",
+    "error": null
+  },
+  {
+    "domain": "r7.com",
+    "url": "https://noticias.r7.com/economia/receita-abre-consulta-ao-terceiro-lote-de-restituicao-do-irpf-2026-nesta-sexta-feira-24-24072026",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://noticias.r7.com/economia/receita-abre-consulta-ao-terceiro-lote-de-restituicao-do-irpf-2026-nesta-sexta-feira-24-24072026/",
+    "content_length": 1500024,
+    "html_file": "html/r7.com/7c38bb57c7.html",
+    "error": null
+  },
+  {
+    "domain": "r7.com",
+    "url": "https://noticias.r7.com/economia/vai-ter-impacto-no-emprego-e-na-renda-diz-economista-sobre-setores-afetados-por-tarifaco-24072026",
+    "status_code": 200,
+    "elapsed_s": 0.24,
+    "final_url": "https://noticias.r7.com/economia/vai-ter-impacto-no-emprego-e-na-renda-diz-economista-sobre-setores-afetados-por-tarifaco-24072026/",
+    "content_length": 1550636,
+    "html_file": "html/r7.com/f203409d61.html",
+    "error": null
+  },
+  {
+    "domain": "terra.com.br",
+    "url": "https://www.terra.com.br/noticias/brasil/acidente-da-voepass-o-que-causou-a-queda-do-aviao-em-sp,dad0d28e8c1bbd1a824b30aa4551fb49ivdtnkne.html",
+    "status_code": 200,
+    "elapsed_s": 0.08,
+    "final_url": "https://www.terra.com.br/noticias/brasil/acidente-da-voepass-o-que-causou-a-queda-do-aviao-em-sp,dad0d28e8c1bbd1a824b30aa4551fb49ivdtnkne.html",
+    "content_length": 154751,
+    "html_file": "html/terra.com.br/47fa49fdb0.html",
+    "error": null
+  },
+  {
+    "domain": "terra.com.br",
+    "url": "https://www.terra.com.br/noticias/brasil/brasil-e-o-maior-perdedor-das-tarifas-adicionais-de-trump-diz-financial-times,2e5d09810020221b3ac3ab20f7d45551glwlutoo.html",
+    "status_code": 200,
+    "elapsed_s": 0.11,
+    "final_url": "https://www.terra.com.br/noticias/brasil/brasil-e-o-maior-perdedor-das-tarifas-adicionais-de-trump-diz-financial-times,2e5d09810020221b3ac3ab20f7d45551glwlutoo.html",
+    "content_length": 151728,
+    "html_file": "html/terra.com.br/b5a23aa7d0.html",
+    "error": null
+  },
+  {
+    "domain": "terra.com.br",
+    "url": "https://www.terra.com.br/economia/governo-lula-diminui-bloqueio-no-orcamento-e-libera-r-57-bilhoes-em-gastos-na-vespera-de-campanha,bba6831dc04e52c1d4256172cff557bfphvfbve9.html",
+    "status_code": 200,
+    "elapsed_s": 0.08,
+    "final_url": "https://www.terra.com.br/economia/governo-lula-diminui-bloqueio-no-orcamento-e-libera-r-57-bilhoes-em-gastos-na-vespera-de-campanha,bba6831dc04e52c1d4256172cff557bfphvfbve9.html",
+    "content_length": 146054,
+    "html_file": "html/terra.com.br/05a7c3eed3.html",
+    "error": null
+  },
+  {
+    "domain": "metropoles.com",
+    "url": "https://www.metropoles.com/brasil/apos-tarifaco-lula-fala-em-nao-deixar-ninguem-meter-o-nariz-no-pais",
+    "status_code": 200,
+    "elapsed_s": 0.5,
+    "final_url": "https://www.metropoles.com/brasil/apos-tarifaco-lula-fala-em-nao-deixar-ninguem-meter-o-nariz-no-pais",
+    "content_length": 242089,
+    "html_file": "html/metropoles.com/87630ba4d6.html",
+    "error": null
+  },
+  {
+    "domain": "metropoles.com",
+    "url": "https://www.metropoles.com/brasil/produtos-brasileiros-serao-taxados-em-ate-375-a-partir-desta-6a-veja-lista",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www.metropoles.com/brasil/produtos-brasileiros-serao-taxados-em-ate-375-a-partir-desta-6a-veja-lista",
+    "content_length": 282035,
+    "html_file": "html/metropoles.com/19efe043f1.html",
+    "error": null
+  },
+  {
+    "domain": "metropoles.com",
+    "url": "https://www.metropoles.com/brasil/governo-lula-reage-a-nova-tarifa-e-promete-acionar-reciprocidade",
+    "status_code": 200,
+    "elapsed_s": 0.15,
+    "final_url": "https://www.metropoles.com/brasil/governo-lula-reage-a-nova-tarifa-e-promete-acionar-reciprocidade",
+    "content_length": 263454,
+    "html_file": "html/metropoles.com/f1b436d1fe.html",
+    "error": null
+  },
+  {
+    "domain": "poder360.com.br",
+    "url": "https://www.poder360.com.br/poder-economia/jbs-mira-expansao-global-com-listagem-nos-eua-e-aquisicao-em-oma/",
+    "status_code": 200,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.poder360.com.br/poder-economia/jbs-mira-expansao-global-com-listagem-nos-eua-e-aquisicao-em-oma/",
+    "content_length": 245284,
+    "html_file": "html/poder360.com.br/970e009eaa.html",
+    "error": null
+  },
+  {
+    "domain": "poder360.com.br",
+    "url": "https://www.poder360.com.br/poder-governo/so-vou-falar-do-tarifaco-quando-trump-falar-diz-lula/",
+    "status_code": 200,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.poder360.com.br/poder-governo/so-vou-falar-do-tarifaco-quando-trump-falar-diz-lula/",
+    "content_length": 237811,
+    "html_file": "html/poder360.com.br/5d2c36eb19.html",
+    "error": null
+  },
+  {
+    "domain": "poder360.com.br",
+    "url": "https://www.poder360.com.br/poder-economia/saiba-quais-indicadores-internacionais-saem-nesta-semana-15/",
+    "status_code": 200,
+    "elapsed_s": 0.11,
+    "final_url": "https://www.poder360.com.br/poder-economia/saiba-quais-indicadores-internacionais-saem-nesta-semana-15/",
+    "content_length": 229753,
+    "html_file": "html/poder360.com.br/cf0201f9d3.html",
+    "error": null
+  },
+  {
+    "domain": "gzh.com.br",
+    "url": "https://gauchazh.clicrbs.com.br/viral/noticia/2026/07/joao-gomes-cancela-shows-apos-ser-hospitalizado-com-influenza-cmrz4oac601sg014crnxsl3md.html",
+    "status_code": 200,
+    "elapsed_s": 1.13,
+    "final_url": "https://gauchazh.clicrbs.com.br/viral/noticia/2026/07/joao-gomes-cancela-shows-apos-ser-hospitalizado-com-influenza-cmrz4oac601sg014crnxsl3md.html",
+    "content_length": 221721,
+    "html_file": "html/gzh.com.br/4c01b88e41.html",
+    "error": null
+  },
+  {
+    "domain": "gzh.com.br",
+    "url": "https://gauchazh.clicrbs.com.br/colunistas/gisele-loeblein/noticia/2026/07/brasil-proibe-foie-gras-e-franca-reage-entenda-a-disputa-por-tras-da-iguaria-de-luxo-cmrza1zq501wa0163q6yjjuq9.html",
+    "status_code": 200,
+    "elapsed_s": 0.82,
+    "final_url": "https://gauchazh.clicrbs.com.br/colunistas/gisele-loeblein/noticia/2026/07/brasil-proibe-foie-gras-e-franca-reage-entenda-a-disputa-por-tras-da-iguaria-de-luxo-cmrza1zq501wa0163q6yjjuq9.html",
+    "content_length": 182344,
+    "html_file": "html/gzh.com.br/16108f3643.html",
+    "error": null
+  },
+  {
+    "domain": "correiobraziliense.com.br",
+    "url": "https://www.correiobraziliense.com.br/politica/2026/07/7467410-pp-opta-pela-neutralidade-nacional-e-libera-palanques-para-eleicoes.html",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://www.correiobraziliense.com.br/politica/2026/07/7467410-pp-opta-pela-neutralidade-nacional-e-libera-palanques-para-eleicoes.html",
+    "content_length": 194128,
+    "html_file": "html/correiobraziliense.com.br/63f9d79401.html",
+    "error": null
+  },
+  {
+    "domain": "correiobraziliense.com.br",
+    "url": "https://www.correiobraziliense.com.br/brasil/2026/07/7467405-mulheres-ja-podem-comprar-spray-de-pimenta-para-defesa-pessoal-veja-regras.html",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://www.correiobraziliense.com.br/brasil/2026/07/7467405-mulheres-ja-podem-comprar-spray-de-pimenta-para-defesa-pessoal-veja-regras.html",
+    "content_length": 205573,
+    "html_file": "html/correiobraziliense.com.br/28ff10b0f9.html",
+    "error": null
+  },
+  {
+    "domain": "correiobraziliense.com.br",
+    "url": "https://www.correiobraziliense.com.br/brasil/2026/07/7467426-alem-do-spray-4-itens-de-defesa-pessoal-permitidos-por-lei-no-pais.html",
+    "status_code": 200,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.correiobraziliense.com.br/brasil/2026/07/7467426-alem-do-spray-4-itens-de-defesa-pessoal-permitidos-por-lei-no-pais.html",
+    "content_length": 208161,
+    "html_file": "html/correiobraziliense.com.br/147d07e376.html",
+    "error": null
+  },
+  {
+    "domain": "agenciabrasil.ebc.com.br",
+    "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/eua-impoem-nova-tarifa-de-125-produtos-brasileiros",
+    "status_code": 200,
+    "elapsed_s": 0.07,
+    "final_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/eua-impoem-nova-tarifa-de-125-produtos-brasileiros",
+    "content_length": 103372,
+    "html_file": "html/agenciabrasil.ebc.com.br/31097f4af1.html",
+    "error": null
+  },
+  {
+    "domain": "agenciabrasil.ebc.com.br",
+    "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/ministro-chama-tarifa-dos-eua-de-indevida-e-promete-reacao",
+    "status_code": 200,
+    "elapsed_s": 0.08,
+    "final_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/ministro-chama-tarifa-dos-eua-de-indevida-e-promete-reacao",
+    "content_length": 102969,
+    "html_file": "html/agenciabrasil.ebc.com.br/8eb3967f69.html",
+    "error": null
+  },
+  {
+    "domain": "agenciabrasil.ebc.com.br",
+    "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/estados-unidos-isentam-471-produtos-de-nova-tarifa-de-125",
+    "status_code": 200,
+    "elapsed_s": 0.07,
+    "final_url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/estados-unidos-isentam-471-produtos-de-nova-tarifa-de-125",
+    "content_length": 101373,
+    "html_file": "html/agenciabrasil.ebc.com.br/1ab53295af.html",
+    "error": null
+  },
+  {
+    "domain": "otempo.com.br",
+    "url": "https://www.otempo.com.br/politica/2026/7/24/dataprev-formaliza-reajuste-em-contrato-de-tecnologia-com-a-teletex",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www.otempo.com.br/politica/2026/7/24/dataprev-formaliza-reajuste-em-contrato-de-tecnologia-com-a-teletex",
+    "content_length": 195241,
+    "html_file": "html/otempo.com.br/7f5b59fba4.html",
+    "error": null
+  },
+  {
+    "domain": "otempo.com.br",
+    "url": "https://www.otempo.com.br/politica/governo/2026/7/14/na-vespera-de-decisao-governo-lula-faz-reuniao-com-eua-e-fala-em-carater-injusto-de-tarifas",
+    "status_code": 200,
+    "elapsed_s": 0.12,
+    "final_url": "https://www.otempo.com.br/politica/governo/2026/7/14/na-vespera-de-decisao-governo-lula-faz-reuniao-com-eua-e-fala-em-carater-injusto-de-tarifas",
+    "content_length": 190928,
+    "html_file": "html/otempo.com.br/ba6820fc72.html",
+    "error": null
+  },
+  {
+    "domain": "otempo.com.br",
+    "url": "https://www.otempo.com.br/cidades/2026/7/24/justica-decide-na-proxima-quarta-se-acusado-de-matar-sargento-roger-dias-ira-a-juri-popular",
+    "status_code": 200,
+    "elapsed_s": 0.12,
+    "final_url": "https://www.otempo.com.br/cidades/2026/7/24/justica-decide-na-proxima-quarta-se-acusado-de-matar-sargento-roger-dias-ira-a-juri-popular",
+    "content_length": 191583,
+    "html_file": "html/otempo.com.br/aa7dd21dad.html",
+    "error": null
+  },
+  {
+    "domain": "band.uol.com.br",
+    "url": "https://www.band.com.br/noticias/justica-decreta-prisao-preventiva-de-homem-que-atropelou-e-matou-pm-em-sp-202607241436",
+    "status_code": 200,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.band.com.br/noticias/justica-decreta-prisao-preventiva-de-homem-que-atropelou-e-matou-pm-em-sp-202607241436",
+    "content_length": 110146,
+    "html_file": "html/band.uol.com.br/7168dce40e.html",
+    "error": null
+  },
+  {
+    "domain": "band.uol.com.br",
+    "url": "https://www.band.com.br/noticias/entenda-o-que-esta-por-tras-do-acordo-nuclear-entre-eua-e-arabia-saudita-202607241419",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://www.band.com.br/noticias/entenda-o-que-esta-por-tras-do-acordo-nuclear-entre-eua-e-arabia-saudita-202607241419",
+    "content_length": 188135,
+    "html_file": "html/band.uol.com.br/6c41390d8e.html",
+    "error": null
+  },
+  {
+    "domain": "band.uol.com.br",
+    "url": "https://www.band.com.br/economia/noticias/tarifaco-de-trump-veja-como-os-paises-reagiram-a-nova-sobretaxa-de-ate-125-imposta-pelos-eua-202607241157",
+    "status_code": 200,
+    "elapsed_s": 0.12,
+    "final_url": "https://www.band.com.br/economia/noticias/tarifaco-de-trump-veja-como-os-paises-reagiram-a-nova-sobretaxa-de-ate-125-imposta-pelos-eua-202607241157",
+    "content_length": 182103,
+    "html_file": "html/band.uol.com.br/9e7e4b8764.html",
+    "error": null
+  },
+  {
+    "domain": "ge.globo.com",
+    "url": "https://ge.globo.com/futebol/times/cruzeiro/noticia/2026/07/24/cruzeiro-vai-contratar-substituto-de-gabriel-pec-entenda-planos.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.2,
+    "final_url": "https://ge.globo.com/futebol/times/cruzeiro/noticia/2026/07/24/cruzeiro-vai-contratar-substituto-de-gabriel-pec-entenda-planos.ghtml",
+    "content_length": 1335590,
+    "html_file": "html/ge.globo.com/cfd1678e1c.html",
+    "error": null
+  },
+  {
+    "domain": "ge.globo.com",
+    "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/06/12/copa-do-mundo-2026-veja-ranking-de-artilheiros-e-garcons.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.19,
+    "final_url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/06/12/copa-do-mundo-2026-veja-ranking-de-artilheiros-e-garcons.ghtml",
+    "content_length": 1428046,
+    "html_file": "html/ge.globo.com/2ed2545312.html",
+    "error": null
+  },
+  {
+    "domain": "ge.globo.com",
+    "url": "https://ge.globo.com/gato-mestre/dicas/noticia/2026/07/24/palpites-e-dicas-para-bahia-x-corinthians-pelo-brasileirao.ghtml",
+    "status_code": 200,
+    "elapsed_s": 0.21,
+    "final_url": "https://ge.globo.com/gato-mestre/dicas/noticia/2026/07/24/palpites-e-dicas-para-bahia-x-corinthians-pelo-brasileirao.ghtml",
+    "content_length": 1621646,
+    "html_file": "html/ge.globo.com/2ec9c16a7d.html",
+    "error": null
+  },
+  {
+    "domain": "espn.com.br",
+    "url": "https://www.espn.com.br/futebol/sao-paulo/artigo/_/id/16096849/sao-paulo-acerta-negociacao-tripla-com-river-plate-e-encaminha-novidades-para-2026",
+    "status_code": 202,
+    "elapsed_s": 0.11,
+    "final_url": "https://www.espn.com.br/futebol/sao-paulo/artigo/_/id/16096849/sao-paulo-acerta-negociacao-tripla-com-river-plate-e-encaminha-novidades-para-2026",
+    "content_length": 1987,
+    "html_file": null,
+    "error": "HTTP 202"
+  },
+  {
+    "domain": "espn.com.br",
+    "url": "https://www.espn.com.br/futebol/copa-do-mundo/artigo/_/id/16551330/copa-do-mundo-tera-nove-representantes-arbitragem-brasil-veja-nomes",
+    "status_code": 202,
+    "elapsed_s": 0.1,
+    "final_url": "https://www.espn.com.br/futebol/copa-do-mundo/artigo/_/id/16551330/copa-do-mundo-tera-nove-representantes-arbitragem-brasil-veja-nomes",
+    "content_length": 1987,
+    "html_file": null,
+    "error": "HTTP 202"
+  },
+  {
+    "domain": "aosfatos.org",
+    "url": "https://aosfatos.org/noticias/brastemp-consul-fabrica-brasil/",
+    "status_code": 200,
+    "elapsed_s": 0.15,
+    "final_url": "https://www.aosfatos.org/noticias/brastemp-consul-fabrica-brasil/",
+    "content_length": 217430,
+    "html_file": "html/aosfatos.org/9bd41a5bde.html",
+    "error": null
+  },
+  {
+    "domain": "aosfatos.org",
+    "url": "https://aosfatos.org/noticias/moraes-trump-visitar-bolsonaro/",
+    "status_code": 200,
+    "elapsed_s": 0.17,
+    "final_url": "https://www.aosfatos.org/noticias/moraes-trump-visitar-bolsonaro/",
+    "content_length": 218294,
+    "html_file": "html/aosfatos.org/4cb979fe79.html",
+    "error": null
+  },
+  {
+    "domain": "aosfatos.org",
+    "url": "https://aosfatos.org/noticias/governo-idade-minima-aposentadoria/",
+    "status_code": 200,
+    "elapsed_s": 0.15,
+    "final_url": "https://www.aosfatos.org/noticias/governo-idade-minima-aposentadoria/",
+    "content_length": 213201,
+    "html_file": "html/aosfatos.org/7071dc3d98.html",
+    "error": null
+  },
+  {
+    "domain": "lupa.uol.com.br",
+    "url": "https://www.agencialupa.org/noticias/2026/07/21/e-falso-que-luciano-hang-anunciou-plataforma-que-rende-ate-r-220-mil-por-mes/",
+    "status_code": 200,
+    "elapsed_s": 0.15,
+    "final_url": "https://www.agencialupa.org/noticias/2026/07/21/e-falso-que-luciano-hang-anunciou-plataforma-que-rende-ate-r-220-mil-por-mes/",
+    "content_length": 325381,
+    "html_file": "html/lupa.uol.com.br/14503c0f6b.html",
+    "error": null
+  },
+  {
+    "domain": "lupa.uol.com.br",
+    "url": "https://www.agencialupa.org/verificacao/2026/07/02/e-golpe-site-que-simula-plataforma-de-investimento-da-petrobras/",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://www.agencialupa.org/verificacao/2026/07/02/e-golpe-site-que-simula-plataforma-de-investimento-da-petrobras/",
+    "content_length": 301937,
+    "html_file": "html/lupa.uol.com.br/adde0aecf0.html",
+    "error": null
+  },
+  {
+    "domain": "lupa.uol.com.br",
+    "url": "https://www.agencialupa.org/institucional/2026/07/21/aqui-nao-tem-propaganda-de-bets/",
+    "status_code": 200,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.agencialupa.org/institucional/2026/07/21/aqui-nao-tem-propaganda-de-bets/",
+    "content_length": 299274,
+    "html_file": "html/lupa.uol.com.br/871a3c91aa.html",
+    "error": null
+  },
+  {
+    "domain": "bbc.com",
+    "url": "https://www.bbc.com/portuguese/articles/c75yy56153xo",
+    "status_code": 200,
+    "elapsed_s": 0.45,
+    "final_url": "https://www.bbc.com/portuguese/articles/c75yy56153xo",
+    "content_length": 150659,
+    "html_file": "html/bbc.com/7907985b63.html",
+    "error": null
+  },
+  {
+    "domain": "bbc.com",
+    "url": "https://www.bbc.com/portuguese/articles/c8rn582102vo",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www.bbc.com/portuguese/articles/c8rn582102vo",
+    "content_length": 373165,
+    "html_file": "html/bbc.com/99e88cf736.html",
+    "error": null
+  },
+  {
+    "domain": "bbc.com",
+    "url": "https://www.bbc.com/portuguese/articles/cz64le56412o",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www.bbc.com/portuguese/articles/cz64le56412o",
+    "content_length": 349322,
+    "html_file": "html/bbc.com/5336c8be6e.html",
+    "error": null
+  },
+  {
+    "domain": "dw.com",
+    "url": "https://www.dw.com/pt-br/falta-de-emprego-entre-jovens-vira-desafio-global/a-78052376",
+    "status_code": 200,
+    "elapsed_s": 0.16,
+    "final_url": "https://www.dw.com/pt-br/falta-de-emprego-entre-jovens-vira-desafio-global/a-78052376",
+    "content_length": 155408,
+    "html_file": "html/dw.com/47620f5228.html",
+    "error": null
+  },
+  {
+    "domain": "dw.com",
+    "url": "https://www.dw.com/pt-br/alvo-de-tarifaço-brasil-é-há-décadas-fonte-de-superávit-recorde-para-os-eua/a-78090576",
+    "status_code": 200,
+    "elapsed_s": 1.41,
+    "final_url": "https://www.dw.com/pt-br/alvo-de-tarifa%C3%A7o-brasil-%C3%A9-h%C3%A1-d%C3%A9cadas-fonte-de-super%C3%A1vit-recorde-para-os-eua/a-78090576",
+    "content_length": 191422,
+    "html_file": "html/dw.com/53c3ad428f.html",
+    "error": null
+  },
+  {
+    "domain": "dw.com",
+    "url": "https://www.dw.com/pt-br/flávio-e-michelle-fazem-as-pazes-antes-de-convenção-do-pl/a-78105395",
+    "status_code": 200,
+    "elapsed_s": 0.75,
+    "final_url": "https://www.dw.com/pt-br/fl%C3%A1vio-e-michelle-fazem-as-pazes-antes-de-conven%C3%A7%C3%A3o-do-pl/a-78105395",
+    "content_length": 143666,
+    "html_file": "html/dw.com/0c01880160.html",
+    "error": null
+  },
+  {
+    "domain": "elpais.com",
+    "url": "https://elpais.com/internacional/2026-07-24/trump-impone-un-sistema-comercial-caotico-en-su-tercera-ronda-arancelaria.html",
+    "status_code": 200,
+    "elapsed_s": 0.18,
+    "final_url": "https://elpais.com/internacional/2026-07-24/trump-impone-un-sistema-comercial-caotico-en-su-tercera-ronda-arancelaria.html",
+    "content_length": 413248,
+    "html_file": "html/elpais.com/ec748cba76.html",
+    "error": null
+  },
+  {
+    "domain": "elpais.com",
+    "url": "https://elpais.com/internacional/2026-07-24/las-claves-de-los-nuevos-aranceles-de-trump-que-suponen-a-que-paises-afectan-y-cuando-entran-en-vigor.html",
+    "status_code": 200,
+    "elapsed_s": 0.2,
+    "final_url": "https://elpais.com/internacional/2026-07-24/las-claves-de-los-nuevos-aranceles-de-trump-que-suponen-a-que-paises-afectan-y-cuando-entran-en-vigor.html",
+    "content_length": 408554,
+    "html_file": "html/elpais.com/d48e550b24.html",
+    "error": null
+  },
+  {
+    "domain": "elpais.com",
+    "url": "https://elpais.com/internacional/2026-07-24/bruselas-recibe-con-cautela-los-nuevos-aranceles-de-trump-a-la-union-europea.html",
+    "status_code": 200,
+    "elapsed_s": 0.19,
+    "final_url": "https://elpais.com/internacional/2026-07-24/bruselas-recibe-con-cautela-los-nuevos-aranceles-de-trump-a-la-union-europea.html",
+    "content_length": 406200,
+    "html_file": "html/elpais.com/c7d7e1d196.html",
+    "error": null
+  },
+  {
+    "domain": "reuters.com",
+    "url": "https://www.reuters.com/world/",
+    "status_code": 401,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.reuters.com/world/",
+    "content_length": 777,
+    "html_file": null,
+    "error": "HTTP 401"
+  },
+  {
+    "domain": "reuters.com",
+    "url": "https://www.reuters.com/business/",
+    "status_code": 401,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.reuters.com/business/",
+    "content_length": 777,
+    "html_file": null,
+    "error": "HTTP 401"
+  },
+  {
+    "domain": "apnews.com",
+    "url": "https://apnews.com/article/iran-us-hormuz-strait-war-24-july-2026-78c2dbf538f6e61ab816479a4d9bdd85",
+    "status_code": 200,
+    "elapsed_s": 0.19,
+    "final_url": "https://apnews.com/article/iran-us-hormuz-strait-war-24-july-2026-78c2dbf538f6e61ab816479a4d9bdd85",
+    "content_length": 915851,
+    "html_file": "html/apnews.com/77747c9697.html",
+    "error": null
+  },
+  {
+    "domain": "apnews.com",
+    "url": "https://apnews.com/article/usvi-lawsuit-guns-concealed-2nd-amendment-1039052c4389483e4be4ed23f30ef82b",
+    "status_code": 200,
+    "elapsed_s": 0.17,
+    "final_url": "https://apnews.com/article/usvi-lawsuit-guns-concealed-2nd-amendment-1039052c4389483e4be4ed23f30ef82b",
+    "content_length": 760209,
+    "html_file": "html/apnews.com/23a028b791.html",
+    "error": null
+  },
+  {
+    "domain": "apnews.com",
+    "url": "https://apnews.com/article/usmediatimesair-force-one-42429e4d4da8accc42b6c3ddf3f4fed5",
+    "status_code": 200,
+    "elapsed_s": 0.2,
+    "final_url": "https://apnews.com/article/usmediatimesair-force-one-42429e4d4da8accc42b6c3ddf3f4fed5",
+    "content_length": 784049,
+    "html_file": "html/apnews.com/7dd8137fa9.html",
+    "error": null
+  },
+  {
+    "domain": "gov.br",
+    "url": "https://agenciagov.ebc.com.br/noticias/202607/governo-brasileiro-rechaca-alegacoes-dos-eua-para-impor-nova-taxa",
+    "status_code": 200,
+    "elapsed_s": 0.14,
+    "final_url": "https://agenciagov.ebc.com.br/noticias/202607/governo-brasileiro-rechaca-alegacoes-dos-eua-para-impor-nova-taxa",
+    "content_length": 54648,
+    "html_file": "html/gov.br/7602bb324a.html",
+    "error": null
+  },
+  {
+    "domain": "gov.br",
+    "url": "https://agenciagov.ebc.com.br/noticias/202607/enade-2026-prazo-para-solicitar-atendimento-especializado-e-nome-social-termina-hoje-24",
+    "status_code": 200,
+    "elapsed_s": 0.08,
+    "final_url": "https://agenciagov.ebc.com.br/noticias/202607/enade-2026-prazo-para-solicitar-atendimento-especializado-e-nome-social-termina-hoje-24",
+    "content_length": 54474,
+    "html_file": "html/gov.br/f7c8a03f76.html",
+    "error": null
+  },
+  {
+    "domain": "gov.br",
+    "url": "https://agenciagov.ebc.com.br/noticias/202607/cnpj-alfanumerico-o-que-muda-para-empresas-e-empreendedores",
+    "status_code": 200,
+    "elapsed_s": 0.07,
+    "final_url": "https://agenciagov.ebc.com.br/noticias/202607/cnpj-alfanumerico-o-que-muda-para-empresas-e-empreendedores",
+    "content_length": 59581,
+    "html_file": "html/gov.br/85c0343024.html",
+    "error": null
+  },
+  {
+    "domain": "camara.leg.br",
+    "url": "https://www.camara.leg.br/noticias/1290742-projeto-preve-avaliacao-de-risco-de-feminicidio-durante-atendimento-a-vitimas-de-violencia",
+    "status_code": 200,
+    "elapsed_s": 0.17,
+    "final_url": "https://www.camara.leg.br/noticias/1290742-projeto-preve-avaliacao-de-risco-de-feminicidio-durante-atendimento-a-vitimas-de-violencia",
+    "content_length": 73009,
+    "html_file": "html/camara.leg.br/d988babfe7.html",
+    "error": null
+  },
+  {
+    "domain": "camara.leg.br",
+    "url": "https://www.camara.leg.br/noticias/1285520-projeto-protege-sigilo-do-local-de-trabalho-de-servidoras-com-medida-protetiva",
+    "status_code": 500,
+    "elapsed_s": 0.21,
+    "final_url": "https://www.camara.leg.br/noticias/1285520-projeto-protege-sigilo-do-local-de-trabalho-de-servidoras-com-medida-protetiva",
+    "content_length": 31713,
+    "html_file": null,
+    "error": "HTTP 500"
+  },
+  {
+    "domain": "camara.leg.br",
+    "url": "https://www.camara.leg.br/noticias/1293099-retrospectiva-deputados-aprovaram-minirreforma-eleitoral-no-primeiro-semestre-deste-ano",
+    "status_code": 200,
+    "elapsed_s": 0.09,
+    "final_url": "https://www.camara.leg.br/noticias/1293099-retrospectiva-deputados-aprovaram-minirreforma-eleitoral-no-primeiro-semestre-deste-ano",
+    "content_length": 60604,
+    "html_file": "html/camara.leg.br/24077eb392.html",
+    "error": null
+  },
+  {
+    "domain": "senado.leg.br",
+    "url": "https://www12.senado.leg.br/noticias/materias/2026/07/24/eleicoes-o-que-e-permitido-e-o-que-e-proibido-nas-redes-sociais",
+    "status_code": 200,
+    "elapsed_s": 0.61,
+    "final_url": "https://www12.senado.leg.br/noticias/materias/2026/07/24/eleicoes-o-que-e-permitido-e-o-que-e-proibido-nas-redes-sociais",
+    "content_length": 60482,
+    "html_file": "html/senado.leg.br/b5f19420c8.html",
+    "error": null
+  },
+  {
+    "domain": "senado.leg.br",
+    "url": "https://www12.senado.leg.br/noticias/materias/2026/07/24/lei-autoriza-venda-de-spray-de-pimenta-para-seguranca-das-mulheres",
+    "status_code": 200,
+    "elapsed_s": 0.25,
+    "final_url": "https://www12.senado.leg.br/noticias/materias/2026/07/24/lei-autoriza-venda-de-spray-de-pimenta-para-seguranca-das-mulheres",
+    "content_length": 53652,
+    "html_file": "html/senado.leg.br/b55bf207d4.html",
+    "error": null
+  },
+  {
+    "domain": "stf.jus.br",
+    "url": "https://noticias.stf.jus.br/postsnoticias/stf-revoga-medidas-cautelares-impostas-a-investigados-por-envolvimento-com-grupos-criminosos-violentos-no-rj",
+    "status_code": 200,
+    "elapsed_s": 0.75,
+    "final_url": "https://noticias.stf.jus.br/postsnoticias/stf-revoga-medidas-cautelares-impostas-a-investigados-por-envolvimento-com-grupos-criminosos-violentos-no-rj/",
+    "content_length": 66548,
+    "html_file": "html/stf.jus.br/5056ab61a8.html",
+    "error": null
+  },
+  {
+    "domain": "stf.jus.br",
+    "url": "https://noticias.stf.jus.br/postsnoticias/decisao-do-stf-permite-retomada-da-cobranca-de-iptu-em-teresina",
+    "status_code": 200,
+    "elapsed_s": 0.71,
+    "final_url": "https://noticias.stf.jus.br/postsnoticias/decisao-do-stf-permite-retomada-da-cobranca-de-iptu-em-teresina/",
+    "content_length": 66365,
+    "html_file": "html/stf.jus.br/790c1c06f9.html",
+    "error": null
+  },
+  {
+    "domain": "stf.jus.br",
+    "url": "https://noticias.stf.jus.br/postsnoticias/rede-questiona-falta-de-responsabilizacao-de-parlamentares-por-emendas-impositivas",
+    "status_code": 200,
+    "elapsed_s": 1.17,
+    "final_url": "https://noticias.stf.jus.br/postsnoticias/rede-questiona-falta-de-responsabilizacao-de-parlamentares-por-emendas-impositivas/",
+    "content_length": 65095,
+    "html_file": "html/stf.jus.br/7aea31a431.html",
+    "error": null
+  },
+  {
+    "domain": "tse.jus.br",
+    "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Julho/manual-do-eleitor-entenda-como-vai-funcionar-a-biometria-nas-eleicoes-2026",
+    "status_code": 200,
+    "elapsed_s": 0.1,
+    "final_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Julho/manual-do-eleitor-entenda-como-vai-funcionar-a-biometria-nas-eleicoes-2026",
+    "content_length": 138249,
+    "html_file": "html/tse.jus.br/ba856bdd0e.html",
+    "error": null
+  },
+  {
+    "domain": "tse.jus.br",
+    "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Julho/justica-eleitoral-completa-94-anos-de-atuacao-na-paraiba",
+    "status_code": 200,
+    "elapsed_s": 0.1,
+    "final_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Julho/justica-eleitoral-completa-94-anos-de-atuacao-na-paraiba",
+    "content_length": 124184,
+    "html_file": "html/tse.jus.br/59b6d12ea5.html",
+    "error": null
+  },
+  {
+    "domain": "tse.jus.br",
+    "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Abril/justica-eleitoral-conclui-atualizacao-tecnologica-dos-portais-reforcando-modernizacao-e-seguranca",
+    "status_code": 200,
+    "elapsed_s": 0.07,
+    "final_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Abril/justica-eleitoral-conclui-atualizacao-tecnologica-dos-portais-reforcando-modernizacao-e-seguranca",
+    "content_length": 139737,
+    "html_file": "html/tse.jus.br/bdd4b48d4b.html",
+    "error": null
+  },
+  {
+    "domain": "ibge.gov.br",
+    "url": "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47613-ibge-participa-da-78-reuniao-anual-da-sbpc-e-convida-publico-a-conhecer-suas-atividades",
+    "status_code": 403,
+    "elapsed_s": 0.15,
+    "final_url": "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47613-ibge-participa-da-78-reuniao-anual-da-sbpc-e-convida-publico-a-conhecer-suas-atividades",
+    "content_length": 6406,
+    "html_file": null,
+    "error": "HTTP 403"
+  },
+  {
+    "domain": "ibge.gov.br",
+    "url": "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47506-cumprimento-a-legislacao-eleitoral-a-partir-de-4-de-julho",
+    "status_code": 403,
+    "elapsed_s": 0.11,
+    "final_url": "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47506-cumprimento-a-legislacao-eleitoral-a-partir-de-4-de-julho",
+    "content_length": 6274,
+    "html_file": null,
+    "error": "HTTP 403"
+  },
+  {
+    "domain": "who.int",
+    "url": "https://www.who.int/news/item/02-07-2026-who-adds-first-diagnostic-test-for-ebola-bundibugyo-virus-to-its-emergency-use-listing",
+    "status_code": 200,
+    "elapsed_s": 0.13,
+    "final_url": "https://www.who.int/news/item/02-07-2026-who-adds-first-diagnostic-test-for-ebola-bundibugyo-virus-to-its-emergency-use-listing",
+    "content_length": 104171,
+    "html_file": "html/who.int/2f0917eb08.html",
+    "error": null
+  },
+  {
+    "domain": "who.int",
+    "url": "https://www.who.int/news/item/03-02-2026-who-launches-2026-appeal-to-help-millions-of-people-in-health-emergencies-and-crisis-settings",
+    "status_code": 200,
+    "elapsed_s": 0.15,
+    "final_url": "https://www.who.int/news/item/03-02-2026-who-launches-2026-appeal-to-help-millions-of-people-in-health-emergencies-and-crisis-settings",
+    "content_length": 96232,
+    "html_file": "html/who.int/5c6a4d2931.html",
+    "error": null
+  }
+]

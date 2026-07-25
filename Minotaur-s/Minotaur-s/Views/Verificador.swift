@@ -61,7 +61,6 @@ struct VerificadorView: View {
     private let trustedDomains: Set<String> = [
         "g1.globo.com",
         "oglobo.globo.com",
-        "uol.com.br",
         "folha.uol.com.br",
         "estadao.com.br",
         "cnnbrasil.com.br",
@@ -78,20 +77,17 @@ struct VerificadorView: View {
         "otempo.com.br",
         "band.uol.com.br",
         "ge.globo.com",
-        "espn.com.br",
         "aosfatos.org",
         "lupa.uol.com.br",
         "bbc.com",
         "dw.com",
         "elpais.com",
-        "reuters.com",
         "apnews.com",
         "gov.br",
         "camara.leg.br",
         "senado.leg.br",
         "stf.jus.br",
         "tse.jus.br",
-        "ibge.gov.br",
         "who.int"
     ]
 

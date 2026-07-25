@@ -130,9 +130,10 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 | Conversão de modelos | Python + `coremltools` + `transformers` (offline, fora do app) |
 
 ### 3.2 Modelos de ML
-- Modelo de embeddings: `sentence-transformers/all-MiniLM-L6-v2` (ou equivalente), convertido para `.mlpackage`.
-- Modelo NLI: modelo tipo `bart-large-mnli` / `roberta-large-mnli`, convertido para `.mlpackage` e quantizado (INT8 ou palettização).
-- Suporte a português: [EM ABERTO] — modelos citados são majoritariamente treinados em inglês. É necessário validar desempenho em PT-BR ou selecionar alternativas multilíngues (ex: variantes XNLI / paraphrase-multilingual).
+- Modelo de embeddings: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, convertido para `.mlpackage` e quantizado INT8 (113 MB). Ver DT-18.
+- Modelo NLI: `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli`, convertido para `.mlpackage` e quantizado INT8 (**103 MB**). Roda on-device com `computeUnits = .cpuOnly` como configuração padrão — o shape de sequência dinâmico (`RangeDim`) não aproveita bem a ANE, e `.cpuOnly` mediu mais rápido que `.all` neste modelo em device físico (2,0 ms vs. 10,5 ms). Ver DT-18 e spike 02c.
+- Tamanho combinado (embeddings + NLI): 113 MB + 103 MB = **216 MB INT8**, dentro do alvo NF-05 (<500 MB).
+- Suporte a português: modelo de embeddings confirmado (spikes 01, 02). Modelo de NLI adotado (MiniLMv2-L6) atingiu **90% (18/20)** no dataset de validação PT-BR do Spike 1 — abaixo dos 100% (20/20) do `mDeBERTa-v3-base-xnli`, testado antes mas descartado por **não executar em Core ML on-device** (crash/erro em todas as configurações de `computeUnits` testadas — ver Spike 2 e DT-18). Essa diferença de acurácia (~90% vs. 100%) é uma limitação aceita conscientemente em troca de um modelo que de fato roda em device; fica registrada aqui para não se perder. Ver spike 02c.
 - Ambos os modelos são embarcados no bundle do app. Nenhum download de modelo em runtime nesta fase.
 
 ### 3.3 Performance
@@ -296,6 +297,7 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 | DT-15 | `Verificador.swift` atual é destruído e reconstruído do zero na parte de lógica/análise | Implementação atual (artigo inteiro para `FoundationModels`) erra com frequência; não é base confiável para evolução incremental |
 | DT-16 | Design visual/estrutura de UI da tela atual pode ser reaproveitado quando razoável | Não há problema identificado na UI, só na lógica de verificação; evita retrabalho desnecessário |
 | DT-17 | A nova lógica deve ser separada em arquivo(s) próprio(s), não deve viver inteira em `Verificador.swift` | O problema original inclui estar "totalmente implementada no mesmo arquivo"; separar responsabilidades (busca, extração, embeddings, NLI, agregação) evita repetir esse defeito estrutural |
+| DT-18 (revisada) | Modelo de embeddings `paraphrase-multilingual-MiniLM-L12-v2` (INT8, 113 MB) e modelo NLI `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli` (INT8, 103 MB), rodando em `computeUnits = .cpuOnly` | A decisão anterior (`mDeBERTa-v3-base-xnli` com `XSoftmax` patchado) foi abandonada: o modelo convertia para Core ML e batia os logits com o PyTorch original (cos=1,0), mas **não executava uma única inferência em nenhum ambiente de device testado** — crash MPSGraph em `.all`, erro BNNS em `.cpuOnly`, trava no simulador (Spike 2). O `MiniLMv2-L6` substitui porque **executa** em device físico real com logits corretos (cos=1,0) tanto em `.cpuOnly` quanto em `.all`, é o menor e mais rápido entre os candidatos que passaram nesse teste (103 MB, 2 ms em device), e atinge 18/20 (90%) em PT-BR no dataset do Spike 1 — abaixo do 100% do mDeBERTa, mas o único caminho comprovadamente executável em device até agora. Ver spikes/02-coreml-latencia, spikes/02c-nli-executavel |
 
 ---
 
@@ -326,7 +328,7 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 
 ### 7.3 Pontos em aberto (bloqueiam decisões de implementação)
 
-1. **[EM ABERTO]** Modelos específicos com suporte comprovado a PT-BR (embeddings e NLI).
+1. ~~Modelos específicos com suporte comprovado a PT-BR~~ — resolvido: `paraphrase-multilingual-MiniLM-L12-v2` (embeddings) + `mDeBERTa-v3-base-xnli` patchado (NLI). Ver DT-18.
 2. ~~Provedor de busca~~ — decidido: scraping de `html.duckduckgo.com` (DT-11 revisada).
 3. **[EM ABERTO]** Como proteger a chave de API sem backend próprio.
 4. ~~Composição inicial e critério editorial da allowlist~~ — resolvido: reaproveita o conteúdo já existente em `trustedDomains` (RF-03.1). Formato de armazenamento é livre (RF-03.2).
@@ -334,7 +336,7 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 6. **[EM ABERTO]** Limiar mínimo de similaridade de cosseno para selecionar chunks.
 7. **[EM ABERTO]** Limiar mínimo de confiança do NLI para aceitar um rótulo.
 8. **[EM ABERTO]** Regra de desempate na agregação quando há neutros misturados.
-9. **[EM ABERTO]** Versão mínima do iOS — a resolver por spike técnico (RD-01), não por suposição.
+9. **[EM ABERTO]** Versão mínima do iOS — verificado empiricamente que o pipeline (embeddings + NLI `MiniLMv2-L6`) executa com sucesso em **iOS 18.6** (simulador) e **iOS 26.3.1** (device físico, iPhone 16) — ver Spike 2c. **Não foi possível testar iOS 16 nem 17** nesta rodada: o ambiente Xcode disponível só oferece download de runtimes de simulador iOS 18.6 e 26.x, não é uma escolha de projeto. Não há evidência de que o pipeline funcione (ou falhe) em iOS 16/17, então o item permanece aberto — não deve ser fixado em iOS 18 nem assumido como compatível com 16/17 sem teste real nessas versões.
 10. ~~Mecanismo de persistência local~~ — resolvido: não há persistência de verificações nesta feature (ver Fora de Escopo, seção 5).
 11. **[EM ABERTO]** Viabilidade do tamanho do app após quantização; plano B se exceder o alvo.
 12. **[EM ABERTO]** Política de conformidade com `robots.txt`.

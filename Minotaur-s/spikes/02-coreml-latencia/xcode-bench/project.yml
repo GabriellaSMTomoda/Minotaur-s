@@ -1,15 +1,14 @@
-# Projeto de MEDIÇÃO (não é o app principal). Gera um app iOS mínimo que
-# carrega os .mlpackage do Spike 2 e mede a latência de inferência.
+# Projeto de MEDIÇÃO (não é o app principal). App iOS mínimo que carrega os
+# .mlpackage dos candidatos NLI do Spike 2c e, para cada um, roda .predict()
+# em device verificando se os logits batem com a referência PyTorch (Filtro 2).
 #
 # Uso:
-#   1) Rode as conversões (convert_embeddings.py / convert_nli.py) — os
-#      .mlpackage ficam em ../build/.
+#   1) Rode ../../02c-nli-executavel/convert_and_reference.py (gera os
+#      .mlpackage INT8 + manifest.json em ../../02c-nli-executavel/build/).
 #   2) xcodegen generate   (dentro desta pasta)
-#   3) Abra CoreMLBench.xcodeproj, selecione um iPhone REAL e rode.
+#   3) Rode em simulador iOS 18.6 e em iPhone físico (ver run_bench.sh).
 #
-# Os .mlpackage em ../build são adicionados ao target; o Xcode os compila
-# para .mlmodelc automaticamente. São `optional` para o projeto gerar mesmo
-# antes de os modelos existirem.
+# Env opcionais (isolam crashes): BENCH_MODEL=<short> BENCH_UNITS=all|cpuOnly.
 name: CoreMLBench
 options:
   bundleIdPrefix: com.spike.coremlbench
@@ -20,10 +19,19 @@ targets:
     deploymentTarget: "16.0"
     sources:
       - path: Sources
-      - path: ../build/Embeddings_int8.mlpackage
+      - path: ../../02c-nli-executavel/build/manifest.json
         buildPhase: resources
         optional: true
-      - path: ../build/NLI_int8.mlpackage
+      - path: ../../02c-nli-executavel/build/L6_int8.mlpackage
+        buildPhase: resources
+        optional: true
+      - path: ../../02c-nli-executavel/build/L12_int8.mlpackage
+        buildPhase: resources
+        optional: true
+      - path: ../../02c-nli-executavel/build/symanto_int8.mlpackage
+        buildPhase: resources
+        optional: true
+      - path: ../../02c-nli-executavel/build/erniem_int8.mlpackage
         buildPhase: resources
         optional: true
     settings:
