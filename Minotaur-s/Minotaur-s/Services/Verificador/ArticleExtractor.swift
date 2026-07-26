@@ -22,7 +22,9 @@ import SwiftSoup
 ///
 /// Pontuar blocos por quanto texto real eles carregam é imune às três: nenhuma delas muda a
 /// densidade de texto do bloco que de fato contém a matéria.
-struct ArticleExtractor {
+/// `Sendable` porque a extração dos artigos roda em paralelo, uma tarefa por fonte (RF-05.6):
+/// o único campo é imutável e a `URLSession` já é segura entre threads.
+struct ArticleExtractor: Sendable {
 
     /// Mínimo de caracteres para o texto ser considerado utilizável (RF-05.3 / CA-05).
     /// Abaixo disso: paywall, conteúdo via JavaScript, ou falha de extração.

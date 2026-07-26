@@ -13,7 +13,9 @@ import Foundation
 /// chamada vai para um proxy serverless (Cloudflare Workers) que injeta a chave e repassa a
 /// resposta (NF-09 / DT-21). Chave embarcada no binário é extraível por engenharia reversa,
 /// então o proxy é a única proteção real. O código do Worker está em `proxy/`.
-struct TavilySearchService {
+/// `Sendable` porque o coordenador o usa de dentro de tarefas concorrentes: os dois campos são
+/// imutáveis e a `URLSession` já é segura entre threads.
+struct TavilySearchService: Sendable {
 
     /// URL do Worker que faz o proxy da Tavily.
     ///
