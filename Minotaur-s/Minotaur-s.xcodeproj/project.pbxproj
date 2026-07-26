@@ -81,6 +81,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0017FEA12E65C82200DF2FC5 /* Intents */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Intents; sourceTree = "<group>"; };
+		6FD2CC67DB918E3213E5A524 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXGroup section */
@@ -110,6 +111,7 @@
 		38F290B2CC4D5DD2E59FB30F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6FD2CC67DB918E3213E5A524 /* Verificador */,
 				0017FF222E68692F00DF2FC5 /* QuestionSession.swift */,
 				0017FE9F2E65C4FE00DF2FC5 /* Question.swift */,
 				9C88C837C02BD4C80FFF837B /* Fact.swift */,
@@ -227,6 +229,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				0017FEA12E65C82200DF2FC5 /* Intents */,
+				6FD2CC67DB918E3213E5A524 /* Verificador */,
 			);
 			name = "Minotaur-s";
 			packageProductDependencies = (

@@ -57,40 +57,6 @@ struct VerificadorView: View {
     // Chave da API Google Fact Check Tools
     private let factCheckAPIKey: String? = "AIzaSyAXdwJ8ydNZgDLpH1CjD04j21Z8ag5qKFM"
 
-    // Lista de domínios confiáveis
-    private let trustedDomains: Set<String> = [
-        "g1.globo.com",
-        "oglobo.globo.com",
-        "folha.uol.com.br",
-        "estadao.com.br",
-        "cnnbrasil.com.br",
-        "veja.abril.com.br",
-        "valor.globo.com",
-        "exame.com",
-        "r7.com",
-        "terra.com.br",
-        "metropoles.com",
-        "poder360.com.br",
-        "gzh.com.br",
-        "correiobraziliense.com.br",
-        "agenciabrasil.ebc.com.br",
-        "otempo.com.br",
-        "band.uol.com.br",
-        "ge.globo.com",
-        "aosfatos.org",
-        "lupa.uol.com.br",
-        "bbc.com",
-        "dw.com",
-        "elpais.com",
-        "apnews.com",
-        "gov.br",
-        "camara.leg.br",
-        "senado.leg.br",
-        "stf.jus.br",
-        "tse.jus.br",
-        "who.int"
-    ]
-
     var body: some View {
         NavigationStack {
             ScrollView{
@@ -465,7 +431,7 @@ struct VerificadorView: View {
 
     private func evaluateEvidence(from results: [WebSearchResult]) async -> Verdict {
         // Filtra apenas resultados em domínios confiáveis
-        let trusted = results.filter { trustedDomains.contains($0.host) }
+        let trusted = results.filter { TrustedDomain.allowlist.contains($0.host) }
         if trusted.isEmpty {
             return .unverified
         }
