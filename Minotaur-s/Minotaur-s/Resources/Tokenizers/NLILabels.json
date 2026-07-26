@@ -1,0 +1,7 @@
+{
+  "id2label": {
+    "0": "entailment",
+    "1": "neutral",
+    "2": "contradiction"
+  }
+}

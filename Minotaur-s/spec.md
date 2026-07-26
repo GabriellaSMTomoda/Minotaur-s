@@ -45,11 +45,11 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 
 ### RF-02 — Geração da query de busca
 - RF-02.1 — Se a entrada tiver mais de 200 caracteres, o app deve extrair uma query reduzida (palavras-chave) em vez de enviar o texto inteiro ao buscador.
-- RF-02.2 — Estratégia de extração de palavras-chave: [EM ABERTO] — opções consideradas: (a) remoção de stopwords + top-N termos por frequência, (b) primeiras N palavras da afirmação, (c) modelo local leve.
+- RF-02.2 — Estratégia definitiva: extrair a primeira frase da afirmação, truncada em 200 caracteres. Resolvido — descartado o saco-de-palavras: os vazamentos de domínio observados no Spike 5 concentraram-se em buscas dominadas por termo genérico isolado. Ver DT-22.
 - RF-02.3 — A query deve ser restrita aos domínios da allowlist usando o parâmetro `include_domains` da API de busca (Tavily), com a lista completa de domínios em uma única chamada. Não é necessário construir `site:`/`OR` manualmente — a restrição é nativa da API.
 
 ### RF-03 — Allowlist de domínios confiáveis
-- RF-03.1 — A composição da lista de domínios confiáveis já existe hoje como `trustedDomains`, em `VerificadorView`, e deve ser preservada como fonte da verdade do conteúdo, **com uma exceção autorizada**: os 4 domínios identificados no Spike 3 como bloqueados por bot-blocking (`uol.com.br`, `espn.com.br`, `reuters.com`, `ibge.gov.br` — HTTP 401/403/202 vazio, não é falha de extração) devem ser **removidos** da lista. Fora dessa exceção, nenhum outro domínio é adicionado ou removido nesta reconstrução.
+- RF-03.1 — A composição da lista de domínios confiáveis já existe hoje como `trustedDomains`, em `VerificadorView`, e deve ser preservada como fonte da verdade do conteúdo, **com uma exceção autorizada**: os 4 domínios identificados no Spike 3 como bloqueados por bot-blocking (`uol.com.br`, `espn.com.br`, `reuters.com`, `ibge.gov.br` — HTTP 401/403/202 vazio, não é falha de extração) devem ser **removidos** da lista. Fora dessa exceção, nenhum outro domínio é adicionado ou removido nesta reconstrução. **Correção técnica adicional (Fase 3):** 4 entradas tinham o valor de `domain` desatualizado em relação ao host real que serve o conteúdo (`band.uol.com.br`→`www.band.com.br`, `lupa.uol.com.br`→`www.agencialupa.org`, `gzh.com.br`→`gauchazh.clicrbs.com.br`, e o veículo da Agência Gov, que precisou de **entrada própria** `agenciagov.ebc.com.br` — não casa por sufixo com a entrada existente `agenciabrasil.ebc.com.br` (achado só na integração real, Fase 3). A lista final tem **31 strings para os mesmos 30 veículos** (a Agência Gov agora tem 2 entradas). Não é nova curadoria, é correção de bug de correspondência que impedia essas fontes de retornar qualquer artigo via `include_domains`. Ver DT-28.
 - RF-03.2 — O formato de armazenamento/estrutura de dados é livre para a reconstrução — não precisa continuar como propriedade da `VerificadorView`. Fica a critério da implementação (ex: struct/enum dedicado, arquivo JSON no bundle, etc.), desde que a lógica de verificação (busca, filtragem, extração) não dependa de acessar a `View` para obter os domínios.
 - RF-03.3 — Cada domínio precisa continuar identificável por seu `domain` (string usada no filtro/`site:`). Campos adicionais (`displayName`, `enabled`, etc.) podem ser adicionados na migração se ajudarem a estrutura, mas não são obrigatórios caso não existam hoje.
 - RF-03.4 — Nesta fase, a lista **não é editável pelo usuário** e não é atualizada remotamente — apenas migrada de lugar/formato, não de conteúdo.
@@ -62,11 +62,12 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 - RF-04.3 — O app solicita 8–10 resultados por verificação à API (`max_results`), aplica o filtro de allowlist (RF-03.5) e trunca para os 5 primeiros resultados dentro da allowlist. Pedir mais resultados do que o necessário e truncar depois do filtro reduz a taxa de vazamento observada no Spike 5 (evidência: a mesma busca que vazou 4/5 com `max_results=5` retornou 10/10 dentro da allowlist com `max_results=10`).
 - RF-04.4 — Se nenhum resultado for retornado, o app exibe o veredito `NÃO ENCONTRADO` (ver RF-08) sem executar as etapas seguintes.
 - RF-04.5 — Falha de rede na busca deve produzir mensagem de erro distinta de "não encontrado".
+- RF-04.6 — Em caso de erro HTTP 5xx ou timeout na chamada de busca, o app tenta **uma única vez adicional** antes de reportar falha (RF-10). Erros 401/429 nunca são reafetados. Resolvido — ver DT-27. Retry por artigo individual permanece em aberto (item 14 da seção 7.3).
 
 ### RF-05 — Download e extração do conteúdo do artigo
 - RF-05.1 — Para cada URL aprovada, o app baixa o HTML via `URLSession`.
-- RF-05.2 — O app extrai o texto principal do artigo, descartando menu, rodapé, anúncios, comentários e blocos de "leia também".
-- RF-05.3 — Se o texto extraído tiver menos de 200 caracteres, a fonte é considerada inválida e descartada (indica paywall, conteúdo via JavaScript ou falha de extração).
+- RF-05.2 — O app extrai o texto principal do artigo, descartando menu, rodapé, anúncios, comentários e blocos de "leia também". Abordagem definitiva: porte de algoritmo tipo Readability sobre SwiftSoup (pontuação por densidade de texto por bloco), não heurística por denylist simples. Ver DT-23, resolve item aberto 15.
+- RF-05.3 — Se o texto extraído tiver menos de 200 caracteres, o app usa como fallback o campo `content` (snippet) retornado pela Tavily para aquela URL; só se esse fallback também tiver menos de 200 caracteres a fonte é considerada inválida e descartada (indica paywall, conteúdo via JavaScript ou falha de extração). O `content` da Tavily nunca substitui a extração própria quando esta é bem-sucedida — é usado apenas como último recurso. Ver DT-23, resolve item aberto 16.
 - RF-05.4 — Timeout de 8 segundos por artigo. Artigo que estourar o timeout é descartado sem abortar o fluxo.
 - RF-05.5 — Artigos que exigem renderização de JavaScript não são suportados nesta fase e serão descartados por RF-05.3.
 - RF-05.6 — Todo o processamento de rede ocorre em paralelo entre artigos, não em série.
@@ -78,14 +79,14 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 - RF-06.4 — A afirmação do usuário é convertida no mesmo espaço vetorial.
 - RF-06.5 — O app calcula similaridade de cosseno entre a afirmação e cada chunk.
 - RF-06.6 — Os **top 3 chunks** de maior similaridade seguem para a etapa de NLI. Chunks com similaridade abaixo de um limiar mínimo são descartados.
-- RF-06.7 — Valor do limiar mínimo de similaridade: [EM ABERTO] — a calibrar empiricamente.
+- RF-06.7 — Valor definitivo do limiar mínimo de similaridade: **0,25** (cosseno). Calibrado a partir dos dados de similaridade por par do Spike 2c: pares decisivos (entailment/contradiction reais) variaram de 0,31 a 0,86; pares neutros ficaram em 0,09–0,17 (um outlier em 0,58). 0,25 preserva 15/15 pares decisivos e descarta 4/5 neutros do dataset. A validar num spike adicional sobre chunks de artigo real antes do lançamento. Ver DT-24.
 
 ### RF-07 — Pipeline de análise: NLI
 - RF-07.1 — Para cada chunk selecionado, executar o modelo NLI on-device com `premissa = chunk` e `hipótese = afirmação do usuário`.
 - RF-07.2 — A saída do modelo é a distribuição de probabilidade entre `entailment`, `contradiction` e `neutral`.
-- RF-07.3 — O resultado por artigo é o rótulo com maior probabilidade entre todos os chunks daquele artigo, com o respectivo score.
+- RF-07.3 — **Resolvido nesta fase (leitura literal original não funciona — ver DT-29).** O resultado por artigo é determinado assim: entre os chunks selecionados (RF-06.6), **neutro não compete pela vitória do artigo**. O rótulo do artigo é o maior score entre `entailment` e `contradiction` (acima do limiar de RF-07.5) encontrado em qualquer chunk daquele artigo; só quando nenhum chunk produzir `entailment` ou `contradiction` acima do limiar o rótulo do artigo é `neutral`.
 - RF-07.4 — Rótulos com confiança abaixo de um limiar mínimo são rebaixados para `neutral`.
-- RF-07.5 — Valor do limiar mínimo de confiança do NLI: [EM ABERTO] — a calibrar empiricamente.
+- RF-07.5 — Valor definitivo do limiar mínimo de confiança do NLI: **0,50**. O único "erro perigoso" observado no MiniLMv2-L6 (Spike 1) teve confiança 0,66 — mesma faixa de um entailment correto, então nenhum limiar global de confiança isola esse caso sozinho; o par em questão tinha similaridade 0,09, abaixo do piso da RF-06.7, que o filtra antes de chegar ao NLI. Os dois limiares (RF-06.7 e RF-07.5) resolvem esse risco em conjunto. Ver DT-25.
 
 ### RF-08 — Agregação e veredito final
 - RF-08.1 — O veredito é agregado a partir dos rótulos por artigo, segundo as regras:
@@ -95,7 +96,7 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
   - Todas `neutral` → `SEM INFORMAÇÃO SUFICIENTE`
   - Empate entre `entailment` e `contradiction` → `FONTES DIVERGENTES`
 - RF-08.2 — O veredito nunca usa linguagem de verdade absoluta ("verdadeiro"/"falso"). Sempre referencia as fontes.
-- RF-08.3 — Regra de desempate quando há empate parcial com neutros presentes: [EM ABERTO]
+- RF-08.3 — Regra de desempate definitiva: neutro não participa da votação. Sejam E = nº de fontes com rótulo `entailment` e C = nº de fontes com rótulo `contradiction` (após RF-07.4): E+C=0 → `NÃO ENCONTRADO`/`SEM_INFORMACAO` conforme o caso; E>C → `CONFIRMADO`; C>E → `CONTRADITO`; E=C>0 → `DIVERGENTES`. Fecha todos os casos de RF-08.1 sem introduzir veredito novo. Ver DT-26. **Decisão de produto explícita: sem piso mínimo de fontes válidas** — 1 fonte válida já é suficiente para emitir um veredito diferente de `NÃO ENCONTRADO`.
 
 ### RF-09 — Tela de resultado
 *(Nota: o layout/design visual atual da tela de resultado pode ser reaproveitado onde fizer sentido — ver seção 0 e DT-15. Os requisitos abaixo descrevem o que a tela deve exibir, não como deve ser desenhada.)*
@@ -129,6 +130,8 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 | Álgebra vetorial | Accelerate framework (similaridade de cosseno) |
 | Conversão de modelos | Python + `coremltools` + `transformers` (offline, fora do app) |
 | Proxy de API (proteção de chave) | Cloudflare Workers (serverless, tier gratuito) — ver DT-21 |
+
+Versões fixadas na integração real (Fase 3, DT-30): SwiftSoup 2.9.6; `swift-transformers` 1.3.3 (produto `Tokenizers`).
 
 ### 3.2 Modelos de ML
 - **Modelo de embeddings (definitivo):** `paraphrase-multilingual-MiniLM-L12-v2`, convertido para `.mlpackage`, quantizado INT8 (~113 MB). Validado em PT-BR no Spike 1; conversão validada no Spike 2 (cos=0,9999 vs. PyTorch); latência em device físico = 7 ms (Spike 2, medição com Xcode completo), bem abaixo de NF-01.
@@ -308,6 +311,16 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 | DT-19 | Solicitar mais resultados da API do que o necessário (8-10) e truncar para 5 depois do filtro de allowlist | Reduz a taxa de vazamento de domínios fora da allowlist observada no Spike 5 (evidência: mesma busca vazou 4/5 com max_results=5, mas retornou 10/10 corretos com max_results=10) |
 | DT-20 | Domínios `*.gov.br` na allowlist continuam validando por sufixo, incluindo subdomínios de prefeituras/órgãos menores, não só o portal federal | Decisão consciente do stakeholder: simplicidade da regra de correspondência sobrepõe o risco de incluir órgãos públicos menores, que ainda são fontes governamentais legítimas |
 | DT-21 | Proteção da chave da Tavily via proxy serverless (Cloudflare Workers) | Chave embarcada no binário é extraível por engenharia reversa (consenso técnico, inclusive de post do DTS da Apple); proxy é a única proteção real. Cloudflare Workers: tier gratuito de 100.000 req/dia, sem custo, manutenção mínima (função stateless, não é servidor 24/7 tradicional) — não contradiz o espírito de DT-13 (evitar backend pesado) |
+| DT-22 | `SearchQueryBuilder`: primeira frase da afirmação, truncada em 200 caracteres | Saco-de-palavras testado empiricamente (Spike 5) concentra os vazamentos de domínio em termo genérico isolado; primeira frase preserva contexto sintático da afirmação |
+| DT-23 | `ArticleExtractor`: porte tipo Readability sobre SwiftSoup (pontuação por bloco), com o campo `content` da Tavily como fallback — nunca substituto — quando a extração própria resultar em <200 chars | Pontuação por bloco resolve armadilhas do Spike 3 que a heurística por denylist não cobria; fallback resgata fontes com extração difícil sem enfraquecer RF-05.3 como regra padrão |
+| DT-24 | Limiar de similaridade de cosseno: 0,25 | Calibrado com dados reais de similaridade por par do Spike 2c (pares decisivos 0,31–0,86; neutros 0,09–0,17) |
+| DT-25 | Limiar de confiança do NLI: 0,50 | Único erro perigoso do MiniLMv2-L6 tinha confiança 0,66, mas similaridade 0,09 — já filtrado pelo piso da DT-24 antes de chegar ao NLI |
+| DT-26 | Regra de desempate na agregação (RF-08.3): neutro não vota; E>C→CONFIRMADO, C>E→CONTRADITO, E=C>0→DIVERGENTES, E+C=0→NÃO_ENCONTRADO/SEM_INFORMACAO conforme o caso. **Sem piso mínimo de fontes válidas** | Fecha RF-08.3 sem introduzir veredito novo; decisão de produto explícita de não exigir mínimo de fontes válidas para emitir veredito |
+| DT-27 | Retry: uma tentativa extra apenas na chamada de busca (Tavily), para erro 5xx e timeout, nunca para 401/429. Retry por artigo individual permanece em aberto (item 14) | Erro transitório de rede na busca é ponto único de falha para toda a verificação; retry por artigo é decisão de fase futura (RF-05) |
+| DT-28 | 4 entradas da allowlist corrigidas para o host real que serve o conteúdo (`band.uol.com.br`→`www.band.com.br`, `lupa.uol.com.br`→`www.agencialupa.org`, `gzh.com.br`→`gauchazh.clicrbs.com.br`, Agência Gov ganha entrada própria `agenciagov.ebc.com.br` além de `agenciabrasil.ebc.com.br`). Lista final: 31 strings para 30 veículos. `AllowlistFilter` normaliza o prefixo `www.` dos dois lados da comparação (domínio armazenado e host do resultado) | Correção de bug de correspondência (Fase 3): o valor antigo nunca bateria via `include_domains`/sufixo; mesmos 30 veículos representados, sem nova curadoria |
+| DT-29 | RF-07.3 — regra de vitória do rótulo por artigo: neutro não compete quando algum chunk produz `entailment`/`contradiction` acima do limiar (RF-07.5) | Medição real (Fase 3): chunk distrator deu `neutral` 0,9930 e chunk relevante deu `entailment` 0,9883 no mesmo artigo; a leitura literal da RF-07.3 (maior probabilidade entre todos os chunks) escolheria o distrator e rotularia o artigo como neutro. NLI tende a ser extremamente confiante ao declarar neutralidade sobre chunk fora do assunto, e RF-06.6 sempre envia até 3 chunks — sem essa regra, o pipeline colapsaria para SEM_INFORMACAO na maioria dos artigos reais |
+| DT-30 | Dependências SPM integradas: SwiftSoup 2.9.6 e `swift-transformers` 1.3.3 (produto `Tokenizers`) | Nenhuma dependência de terceiros existia no projeto antes da Fase 3; necessárias para RF-05.2 (extração) e RF-06.3/RF-07.1 (tokenização, DT-06). `swift-transformers` traz 12 pacotes transitivos (swift-nio, swift-crypto, EventSource etc.) — peso maior que o esperado, ver item aberto 20 |
+| DT-31 | Modelos Core ML (`.mlpackage`) e assets de tokenizador não são versionados no git; gerados localmente por `export_assets.py` antes do primeiro build | Os pesos (113 MB + 103 MB) excedem o limite de arquivo do GitHub. Quem clonar o repo precisa rodar o script de export antes do primeiro build — documentar isso no README do projeto |
 
 ---
 
@@ -343,21 +356,24 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 2. ~~Provedor de busca~~ — decidido (2ª revisão): **Tavily**, substituindo o DDG por bloqueio sistemático confirmado (DT-11 revisada 2ª vez, evidência no Spike 5).
 3. ~~Como proteger a chave de API da Tavily sem backend próprio~~ — resolvido: proxy serverless via Cloudflare Workers (DT-21). O app chama a URL do Worker, nunca a Tavily diretamente nem embarca a chave.
 4. ~~Composição inicial e critério editorial da allowlist~~ — resolvido: reaproveita o conteúdo já existente em `trustedDomains` (RF-03.1). Formato de armazenamento é livre (RF-03.2).
-5. **[EM ABERTO]** Estratégia de extração de palavras-chave para a query de busca.
-6. **[EM ABERTO]** Limiar mínimo de similaridade de cosseno para selecionar chunks.
-7. **[EM ABERTO]** Limiar mínimo de confiança do NLI para aceitar um rótulo.
-8. **[EM ABERTO]** Regra de desempate na agregação quando há neutros misturados.
+5. ~~Estratégia de extração de palavras-chave para a query de busca~~ — resolvido: primeira frase truncada em 200 caracteres (RF-02.2, DT-22).
+6. ~~Limiar mínimo de similaridade de cosseno para selecionar chunks~~ — resolvido: 0,25 (RF-06.7, DT-24).
+7. ~~Limiar mínimo de confiança do NLI para aceitar um rótulo~~ — resolvido: 0,50 (RF-07.5, DT-25).
+8. ~~Regra de desempate na agregação quando há neutros misturados~~ — resolvido (RF-08.3, DT-26).
 9. **[EM ABERTO]** Versão mínima do iOS — a resolver por spike técnico (RD-01), não por suposição.
 10. ~~Mecanismo de persistência local~~ — resolvido: não há persistência de verificações nesta feature (ver Fora de Escopo, seção 5).
 11. **[EM ABERTO]** Viabilidade do tamanho do app após quantização; plano B se exceder o alvo.
 12. **[EM ABERTO]** Política de conformidade com `robots.txt`.
-13. **[EM ABERTO]** Existência de dataset de validação em PT-BR para calibrar os limiares acima.
-14. **[EM ABERTO]** Retry em caso de erro HTTP 5xx transiente de um artigo (RF-05.4 só cobre timeout, não erro explícito seguido de possível sucesso em nova tentativa) — achado no Spike 3 (`camara.leg.br`).
-15. **[EM ABERTO]** Biblioteca/abordagem de extração de texto em Swift para RF-05.2 (SwiftSoup + heurística própria vs. porte de algoritmo tipo Readability). O Spike 3 validou viabilidade em Python (`trafilatura` venceu), mas não decide a implementação Swift.
-16. **[EM ABERTO]** Se o campo `content` (snippet) da resposta da Tavily substitui, complementa, ou é ignorado em favor da extração própria via RF-05.1/RF-05.2.
+13. ~~Existência de dataset de validação em PT-BR para calibrar os limiares~~ — resolvido: os dados de similaridade por par do Spike 2c serviram de base para RF-06.7/RF-07.5 (DT-24, DT-25), com validação adicional recomendada em spike futuro sobre chunks de artigo real.
+14. **[PARCIALMENTE EM ABERTO]** Retry em caso de erro HTTP 5xx transiente — resolvido para a chamada de busca (uma tentativa extra, DT-27); retry por artigo individual (achado no Spike 3, `camara.leg.br`) continua em aberto, a tratar na fase de implementação de `ArticleExtractor`/RF-05.
+15. ~~Biblioteca/abordagem de extração de texto em Swift para RF-05.2~~ — resolvido: porte tipo Readability sobre SwiftSoup (RF-05.2, DT-23).
+16. ~~Se o campo `content` da Tavily substitui, complementa, ou é ignorado~~ — resolvido: usado apenas como fallback quando a extração própria falhar (RF-05.3, DT-23).
 17. **[EM ABERTO]** Testar `search_depth="advanced"` da Tavily (2 créditos/chamada) — não avaliado se muda a taxa de vazamento de domínio (RF-03.5) ou a qualidade dos resultados o suficiente para justificar o custo.
 18. **[EM ABERTO]** Formato do erro de cota esgotada e de rate-limit da Tavily (RF-10.2) — não observado nos spikes; só o erro 401 de chave inválida foi documentado.
 19. **[EM ABERTO]** Paywall parcial (artigo com preview aberto + resto bloqueado) não foi testado empiricamente — RF-05.3 provavelmente cobre o caso (texto curto), mas não foi comprovado.
+20. **[EM ABERTO]** Peso das dependências transitivas do `swift-transformers` (12 pacotes: swift-nio, swift-crypto, EventSource etc., ver DT-30) — avaliar se é aceitável ou se compensa isolar/trocar por implementação de tokenizer mais enxuta.
+21. **[EM ABERTO]** Os dois `tokenizer.json` somam 34 MB versionados no repo (checksums diferentes, não deduplicáveis) — avaliar se cabe otimização (ex: strip de metadados) ou se fica assim.
+22. **[EM ABERTO]** Deploy do proxy Cloudflare Workers (DT-21) — o código já existe (3 arquivos), mas não foi implantado. `TavilySearchService.proxyEndpoint` está vazio até o deploy acontecer; é ação do usuário (`wrangler login`/`wrangler deploy`), não do Claude Code.
 
 ### 7.4 Ordem sugerida de validação antes da implementação completa
 

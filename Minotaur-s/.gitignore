@@ -7,3 +7,11 @@ build/
 
 # Ignorar arquivos temporários
 *.xcurserdata
+
+# Modelos Core ML: os weight.bin têm 113 MB e 103 MB, acima do limite de 100 MB por arquivo
+# do GitHub. Reconstituir com ./scripts/sync-models.sh antes do primeiro build.
+Minotaur-s/Resources/Models/
+
+# Dependências do Worker (proxy/), caso alguém rode npm install localmente
+proxy/node_modules/
+proxy/.wrangler/

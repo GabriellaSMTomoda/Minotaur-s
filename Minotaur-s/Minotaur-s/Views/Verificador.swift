@@ -54,8 +54,14 @@ struct VerificadorView: View {
     @State private var isResponding: Bool = false
     @State private var errorMessage: String?
 
-    // Chave da API Google Fact Check Tools
-    private let factCheckAPIKey: String? = "AIzaSyAXdwJ8ydNZgDLpH1CjD04j21Z8ag5qKFM"
+    // Chave da API Google Fact Check Tools.
+    //
+    // O valor estava hardcoded aqui e foi removido: chave em código-fonte é extraível do
+    // binário e já ficou exposta no histórico do git — precisa ser revogada e rotacionada
+    // no Google Cloud Console, e reintroduzida por configuração segura (nunca literal).
+    // Enquanto vazia, `evaluateFactChecks` retorna nil no guard abaixo e o fluxo legado
+    // degrada para a busca web, sem quebrar.
+    private let factCheckAPIKey: String? = ""
 
     var body: some View {
         NavigationStack {
