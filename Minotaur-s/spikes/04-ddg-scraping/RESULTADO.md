@@ -130,7 +130,12 @@ estado exato no momento da parada.
 
 ---
 
-## Recomendação final
+## Recomendação final (consolidada — 2 rodadas)
+
+> Esta seção foi atualizada após uma repetição do teste em dia/horário
+> diferente (ver "Repetição — Rede/Dia Diferente" acima). O texto
+> original abaixo foi mantido como registro histórico da primeira
+> rodada; a consolidação vem em seguida.
 
 **Inviável tal como testado — com ressalva de amostra pequena.**
 
@@ -166,6 +171,131 @@ usuário quando a busca falhar (mitigação já prevista em §7.1); ou (c)
 reabrir a decisão de provedor de busca (DT-11). Não escolhi nenhuma
 dessas por conta própria.
 
+### Consolidação após a 2ª rodada
+
+A opção (a) acima foi executada: repeti o teste em dia/horário diferente
+(ver "Repetição — Rede/Dia Diferente"). O resultado foi **o mesmo
+bloqueio, no mesmo ponto, com corpo de resposta quase byte-idêntico** ao
+da primeira rodada. Isso muda o peso da evidência:
+
+- A explicação "evento pontual de horário" fica **enfraquecida** — o
+  bloqueio ocorreu em horários bem diferentes (noite vs. madrugada) com
+  resultado idêntico.
+- A explicação "coincidência de IP/rede específico" **não foi
+  totalmente descartada** — não tenho registro do tipo de rede da
+  rodada original para comparar com segurança (ver ressalva na seção da
+  repetição). Ainda assim, a reprodução byte-a-byte do corpo de resposta
+  em duas ocasiões distintas é o tipo de evidência que normalmente se
+  associa a bloqueio por fingerprint do cliente HTTP (sistemático),
+  não a triagem de rede pontual.
+- Duas rodadas com o mesmo padrão exato, na primeira requisição de
+  cada uma, é uma amostra maior do que uma — mas **ainda são só 2
+  pontos de dados automatizados**, ambos com o mesmo cliente Python
+  (`requests`) e nenhum teste com `URLSession`/Swift real.
+
+**Minha leitura, sem decidir por você:** a evidência acumulada agora
+aponta **mais para bloqueio sistemático do que para coincidência
+pontual**, o que reduz a plausibilidade da opção (a) [repetir de novo]
+como próximo passo de maior valor — repetir uma terceira vez com o
+mesmo cliente Python tende a só confirmar o mesmo padrão. As opções que
+continuam abertas para você decidir são (b) aceitar o risco e seguir
+com DT-11 revisada, testando o comportamento real em `URLSession`/Swift
+antes de descartar de vez (o fingerprint de bloqueio pode ser
+específico do cliente Python, não necessariamente do app real), ou (c)
+reabrir DT-11 e considerar um provedor alternativo — ver a seção
+"Alternativas ao DuckDuckGo (proposta)" abaixo, que preparei como
+pesquisa comparativa (não como escolha) por essa possibilidade ter
+ficado mais provável após esta repetição.
+
+---
+
+## Alternativas ao DuckDuckGo (proposta)
+
+> Seção adicionada por o padrão de bloqueio ter se repetido na 2ª
+> rodada. Isto é **pesquisa comparativa para sua decisão**, não uma
+> escolha feita, não uma implementação, e não uma alteração de DT-11 no
+> `spec.md`. Nenhuma destas opções foi integrada ao app.
+
+Critérios de avaliação, na ordem de prioridade definida na tarefa: (a)
+risco de rejeição na App Store, (b) custo (gratuito ou quota mínima
+razoável, requisito de DT-11 original), (c) suporte a restringir busca
+à allowlist (equivalente a `site:` sem depender de scraping de HTML),
+(d) estabilidade documentada.
+
+### Opção 1 — Bing Web Search / Bing Search API (via Azure AI Services)
+
+- **Como funciona:** API oficial REST da Microsoft, com Termos de
+  Serviço explícitos; suporta o operador `site:` na própria query, então
+  a restrição por domínio funciona igual ao esquema atual, sem scraping
+  de HTML.
+- **Custo/quota gratuita:** historicamente teve um tier gratuito
+  (~1.000–3.000 transações/mês dependendo do plano); a Microsoft tem
+  descontinuado e reestruturado esses tiers de busca com frequência nos
+  últimos anos — **precisa verificar a oferta vigente no momento da
+  decisão**, não dá para tratar como garantidamente gratuito hoje.
+- **API oficial vs. scraping:** API oficial, com chave e contrato.
+- **App Store:** favorável — é consumo de API de terceiro com ToS claro,
+  padrão comum em apps publicados; exige exibir atribuição
+  ("Resultados por Bing") em alguns planos, o que é positivo para
+  credibilidade e não é um problema de aprovação.
+- **Ressalva:** exige chave de API, o que reabre o ponto **[EM ABERTO]
+  7.3.3** da spec ("como proteger a chave de API sem backend próprio")
+  — hoje não existe porque DT-11 evita ter chave. Adotar esta opção cria
+  uma nova pendência a resolver, não é troca neutra.
+
+### Opção 2 — Brave Search API
+
+- **Como funciona:** API oficial de busca da Brave, com endpoint REST
+  documentado; suporta parâmetros de busca que permitem compor queries
+  restritas por domínio no texto da query (mesmo padrão `site:`).
+- **Custo/quota gratuita:** oferece um tier gratuito com cota mensal
+  limitada (na ordem de milhares de queries/mês em alguns planos
+  divulgados) — **quota exata e disponibilidade de tier gratuito devem
+  ser confirmadas no momento da decisão**, pois programas de API mudam.
+- **API oficial vs. scraping:** API oficial, com chave e contrato,
+  criada especificamente para uso de terceiros (diferente do DDG, que
+  não oferece API de busca pública — só o scraping do HTML voltado a
+  humanos, o que é a raiz do problema atual).
+- **App Store:** favorável — mesmo raciocínio da Opção 1: consumo de API
+  com ToS, sem scraping.
+- **Ressalva:** mesma reabertura do ponto de proteção de chave de API
+  sem backend próprio.
+
+### Opção 3 — Google Programmable Search Engine (Custom Search JSON API)
+
+- **Como funciona:** API oficial do Google; permite restringir a busca
+  a uma lista de sites configurada previamente no "mecanismo de busca
+  programável" (equivalente direto à allowlist — a restrição por
+  domínio fica configurada do lado do Google, não precisa nem montar
+  `site:` `OR` manualmente).
+- **Custo/quota gratuita:** tier gratuito de 100 consultas/dia
+  historicamente divulgado pela Google; acima disso é pago por bloco de
+  consultas. Para uso leve (uma verificação = poucas consultas), pode
+  caber dentro do gratuito, mas **100/dia é um teto baixo se o app tiver
+  uso real** — precisa avaliar se é suficiente para o volume esperado.
+- **API oficial vs. scraping:** API oficial, com chave.
+- **App Store:** favorável — mesmo raciocínio de API com ToS.
+- **Ressalva:** mesma reabertura do ponto de proteção de chave; quota
+  diária mais restritiva que as opções 1 e 2 para um app com uso
+  contínuo.
+
+### Observação comum às três alternativas
+
+Todas trocam "sem chave de API" (vantagem atual de DT-11, ver NF-09) por
+"com chave de API", o que reabre um ponto hoje fechado (7.3.3, "como
+proteger a chave sem backend próprio"). Isso não invalida as opções —
+mas significa que trocar de provedor não é uma mudança isolada: também
+exigiria decidir essa proteção de chave (ex: ofuscação no binário,
+ou aceitar o risco de chave exposta em app client-only com quota
+baixa o suficiente para limitar o dano de abuso). Não pesquisei essa
+parte em profundidade aqui porque está fora do que foi pedido nesta
+tarefa — sinalizo para não se perder.
+
+Nenhuma das três teve teste real (nenhuma requisição foi feita a nenhuma
+delas) — isto é pesquisa de documentação pública, não um spike
+executado. Se você optar por seguir alguma delas, o próximo passo seria
+um novo spike técnico, análogo a este, antes de integrar ao app.
+
 ---
 
 ## O que este spike NÃO fez
@@ -183,6 +313,83 @@ dessas por conta própria.
 - **Não decide o destino de DT-11 nem implementa nenhuma mitigação**
   (cache, retry, mudança de provedor) — apenas relata o que ocorreu.
 - **Não editou `spec.md`** além do que já estava coberto pela Tarefa 1.
+
+---
+
+## Repetição — Rede/Dia Diferente
+
+**Data/hora:** 2026-07-25, ~01:20 (horário local, `-03`) — a rodada
+original foi em 2026-07-24, por volta das 22:04–22:08. Diferença de
+~3h15min e cruzando a virada do dia.
+
+**Objetivo desta repetição:** descartar (ou reforçar) a hipótese de que
+o bloqueio da rodada original foi coincidência pontual de IP/rede,
+rodando exatamente os mesmos scripts (`domains.py`, `queries.py`,
+`search_ddg.py`, sem alteração de lógica) em condições diferentes.
+
+### Condições da rede
+
+- Conexão: Wi-Fi (`en0`), endereço IPv4 privado na faixa `192.168.0.x`
+  (não exponho o IP completo nem o público, conforme instruído).
+- **Limitação honesta desta repetição:** a rodada original não registrou
+  qual rede foi usada (não há esse dado no `RESULTADO.md` original nem
+  nos artefatos salvos). Não é possível confirmar com certeza se esta é
+  uma rede *diferente* da original ou a mesma rede em horário diferente
+  — só posso confirmar a diferença de **dia/hora**, não de rede. Isso
+  enfraquece um pouco o valor desta repetição para descartar "coincidência
+  de IP" especificamente, mas ainda é uma segunda amostra independente no
+  tempo.
+- Critério de decisão foi fixado *antes* de rodar (ver prompt da tarefa):
+  bloqueio de novo no mesmo padrão → reforça hipótese sistemática;
+  sucesso → enfraquece (mas não descarta) a hipótese sistemática; de
+  qualquer forma, uma repetição não encerra a dúvida.
+
+### O que aconteceu
+
+Bloqueou de novo, **na primeira requisição automatizada da fase A**,
+com o **mesmo padrão exato** da rodada original:
+
+| Campo | Rodada original (2026-07-24) | Repetição (2026-07-25) |
+|---|---|---|
+| `status_code` | 202 | 202 |
+| `elapsed_s` | 0.17 | 0.17 |
+| `body_len` | 14.439 bytes | 14.445 bytes (diferença de 6 bytes — provável token/timestamp dinâmico na página de challenge) |
+| `result_count` | 0 | 0 |
+| `block_reason` | "HTTP 202 inesperado" | "HTTP 202 inesperado" |
+| Ponto de parada | `n_domains=3`, 1ª query da fase A | `n_domains=3`, 1ª query da fase A (query idêntica) |
+
+A fase A não avançou além de `n_domains=3` nesta repetição também — a
+fase B **novamente não chegou a rodar**. Resultado bruto em
+[`results_repeat.json`](./results_repeat.json), log em
+[`run_log_repeat.txt`](./run_log_repeat.txt). O `results.json` original
+foi preservado (git, commit `08933f1`) e não foi sobrescrito.
+
+### Análise
+
+O corpo de resposta quase byte-a-byte idêntico (14.439 vs 14.445, a
+mesma query, o mesmo `status_code`, o mesmo tempo de resposta de 0,17s)
+sugere fortemente que **não é rate-limit por volume** (esta sessão fez
+uma única requisição antes de bloquear, igual à original) nem efeito de
+horário — é consistente com um **bloqueio determinístico por
+fingerprint do cliente HTTP** (a biblioteca `requests` do Python), que
+dispara na primeira requisição, independente de dia ou de quantas
+requisições vieram antes. Isso é coerente com a hipótese já levantada na
+rodada original (assinatura TLS/HTTP de `requests` vs. navegador/`curl`).
+
+Repetir em dia diferente **não** produziu um resultado diferente — o que
+era exatamente o critério definido antes de rodar para "reforça hipótese
+sistemática, não coincidência".
+
+### Resposta às perguntas da tarefa (repetição)
+
+- **Bloqueou de novo?** Sim.
+- **Mesmo padrão?** Sim — mesmo `status_code`, mesmo `block_reason`,
+  corpo de tamanho quase idêntico, mesmo ponto de parada.
+- **Em qual ponto?** Idêntico à rodada original: primeira requisição da
+  fase A (`n_domains=3`).
+- **A diferença de dia mudou o resultado?** Não.
+- **Ressalva:** rede não confirmada como diferente (ver limitação acima)
+  — a diferença comprovada é só de dia/horário, não de rede/IP.
 
 ---
 

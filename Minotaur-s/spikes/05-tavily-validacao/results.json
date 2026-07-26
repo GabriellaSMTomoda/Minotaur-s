@@ -1,0 +1,2966 @@
+{
+  "phase1_full_allowlist": [
+    {
+      "query": "Governo federal anuncia isenção de imposto de renda para quem ganha até dois salários mínimos",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.25,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.65,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "GOV.BR",
+          "url": "https://www.gov.br/pt-br",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 1142,
+          "has_raw_content": false,
+          "score": 0.19985436
+        },
+        {
+          "title": "Government",
+          "url": "https://en.wikipedia.org/wiki/Government",
+          "host": "en.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 1082,
+          "has_raw_content": false,
+          "score": 0.12820852
+        },
+        {
+          "title": "www.governo.it | Governo Italiano Presidenza del Consiglio dei Ministri",
+          "url": "https://www.governo.it/it",
+          "host": "governo.it",
+          "in_official_allowlist": false,
+          "content_len": 1365,
+          "has_raw_content": false,
+          "score": 0.105809815
+        },
+        {
+          "title": "CanalGov",
+          "url": "https://www.youtube.com/@canalgov",
+          "host": "youtube.com",
+          "in_official_allowlist": false,
+          "content_len": 54,
+          "has_raw_content": false,
+          "score": 0.07504766
+        },
+        {
+          "title": "English Translation of “GOVERNO” | Collins Portuguese-English Dictionary",
+          "url": "https://www.collinsdictionary.com/dictionary/portuguese-english/governo",
+          "host": "collinsdictionary.com",
+          "in_official_allowlist": false,
+          "content_len": 947,
+          "has_raw_content": false,
+          "score": 0.057774507
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Governo federal anuncia isenção de imposto de renda para quem ganha até dois salários mínimos"
+    },
+    {
+      "query": "Banco Central decide manter taxa Selic inalterada na última reunião do Copom",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.72,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.2,
+      "result_count": 4,
+      "results": [
+        {
+          "title": "Copom endurece discurso, e deixa a dúvida: a Selic pode ...",
+          "url": "https://g1.globo.com/economia/noticia/2024/08/01/copom-endurece-discurso-e-deixa-duvida-se-selic-pode-subir-entenda.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 142,
+          "has_raw_content": false,
+          "score": 0.85186684
+        },
+        {
+          "title": "Na última reunião de 2025, Copom deve manter novamente juro estável em 15% ao ano | G1",
+          "url": "https://g1.globo.com/economia/noticia/2025/12/10/na-ultima-reuniao-de-2025-copom-deve-manter-novamente-juro-estavel-em-15percent-ao-ano.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 935,
+          "has_raw_content": false,
+          "score": 0.85157084
+        },
+        {
+          "title": "Copom mantém Selic em 10,50% ao ano, em decisão já ... - G1",
+          "url": "https://g1.globo.com/economia/noticia/2024/07/31/copom-mantem-selic-em-1050percent-ao-ano-em-decisao-ja-esperada-pelo-mercado.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 127,
+          "has_raw_content": false,
+          "score": 0.8449346
+        },
+        {
+          "title": "Pela quarta vez em 2023, Copom decide manter Selic em 13 ...",
+          "url": "https://g1.globo.com/economia/noticia/2023/06/21/pela-quarta-vez-em-2023-copom-decide-manter-selic-em-1375percent.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 139,
+          "has_raw_content": false,
+          "score": 0.84027237
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Banco Central decide manter taxa Selic inalterada na última reunião do Copom"
+    },
+    {
+      "query": "Seleção brasileira de futebol se classifica para as quartas de final da competição internacional",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.66,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.18,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Quando será o próximo jogo do Brasil? Veja data e horário | G1",
+          "url": "https://g1.globo.com/mundo/noticia/2026/06/29/brasil-nas-oitavas-veja-quando-sera-o-proximo-jogo-da-selecao-na-copa.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 1283,
+          "has_raw_content": false,
+          "score": 0.57064295
+        },
+        {
+          "title": "Próximos jogos do Brasil na Copa: veja cenários para o mata-mata | G1",
+          "url": "https://g1.globo.com/mundo/noticia/2026/06/23/quem-o-brasil-pode-enfrentar-no-mata-mata-da-copa-do-mundo-os-cenarios-de-cada-resultado.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 1337,
+          "has_raw_content": false,
+          "score": 0.4630806
+        },
+        {
+          "title": "Copa do Mundo: quando são os jogos do Brasil e quais os adversários | G1",
+          "url": "https://g1.globo.com/mundo/noticia/2026/06/01/10-dias-para-a-copa-do-mundo-quando-sao-os-jogos-do-brasil-e-quais-os-adversarios.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 1395,
+          "has_raw_content": false,
+          "score": 0.3684744
+        },
+        {
+          "title": "Quem são os classificados para as quartas de final da ...",
+          "url": "https://www.terra.com.br/esportes/futebol/copa-2026/quem-sao-os-classificados-para-as-quartas-de-final-da-copa-confira-os-confrontos,9f61e57e223d6eb54b8c02ec9cbc7c09cydborn5.html",
+          "host": "terra.com.br",
+          "in_official_allowlist": true,
+          "content_len": 139,
+          "has_raw_content": false,
+          "score": 0.3236371
+        },
+        {
+          "title": "Com Anitta e Shakira, saiba como serão cerimônias de abertura da Copa | G1",
+          "url": "https://g1.globo.com/pop-arte/noticia/2026/06/10/com-anitta-e-shakira-como-serao-as-tres-cerimonias-de-abertura-da-copa-e-os-detalhes-dos-jogos-do-maior-mundial-da-historia.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 1205,
+          "has_raw_content": false,
+          "score": 0.12420263
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Seleção brasileira de futebol se classifica para as quartas de final da competição internacional"
+    },
+    {
+      "query": "OMS declara fim da emergência de saúde pública para determinada doença",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.8,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.24,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "OMS declara fim da Emergência de Saúde Pública ...",
+          "url": "https://www.unasus.gov.br/noticia/oms-declara-fim-da-emergencia-de-saude-publica-de-importancia-internacional-referente-a-covid-19",
+          "host": "unasus.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 144,
+          "has_raw_content": false,
+          "score": 0.8296166
+        },
+        {
+          "title": "Fim da pandemia da covid? Entenda decisão da OMS ...",
+          "url": "https://www.estadao.com.br/saude/fim-da-pandemia-da-covid-entenda-decisao-da-oms-sobre-emergencia-de-saude",
+          "host": "estadao.com.br",
+          "in_official_allowlist": true,
+          "content_len": 140,
+          "has_raw_content": false,
+          "score": 0.7811474
+        },
+        {
+          "title": "BOLETIM EPIDEMIOLÓGICO ESPECIAL - Portal Gov.br",
+          "url": "https://www.gov.br/saude/pt-br/centrais-de-conteudo/publicacoes/boletins/epidemiologicos/covid-19/2023/boletim-epidemiologico-no-156-boletim-coe-coronavirus/@@download/file/af_Boletim_Covid_156_outubro_22dez23b.pdf",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 136,
+          "has_raw_content": false,
+          "score": 0.7795405
+        },
+        {
+          "title": "Anúncio da OMS ainda não significa o fim da pandemia de ...",
+          "url": "https://www.cnnbrasil.com.br/saude/anuncio-da-oms-ainda-nao-significa-o-fim-da-pandemia-de-covid-19-entenda",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 136,
+          "has_raw_content": false,
+          "score": 0.7732339
+        },
+        {
+          "title": "Covid: o que muda com o fim do estado de emergência ...",
+          "url": "https://www.metropoles.com/saude/covid-o-que-muda-com-o-fim-do-estado-de-emergencia-decretado-pela-oms",
+          "host": "metropoles.com",
+          "in_official_allowlist": true,
+          "content_len": 140,
+          "has_raw_content": false,
+          "score": 0.7443038
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "OMS declara fim da emergência de saúde pública para determinada doença"
+    },
+    {
+      "query": "STF julga ação sobre marco temporal de terras indígenas",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 2.41,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.85,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "STF julga marco temporal de terras indígenas nesta quarta (10/12)",
+          "url": "https://www.metropoles.com/brasil/stf-julga-marco-temporal-de-terras-indigenas-nesta-quarta-10-12",
+          "host": "metropoles.com",
+          "in_official_allowlist": true,
+          "content_len": 110,
+          "has_raw_content": false,
+          "score": 0.85797083
+        },
+        {
+          "title": "derrubou a tese do marco temporal das terras indígenas",
+          "url": "https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=514552&ori=1",
+          "host": "portal.stf.jus.br",
+          "in_official_allowlist": true,
+          "content_len": 143,
+          "has_raw_content": false,
+          "score": 0.85216236
+        },
+        {
+          "title": "Indígenas fazem protesto em Brasília à espera de ...",
+          "url": "https://oglobo.globo.com/brasil/meio-ambiente/indigenas-fazem-protesto-em-brasilia-espera-de-julgamento-de-marco-temporal-para-terras-25170733",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 136,
+          "has_raw_content": false,
+          "score": 0.83290404
+        },
+        {
+          "title": "Marco temporal: concluída a apresentação de argumentos",
+          "url": "https://noticias.stf.jus.br/postsnoticias/marco-temporal-concluida-a-apresentacao-de-argumentos-em-julgamento-no-stf",
+          "host": "noticias.stf.jus.br",
+          "in_official_allowlist": true,
+          "content_len": 139,
+          "has_raw_content": false,
+          "score": 0.8098936
+        },
+        {
+          "title": "Supremo pode julgar nesta quarta se é legal marco temporal ...",
+          "url": "https://g1.globo.com/politica/noticia/2021/08/25/supremo-pode-julgar-nesta-quarta-se-e-legal-marco-temporal-para-demarcacao-de-terras-indigenas.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 132,
+          "has_raw_content": false,
+          "score": 0.798077
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "STF julga ação sobre marco temporal de terras indígenas"
+    },
+    {
+      "query": "Senado aprova projeto de lei sobre regulamentação de inteligência artificial no Brasil",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.8,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.31,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Senado aprova regulamentação da inteligência artificial; texto vai à Câmara — Senado Notícias",
+          "url": "https://www12.senado.leg.br/noticias/materias/2024/12/10/senado-aprova-regulamentacao-da-inteligencia-artificial-texto-vai-a-camara",
+          "host": "www12.senado.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 974,
+          "has_raw_content": false,
+          "score": 0.92091084
+        },
+        {
+          "title": "Senado aprova projeto de regulamentação de inteligência ...",
+          "url": "https://exame.com/tecnologia/senado-aprova-projeto-de-regulamentacao-de-inteligencia-artificial-no-brasil",
+          "host": "exame.com",
+          "in_official_allowlist": true,
+          "content_len": 154,
+          "has_raw_content": false,
+          "score": 0.9138076
+        },
+        {
+          "title": "Marco da Inteligência Artificial é aprovado em Plenário e vai à Câmara — Senado Notícias",
+          "url": "https://www12.senado.leg.br/noticias/videos/2024/12/marco-da-inteligencia-artificial-e-aprovado-em-plenario-e-vai-a-camara",
+          "host": "www12.senado.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 1092,
+          "has_raw_content": false,
+          "score": 0.90039873
+        },
+        {
+          "title": "Senado aprova regulamentação da inteligência artificial",
+          "url": "https://www.poder360.com.br/poder-congresso/senado-aprova-regulamentacao-da-inteligencia-artificial-entenda",
+          "host": "poder360.com.br",
+          "in_official_allowlist": true,
+          "content_len": 124,
+          "has_raw_content": false,
+          "score": 0.8732259
+        },
+        {
+          "title": "Regulação da inteligência artificial exige cuidado com dados pessoais, aponta debate — Senado Notícias",
+          "url": "https://www12.senado.leg.br/noticias/materias/2023/10/19/regulacao-da-inteligencia-artificial-exige-cuidado-com-dados-pessoais-aponta-debate",
+          "host": "www12.senado.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 858,
+          "has_raw_content": false,
+          "score": 0.87166095
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Senado aprova projeto de lei sobre regulamentação de inteligência artificial no Brasil"
+    },
+    {
+      "query": "Inflação medida pelo IPCA acelera no último mês segundo dados oficiais",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.2,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.72,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Portal da Inflação - FGV",
+          "url": "https://portal-da-inflacao-ibre.fgv.br",
+          "host": "portal-da-inflacao-ibre.fgv.br",
+          "in_official_allowlist": false,
+          "content_len": 944,
+          "has_raw_content": false,
+          "score": 0.477969
+        },
+        {
+          "title": "IPCA Acumulado Hoje | Inflação do Brasil - Investing.com",
+          "url": "https://br.investing.com/economic-calendar/brazilian-cpi-410",
+          "host": "br.investing.com",
+          "in_official_allowlist": false,
+          "content_len": 924,
+          "has_raw_content": false,
+          "score": 0.3844273
+        },
+        {
+          "title": "Inflação | IBGE",
+          "url": "https://www.ibge.gov.br/explica/inflacao.php",
+          "host": "ibge.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 959,
+          "has_raw_content": false,
+          "score": 0.38421932
+        },
+        {
+          "title": "Indicadores Econômicos: Inflação, Taxas de Juros e Moedas",
+          "url": "https://www.debit.com.br/tabelas/indicadores-economicos",
+          "host": "debit.com.br",
+          "in_official_allowlist": false,
+          "content_len": 894,
+          "has_raw_content": false,
+          "score": 0.380069
+        },
+        {
+          "title": "Inflação – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Infla%C3%A7%C3%A3o",
+          "host": "pt.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 658,
+          "has_raw_content": false,
+          "score": 0.3449513
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Inflação medida pelo IPCA acelera no último mês segundo dados oficiais"
+    },
+    {
+      "query": "Presidente dos Estados Unidos anuncia novas tarifas sobre produtos importados do Brasil",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 2.08,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.51,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Além do Brasil, Argentina, UE e Reino Unido são alvo de novo tarifaço, veja lista | Exame",
+          "url": "https://exame.com/mundo/alem-do-brasil-argentina-ue-e-reino-unido-sao-alvo-de-novo-tarifaco-veja-lista",
+          "host": "exame.com",
+          "in_official_allowlist": true,
+          "content_len": 983,
+          "has_raw_content": false,
+          "score": 0.83678174
+        },
+        {
+          "title": "Governo Trump sugere novo tarifaço contra países por trabalho forçado e inclui Brasil em sobretaxa de 12,5%",
+          "url": "https://oglobo.globo.com/economia/noticia/2026/06/03/governo-trump-sugere-novo-tarifaco-contra-paises-por-trabalho-forcado-e-inclui-brasil-em-sobretaxa-de-125percent.ghtml",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 1172,
+          "has_raw_content": false,
+          "score": 0.834852
+        },
+        {
+          "title": "EUA citam prática comercial desleal e propõem tarifa de 25% ao Brasil",
+          "url": "https://www.poder360.com.br/poder-economia/eua-citam-pratica-comercial-desleal-e-propoe-tarifa-de-25-ao-brasil",
+          "host": "poder360.com.br",
+          "in_official_allowlist": true,
+          "content_len": 1192,
+          "has_raw_content": false,
+          "score": 0.8201387
+        },
+        {
+          "title": "Medicamentos e caminhões: Veja as novas tarifas ...",
+          "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/medicamentos-e-caminhoes-veja-as-novas-tarifas-anunciadas-por-trump",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 150,
+          "has_raw_content": false,
+          "score": 0.77055156
+        },
+        {
+          "title": "Senadores reagem à decisão de Trump de taxar em 50% produtos brasileiros — Senado Notícias",
+          "url": "https://www12.senado.leg.br/noticias/materias/2025/07/10/senadores-reagem-a-decisao-de-trump-de-taxar-em-50-produtos-brasileiros",
+          "host": "www12.senado.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 1082,
+          "has_raw_content": false,
+          "score": 0.7500592
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Presidente dos Estados Unidos anuncia novas tarifas sobre produtos importados do Brasil"
+    },
+    {
+      "query": "Ibovespa fecha em alta puxado por ações de empresas de commodities",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.86,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.17,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Ibovespa fecha em alta puxado por ações de commodities | Finanças",
+          "url": "https://valor.globo.com/financas/noticia/2017/07/10/ibovespa-fecha-em-alta-puxado-por-acoes-de-commodities-1.ghtml",
+          "host": "valor.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 151,
+          "has_raw_content": false,
+          "score": 0.9163571
+        },
+        {
+          "title": "Ibovespa fecha acima dos 67 mil pontos e dólar avança a R$ ...",
+          "url": "https://oglobo.globo.com/economia/ibovespa-fecha-acima-dos-67-mil-pontos-dolar-avanca-r-1672-2822949",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 157,
+          "has_raw_content": false,
+          "score": 0.90869105
+        },
+        {
+          "title": "Ibovespa supera 126 mil pontos puxado por commodities e bancos ...",
+          "url": "https://valor.globo.com/financas/noticia/2021/07/26/ibovespa-fecha-em-alta-puxado-pelas-blue-chips.ghtml",
+          "host": "valor.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 159,
+          "has_raw_content": false,
+          "score": 0.8898454
+        },
+        {
+          "title": "DESTAQUES DOS PRINCIPAIS JORNAIS 14 de abril de 2020",
+          "url": "https://www.gov.br/mme/pt-br/arquivos/clipping-14-04-2020.pdf",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 155,
+          "has_raw_content": false,
+          "score": 0.88444936
+        },
+        {
+          "title": "Ibovespa sobe ao maior nível em oito meses - Valor Econômico",
+          "url": "https://valor.globo.com/financas/noticia/2022/04/01/ibovespa-fecha-em-alta-puxado-por-papeis-ligados-a-atividade-domestica.ghtml",
+          "host": "valor.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 114,
+          "has_raw_content": false,
+          "score": 0.8591094
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Ibovespa fecha em alta puxado por ações de empresas de commodities"
+    },
+    {
+      "query": "Ministério da Saúde inicia campanha nacional de vacinação contra a gripe",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.58,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.03,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Campanha nacional de vacinação contra a gripe começa ...",
+          "url": "https://www.cnnbrasil.com.br/saude/campanha-nacional-de-vacinacao-contra-a-gripe-comeca-nesta-segunda-feira-4",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 140,
+          "has_raw_content": false,
+          "score": 0.8655088
+        },
+        {
+          "title": "Vacinação contra gripe 2026 começa neste sábado",
+          "url": "https://exame.com/brasil/vacinacao-contra-gripe-2026-comeca-neste-sabado-quem-pode-se-vacinar",
+          "host": "exame.com",
+          "in_official_allowlist": true,
+          "content_len": 136,
+          "has_raw_content": false,
+          "score": 0.8437023
+        },
+        {
+          "title": "Saúde faz Dia D de mobilização contra a gripe e inicia a ...",
+          "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2016-04/saude-faz-dia-d-de-mobilizacao-contra-gripe-e-inicia-campanha-de-vacinacaoc",
+          "host": "agenciabrasil.ebc.com.br",
+          "in_official_allowlist": true,
+          "content_len": 144,
+          "has_raw_content": false,
+          "score": 0.84183896
+        },
+        {
+          "title": "Campanha nacional de vacinação contra a gripe influenza",
+          "url": "https://www12.senado.leg.br/radio/1/conexao-senado/2020/03/23/campanha-nacional-de-vacinacao-contra-a-gripe-influenza",
+          "host": "www12.senado.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 151,
+          "has_raw_content": false,
+          "score": 0.82728493
+        },
+        {
+          "title": "Rio inicia campanha de vacinação contra gripe para ...",
+          "url": "https://oglobo.globo.com/rio/noticia/2026/03/24/rio-inicia-campanha-de-vacinacao-contra-gripe-para-pessoas-a-partir-dos-6-meses-de-idade.ghtml",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 138,
+          "has_raw_content": false,
+          "score": 0.82560414
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Ministério da Saúde inicia campanha nacional de vacinação contra a gripe"
+    },
+    {
+      "query": "União Europeia fecha acordo comercial com o Mercosul após anos de negociação",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.29,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.77,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "UNIÃO | definição no dicionário português-inglês",
+          "url": "https://dictionary.cambridge.org/pt/dicionario/portugues-ingles/uniao",
+          "host": "dictionary.cambridge.org",
+          "in_official_allowlist": false,
+          "content_len": 165,
+          "has_raw_content": false,
+          "score": 0.08642383
+        },
+        {
+          "title": "União – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Uni%C3%A3o",
+          "host": "pt.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 929,
+          "has_raw_content": false,
+          "score": 0.05906367
+        },
+        {
+          "title": "união - Tradução em inglês",
+          "url": "https://www.linguee.com.br/portugues-ingles/traducao/uni%C3%A3o.html",
+          "host": "linguee.com.br",
+          "in_official_allowlist": false,
+          "content_len": 162,
+          "has_raw_content": false,
+          "score": 0.05496988
+        },
+        {
+          "title": "União - Dicio, Dicionário Online de Português",
+          "url": "https://www.dicio.com.br/uniao",
+          "host": "dicio.com.br",
+          "in_official_allowlist": false,
+          "content_len": 1069,
+          "has_raw_content": false,
+          "score": 0.051543966
+        },
+        {
+          "title": "Sinônimo de União - Sinônimos",
+          "url": "https://www.sinonimos.com.br/uniao",
+          "host": "sinonimos.com.br",
+          "in_official_allowlist": false,
+          "content_len": 1270,
+          "has_raw_content": false,
+          "score": 0.04778461
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "União Europeia fecha acordo comercial com o Mercosul após anos de negociação"
+    },
+    {
+      "query": "Polícia Federal deflagra operação contra fraude em benefícios do INSS",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.99,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.31,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "PF deflagra operação contra fraudes na Previdência Social",
+          "url": "https://www.gov.br/pf/pt-br/assuntos/noticias/2025/08/pf-deflagra-operacao-contra-fraudes-na-previdencia-social",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 112,
+          "has_raw_content": false,
+          "score": 0.8660535
+        },
+        {
+          "title": "Polícia Federal deflagra operação contra fraudes a benefícios ...",
+          "url": "https://www.gov.br/pf/pt-br/assuntos/noticias/2020/07-noticias-de-julho-de-2020/policia-federal-deflagra-operacao-contra-fraudes-a-beneficios-previdenciarios-na-bahia",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 148,
+          "has_raw_content": false,
+          "score": 0.8624794
+        },
+        {
+          "title": "PF deflagra operação contra fraudes no Espírito Santo",
+          "url": "https://www.gov.br/pf/pt-br/assuntos/noticias/2025/12/pf-deflagra-operacao-contra-fraudes-no-espirito-santo",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 158,
+          "has_raw_content": false,
+          "score": 0.8565368
+        },
+        {
+          "title": "Polícia Federal deflagra ação contra fraude na Caixa e no INSS",
+          "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2021-10/policia-federal-deflagra-acao-contra-fraude-na-caixa-e-no-inss",
+          "host": "agenciabrasil.ebc.com.br",
+          "in_official_allowlist": true,
+          "content_len": 142,
+          "has_raw_content": false,
+          "score": 0.85186684
+        },
+        {
+          "title": "Polícia Federal deflagra operação contra fraudes a benefícios ...",
+          "url": "https://www.gov.br/pf/pt-br/assuntos/noticias/2025/06/policia-federal-deflagra-operacao-contra-fraudes-a-beneficios-previdenciarios-na-paraiba",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 172,
+          "has_raw_content": false,
+          "score": 0.8446273
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Polícia Federal deflagra operação contra fraude em benefícios do INSS"
+    },
+    {
+      "query": "Câmara dos Deputados vota reforma tributária em segundo turno",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.56,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.94,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Reforma tributária: veja como votou cada deputado no 2º ...",
+          "url": "https://www.metropoles.com/brasil/reforma-tributaria-veja-como-votou-cada-deputado-no-2o-turno",
+          "host": "metropoles.com",
+          "in_official_allowlist": true,
+          "content_len": 118,
+          "has_raw_content": false,
+          "score": 0.846159
+        },
+        {
+          "title": "Aprovada Reforma Tributária em segundo turno - Notícias",
+          "url": "https://www.camara.leg.br/noticias/37506-aprovada-reforma-tributaria-em-segundo-turno",
+          "host": "camara.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 153,
+          "has_raw_content": false,
+          "score": 0.8194462
+        },
+        {
+          "title": "Câmara conclui votação de projeto que regulamenta a reforma tributária; texto vai ao Senado - Notícias - Portal da Câmara dos Deputados",
+          "url": "https://www.camara.leg.br/noticias/1106927-camara-conclui-votacao-de-projeto-que-regulamenta-a-reforma-tributaria-texto-vai-ao-senado",
+          "host": "camara.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 1152,
+          "has_raw_content": false,
+          "score": 0.76972175
+        },
+        {
+          "title": "Reforma tributária é aprovada em dois turnos em votação ...",
+          "url": "https://valor.globo.com/politica/noticia/2023/12/15/camara-inicia-sessao-para-votar-reforma-tributaria.ghtml",
+          "host": "valor.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 104,
+          "has_raw_content": false,
+          "score": 0.76173395
+        },
+        {
+          "title": "Câmara conclui votação da reforma tributária em segundo ...",
+          "url": "https://www.camara.leg.br/noticias/1027154-camara-conclui-votacao-da-reforma-tributaria-em-segundo-turno",
+          "host": "camara.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 136,
+          "has_raw_content": false,
+          "score": 0.7593865
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Câmara dos Deputados vota reforma tributária em segundo turno"
+    },
+    {
+      "query": "Cientistas brasileiros publicam estudo sobre variante de vírus respiratório",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.72,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.2,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Cientistas brasileiros descobrem nova variante do ...",
+          "url": "https://oglobo.globo.com/saude/coronavirus/cientistas-brasileiros-descobrem-nova-variante-do-coronavirus-1-24922327",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 141,
+          "has_raw_content": false,
+          "score": 0.7507177
+        },
+        {
+          "title": "Brasileiros criam método capaz de prever casos de variantes ...",
+          "url": "https://veja.abril.com.br/saude/brasileiros-criam-metodo-capaz-de-prever-casos-de-variantes-da-covid-19",
+          "host": "veja.abril.com.br",
+          "in_official_allowlist": true,
+          "content_len": 140,
+          "has_raw_content": false,
+          "score": 0.6257817
+        },
+        {
+          "title": "Vamos eliminar ou conviver com o coronavírus? Cientistas ...",
+          "url": "https://oglobo.globo.com/saude/vamos-eliminar-ou-conviver-com-coronavirus-cientistas-tracam-4-cenarios-para-mundo-partir-de-2022-1-25121745",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 142,
+          "has_raw_content": false,
+          "score": 0.5411427
+        },
+        {
+          "title": "Covid: O que ciência já descobriu sobre maior ...",
+          "url": "https://oglobo.globo.com/epoca/sociedade/covid-que-ciencia-ja-descobriu-sobre-maior-agressividade-de-variante-p1-em-jovens-1-25019307",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 144,
+          "has_raw_content": false,
+          "score": 0.498902
+        },
+        {
+          "title": "Ômicron: nova variante atingiu auge de 70% dos casos no ...",
+          "url": "https://oglobo.globo.com/saude/omicron-nova-variante-atingiu-auge-de-70-dos-casos-no-dia-25-de-dezembro-mostra-levantamento-inedito-25335182",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 140,
+          "has_raw_content": false,
+          "score": 0.46935064
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Cientistas brasileiros publicam estudo sobre variante de vírus respiratório"
+    },
+    {
+      "query": "Prefeitura de São Paulo anuncia novo plano de mobilidade urbana para a capital",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.24,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.75,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Secretaria Municipal de Mobilidade Urbana e Transporte",
+          "url": "https://prefeitura.sp.gov.br/web/mobilidade/w/noticias/289946",
+          "host": "prefeitura.sp.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 166,
+          "has_raw_content": false,
+          "score": 0.750937
+        },
+        {
+          "title": "Secretaria Municipal de Urbanismo e Licenciamento",
+          "url": "https://prefeitura.sp.gov.br/web/licenciamento/w/caminhos-mais-seguros-para-a-popula%C3%A7%C3%A3o-prefeitura-anuncia-projeto-de-urbanismo-social-para-a-regi%C3%A3o-do-ceu-pinheirinho-d-%C3%A1gua-na-zona-norte",
+          "host": "prefeitura.sp.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 159,
+          "has_raw_content": false,
+          "score": 0.7474137
+        },
+        {
+          "title": "Novo plano da mobilidade urbana brasileira prevê até R$ ...",
+          "url": "https://valor.globo.com/publicacoes/especiais/revista-infraestrutura-e-logistica/noticia/2025/10/31/r-600-bilhoes-sobre-trilhos-o-novo-plano-da-mobilidade-urbana-brasileira.ghtml",
+          "host": "valor.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 172,
+          "has_raw_content": false,
+          "score": 0.71758664
+        },
+        {
+          "title": "Prefeito destaca importância de nova estação da CPTM e ...",
+          "url": "https://prefeitura.sp.gov.br/w/noticia/prefeito-destaca-importancia-de-nova-estacao-da-cptm-e-anuncia-reestruturacao-do-setor-de-mobilidade-e-transportes-da-capital-1",
+          "host": "prefeitura.sp.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 166,
+          "has_raw_content": false,
+          "score": 0.69845337
+        },
+        {
+          "title": "Prefeitura anuncia BRTs e corredores de ônibus que ...",
+          "url": "https://prefeitura.sp.gov.br/w/noticia/prefeitura-anuncia-brts-e-corredores-de-onibus-que-tornarao-a-cidade-um-canteiro-de-obras",
+          "host": "prefeitura.sp.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 173,
+          "has_raw_content": false,
+          "score": 0.69795954
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Prefeitura de São Paulo anuncia novo plano de mobilidade urbana para a capital"
+    },
+    {
+      "query": "Papa faz visita oficial ao Brasil e celebra missa campal",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.2,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.7,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "About Us - Papa",
+          "url": "https://www.papa.com/about",
+          "host": "papa.com",
+          "in_official_allowlist": false,
+          "content_len": 148,
+          "has_raw_content": false,
+          "score": 0.2865439
+        },
+        {
+          "title": "Login to Papa · Papa",
+          "url": "https://app.papa.com",
+          "host": "app.papa.com",
+          "in_official_allowlist": false,
+          "content_len": 133,
+          "has_raw_content": false,
+          "score": 0.23638442
+        },
+        {
+          "title": "Papa | Companion Care for Older Adults & Families",
+          "url": "https://www.papa.com",
+          "host": "papa.com",
+          "in_official_allowlist": false,
+          "content_len": 1165,
+          "has_raw_content": false,
+          "score": 0.20074598
+        },
+        {
+          "title": "papa",
+          "url": "https://en.wiktionary.org/wiki/papa",
+          "host": "en.wiktionary.org",
+          "in_official_allowlist": false,
+          "content_len": 865,
+          "has_raw_content": false,
+          "score": 0.19205433
+        },
+        {
+          "title": "PAPA",
+          "url": "https://www.youtube.com/watch?v=Pm-4czNR32c",
+          "host": "youtube.com",
+          "in_official_allowlist": false,
+          "content_len": 442,
+          "has_raw_content": false,
+          "score": 0.18692514
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Papa faz visita oficial ao Brasil e celebra missa campal"
+    },
+    {
+      "query": "TSE define novas regras de propaganda eleitoral para as eleições municipais",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.27,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.73,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "RESOLUÇÃO Nº 23.755, DE 2 DE MARÇO DE 2026 — Tribunal Superior Eleitoral",
+          "url": "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-755-de-2-de-marco-de-2026",
+          "host": "tse.jus.br",
+          "in_official_allowlist": true,
+          "content_len": 1209,
+          "has_raw_content": false,
+          "score": 0.7785319
+        },
+        {
+          "title": "Conheça as regras gerais para a divulgação de propaganda eleitoral — Tribunal Superior Eleitoral",
+          "url": "https://www.tse.jus.br/comunicacao/noticias/2024/Marco/conheca-as-regras-gerais-para-a-divulgacao-de-propaganda-eleitoral",
+          "host": "tse.jus.br",
+          "in_official_allowlist": true,
+          "content_len": 1094,
+          "has_raw_content": false,
+          "score": 0.7771143
+        },
+        {
+          "title": "Propaganda político-eleitoral — Tribunal Superior Eleitoral",
+          "url": "https://www.tse.jus.br/institucional/escola-judiciaria-eleitoral/publicacoes/revistas-da-eje/artigos/propaganda-politico-eleitoral",
+          "host": "tse.jus.br",
+          "in_official_allowlist": true,
+          "content_len": 1133,
+          "has_raw_content": false,
+          "score": 0.77199864
+        },
+        {
+          "title": "Por Dentro das Eleições: conheça as regras sobre uso de IA na campanha eleitoral de 2026 — Tribunal Superior Eleitoral",
+          "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Abril/por-dentro-das-eleicoes-conheca-as-regras-sobre-uso-de-ia-na-campanha-eleitoral-de-2026",
+          "host": "tse.jus.br",
+          "in_official_allowlist": true,
+          "content_len": 1277,
+          "has_raw_content": false,
+          "score": 0.6641271
+        },
+        {
+          "title": "o novo conceito de propaganda eleitoral antecipada: uma ...",
+          "url": "https://revistaeje.tse.jus.br/estudoseleitorais/article/download/11/11/70",
+          "host": "revistaeje.tse.jus.br",
+          "in_official_allowlist": true,
+          "content_len": 169,
+          "has_raw_content": false,
+          "score": 0.6238588
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "TSE define novas regras de propaganda eleitoral para as eleições municipais"
+    },
+    {
+      "query": "Justiça determina bloqueio de bens de empresa investigada por lavagem de dinheiro",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.73,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.13,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Refit: Justiça determina bloqueio de R$ 10,2 bilhões em ...",
+          "url": "https://oglobo.globo.com/brasil/noticia/2025/11/27/refit-justica-determina-bloqueio-de-r-102-bilhoes-em-bens-do-maior-devedor-contumaz-do-pais.ghtml",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 153,
+          "has_raw_content": false,
+          "score": 0.8497846
+        },
+        {
+          "title": "G1 - Justiça de Minas Gerais determina bloqueio de bens de ...",
+          "url": "https://g1.globo.com/minas-gerais/noticia/2014/04/justica-de-minas-gerais-determina-bloqueio-de-bens-de-alvimar-perrella.html",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 166,
+          "has_raw_content": false,
+          "score": 0.78886026
+        },
+        {
+          "title": "Justiça determina bloqueio de bens de suspeitos de integrar ...",
+          "url": "https://g1.globo.com/mg/sul-de-minas/noticia/2024/11/29/justica-determina-bloqueio-de-bens-de-suspeitos-de-integrar-organizacao-que-promovia-falsos-sorteios-na-internet-em-mg.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 164,
+          "has_raw_content": false,
+          "score": 0.7734393
+        },
+        {
+          "title": "PF deflagra operação contra lavagem de dinheiro e ...",
+          "url": "https://www.gov.br/pf/pt-br/assuntos/noticias/2025/10/pf-deflagra-operacao-contra-lavagem-de-dinheiro-e-contrabando",
+          "host": "gov.br",
+          "in_official_allowlist": true,
+          "content_len": 170,
+          "has_raw_content": false,
+          "score": 0.7730283
+        },
+        {
+          "title": "PF investiga lavagem de dinheiro ligada a fraudes em ... - G1",
+          "url": "https://g1.globo.com/rn/rio-grande-do-norte/noticia/2026/02/05/operacao-da-pf-investiga-lavagem-de-dinheiro-rn.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 168,
+          "has_raw_content": false,
+          "score": 0.6912478
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Justiça determina bloqueio de bens de empresa investigada por lavagem de dinheiro"
+    },
+    {
+      "query": "Petrobras anuncia novo investimento em exploração de petróleo no pré-sal",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.55,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.93,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Petrobras anuncia pacote de R$ 37 bilhões para São ...",
+          "url": "https://oglobo.globo.com/economia/noticia/2026/05/15/petrobras-anuncia-pacote-de-r-37-bilhoes-para-sao-paulo-com-nova-fronteira-no-pre-sal-e-expansao-no-porto-de-santos.ghtml",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 143,
+          "has_raw_content": false,
+          "score": 0.843393
+        },
+        {
+          "title": "Petrobras anuncia investimento de US$ 16 bilhões na ...",
+          "url": "https://www.cnnbrasil.com.br/economia/financas/petrobras-anuncia-investimento-de-us-16-bilhoes-na-bacia-de-campos",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 142,
+          "has_raw_content": false,
+          "score": 0.8145405
+        },
+        {
+          "title": "Resultado dos Contratos de - Partilha de Produção - PPSA",
+          "url": "https://www.presalpetroleo.gov.br/wp-content/uploads/2025/10/Resultado-dos-Contratos-de-Partilha-de-Producao-SPE.pdf",
+          "host": "presalpetroleo.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 156,
+          "has_raw_content": false,
+          "score": 0.8131201
+        },
+        {
+          "title": "'Novo pré-sal' ameaça meta de fazer do Brasil potência ...",
+          "url": "https://valor.globo.com/publicacoes/especiais/cop28/noticia/2023/12/19/novo-pre-sal-ameaca-meta-de-fazer-do-brasil-potencia-ambiental.ghtml",
+          "host": "valor.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 112,
+          "has_raw_content": false,
+          "score": 0.74785584
+        },
+        {
+          "title": "11 novas plataformas serão instaladas no pré-sal até 2027 ...",
+          "url": "https://www.cnnbrasil.com.br/economia/financas/11-novas-plataformas-serao-instaladas-no-pre-sal-ate-2027-afirma-petrobras",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 145,
+          "has_raw_content": false,
+          "score": 0.7237202
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Petrobras anuncia novo investimento em exploração de petróleo no pré-sal"
+    },
+    {
+      "query": "Nasa confirma data de lançamento de nova missão espacial tripulada",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.56,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.07,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Nasa confirma data para primeira missão tripulada à Lua ...",
+          "url": "https://www.estadao.com.br/ciencia/nasa-confirma-data-primeira-missao-tripulada-lua-50-anos-veja-quando-sera-npr",
+          "host": "estadao.com.br",
+          "in_official_allowlist": true,
+          "content_len": 168,
+          "has_raw_content": false,
+          "score": 0.7890553
+        },
+        {
+          "title": "Nasa anuncia tripulantes da Artemis III, prevista para 2027 - G1",
+          "url": "https://g1.globo.com/ciencia/noticia/2026/06/09/nasa-anuncia-tripulantes-da-artemis-iii-missao-esta-prevista-para-2027.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 171,
+          "has_raw_content": false,
+          "score": 0.6892434
+        },
+        {
+          "title": "Primeiro voo tripulado da espaçonave Starliner ganha ...",
+          "url": "https://www.cnnbrasil.com.br/tecnologia/primeiro-voo-tripulado-da-espaconave-starliner-ganha-nova-data-veja",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 165,
+          "has_raw_content": false,
+          "score": 0.685971
+        },
+        {
+          "title": "Artemis II: Nasa pode lançar missão tripulada à Lua nesta ...",
+          "url": "https://g1.globo.com/ciencia/noticia/2026/04/01/artemis-ii-nasa-deve-lancar-nesta-quarta-missao-historica-de-sobrevoo-tripulado-a-lua-saiba-tudo.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 113,
+          "has_raw_content": false,
+          "score": 0.65279555
+        },
+        {
+          "title": "Nasa volta à Lua em missão tripulada com primeira mulher",
+          "url": "https://www.cnnbrasil.com.br/tecnologia/nasa-volta-a-lua-em-missao-tripulada-com-primeira-mulher",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 165,
+          "has_raw_content": false,
+          "score": 0.6141863
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Nasa confirma data de lançamento de nova missão espacial tripulada"
+    }
+  ],
+  "phase2_exclusion_test": [
+    {
+      "query": "Governo federal anuncia isenção de imposto de renda para quem ganha até dois salários mínimos",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int",
+        "wikipedia.org"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.8,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.28,
+      "result_count": 10,
+      "results": [
+        {
+          "title": "Senado aprova isenção de IR para quem ganha até dois ...",
+          "url": "https://exame.com/economia/senado-aprova-isencao-de-ir-para-quem-ganha-ate-dois-salarios-minimos-veja-o-que-muda",
+          "host": "exame.com",
+          "in_official_allowlist": true,
+          "content_len": 139,
+          "has_raw_content": false,
+          "score": 0.8724455
+        },
+        {
+          "title": "Medida provisória isenta de Imposto de Renda quem ganha até dois salários mínimos - Notícias - Portal da Câmara dos Deputados",
+          "url": "https://www.camara.leg.br/noticias/1150124-medida-provisoria-isenta-de-imposto-de-renda-quem-ganha-ate-dois-salarios-minimos",
+          "host": "camara.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 839,
+          "has_raw_content": false,
+          "score": 0.82082915
+        },
+        {
+          "title": "Lula anuncia isenção de IR para até dois salários",
+          "url": "https://www.correiobraziliense.com.br/economia/2024/01/6791696-lula-anuncia-isencao-de-ir-para-ate-dois-salarios.html",
+          "host": "correiobraziliense.com.br",
+          "in_official_allowlist": true,
+          "content_len": 139,
+          "has_raw_content": false,
+          "score": 0.78963995
+        },
+        {
+          "title": "Câmara aprova aumento de isenção de IR para dois ...",
+          "url": "https://oglobo.globo.com/economia/noticia/2025/06/25/camara-aprova-aumento-de-isencao-de-ir-para-dois-salarios-minimos.ghtml",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 161,
+          "has_raw_content": false,
+          "score": 0.7827459
+        },
+        {
+          "title": "Imposto de Renda: isenção sobe para R$ 2.112. Mas ...",
+          "url": "https://oglobo.globo.com/economia/imposto-de-renda/noticia/2023/02/imposto-de-renda-quem-tem-direito-a-isencao-com-a-nova-faixa-vale-a-partir-de-quando.ghtml",
+          "host": "oglobo.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 154,
+          "has_raw_content": false,
+          "score": 0.74785584
+        },
+        {
+          "title": "Imposto de Renda: Senado aprova isenção até dois salários",
+          "url": "https://www1.folha.uol.com.br/mercado/2025/08/senado-aprova-projeto-que-garante-isencao-ate-dois-salarios-minimos-e-reajuste-da-tabela-do-ir.shtml",
+          "host": "www1.folha.uol.com.br",
+          "in_official_allowlist": true,
+          "content_len": 169,
+          "has_raw_content": false,
+          "score": 0.74652773
+        },
+        {
+          "title": "Renda de dois salários perderá isenção do IR",
+          "url": "https://www.correiobraziliense.com.br/economia/2024/01/6788669-renda-de-dois-salarios-perdera-isencao-do-ir-entidade-defende-correcao-da-tabela.html",
+          "host": "correiobraziliense.com.br",
+          "in_official_allowlist": true,
+          "content_len": 136,
+          "has_raw_content": false,
+          "score": 0.72698855
+        },
+        {
+          "title": "Imposto de Renda: Governo amplia isenção para quem ...",
+          "url": "https://www.correiobraziliense.com.br/economia/2024/02/6799086-imposto-de-renda-governo-amplia-isencao-para-quem-recebe-ate-dois-salarios.html",
+          "host": "correiobraziliense.com.br",
+          "in_official_allowlist": true,
+          "content_len": 122,
+          "has_raw_content": false,
+          "score": 0.65146625
+        },
+        {
+          "title": "Sancionada isenção do Imposto de Renda para quem ...",
+          "url": "https://www12.senado.leg.br/noticias/materias/2025/11/27/sancionada-isencao-do-imposto-de-renda-para-quem-ganha-ate-r-5-mil-por-mes",
+          "host": "www12.senado.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 938,
+          "has_raw_content": false,
+          "score": 0.53196377
+        },
+        {
+          "title": "Congresso recebe proposta que isenta IR de quem ganha até R$ 5 mil — Senado Notícias",
+          "url": "https://www12.senado.leg.br/noticias/materias/2025/03/19/congresso-recebe-proposta-que-isenta-ir-de-quem-ganha-ate-r-5-mil",
+          "host": "www12.senado.leg.br",
+          "in_official_allowlist": true,
+          "content_len": 803,
+          "has_raw_content": false,
+          "score": 0.50388235
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Governo federal anuncia isenção de imposto de renda para quem ganha até dois salários mínimos",
+      "extra_domain": "wikipedia.org",
+      "kind": "mixed_30_plus_extra",
+      "extra_domain_appeared": false,
+      "extra_domain_appearances": []
+    },
+    {
+      "query": "Governo federal anuncia isenção de imposto de renda para quem ganha até dois salários mínimos",
+      "include_domains": [
+        "wikipedia.org"
+      ],
+      "status_code": 200,
+      "elapsed_s": 2.48,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.86,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Governo Lula (2023–presente) – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Governo_Lula_(2023%E2%80%93presente)",
+          "host": "pt.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 1389,
+          "has_raw_content": false,
+          "score": 0.83093774
+        },
+        {
+          "title": "Gleisi Hoffmann – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Gleisi_Hoffmann",
+          "host": "pt.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 1176,
+          "has_raw_content": false,
+          "score": 0.40042162
+        },
+        {
+          "title": "Chega – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Chega",
+          "host": "pt.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 1200,
+          "has_raw_content": false,
+          "score": 0.27489898
+        },
+        {
+          "title": "Jair Bolsonaro – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Jair_Bolsonaro",
+          "host": "pt.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 1501,
+          "has_raw_content": false,
+          "score": 0.07870625
+        },
+        {
+          "title": "Eleição presidencial no Brasil em 2014 – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Elei%C3%A7%C3%A3o_presidencial_no_Brasil_em_2014",
+          "host": "pt.wikipedia.org",
+          "in_official_allowlist": false,
+          "content_len": 1058,
+          "has_raw_content": false,
+          "score": 0.050578702
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Governo federal anuncia isenção de imposto de renda para quem ganha até dois salários mínimos",
+      "extra_domain": "wikipedia.org",
+      "kind": "isolated_extra_only"
+    },
+    {
+      "query": "Banco Central decide manter taxa Selic inalterada na última reunião do Copom",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int",
+        "cnn.com"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.01,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.49,
+      "result_count": 9,
+      "results": [
+        {
+          "title": "Taxa Selic: Banco Central mantém juros em 15% ao ano | G1",
+          "url": "https://g1.globo.com/economia/noticia/2025/09/17/banco-central-mantem-taxa-basica-de-juros-em-15percent-ao-ano.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 948,
+          "has_raw_content": false,
+          "score": 0.8825193
+        },
+        {
+          "title": "Na última reunião de 2025, Copom deve manter novamente ...",
+          "url": "https://g1.globo.com/economia/noticia/2025/12/10/na-ultima-reuniao-de-2025-copom-deve-manter-novamente-juro-estavel-em-15percent-ao-ano.ghtml",
+          "host": "g1.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 935,
+          "has_raw_content": false,
+          "score": 0.85995835
+        },
+        {
+          "title": "Super-Quarta: BC deve manter Selic em 15% ao ano - Folha",
+          "url": "https://www1.folha.uol.com.br/mercado/2025/07/bc-deve-manter-selic-em-15-ao-ano-e-encerrar-ciclo-de-alta-de-juros-dizem-economistas.shtml",
+          "host": "www1.folha.uol.com.br",
+          "in_official_allowlist": true,
+          "content_len": 154,
+          "has_raw_content": false,
+          "score": 0.76701033
+        },
+        {
+          "title": "Arquivos Selic - Página 14 de 22 - Blog do Vicente",
+          "url": "https://blogs.correiobraziliense.com.br/vicente/tag/selic/page/14",
+          "host": "blogs.correiobraziliense.com.br",
+          "in_official_allowlist": true,
+          "content_len": 156,
+          "has_raw_content": false,
+          "score": 0.76300776
+        },
+        {
+          "title": "ata da reunião do Copom",
+          "url": "https://static.poder360.com.br/uploads/2026/06/ata-selic-copom-banco-central-16-17-junho-2026.pdf",
+          "host": "static.poder360.com.br",
+          "in_official_allowlist": true,
+          "content_len": 1454,
+          "has_raw_content": false,
+          "score": 0.7407191
+        },
+        {
+          "title": "Banco Central reduz taxa Selic em 0,50 ponto, para 13,25 ...",
+          "url": "https://blogs.correiobraziliense.com.br/vicente/banco-central-reduz-taxa-selic-em-050-ponto-para-1325-ao-ano",
+          "host": "blogs.correiobraziliense.com.br",
+          "in_official_allowlist": true,
+          "content_len": 147,
+          "has_raw_content": false,
+          "score": 0.73981786
+        },
+        {
+          "title": "Calendário do Copom 2026: confira todas as datas das reuniões que definem a taxa Selic - Estadão",
+          "url": "https://www.estadao.com.br/einvestidor/financas-pessoais/copom-2026-calendario-reunioes-selic-banco-central",
+          "host": "estadao.com.br",
+          "in_official_allowlist": true,
+          "content_len": 832,
+          "has_raw_content": false,
+          "score": 0.6654328
+        },
+        {
+          "title": "Banco Central reduz taxa de juros para 14,50% ao ano",
+          "url": "https://newblogs.correiobraziliense.com.br/blog-da-rosana-hessel/banco-central-reduz-taxa-de-juros-para-1450-ao-ano",
+          "host": "newblogs.correiobraziliense.com.br",
+          "in_official_allowlist": true,
+          "content_len": 154,
+          "has_raw_content": false,
+          "score": 0.5948579
+        },
+        {
+          "title": "Banco Central mantém taxa de juros em 15% ao ano",
+          "url": "https://newblogs.correiobraziliense.com.br/blog-da-rosana-hessel/banco-central-mantem-taxa-de-juros-em-15-ao-ano",
+          "host": "newblogs.correiobraziliense.com.br",
+          "in_official_allowlist": true,
+          "content_len": 155,
+          "has_raw_content": false,
+          "score": 0.5806618
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Banco Central decide manter taxa Selic inalterada na última reunião do Copom",
+      "extra_domain": "cnn.com",
+      "kind": "mixed_30_plus_extra",
+      "extra_domain_appeared": false,
+      "extra_domain_appearances": []
+    },
+    {
+      "query": "Banco Central decide manter taxa Selic inalterada na última reunião do Copom",
+      "include_domains": [
+        "cnn.com"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.85,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.14,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "La Reserva Federal mantiene las tasas de interés inalteradas por cuarta vez consecutiva | CNN",
+          "url": "https://cnnespanol.cnn.com/2024/01/31/reserva-federal-tipos-interes-inalterados-trax",
+          "host": "cnnespanol.cnn.com",
+          "in_official_allowlist": false,
+          "content_len": 2433,
+          "has_raw_content": false,
+          "score": 0.5060794
+        },
+        {
+          "title": "La Reserva Federal mantiene sin cambios las tasas de interés en la última reunión de Powell como presidente | CNN",
+          "url": "https://cnnespanol.cnn.com/2026/04/29/eeuu/reserva-federal-mantiene-tasas-de-interes-trax",
+          "host": "cnnespanol.cnn.com",
+          "in_official_allowlist": false,
+          "content_len": 2274,
+          "has_raw_content": false,
+          "score": 0.48440504
+        },
+        {
+          "title": "La Reserva Federal mantiene estables las tasas de interés en medio de la caótica guerra comercial de Trump | CNN",
+          "url": "https://cnnespanol.cnn.com/2025/03/19/eeuu/fed-mantiene-tasas-interes-guerra-comercial-trump-trax",
+          "host": "cnnespanol.cnn.com",
+          "in_official_allowlist": false,
+          "content_len": 2487,
+          "has_raw_content": false,
+          "score": 0.37724295
+        },
+        {
+          "title": "El Banco Central Europeo recorta las tasas de interés ante la amenaza de los aranceles | CNN",
+          "url": "https://cnnespanol.cnn.com/2025/04/17/economia/banco-central-europeo-tasas-interes-aranceles-trax",
+          "host": "cnnespanol.cnn.com",
+          "in_official_allowlist": false,
+          "content_len": 2378,
+          "has_raw_content": false,
+          "score": 0.3458787
+        },
+        {
+          "title": "Como Trump, Petro se queja de las tasas de interés y rompe con el banco central | CNN",
+          "url": "https://cnnespanol.cnn.com/2026/04/01/colombia/petro-tasas-interes-banco-trump-orix",
+          "host": "cnnespanol.cnn.com",
+          "in_official_allowlist": false,
+          "content_len": 2306,
+          "has_raw_content": false,
+          "score": 0.16791369
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Banco Central decide manter taxa Selic inalterada na última reunião do Copom",
+      "extra_domain": "cnn.com",
+      "kind": "isolated_extra_only"
+    },
+    {
+      "query": "Seleção brasileira de futebol se classifica para as quartas de final da competição internacional",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int",
+        "reuters.com"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.67,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.19,
+      "result_count": 10,
+      "results": [
+        {
+          "title": "Veja do que o Brasil precisa para se classificar e passar ...",
+          "url": "https://ge.globo.com/futebol/selecao-brasileira/noticia/2024/06/28/veja-do-que-o-brasil-precisa-para-se-classificar-e-passar-em-primeiro-no-grupo-da-copa-america.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 171,
+          "has_raw_content": false,
+          "score": 0.75723875
+        },
+        {
+          "title": "Copa do Mundo: veja a tabela dos jogos do Brasil, com dias, horários e locais | Ge",
+          "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/05/18/copa-do-mundo-veja-a-tabela-dos-jogos-do-brasil-com-dias-horarios-e-locais.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 896,
+          "has_raw_content": false,
+          "score": 0.529337
+        },
+        {
+          "title": "Seleção de Ilhabela se classifica para...",
+          "url": "https://www.ilhabela.sp.gov.br/portal/noticias/0/3/5474/selecao-de-ilhabela-se-classifica-para-as-quartas-de-final-do-torneio-internacional-de-futebol-amador",
+          "host": "ilhabela.sp.gov.br",
+          "in_official_allowlist": true,
+          "content_len": 168,
+          "has_raw_content": false,
+          "score": 0.5167668
+        },
+        {
+          "title": "Brasil registra o maior jejum de títulos da história da Copa",
+          "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/07/05/brasil-registra-o-maior-jejum-de-titulos-da-historia-da-copa.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 168,
+          "has_raw_content": false,
+          "score": 0.5148644
+        },
+        {
+          "title": "Kings League: Brasil atropela a Arábia e vai às quartas do ...",
+          "url": "https://ge.globo.com/kings-league/noticia/2026/01/12/kings-league-brasil-atropela-a-arabia-saudita-e-vai-as-quartas-da-copa-do-mundo.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 155,
+          "has_raw_content": false,
+          "score": 0.4974371
+        },
+        {
+          "title": "Brasil é cabeça de chave do Grupo C da Copa do Mundo de 2026; veja análise dos adversários | Ge",
+          "url": "https://ge.globo.com/futebol/futebol-internacional/noticia/2025/12/05/brasil-e-cabeca-de-chave-do-grupo-c-da-copa-do-mundo-de-2026-veja-analise-dos-adversarios.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 799,
+          "has_raw_content": false,
+          "score": 0.4813325
+        },
+        {
+          "title": "Qual vai ser o adversário do Brasil? Veja cenários e caminho até final | Ge",
+          "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/06/29/qual-vai-ser-o-adversario-do-brasil-veja-cenarios-e-caminho-ate-final.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 830,
+          "has_raw_content": false,
+          "score": 0.47008035
+        },
+        {
+          "title": "Quartas da Copa do Mundo: Supercomputador prevê ...",
+          "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/07/09/supercomputador-preve-vencedores-dos-jogos-das-quartas-de-final-da-copa-veja-projecoes.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 136,
+          "has_raw_content": false,
+          "score": 0.46322632
+        },
+        {
+          "title": "Veja do que o Brasil precisa para se classificar após vitória ...",
+          "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/06/19/veja-do-que-o-brasil-precisa-para-se-classificar-apos-vitoria-sobre-o-haiti.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 161,
+          "has_raw_content": false,
+          "score": 0.43611822
+        },
+        {
+          "title": "Argentina chega às quartas da Copa; Brasil e Alemanha ...",
+          "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/07/04/veja-ranking-de-selecoes-com-mais-participacoes-em-quartas-de-final-de-copa-brasil-e-alemanha-lideram.ghtml",
+          "host": "ge.globo.com",
+          "in_official_allowlist": true,
+          "content_len": 145,
+          "has_raw_content": false,
+          "score": 0.42019567
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Seleção brasileira de futebol se classifica para as quartas de final da competição internacional",
+      "extra_domain": "reuters.com",
+      "kind": "mixed_30_plus_extra",
+      "extra_domain_appeared": false,
+      "extra_domain_appearances": []
+    },
+    {
+      "query": "Seleção brasileira de futebol se classifica para as quartas de final da competição internacional",
+      "include_domains": [
+        "reuters.com"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.93,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.32,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Brazil into Copa quarters after 1-1 draw with Colombia",
+          "url": "https://www.reuters.com/sports/soccer/brazil-into-copa-america-quarters-after-1-1-draw-with-colombia-2024-07-03",
+          "host": "reuters.com",
+          "in_official_allowlist": false,
+          "content_len": 915,
+          "has_raw_content": false,
+          "score": 0.68874115
+        },
+        {
+          "title": ": Brazil advance; Argentina, Mexico out",
+          "url": "https://www.reuters.com/article/world/-brazil-advance-argentina-mexico-out-idUSKCN10L28H",
+          "host": "reuters.com",
+          "in_official_allowlist": false,
+          "content_len": 138,
+          "has_raw_content": false,
+          "score": 0.6175132
+        },
+        {
+          "title": "Britain, U.S. and Brazil reach quarter-finals",
+          "url": "https://www.reuters.com/article/sports/britain-us-and-brazil-reach-quarter-finals-idUSBRE86R0T8",
+          "host": "reuters.com",
+          "in_official_allowlist": false,
+          "content_len": 140,
+          "has_raw_content": false,
+          "score": 0.60358196
+        },
+        {
+          "title": "Soccer-Canada reach Olympic quarter-finals despite six- ...",
+          "url": "https://www.reuters.com/sports/olympics/soccer-germany-brazil-reach-olympic-quarter-finals-australia-made-wait-2024-07-31",
+          "host": "reuters.com",
+          "in_official_allowlist": false,
+          "content_len": 139,
+          "has_raw_content": false,
+          "score": 0.50886196
+        },
+        {
+          "title": "Depleted Brazil brace for must-win World Cup qualifiers",
+          "url": "https://www.reuters.com/sports/soccer/depleted-brazil-brace-must-win-world-cup-qualifiers-2024-10-09",
+          "host": "reuters.com",
+          "in_official_allowlist": false,
+          "content_len": 157,
+          "has_raw_content": false,
+          "score": 0.44767818
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "Seleção brasileira de futebol se classifica para as quartas de final da competição internacional",
+      "extra_domain": "reuters.com",
+      "kind": "isolated_extra_only"
+    }
+  ],
+  "phase3_no_results": [
+    {
+      "query": "xzqvwplkjhqwsdfghjklzxcvbnm9876543210 teste deliberado sem nenhuma noticia correspondente esperada nesta consulta",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 2.38,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 1.72,
+      "result_count": 5,
+      "results": [
+        {
+          "title": "Novo companheiro de Verstappen, Hadjar bate durante teste em Barcelona | CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/esportes/automobilismo/novo-companheiro-de-verstappen-hadjar-bate-durante-teste-em-barcelona",
+          "host": "cnnbrasil.com.br",
+          "in_official_allowlist": true,
+          "content_len": 2191,
+          "has_raw_content": false,
+          "score": 0.20244355
+        },
+        {
+          "title": "Teste Público das urnas eletrônicas começa nesta segunda-feira (1º) | Radioagência Nacional",
+          "url": "https://agenciabrasil.ebc.com.br/radioagencia-nacional/geral/audio/2025-11/teste-publico-das-urnas-eletronicas-comeca-nesta-segunda-feira-1o",
+          "host": "agenciabrasil.ebc.com.br",
+          "in_official_allowlist": true,
+          "content_len": 2264,
+          "has_raw_content": false,
+          "score": 0.19360471
+        },
+        {
+          "title": "CNPU divulga notas preliminares da prova discursiva nesta sexta (23) | Radioagência Nacional",
+          "url": "https://agenciabrasil.ebc.com.br/radioagencia-nacional/geral/audio/2026-01/cpnu-divulga-notas-preliminares-da-prova-discursiva-nesta-sexta-23",
+          "host": "agenciabrasil.ebc.com.br",
+          "in_official_allowlist": true,
+          "content_len": 2223,
+          "has_raw_content": false,
+          "score": 0.15014121
+        },
+        {
+          "title": "Proxalutamida: MPF e conselho médico vão apurar teste sem autorização com pacientes de covid - Estadão",
+          "url": "https://saude.estadao.com.br/noticias/geral,proxalutamida-conselho-e-mpf-vao-apurar-teste-sem-autorizacao-com-pacientes-de-covid,70003821117",
+          "host": "saude.estadao.com.br",
+          "in_official_allowlist": true,
+          "content_len": 2434,
+          "has_raw_content": false,
+          "score": 0.14382415
+        },
+        {
+          "title": "A que horas começa o BBB 26 nesta segunda? O que vai acontecer no programa hoje?",
+          "url": "https://www.terra.com.br/diversao/tv/reality-shows/a-que-horas-comeca-o-bbb-26-nesta-segunda-o-que-vai-acontecer-no-programa-hoje,d444d41b64491570b7865045e796b394w93do4ee.html",
+          "host": "terra.com.br",
+          "in_official_allowlist": true,
+          "content_len": 2110,
+          "has_raw_content": false,
+          "score": 0.12939197
+        }
+      ],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ],
+      "first_result_raw_keys": [
+        "content",
+        "raw_content",
+        "score",
+        "title",
+        "url"
+      ],
+      "claim": "xzqvwplkjhqwsdfghjklzxcvbnm9876543210 teste deliberado sem nenhuma noticia correspondente esperada nesta consulta"
+    }
+  ],
+  "phase4_invalid_key": [
+    {
+      "query": "teste de chave invalida",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 401,
+      "elapsed_s": 0.55,
+      "credit_related_headers": {},
+      "error_payload": {
+        "detail": {
+          "error": "Unauthorized: missing or invalid API key."
+        }
+      },
+      "result_count": 0,
+      "results": []
+    }
+  ],
+  "phase3b_pure_gibberish_no_results": [
+    {
+      "query": "zzxqvbnmqwpfjtlorkhsdcbgy 9284710583 xkcvbnmqwertyuiopasdfghjklzx qwoieurytlaksjdhfg",
+      "include_domains": [
+        "g1.globo.com",
+        "oglobo.globo.com",
+        "folha.uol.com.br",
+        "estadao.com.br",
+        "cnnbrasil.com.br",
+        "veja.abril.com.br",
+        "valor.globo.com",
+        "exame.com",
+        "r7.com",
+        "terra.com.br",
+        "metropoles.com",
+        "poder360.com.br",
+        "gzh.com.br",
+        "correiobraziliense.com.br",
+        "agenciabrasil.ebc.com.br",
+        "otempo.com.br",
+        "band.uol.com.br",
+        "ge.globo.com",
+        "aosfatos.org",
+        "lupa.uol.com.br",
+        "bbc.com",
+        "dw.com",
+        "elpais.com",
+        "apnews.com",
+        "gov.br",
+        "camara.leg.br",
+        "senado.leg.br",
+        "stf.jus.br",
+        "tse.jus.br",
+        "who.int"
+      ],
+      "status_code": 200,
+      "elapsed_s": 1.46,
+      "credit_related_headers": {},
+      "tavily_response_time_field": 0.98,
+      "result_count": 0,
+      "results": [],
+      "response_keys": [
+        "answer",
+        "follow_up_questions",
+        "images",
+        "query",
+        "request_id",
+        "response_time",
+        "results"
+      ]
+    }
+  ]
+}

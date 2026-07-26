@@ -67,9 +67,9 @@ Antes de considerar a tarefa concluída, confirme explicitamente:
 |---|---|
 | 0 | Contexto: o que pode/não pode ser reaproveitado do código atual |
 | 1 | Objetivo da feature |
-| 2 (RF-01 a RF-10) | Requisitos funcionais — pipeline completo: entrada → busca (DDG) → extração → embeddings → NLI → agregação → resultado → erros |
+| 2 (RF-01 a RF-10) | Requisitos funcionais — pipeline completo: entrada → busca (Tavily via proxy) → extração → embeddings → NLI → agregação → resultado → erros |
 | 3 (NF) | Stack, modelos, performance, segurança, formatos de dados |
 | 4 (CA-01 a CA-11) | Critérios de aceitação — base para os testes |
 | 5 | Fora de escopo — não implementar |
-| 6 (DT-01 a DT-17) | Decisões técnicas já tomadas — não reabrir sem necessidade |
+| 6 (DT-01 a DT-21) | Decisões técnicas já tomadas — não reabrir sem necessidade |
 | 7 | Riscos e pontos `[EM ABERTO]` — não resolver sem confirmação do usuário |

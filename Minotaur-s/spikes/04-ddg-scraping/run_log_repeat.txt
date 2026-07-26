@@ -1,0 +1,8 @@
+
+=== FASE A — limite prático de domínios por query (site: OR) ===
+
+[A] n_domains=3 query_len=124 chars
+    status=202 BLOQUEADO resultados=0 dentro_do_subset=0/0 tempo=0.17s
+    !!! BLOQUEIO DETECTADO: HTTP 202 inesperado — parando fase A
+
+Parando após bloqueio na fase A. Resultados parciais salvos em results.json.

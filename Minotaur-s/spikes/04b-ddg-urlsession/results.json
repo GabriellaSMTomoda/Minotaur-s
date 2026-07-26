@@ -1,0 +1,93 @@
+{
+  "phase_a": [
+    {
+      "blocked": false,
+      "body_len": 41749,
+      "elapsed_s": 0.84,
+      "hosts_matching_subset": 0,
+      "hosts_total": 10,
+      "n_domains": 3,
+      "query": "Governo federal anuncia isenção imposto renda quem ganha site:g1.globo.com OR site:oglobo.globo.com OR site:folha.uol.com.br",
+      "query_len": 124,
+      "result_count": 10,
+      "result_hosts": [
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com"
+      ],
+      "status_code": 200
+    },
+    {
+      "blocked": false,
+      "body_len": 40120,
+      "elapsed_s": 0.79,
+      "hosts_matching_subset": 0,
+      "hosts_total": 10,
+      "n_domains": 5,
+      "query": "Governo federal anuncia isenção imposto renda quem ganha site:g1.globo.com OR site:oglobo.globo.com OR site:folha.uol.com.br OR site:estadao.com.br OR site:cnnbrasil.com.br",
+      "query_len": 172,
+      "result_count": 10,
+      "result_hosts": [
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com"
+      ],
+      "status_code": 200
+    },
+    {
+      "blocked": false,
+      "body_len": 39710,
+      "elapsed_s": 0.78,
+      "hosts_matching_subset": 0,
+      "hosts_total": 10,
+      "n_domains": 8,
+      "query": "Governo federal anuncia isenção imposto renda quem ganha site:g1.globo.com OR site:oglobo.globo.com OR site:folha.uol.com.br OR site:estadao.com.br OR site:cnnbrasil.com.br OR site:veja.abril.com.br OR site:valor.globo.com OR site:exame.com",
+      "query_len": 240,
+      "result_count": 10,
+      "result_hosts": [
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com",
+        "duckduckgo.com"
+      ],
+      "status_code": 200
+    },
+    {
+      "block_reason": "HTTP 202 inesperado",
+      "blocked": true,
+      "body_len": 14814,
+      "elapsed_s": 0.1,
+      "hosts_matching_subset": 0,
+      "hosts_total": 0,
+      "n_domains": 12,
+      "query": "Governo federal anuncia isenção imposto renda quem ganha site:g1.globo.com OR site:oglobo.globo.com OR site:folha.uol.com.br OR site:estadao.com.br OR site:cnnbrasil.com.br OR site:veja.abril.com.br OR site:valor.globo.com OR site:exame.com OR site:r7.com OR site:terra.com.br OR site:metropoles.com OR site:poder360.com.br",
+      "query_len": 323,
+      "result_count": 0,
+      "result_hosts": [],
+      "status_code": 202
+    }
+  ],
+  "phase_b": [],
+  "stop_reason": "bloqueio detectado na fase A",
+  "stopped_early": true
+}

@@ -46,20 +46,20 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 ### RF-02 — Geração da query de busca
 - RF-02.1 — Se a entrada tiver mais de 200 caracteres, o app deve extrair uma query reduzida (palavras-chave) em vez de enviar o texto inteiro ao buscador.
 - RF-02.2 — Estratégia de extração de palavras-chave: [EM ABERTO] — opções consideradas: (a) remoção de stopwords + top-N termos por frequência, (b) primeiras N palavras da afirmação, (c) modelo local leve.
-- RF-02.3 — A query deve ser restrita aos domínios da allowlist usando o operador `site:` com `OR`.
+- RF-02.3 — A query deve ser restrita aos domínios da allowlist usando o parâmetro `include_domains` da API de busca (Tavily), com a lista completa de domínios em uma única chamada. Não é necessário construir `site:`/`OR` manualmente — a restrição é nativa da API.
 
 ### RF-03 — Allowlist de domínios confiáveis
-- RF-03.1 — A composição da lista de domínios confiáveis já existe hoje como `trustedDomains`, em `VerificadorView`, e deve ser preservada como fonte da verdade do conteúdo (os domínios em si não mudam nesta reconstrução).
+- RF-03.1 — A composição da lista de domínios confiáveis já existe hoje como `trustedDomains`, em `VerificadorView`, e deve ser preservada como fonte da verdade do conteúdo, **com uma exceção autorizada**: os 4 domínios identificados no Spike 3 como bloqueados por bot-blocking (`uol.com.br`, `espn.com.br`, `reuters.com`, `ibge.gov.br` — HTTP 401/403/202 vazio, não é falha de extração) devem ser **removidos** da lista. Fora dessa exceção, nenhum outro domínio é adicionado ou removido nesta reconstrução.
 - RF-03.2 — O formato de armazenamento/estrutura de dados é livre para a reconstrução — não precisa continuar como propriedade da `VerificadorView`. Fica a critério da implementação (ex: struct/enum dedicado, arquivo JSON no bundle, etc.), desde que a lógica de verificação (busca, filtragem, extração) não dependa de acessar a `View` para obter os domínios.
 - RF-03.3 — Cada domínio precisa continuar identificável por seu `domain` (string usada no filtro/`site:`). Campos adicionais (`displayName`, `enabled`, etc.) podem ser adicionados na migração se ajudarem a estrutura, mas não são obrigatórios caso não existam hoje.
 - RF-03.4 — Nesta fase, a lista **não é editável pelo usuário** e não é atualizada remotamente — apenas migrada de lugar/formato, não de conteúdo.
-- RF-03.5 — Resultados de busca cujo domínio não esteja na allowlist devem ser descartados, mesmo que retornados pelo buscador.
+- RF-03.5 — Resultados de busca cujo domínio não esteja na allowlist devem ser descartados, mesmo que retornados pelo buscador. **Este filtro é obrigatório, não defesa em profundidade**: o Spike 5 confirmou empiricamente que `include_domains` da Tavily não é um filtro 100% rígido — vazou domínios fora da allowlist em 4/20 buscas de teste (20%), incluindo 2 casos onde 100% dos resultados retornados eram de fora da lista (Wikipédia, dicionários online, sites sem relação jornalística).
 - RF-03.6 — Migrar `trustedDomains` para fora da `VerificadorView` faz parte da reconstrução (ver DT-17): a `View` não deve ser dona da fonte de dados usada pela lógica de negócio.
 
 ### RF-04 — Busca de artigos
 - RF-04.1 — O app consulta um provedor de busca web restrito à allowlist.
-- RF-04.2 — Provedor de busca: scraping de `html.duckduckgo.com`. Sem uso de API externa paga nesta fase. Ver DT-11 (revisada) e riscos associados em 7.2/7.3.
-- RF-04.3 — O app recupera no máximo 5 resultados por verificação.
+- RF-04.2 — Provedor de busca: **Tavily** (https://tavily.com), API oficial com contrato/ToS, tier gratuito de 1.000 créditos/mês sem cartão de crédito. Ver DT-11 (revisada 2ª vez) e evidência no Spike 5. O app **não chama a Tavily diretamente** — chama um proxy serverless (Cloudflare Workers, DT-21) que injeta a chave e repassa a requisição/resposta.
+- RF-04.3 — O app solicita 8–10 resultados por verificação à API (`max_results`), aplica o filtro de allowlist (RF-03.5) e trunca para os 5 primeiros resultados dentro da allowlist. Pedir mais resultados do que o necessário e truncar depois do filtro reduz a taxa de vazamento observada no Spike 5 (evidência: a mesma busca que vazou 4/5 com `max_results=5` retornou 10/10 dentro da allowlist com `max_results=10`).
 - RF-04.4 — Se nenhum resultado for retornado, o app exibe o veredito `NÃO ENCONTRADO` (ver RF-08) sem executar as etapas seguintes.
 - RF-04.5 — Falha de rede na busca deve produzir mensagem de erro distinta de "não encontrado".
 
@@ -128,13 +128,20 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 | Rede | `URLSession` (async/await) |
 | Álgebra vetorial | Accelerate framework (similaridade de cosseno) |
 | Conversão de modelos | Python + `coremltools` + `transformers` (offline, fora do app) |
+| Proxy de API (proteção de chave) | Cloudflare Workers (serverless, tier gratuito) — ver DT-21 |
 
 ### 3.2 Modelos de ML
-- Modelo de embeddings: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, convertido para `.mlpackage` e quantizado INT8 (113 MB). Ver DT-18.
-- Modelo NLI: `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli`, convertido para `.mlpackage` e quantizado INT8 (**103 MB**). Roda on-device com `computeUnits = .cpuOnly` como configuração padrão — o shape de sequência dinâmico (`RangeDim`) não aproveita bem a ANE, e `.cpuOnly` mediu mais rápido que `.all` neste modelo em device físico (2,0 ms vs. 10,5 ms). Ver DT-18 e spike 02c.
-- Tamanho combinado (embeddings + NLI): 113 MB + 103 MB = **216 MB INT8**, dentro do alvo NF-05 (<500 MB).
-- Suporte a português: modelo de embeddings confirmado (spikes 01, 02). Modelo de NLI adotado (MiniLMv2-L6) atingiu **90% (18/20)** no dataset de validação PT-BR do Spike 1 — abaixo dos 100% (20/20) do `mDeBERTa-v3-base-xnli`, testado antes mas descartado por **não executar em Core ML on-device** (crash/erro em todas as configurações de `computeUnits` testadas — ver Spike 2 e DT-18). Essa diferença de acurácia (~90% vs. 100%) é uma limitação aceita conscientemente em troca de um modelo que de fato roda em device; fica registrada aqui para não se perder. Ver spike 02c.
+- **Modelo de embeddings (definitivo):** `paraphrase-multilingual-MiniLM-L12-v2`, convertido para `.mlpackage`, quantizado INT8 (~113 MB). Validado em PT-BR no Spike 1; conversão validada no Spike 2 (cos=0,9999 vs. PyTorch); latência em device físico = 7 ms (Spike 2, medição com Xcode completo), bem abaixo de NF-01.
+- **Modelo de NLI (definitivo):** `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli` (ver DT-18 revisada), rodando em **`.cpuOnly`** (não `.all`). Convertido para `.mlpackage`, quantizado INT8 (~103 MB). Executa com logits corretos em device físico (cos=1,0 vs. PyTorch) tanto em `.cpuOnly` (2 ms) quanto em `.all` (10,5 ms) — `.cpuOnly` escolhido por ser mais rápido neste caso (shape dinâmico `RangeDim` não aproveita bem a ANE). Acurácia em PT-BR: **18/20 (90%)** no dataset do Spike 1, com o menor número de "erros perigosos" (classificar `neutral`/`entailment` como `contradiction`) entre os candidatos testados.
+  - **Histórico da decisão:** o modelo originalmente escolhido, `mDeBERTa-v3-base-xnli` com `XSoftmax` patchado, teve 100% de acerto em PT-BR (Spike 1) e conversão para Core ML com saída idêntica ao original (Spike 2b), mas **não executa em nenhum device real testado** — crash de MPSGraph (`.all`) e erro BNNS (`.cpuOnly`), confirmado em 3 tentativas (Spike 2, medição com Xcode completo). "Converter sem erro" e "logits baterem em PyTorch" não garantiram execução real — lição estrutural do Spike 2c, que reordenou os filtros de validação (execução em device antes de qualidade PT-BR) para os candidatos seguintes.
+  - Candidatos testados no Spike 2c, todos com execução confirmada em device físico: `MiniLMv2-L6` (escolhido, 90% PT-BR, 103 MB, 2ms), `MiniLMv2-L12` (85% PT-BR, 113 MB, 3ms — alternativa próxima), `symanto/xlm-roberta-base` (80% PT-BR, 266 MB, só roda em `.cpuOnly` — plano C). `ERNIE-M` reprovado (reproduziu o mesmo crash do mDeBERTa).
+  - **Trade-off aceito conscientemente:** a acurácia PT-BR caiu de 100% (mDeBERTa, não executável) para 90% (MiniLMv2-L6, executável) — a escolha é entre um modelo que não roda e um que roda a ~90%.
+  - **Dependência de manutenção:** nenhuma — `MiniLMv2-L6` usa atenção padrão, sem custom op, sem monkeypatch necessário no pipeline de conversão.
+- Suporte a português: **resolvido.** Ambos os modelos foram validados com dataset real em PT-BR (Spike 1) e a conversão para Core ML foi confirmada como preservando a saída e executando corretamente em device físico (Spikes 2, 2b, 2c).
 - Ambos os modelos são embarcados no bundle do app. Nenhum download de modelo em runtime nesta fase.
+- Tamanho combinado (embeddings + NLI, INT8): **113 + 103 = 216 MB** — bem dentro do alvo NF-05 (<500 MB), com folga maior que a estimativa anterior (era ~389 MB com o mDeBERTa).
+
+
 
 ### 3.3 Performance
 - NF-01 — Inferência de embeddings de um chunk: < 150 ms em iPhone 13 ou superior.
@@ -147,7 +154,7 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 ### 3.4 Segurança e privacidade
 - NF-07 — Nenhum servidor próprio. O app não coleta, transmite nem armazena remotamente o texto digitado pelo usuário.
 - NF-08 — O texto do usuário só sai do dispositivo na forma da query enviada ao provedor de busca. Isso deve ser informado explicitamente na política de privacidade e na primeira execução.
-- NF-09 — N/A nesta fase: sem API de busca paga, não há chave a proteger. Reavaliar se o provedor mudar no futuro.
+- NF-09 — **Resolvido:** a chave de API da Tavily é protegida por um proxy serverless (Cloudflare Workers, tier gratuito — ver DT-21). O app nunca embarca a chave nem a envia diretamente à Tavily; toda chamada de busca passa pela URL do Worker, que injeta a chave e repassa a resposta.
 - NF-10 — Todo o tráfego via HTTPS. ATS (App Transport Security) mantido com configuração padrão, sem exceções de domínio.
 - NF-11 — Política de privacidade publicada e acessível dentro do app (exigência da App Store).
 
@@ -290,14 +297,17 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 | DT-08 | Top-3 chunks por artigo para o NLI | O chunk mais similar isolado pode não conter a informação decisiva |
 | DT-09 | Similaridade de cosseno como métrica de relevância | Padrão para `sentence-transformers`; implementável com Accelerate |
 | DT-10 (revisada) | Allowlist embarcada e fixa, com conteúdo migrado de `trustedDomains` (hoje em `VerificadorView`) para fora da camada de UI | Preserva a curadoria já feita; separa dados de negócio da View, alinhado a DT-17 |
-| DT-11 (revisada) | Scraping de `html.duckduckgo.com`, sem API externa | Decisão explícita do stakeholder nesta fase: custo zero e independência de chave de API. Risco de instabilidade e bloqueio aceito conscientemente (ver 7.2) |
+| DT-11 (revisada 2ª vez) | **Tavily** como provedor de busca, substituindo o scraping do DuckDuckGo | O scraping do DDG bloqueou de forma sistemática em 2 clientes HTTP diferentes (Python e Swift/URLSession — Spikes 4 e 4b), inclusive em uso leve. As 3 alternativas originalmente pesquisadas (Bing, Brave, Google Custom Search) estão inviabilizadas: Bing foi descontinuada (ago/2025), Brave eliminou o tier gratuito (fev/2026, exige cartão sem teto de gasto), Google Custom Search está fechada para novos clientes desde 2025. Tavily oferece 1.000 créditos/mês grátis sem cartão, com `include_domains` nativo, validado tecnicamente no Spike 5 (100% de disponibilidade em 20 buscas, latência média 1,62s, sem nenhum sinal de bloqueio) |
 | DT-12 | Vereditos referenciam as fontes, nunca afirmam verdade absoluta | Reduz risco de dano informacional e de rejeição na revisão da App Store |
-| DT-13 | Nenhum servidor próprio; sem coleta de dados | Simplicidade, custo zero, menor exigência regulatória |
+| DT-13 | Nenhum servidor próprio tradicional; sem coleta de dados | Simplicidade, custo zero, menor exigência regulatória. Exceção pontual: DT-21 (proxy serverless da Tavily) — não é um servidor mantido, mas tecnicamente um endpoint existe; o proxy é stateless (só repassa a requisição, não armazena nada) |
 | DT-14 | Trechos citados limitados e sempre com link para o original | Reduz risco de violação de direitos autorais e de rejeição pela guideline 5.2 |
 | DT-15 | `Verificador.swift` atual é destruído e reconstruído do zero na parte de lógica/análise | Implementação atual (artigo inteiro para `FoundationModels`) erra com frequência; não é base confiável para evolução incremental |
 | DT-16 | Design visual/estrutura de UI da tela atual pode ser reaproveitado quando razoável | Não há problema identificado na UI, só na lógica de verificação; evita retrabalho desnecessário |
 | DT-17 | A nova lógica deve ser separada em arquivo(s) próprio(s), não deve viver inteira em `Verificador.swift` | O problema original inclui estar "totalmente implementada no mesmo arquivo"; separar responsabilidades (busca, extração, embeddings, NLI, agregação) evita repetir esse defeito estrutural |
-| DT-18 (revisada) | Modelo de embeddings `paraphrase-multilingual-MiniLM-L12-v2` (INT8, 113 MB) e modelo NLI `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli` (INT8, 103 MB), rodando em `computeUnits = .cpuOnly` | A decisão anterior (`mDeBERTa-v3-base-xnli` com `XSoftmax` patchado) foi abandonada: o modelo convertia para Core ML e batia os logits com o PyTorch original (cos=1,0), mas **não executava uma única inferência em nenhum ambiente de device testado** — crash MPSGraph em `.all`, erro BNNS em `.cpuOnly`, trava no simulador (Spike 2). O `MiniLMv2-L6` substitui porque **executa** em device físico real com logits corretos (cos=1,0) tanto em `.cpuOnly` quanto em `.all`, é o menor e mais rápido entre os candidatos que passaram nesse teste (103 MB, 2 ms em device), e atinge 18/20 (90%) em PT-BR no dataset do Spike 1 — abaixo do 100% do mDeBERTa, mas o único caminho comprovadamente executável em device até agora. Ver spikes/02-coreml-latencia, spikes/02c-nli-executavel |
+| DT-18 (revisada) | Modelo de NLI definitivo: `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli`, rodando em `.cpuOnly` | Substituiu o mDeBERTa patchado (DT-18 original): mDeBERTa convertia e batia logits com PyTorch, mas **não executava em nenhum device físico testado** (crash MPSGraph em `.all`, erro BNNS em `.cpuOnly` — Spike 2, medição com Xcode completo). MiniLMv2-L6 executa com cos=1,0 em device físico (Spike 2c), 90% (18/20) em PT-BR, 103 MB INT8, 2ms — menor número de erros perigosos entre os candidatos que de fato executam. Trade-off aceito: 90% executável > 100% não-executável |
+| DT-19 | Solicitar mais resultados da API do que o necessário (8-10) e truncar para 5 depois do filtro de allowlist | Reduz a taxa de vazamento de domínios fora da allowlist observada no Spike 5 (evidência: mesma busca vazou 4/5 com max_results=5, mas retornou 10/10 corretos com max_results=10) |
+| DT-20 | Domínios `*.gov.br` na allowlist continuam validando por sufixo, incluindo subdomínios de prefeituras/órgãos menores, não só o portal federal | Decisão consciente do stakeholder: simplicidade da regra de correspondência sobrepõe o risco de incluir órgãos públicos menores, que ainda são fontes governamentais legítimas |
+| DT-21 | Proteção da chave da Tavily via proxy serverless (Cloudflare Workers) | Chave embarcada no binário é extraível por engenharia reversa (consenso técnico, inclusive de post do DTS da Apple); proxy é a única proteção real. Cloudflare Workers: tier gratuito de 100.000 req/dia, sem custo, manutenção mínima (função stateless, não é servidor 24/7 tradicional) — não contradiz o espírito de DT-13 (evitar backend pesado) |
 
 ---
 
@@ -312,7 +322,8 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 | Tamanho do app ultrapassar limites razoáveis de download | Médio | Quantização agressiva; se insuficiente, avaliar download dos modelos sob demanda |
 | Extração de texto principal falhar em muitos sites | Alto | Testar com amostra real dos domínios da allowlist antes de fixar a lista |
 | Paywall e conteúdo via JavaScript reduzirem drasticamente as fontes utilizáveis | Alto | Selecionar domínios da allowlist priorizando sites com HTML estático acessível |
-| Bloqueio/rate-limit do scraping do DDG (sem API oficial, risco aceito — DT-11 revisada) | Médio-Alto | Cachear resultados de busca por sessão; degradar com mensagem clara em vez de crash |
+| ~~Bloqueio/rate-limit do scraping do DDG~~ — resolvido: substituído por Tavily (DT-11 revisada 2ª vez), sem sinal de bloqueio no Spike 5 | — | — |
+| Vazamento de domínios fora da allowlist via `include_domains` da Tavily (confirmado no Spike 5, 20% das buscas de teste) | Médio | RF-03.5 como filtro obrigatório (não opcional) + RF-04.3 (over-fetch e truncar) |
 | Throttling térmico em verificações consecutivas | Baixo | Limitar número de chunks processados; NLI é leve o suficiente |
 | Reconstrução da feature afetar acidentalmente outras partes do app por acoplamento no `Verificador.swift` atual | Médio | Mapear todas as dependências/chamadas de/para `Verificador.swift` antes de deletar; separar em arquivos próprios (DT-17) |
 
@@ -322,25 +333,31 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 |---|---|---|
 | Falso positivo/negativo levar o usuário a conclusão errada | Alto | Vereditos sempre referenciados às fontes; aviso de limitação visível; exibir sempre os trechos e links |
 | Rejeição na App Store por agregação de conteúdo de terceiros (guideline 5.2) | Médio | Trechos curtos, atribuição clara, valor agregado evidente (análise, não republicação) |
-| Rejeição por app incompleto se o scraping falhar com frequência (guideline 2.1) | Médio | Garantir degradação elegante e mensagens claras em vez de tela vazia |
+| Rejeição por app incompleto se a extração de texto falhar com frequência (guideline 2.1) | Médio | Garantir degradação elegante e mensagens claras em vez de tela vazia |
 | Violação de ToS ou `robots.txt` dos veículos consultados | Médio | Definir política de conformidade antes do lançamento |
 | Critério de escolha da allowlist ser percebido como enviesado | Médio | Documentar publicamente o critério dentro do app |
 
 ### 7.3 Pontos em aberto (bloqueiam decisões de implementação)
 
-1. ~~Modelos específicos com suporte comprovado a PT-BR~~ — resolvido: `paraphrase-multilingual-MiniLM-L12-v2` (embeddings) + `mDeBERTa-v3-base-xnli` patchado (NLI). Ver DT-18.
-2. ~~Provedor de busca~~ — decidido: scraping de `html.duckduckgo.com` (DT-11 revisada).
-3. **[EM ABERTO]** Como proteger a chave de API sem backend próprio.
+1. ~~Modelos específicos com suporte comprovado a PT-BR~~ — resolvido: embeddings = `paraphrase-multilingual-MiniLM-L12-v2`; NLI = `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli` (rodando em `.cpuOnly`). Ver DT-18 (revisada) e seção 3.2.
+2. ~~Provedor de busca~~ — decidido (2ª revisão): **Tavily**, substituindo o DDG por bloqueio sistemático confirmado (DT-11 revisada 2ª vez, evidência no Spike 5).
+3. ~~Como proteger a chave de API da Tavily sem backend próprio~~ — resolvido: proxy serverless via Cloudflare Workers (DT-21). O app chama a URL do Worker, nunca a Tavily diretamente nem embarca a chave.
 4. ~~Composição inicial e critério editorial da allowlist~~ — resolvido: reaproveita o conteúdo já existente em `trustedDomains` (RF-03.1). Formato de armazenamento é livre (RF-03.2).
 5. **[EM ABERTO]** Estratégia de extração de palavras-chave para a query de busca.
 6. **[EM ABERTO]** Limiar mínimo de similaridade de cosseno para selecionar chunks.
 7. **[EM ABERTO]** Limiar mínimo de confiança do NLI para aceitar um rótulo.
 8. **[EM ABERTO]** Regra de desempate na agregação quando há neutros misturados.
-9. **[EM ABERTO]** Versão mínima do iOS — verificado empiricamente que o pipeline (embeddings + NLI `MiniLMv2-L6`) executa com sucesso em **iOS 18.6** (simulador) e **iOS 26.3.1** (device físico, iPhone 16) — ver Spike 2c. **Não foi possível testar iOS 16 nem 17** nesta rodada: o ambiente Xcode disponível só oferece download de runtimes de simulador iOS 18.6 e 26.x, não é uma escolha de projeto. Não há evidência de que o pipeline funcione (ou falhe) em iOS 16/17, então o item permanece aberto — não deve ser fixado em iOS 18 nem assumido como compatível com 16/17 sem teste real nessas versões.
+9. **[EM ABERTO]** Versão mínima do iOS — a resolver por spike técnico (RD-01), não por suposição.
 10. ~~Mecanismo de persistência local~~ — resolvido: não há persistência de verificações nesta feature (ver Fora de Escopo, seção 5).
 11. **[EM ABERTO]** Viabilidade do tamanho do app após quantização; plano B se exceder o alvo.
 12. **[EM ABERTO]** Política de conformidade com `robots.txt`.
 13. **[EM ABERTO]** Existência de dataset de validação em PT-BR para calibrar os limiares acima.
+14. **[EM ABERTO]** Retry em caso de erro HTTP 5xx transiente de um artigo (RF-05.4 só cobre timeout, não erro explícito seguido de possível sucesso em nova tentativa) — achado no Spike 3 (`camara.leg.br`).
+15. **[EM ABERTO]** Biblioteca/abordagem de extração de texto em Swift para RF-05.2 (SwiftSoup + heurística própria vs. porte de algoritmo tipo Readability). O Spike 3 validou viabilidade em Python (`trafilatura` venceu), mas não decide a implementação Swift.
+16. **[EM ABERTO]** Se o campo `content` (snippet) da resposta da Tavily substitui, complementa, ou é ignorado em favor da extração própria via RF-05.1/RF-05.2.
+17. **[EM ABERTO]** Testar `search_depth="advanced"` da Tavily (2 créditos/chamada) — não avaliado se muda a taxa de vazamento de domínio (RF-03.5) ou a qualidade dos resultados o suficiente para justificar o custo.
+18. **[EM ABERTO]** Formato do erro de cota esgotada e de rate-limit da Tavily (RF-10.2) — não observado nos spikes; só o erro 401 de chave inválida foi documentado.
+19. **[EM ABERTO]** Paywall parcial (artigo com preview aberto + resto bloqueado) não foi testado empiricamente — RF-05.3 provavelmente cobre o caso (texto curto), mas não foi comprovado.
 
 ### 7.4 Ordem sugerida de validação antes da implementação completa
 
