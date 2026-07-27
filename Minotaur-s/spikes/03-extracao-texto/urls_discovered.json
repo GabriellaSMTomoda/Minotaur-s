@@ -1,0 +1,280 @@
+{
+  "g1.globo.com": {
+    "seed": "https://g1.globo.com/",
+    "urls": [
+      "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/24/governo-lula-atuou-para-convencer-federacao-pp-uniao-brasil-a-ficar-neutra-e-nao-apoiar-flavio-bolsonaro.ghtml",
+      "https://g1.globo.com/politica/blog/natuza-nery/post/2026/07/24/crise-michelle-flavio-bolsonaro-video-juntos.ghtml",
+      "https://g1.globo.com/economia/noticia/2026/07/24/durigan-expert-xp.ghtml"
+    ],
+    "error": null
+  },
+  "oglobo.globo.com": {
+    "seed": "https://oglobo.globo.com/",
+    "urls": [
+      "https://oglobo.globo.com/o-globo-por-dentro/",
+      "https://oglobo.globo.com/blogs/sonar-a-escuta-das-redes/",
+      "https://oglobo.globo.com/tudo-sobre/assunto/guerra-na-ucrania/"
+    ],
+    "error": null
+  },
+  "uol.com.br": {
+    "seed": "https://www.uol.com.br/",
+    "urls": [
+      "https://www.uol.com.br/carros/legislacao-multas-e-transito/",
+      "https://economia.uol.com.br/cotacoes/cambio/dolar-comercial-estados-unidos/",
+      "https://economia.uol.com.br/imposto-de-renda/noticias/redacao/2026/03/20/imposto-de-renda-download-programa-declaracao.ghtm"
+    ],
+    "error": null
+  },
+  "folha.uol.com.br": {
+    "seed": "https://www1.folha.uol.com.br/",
+    "urls": [
+      "https://www1.folha.uol.com.br/folha-topicos/guerra-no-ira/",
+      "https://www1.folha.uol.com.br/folha-topicos/guerra-israel-hamas/",
+      "https://www1.folha.uol.com.br/folha-topicos/coreia-do-norte/"
+    ],
+    "error": null
+  },
+  "estadao.com.br": {
+    "seed": "https://www.estadao.com.br/",
+    "urls": [
+      "https://www.estadao.com.br/brasil/laco-de-cv-e-deputado-do-rio-mostra-ser-urgente-tirar-da-politica-os-condenados-por-crime-organizado/",
+      "https://www.estadao.com.br/politica/blog-do-fausto-macedo/pgr-denuncia-desembargador-th-joias-e-ex-presidente-da-assembleia-do-rio-em-investigacao-sobre-o-cv/",
+      "https://www.estadao.com.br/brasil/de-agencia-antimafia-a-fast-track-de-processos-veja-propostas-para-combater-avanco-de-pcc-e-cv/"
+    ],
+    "error": null
+  },
+  "cnnbrasil.com.br": {
+    "seed": "https://www.cnnbrasil.com.br/",
+    "urls": [
+      "https://www.cnnbrasil.com.br/internacional/israel-prepara-grande-operacao-militar-na-cisjordania-apos-mortes/",
+      "https://www.cnnbrasil.com.br/internacional/ira-diz-que-ataque-dos-eua-teve-quartel-da-guarda-revolucionaria-como-alvo/",
+      "https://www.cnnbrasil.com.br/internacional/navios-sauditas-passam-por-bab-el-mandeb-apesar-de-ameacas-dos-houthis/"
+    ],
+    "error": null
+  },
+  "veja.abril.com.br": {
+    "seed": "https://veja.abril.com.br/",
+    "urls": [
+      "https://veja.abril.com.br/noticias-sobre/radar-on-line/",
+      "https://veja.abril.com.br/campeonatos/brasileirao-serie-a-2026/",
+      "https://veja.abril.com.br/coluna/o-som-e-a-furia/"
+    ],
+    "error": null
+  },
+  "valor.globo.com": {
+    "seed": "https://valor.globo.com/",
+    "urls": [
+      "https://valor.globo.com/valor-data/commodities-agricolas-internacionais/",
+      "https://valor.globo.com/valor-data/commodities-agricolas-nacionais/",
+      "https://valor.globo.com/valor-data/atividade-economica-graficos/"
+    ],
+    "error": null
+  },
+  "exame.com": {
+    "seed": "https://exame.com/",
+    "urls": [
+      "https://exame.com/invest/mercados/sete-magnificas-perdem-r-45-tri-em-um-dia-com-temor-por-gastos-em-ia/",
+      "https://exame.com/invest/mercados/ibovespa-volta-a-cair-com-pressao-de-vale-petrobras-e-bancos/",
+      "https://exame.com/invest/mercados/petroleo-e-juros-por-que-a-estagflacao-voltou-a-preocupar-o-mercado/"
+    ],
+    "error": null
+  },
+  "r7.com": {
+    "seed": "https://www.r7.com/",
+    "urls": [
+      "https://esportes.r7.com/prisma/blog-do-fabiano-farah/",
+      "https://esportes.r7.com/prisma/blog-do-fabio-gomes/",
+      "https://entretenimento.r7.com/prisma/blog-da-thais-santanna/"
+    ],
+    "error": null
+  },
+  "terra.com.br": {
+    "seed": "https://www.terra.com.br/noticias/",
+    "urls": [
+      "https://www.terra.com.br/noticias/confira-o-habito-simples-das-pessoas-que-vivem-nas-chamadas-zonas-azuis-que-garante-longevidade,ab66454eb069abb90b013620905a0474x31rtthk.html",
+      "https://www.terra.com.br/noticias/mosca-varejeira-nos-eua-preocupa-autoridades-sanitarias-do-pais,1ce3893543a0247242576e2e893cf1ecxibmx25y.html",
+      "https://www.cartacapital.com.br/justica/pf-investigara-se-projetos-e-emendas-de-flavio-bolsonaro-beneficiaram-o-master/?utm_source=terra_capa_noticias&utm_medium=referral"
+    ],
+    "error": null
+  },
+  "metropoles.com": {
+    "seed": "https://www.metropoles.com/",
+    "urls": [
+      "https://www.metropoles.com/brasil/apos-tarifaco-lula-fala-em-nao-deixar-ninguem-meter-o-nariz-no-pais",
+      "https://www.metropoles.com/brasil/produtos-brasileiros-serao-taxados-em-ate-375-a-partir-desta-6a-veja-lista",
+      "https://www.metropoles.com/brasil/governo-lula-reage-a-nova-tarifa-e-promete-acionar-reciprocidade"
+    ],
+    "error": null
+  },
+  "poder360.com.br": {
+    "seed": "https://www.poder360.com.br/",
+    "urls": [
+      "https://www.poder360.com.br/eleicoes/assista-aos-comerciais-mais-recentes-dos-candidatos-a-presidente-23/",
+      "https://www.poder360.com.br/a-industria-e-o-futuro-do-brasil/",
+      "https://www.poder360.com.br/category/o-custo-do-contrabando/"
+    ],
+    "error": null
+  },
+  "gzh.com.br": {
+    "seed": "https://gauchazh.clicrbs.com.br/",
+    "urls": [],
+    "error": null
+  },
+  "correiobraziliense.com.br": {
+    "seed": "https://www.correiobraziliense.com.br/",
+    "urls": [
+      "https://www.correiobraziliense.com.br/politica/2026/07/7467410-pp-opta-pela-neutralidade-nacional-e-libera-palanques-para-eleicoes.html",
+      "https://www.correiobraziliense.com.br/brasil/2026/07/7467405-mulheres-ja-podem-comprar-spray-de-pimenta-para-defesa-pessoal-veja-regras.html",
+      "https://www.correiobraziliense.com.br/brasil/2026/07/7467426-alem-do-spray-4-itens-de-defesa-pessoal-permitidos-por-lei-no-pais.html"
+    ],
+    "error": null
+  },
+  "agenciabrasil.ebc.com.br": {
+    "seed": "https://agenciabrasil.ebc.com.br/",
+    "urls": [
+      "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/eua-impoem-nova-tarifa-de-125-produtos-brasileiros",
+      "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/ministro-chama-tarifa-dos-eua-de-indevida-e-promete-reacao",
+      "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/estados-unidos-isentam-471-produtos-de-nova-tarifa-de-125"
+    ],
+    "error": null
+  },
+  "otempo.com.br": {
+    "seed": "https://www.otempo.com.br/",
+    "urls": [
+      "https://www.otempo.com.br/saude-e-bem-estar",
+      "https://www.otempo.com.br/especiais/150-anos-da-imigracao-italiana-no-brasil",
+      "https://www.otempo.com.br/especiais/o-que-e-ser-homem"
+    ],
+    "error": null
+  },
+  "band.uol.com.br": {
+    "seed": "https://www.band.uol.com.br/noticias",
+    "urls": [
+      "https://www.band.com.br/noticias/justica-decreta-prisao-preventiva-de-homem-que-atropelou-e-matou-pm-em-sp-202607241436",
+      "https://www.band.com.br/noticias/entenda-o-que-esta-por-tras-do-acordo-nuclear-entre-eua-e-arabia-saudita-202607241419",
+      "https://www.band.com.br/economia/noticias/tarifaco-de-trump-veja-como-os-paises-reagiram-a-nova-sobretaxa-de-ate-125-imposta-pelos-eua-202607241157"
+    ],
+    "error": null
+  },
+  "ge.globo.com": {
+    "seed": "https://ge.globo.com/",
+    "urls": [
+      "https://ge.globo.com/sp/vale-do-paraiba-regiao/futebol/times/bragantino/",
+      "https://ge.globo.com/mg/zona-da-mata-centro-oeste/futebol/times/athletic-club/",
+      "https://ge.globo.com/sp/ribeirao-preto-e-regiao/futebol/times/botafogo-sp/"
+    ],
+    "error": null
+  },
+  "espn.com.br": {
+    "seed": "https://www.espn.com.br/",
+    "urls": [],
+    "error": null
+  },
+  "aosfatos.org": {
+    "seed": "https://aosfatos.org/noticias/",
+    "urls": [
+      "https://aosfatos.org/noticias/brastemp-consul-fabrica-brasil/",
+      "https://aosfatos.org/noticias/moraes-trump-visitar-bolsonaro/",
+      "https://aosfatos.org/noticias/governo-idade-minima-aposentadoria/"
+    ],
+    "error": null
+  },
+  "lupa.uol.com.br": {
+    "seed": "https://lupa.uol.com.br/",
+    "urls": [],
+    "error": null
+  },
+  "bbc.com": {
+    "seed": "https://www.bbc.com/portuguese",
+    "urls": [
+      "https://www.bbc.com/portuguese/articles/c75yy56153xo",
+      "https://www.bbc.com/portuguese/articles/c8rn582102vo",
+      "https://www.bbc.com/portuguese/articles/cz64le56412o"
+    ],
+    "error": null
+  },
+  "dw.com": {
+    "seed": "https://www.dw.com/pt-br/brasil/s-1431",
+    "urls": [],
+    "error": "ERRO ao baixar seed: 404 Client Error: Not Found for url: https://www.dw.com/pt-br/brasil/s-1431"
+  },
+  "elpais.com": {
+    "seed": "https://elpais.com/america/",
+    "urls": [
+      "https://elpais.com/internacional/2026-07-24/trump-impone-un-sistema-comercial-caotico-en-su-tercera-ronda-arancelaria.html",
+      "https://elpais.com/internacional/2026-07-24/las-claves-de-los-nuevos-aranceles-de-trump-que-suponen-a-que-paises-afectan-y-cuando-entran-en-vigor.html",
+      "https://elpais.com/internacional/2026-07-24/bruselas-recibe-con-cautela-los-nuevos-aranceles-de-trump-a-la-union-europea.html"
+    ],
+    "error": null
+  },
+  "reuters.com": {
+    "seed": "https://www.reuters.com/world/",
+    "urls": [],
+    "error": "ERRO ao baixar seed: 401 Client Error: HTTP Forbidden for url: https://www.reuters.com/world/"
+  },
+  "apnews.com": {
+    "seed": "https://apnews.com/",
+    "urls": [
+      "https://apnews.com/article/iran-us-hormuz-strait-war-24-july-2026-78c2dbf538f6e61ab816479a4d9bdd85",
+      "https://apnews.com/article/usvi-lawsuit-guns-concealed-2nd-amendment-1039052c4389483e4be4ed23f30ef82b",
+      "https://apnews.com/article/usmediatimesair-force-one-42429e4d4da8accc42b6c3ddf3f4fed5"
+    ],
+    "error": null
+  },
+  "gov.br": {
+    "seed": "https://www.gov.br/pt-br/noticias",
+    "urls": [],
+    "error": null
+  },
+  "camara.leg.br": {
+    "seed": "https://www.camara.leg.br/noticias",
+    "urls": [
+      "https://www.camara.leg.br/assuntos/ciencia-tecnologia-e-comunicacoes",
+      "https://www.camara.leg.br/assuntos/educacao-cultura-e-esportes",
+      "https://www.camara.leg.br/assuntos/meio-ambiente-e-energia"
+    ],
+    "error": null
+  },
+  "senado.leg.br": {
+    "seed": "https://www12.senado.leg.br/noticias",
+    "urls": [
+      "https://www12.senado.leg.br/noticias/politica-de-uso-das-redes-sociais",
+      "https://www12.senado.leg.br/noticias/materias/2026/07/24/eleicoes-o-que-e-permitido-e-o-que-e-proibido-nas-redes-sociais",
+      "https://www12.senado.leg.br/noticias/materias/2026/07/24/lei-autoriza-venda-de-spray-de-pimenta-para-seguranca-das-mulheres"
+    ],
+    "error": null
+  },
+  "stf.jus.br": {
+    "seed": "https://portal.stf.jus.br/noticias/",
+    "urls": [],
+    "error": "ERRO ao baixar seed: HTTPSConnectionPool(host='portal.stf.jus.br', port=443): Max retries exceeded with url: /noticias/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)')))"
+  },
+  "tse.jus.br": {
+    "seed": "https://www.tse.jus.br/comunicacao/noticias",
+    "urls": [
+      "https://www.tse.jus.br/transparencia-e-prestacao-de-contas",
+      "https://www.tse.jus.br/transparencia-e-prestacao-de-contas/informacoes-exigidas-por-lei/acesso-a-informacao/acesso-a-informacao",
+      "https://www.tse.jus.br/servicos-eleitorais/eleitorado-no-exterior/votacao-no-exterior"
+    ],
+    "error": null
+  },
+  "ibge.gov.br": {
+    "seed": "https://agenciadenoticias.ibge.gov.br/",
+    "urls": [
+      "https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa.html",
+      "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47613-ibge-participa-da-78-reuniao-anual-da-sbpc-e-convida-publico-a-conhecer-suas-atividades",
+      "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47506-cumprimento-a-legislacao-eleitoral-a-partir-de-4-de-julho"
+    ],
+    "error": null
+  },
+  "who.int": {
+    "seed": "https://www.who.int/news-room/headlines",
+    "urls": [
+      "https://www.who.int/mega-menu/health-topics/resources/fact-sheets",
+      "https://www.who.int/mega-menu/health-topics/resources/facts-in-pictures",
+      "https://www.who.int/mega-menu/health-topics/resources/questions-and-answers"
+    ],
+    "error": null
+  }
+}

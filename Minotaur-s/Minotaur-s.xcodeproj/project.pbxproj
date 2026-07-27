@@ -24,11 +24,12 @@
 		8549411F6B8EB14490681906 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA7A6D486FCC86FB5D3FBF /* ContentView.swift */; };
 		911AD7D23044E0C773BAE61B /* Minotaur_sApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */; };
 		948B8FA52CDAFE3C0C0D6041 /* Minotaur_sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C8965D55192F706B6420 /* Minotaur_sTests.swift */; };
-		A59FDB472E86C9C4003873E8 /* Verificador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FDB462E86C9BC003873E8 /* Verificador.swift */; };
 		A59FDB492E8AA71F003873E8 /* Banco_noticias220.tsv in Resources */ = {isa = PBXBuildFile; fileRef = A59FDB482E8AA71F003873E8 /* Banco_noticias220.tsv */; };
 		C55F4D93089419682A7F0C2F /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DAD2FA3DDE89BD1DB0964 /* GameState.swift */; };
 		C817AE2DCCAEC99869837C10 /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */; };
 		E54B47DD2E70787D00C33F6D /* Banco_Dados.tsv in Resources */ = {isa = PBXBuildFile; fileRef = E54B47DC2E70787D00C33F6D /* Banco_Dados.tsv */; };
+		FA5E0005000000000000AA01 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = FA5E0003000000000000AA01 /* SwiftSoup */; };
+		FA5E0006000000000000AA01 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = FA5E0004000000000000AA01 /* Tokenizers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +66,9 @@
 		803F9AED4600A8448D843247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8295FC063DF268891CDC90CE /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C88C837C02BD4C80FFF837B /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
-		A59FDB462E86C9BC003873E8 /* Verificador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verificador.swift; sourceTree = "<group>"; };
 		A59FDB482E8AA71F003873E8 /* Banco_noticias220.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = Banco_noticias220.tsv; sourceTree = "<group>"; };
+		A5C171B230131E2A00F90300 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAUDE.md; sourceTree = "<group>"; };
+		A5FF76FB3012C15D00F28810 /* spec.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = spec.md; sourceTree = "<group>"; };
 		B7B9A5E575AAE2736CA049BB /* FactLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactLoader.swift; sourceTree = "<group>"; };
 		BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minotaur_sApp.swift; sourceTree = "<group>"; };
 		BD7D8A4FC41C94C0498057A8 /* GamePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePersistence.swift; sourceTree = "<group>"; };
@@ -79,12 +81,30 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0017FEA12E65C82200DF2FC5 /* Intents */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Intents; sourceTree = "<group>"; };
+		6FD2CC67DB918E3213E5A524 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
+		7A1C4E9B2F53D8460AC7B1E3 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
+		FA5E0008000000000000AA01 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
+		FA5E0009000000000000AA01 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
+		FA5E000B000000000000AA01 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA5E0007000000000000AA01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA5E0005000000000000AA01 /* SwiftSoup in Frameworks */,
+				FA5E0006000000000000AA01 /* Tokenizers in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		15B32B4BAFF6FE65C51A9ADC /* Minotaur-sTests */ = {
 			isa = PBXGroup;
 			children = (
+				FA5E0009000000000000AA01 /* Verificador */,
 				F643C8965D55192F706B6420 /* Minotaur_sTests.swift */,
 			);
 			path = "Minotaur-sTests";
@@ -93,6 +113,7 @@
 		3600CFCF374A62B1A8D61A95 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7A1C4E9B2F53D8460AC7B1E3 /* Verificador */,
 				00E5B41F2E7853460017DF24 /* DateFormatterStorage.swift */,
 				E54B47DC2E70787D00C33F6D /* Banco_Dados.tsv */,
 				0017FF272E686DA700DF2FC5 /* PerguntaStorage.swift */,
@@ -108,6 +129,7 @@
 		38F290B2CC4D5DD2E59FB30F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6FD2CC67DB918E3213E5A524 /* Verificador */,
 				0017FF222E68692F00DF2FC5 /* QuestionSession.swift */,
 				0017FE9F2E65C4FE00DF2FC5 /* Question.swift */,
 				9C88C837C02BD4C80FFF837B /* Fact.swift */,
@@ -119,6 +141,8 @@
 		A88232B0AD47B35858B6E851 = {
 			isa = PBXGroup;
 			children = (
+				A5C171B230131E2A00F90300 /* CLAUDE.md */,
+				A5FF76FB3012C15D00F28810 /* spec.md */,
 				C11268176EFDA6AFC93D4DE5 /* Minotaur-s */,
 				15B32B4BAFF6FE65C51A9ADC /* Minotaur-sTests */,
 				EC1DE4C96DC5210A68C4BEA1 /* Minotaur-sUITests */,
@@ -131,6 +155,7 @@
 			children = (
 				0017FEA52E65D01A00DF2FC5 /* Minotaur-sRelease.entitlements */,
 				0017FEA12E65C82200DF2FC5 /* Intents */,
+				FA5E0008000000000000AA01 /* Resources */,
 				803F9AED4600A8448D843247 /* Assets.xcassets */,
 				BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */,
 				38F290B2CC4D5DD2E59FB30F /* Models */,
@@ -162,7 +187,7 @@
 		EEEE0870FDD87D8E220DB6E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A59FDB462E86C9BC003873E8 /* Verificador.swift */,
+				FA5E000B000000000000AA01 /* Verificador */,
 				0017FF1D2E673B7700DF2FC5 /* PerguntaDoDiaView.swift */,
 				CEDA7A6D486FCC86FB5D3FBF /* ContentView.swift */,
 				618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */,
@@ -179,11 +204,15 @@
 			buildConfigurationList = 17D8A36D7010D120B53F5AA5 /* Build configuration list for PBXNativeTarget "Minotaur-sTests" */;
 			buildPhases = (
 				78AC142F3CA6AC91FAC63FD2 /* Sources */,
+				FA5E000A000000000000AA01 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				F7958A7F9A091A901BD3FBE4 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FA5E0009000000000000AA01 /* Verificador */,
 			);
 			name = "Minotaur-sTests";
 			packageProductDependencies = (
@@ -215,6 +244,7 @@
 			buildConfigurationList = 35E24FBD065004614C04F21E /* Build configuration list for PBXNativeTarget "Minotaur-s" */;
 			buildPhases = (
 				34535AE799958938CFB251A6 /* Sources */,
+				FA5E0007000000000000AA01 /* Frameworks */,
 				ECB3BB9297AC8B912A5658A2 /* Resources */,
 			);
 			buildRules = (
@@ -223,9 +253,15 @@
 			);
 			fileSystemSynchronizedGroups = (
 				0017FEA12E65C82200DF2FC5 /* Intents */,
+				6FD2CC67DB918E3213E5A524 /* Verificador */,
+				7A1C4E9B2F53D8460AC7B1E3 /* Verificador */,
+				FA5E0008000000000000AA01 /* Resources */,
+				FA5E000B000000000000AA01 /* Verificador */,
 			);
 			name = "Minotaur-s";
 			packageProductDependencies = (
+				FA5E0003000000000000AA01 /* SwiftSoup */,
+				FA5E0004000000000000AA01 /* Tokenizers */,
 			);
 			productName = "Minotaur-s";
 			productReference = ED4FB523FCF52ADD863FE07A /* Minotaur-s.app */;
@@ -258,6 +294,10 @@
 			);
 			mainGroup = A88232B0AD47B35858B6E851;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FA5E0001000000000000AA01 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				FA5E0002000000000000AA01 /* XCRemoteSwiftPackageReference "swift-transformers" */,
+			);
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -280,6 +320,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA5E000A000000000000AA01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -292,7 +339,6 @@
 				00E5B4202E7853490017DF24 /* DateFormatterStorage.swift in Sources */,
 				31479711E40E2DC5784EEC03 /* Fact.swift in Sources */,
 				0017FF232E68693200DF2FC5 /* QuestionSession.swift in Sources */,
-				A59FDB472E86C9C4003873E8 /* Verificador.swift in Sources */,
 				45DDC27FE971ACD00E24806D /* FactLoader.swift in Sources */,
 				0017FE9E2E65C46F00DF2FC5 /* QuestionsDayLoader.swift in Sources */,
 				339DACD1B3AF7C43737EB8D7 /* GamePersistence.swift in Sources */,
@@ -448,7 +494,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CU69WP7862;
+				DEVELOPMENT_TEAM = 2DK23BZ7KB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Fato ou Farsa";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -629,6 +675,38 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FA5E0001000000000000AA01 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.6;
+			};
+		};
+		FA5E0002000000000000AA01 /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FA5E0003000000000000AA01 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA5E0001000000000000AA01 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		FA5E0004000000000000AA01 /* Tokenizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA5E0002000000000000AA01 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Tokenizers;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AFE26FB2410B1E147BA9D36A /* Project object */;
 }

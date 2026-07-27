@@ -1,0 +1,24 @@
+# SPIKE 4b — app iOS mínimo e descartável que refaz, via URLSession puro,
+# a MESMA requisição que bloqueou no Spike 4 (cliente Python `requests`).
+# Não é o app principal. Ver README/RESULTADO.md nesta pasta.
+#
+# Uso:
+#   xcodegen generate
+#   ./run_device.sh
+name: DDGSpike
+options:
+  bundleIdPrefix: com.spike.ddgurlsession
+targets:
+  DDGSpike:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.spike.ddgurlsession
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"

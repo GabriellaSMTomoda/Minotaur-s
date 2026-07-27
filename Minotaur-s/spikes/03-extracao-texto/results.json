@@ -1,0 +1,2014 @@
+[
+  {
+    "domain": "g1.globo.com",
+    "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/07/24/governo-lula-atuou-para-convencer-federacao-pp-uniao-brasil-a-ficar-neutra-e-nao-apoiar-flavio-bolsonaro.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.18,
+    "approach_a": {
+      "chars": 2007,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O governo Lula atuou junto a líderes da federação União Progressista para que ela optasse pela neutralidade pelo menos no primeiro turno da eleição presidencial, não fazendo aliança com o pré-candidato do PL, Flávio Bols"
+    },
+    "approach_b": {
+      "chars": 2106,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Governo Lula atuou para convencer federação PP-União Brasil a não apoiar Flávio Bolsonaro  O governo Lula atuou junto a líderes da federação União Progressista para que ela optasse pela neutralidade pelo menos no primeir"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "g1.globo.com",
+    "url": "https://g1.globo.com/politica/blog/natuza-nery/post/2026/07/24/crise-michelle-flavio-bolsonaro-video-juntos.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.21,
+    "approach_a": {
+      "chars": 1544,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Michelle Bolsonaro e o senador Flávio Bolsonaro deverão gravar juntos um vídeo para as redes sociais. A ideia é que a gravação seja o último passo de uma operação para encerrar a crise entre os dois e mostrar publicament"
+    },
+    "approach_b": {
+      "chars": 2173,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Após um mês de crise, Michelle e Flávio devem gravar vídeo juntos  Michelle Bolsonaro e o senador Flávio Bolsonaro deverão gravar juntos um vídeo para as redes sociais. A ideia é que a gravação seja o último passo de uma"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "g1.globo.com",
+    "url": "https://g1.globo.com/economia/noticia/2026/07/24/durigan-expert-xp.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.2,
+    "approach_a": {
+      "chars": 3816,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Ministro da Fazenda, Dario Durigan. — Foto: Diogo Zacarias/Ministério da Fazenda O ministro da Fazenda, Dario Durigan, afirmou nesta sexta-feira (24) que o governo brasileiro precisa continuar ampliando a regulamentação "
+    },
+    "approach_b": {
+      "chars": 2478,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Ministro da Fazenda, Dario Durigan. — Foto: Diogo Zacarias/Ministério da Fazenda  O ministro da Fazenda, Dario Durigan, afirmou nesta sexta-feira (24) que o governo brasileiro precisa continuar ampliando a regulamentação"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "oglobo.globo.com",
+    "url": "https://oglobo.globo.com/brasil/noticia/2026/07/24/foie-gras-lula-sanciona-lei-e-o-brasil-torna-se-o-segundo-pais-da-america-latina-a-banir-integralmente-o-produto.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.32,
+    "approach_a": {
+      "chars": 4581,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Foie gras: Lula sanciona lei e o Brasil torna-se o segundo país da América Latina a banir integralmente o produto Legislação veda a comercialização de produtos obtidos por alimentação forçada em todo o território naciona"
+    },
+    "approach_b": {
+      "chars": 3441,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O presidente Luiz Inácio Lula da Silva sancionou, nesta sexta-feira, a lei 15.475. Trata-se da norma aprovada pelo Congresso que proíbe a produção e a comercialização de alimentos obtidos por meio da alimentação forçada "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "oglobo.globo.com",
+    "url": "https://oglobo.globo.com/brasil/noticia/2026/07/24/governo-sanciona-lei-que-autoriza-mulheres-a-comprarem-spray-de-pimenta-para-defesa-pessoal.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.35,
+    "approach_a": {
+      "chars": 3378,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Governo sanciona lei que autoriza mulheres a comprarem spray de pimenta para defesa pessoal Legislação autoriza uso do equipamento de menor potencial ofensivo para proteção contra agressões físicas ou sexuais Por O Globo"
+    },
+    "approach_b": {
+      "chars": 2099,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O governo federal sancionou nesta sexta-feira (24) a lei que autoriza, em todo o país, a comercialização, a aquisição e a posse de aerossóis de extratos vegetais, como o spray de pimenta, para fins de defesa pessoal da m"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "oglobo.globo.com",
+    "url": "https://oglobo.globo.com/brasil/noticia/2026/07/23/igreja-presbiteriana-unida-aprova-inclusao-de-pessoas-lgbtqiapn-como-membros-e-pastores.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.36,
+    "approach_a": {
+      "chars": 2596,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Igreja Presbiteriana Unida aprova inclusão de pessoas LGBTQIAPN+ como membros e pastores Decisão não obriga comunidades locais, mas reconhece direitos de pessoas homoafetivas e rechaça discriminação Por O Globo — Rio de "
+    },
+    "approach_b": {
+      "chars": 1622,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A Igreja Presbiteriana Unida (IPU) decidiu que pessoas da comunidade LGBTQIAPN+ podem ser recebidas por igrejas locais como membros e podem, a depender do preenchimento de critérios vocacionais, atuar em funções pastorai"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "uol.com.br",
+    "url": "https://noticias.uol.com.br/colunas/josias-de-souza/2026/07/24/reina-a-paz-entre-flavio-e-sua-madrasta-ate-a-proxima-briga.htm",
+    "download_ok": false,
+    "download_error": "HTTP 403",
+    "elapsed_s": 0.07,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "uol.com.br",
+    "url": "https://economia.uol.com.br/noticias/redacao/2026/07/24/o-que-muda-com-a-nova-ferramenta-do-uol-que-reune-pesquisas-eleitorais.htm",
+    "download_ok": false,
+    "download_error": "HTTP 403",
+    "elapsed_s": 0.07,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "uol.com.br",
+    "url": "https://noticias.uol.com.br/colunas/carlos-madeiro/2026/07/24/pi-homem-movimenta-r-600-mi-zera-conta-e-culpa-perda-em-bolsa-por-calote.htm",
+    "download_ok": false,
+    "download_error": "HTTP 403",
+    "elapsed_s": 0.07,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "folha.uol.com.br",
+    "url": "https://www1.folha.uol.com.br/colunas/adriana-fernandes/2026/07/a-contencao-dos-bolsonaros.shtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.17,
+    "approach_a": {
+      "chars": 2147,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A manchete da Folha foi cirÃºrgica: \"FlÃ¡vio Bolsonaro repete o pai e propaga dado falso sobre urnas em reuniÃ£o com embaixadores\". O presidenciÃ¡vel do PL tentou amenizar a fala, mas o estrago jÃ¡ estÃ¡ feito. A repercu"
+    },
+    "approach_b": {
+      "chars": 2514,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Jornalista em BrasÃ­lia, onde acompanha os principais acontecimentos econÃ´micos e polÃ­ticos hÃ¡ mais de 25 anos  Recurso exclusivo para assinantes  assine ou faÃ§a login  A manchete da Folha foi cirÃºrgica: \" FlÃ¡vio B"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "folha.uol.com.br",
+    "url": "https://www1.folha.uol.com.br/colunas/conrado-hubner-mendes/2026/07/tse-propoe-selo-maria-vai-com-as-urnas.shtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 3251,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Se vocÃª foi defensor do \"voto impresso e auditÃ¡vel\" e com base nesse grito se inscreveu no histÃ³rico movimento de 8 de janeiro de 2023, o presidente do TSE tem ideia a lhe oferecer: o \"selo de acurÃ¡cia eleitoral\". NÃ"
+    },
+    "approach_b": {
+      "chars": 3655,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Professor de direito constitucional da USP, Ã© doutor em direito e ciÃªncia polÃ­tica e membro do ObservatÃ³rio Pesquisa, CiÃªncia e Liberdade - SBPC  Recurso exclusivo para assinantes  assine ou faÃ§a login  Se vocÃª fo"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "folha.uol.com.br",
+    "url": "https://www1.folha.uol.com.br/blogs/brasilia-hoje/2026/07/aliados-de-lula-exploram-investigacao-de-dinheiro-de-vorcaro-a-dark-horse-para-atacar-flavio.shtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 3163,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Aliados do presidente Lula (PT) passaram a explorar politicamente, em publicaÃ§Ã£o nas redes sociais nesta quinta-feira (23), a autorizaÃ§Ã£o do ministro do STF (Supremo Tribunal Federal) AndrÃ© MendonÃ§a para a PolÃcia "
+    },
+    "approach_b": {
+      "chars": 3473,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Bastidores, vÃ­deos e anÃ¡lises de economia e polÃ­tica. De segunda a sexta-feira.  Recurso exclusivo para assinantes  assine ou faÃ§a login  Aliados do presidente Lula ( PT ) passaram a explorar politicamente, em public"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "estadao.com.br",
+    "url": "https://www.estadao.com.br/brasil/laco-de-cv-e-deputado-do-rio-mostra-ser-urgente-tirar-da-politica-os-condenados-por-crime-organizado/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.23,
+    "approach_a": {
+      "chars": 4789,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Lincoln Gakiya: Não falta polícia no Brasil, falta integração e cooperação Para o promotor Lincoln Gakiya, “o crime é mais ágil e mais rápido” que o Estado, sobretudo pela falta de integração. Crédito: Estadão Gerando re"
+    },
+    "approach_b": {
+      "chars": 4803,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Lincoln Gakiya: Não falta polícia no Brasil, falta integração e cooperação  Para o promotor Lincoln Gakiya, “o crime é mais ágil e mais rápido” que o Estado, sobretudo pela falta de integração. Crédito: Estadão  Gerando "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "estadao.com.br",
+    "url": "https://www.estadao.com.br/politica/blog-do-fausto-macedo/pgr-denuncia-desembargador-th-joias-e-ex-presidente-da-assembleia-do-rio-em-investigacao-sobre-o-cv/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.12,
+    "approach_a": {
+      "chars": 6100,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "O Procurador-Geral da República, Paulo Gonet, denunciou o presidente afastado da Assembleia Legislativa do Rio, Rodrigo Bacellar, o ex-deputado fluminense TH Joias, e o desembargador federal Macário Ramos Júdice Neto por"
+    },
+    "approach_b": {
+      "chars": 6112,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O Procurador-Geral da República, Paulo Gonet, denunciou o presidente afastado da Assembleia Legislativa do Rio, Rodrigo Bacellar , o ex-deputado fluminense TH Joias , e o desembargador federal Macário Ramos Júdice Neto p"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "estadao.com.br",
+    "url": "https://www.estadao.com.br/brasil/de-agencia-antimafia-a-fast-track-de-processos-veja-propostas-para-combater-avanco-de-pcc-e-cv/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 10644,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Lincoln Gakiya: Não falta polícia no Brasil, falta integração e cooperação Para o promotor Lincoln Gakiya, “o crime é mais ágil e mais rápido” que o Estado, sobretudo pela falta de integração. Crédito: Estadão Gerando re"
+    },
+    "approach_b": {
+      "chars": 9975,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Lincoln Gakiya: Não falta polícia no Brasil, falta integração e cooperação  Para o promotor Lincoln Gakiya, “o crime é mais ágil e mais rápido” que o Estado, sobretudo pela falta de integração. Crédito: Estadão  Gerando "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "cnnbrasil.com.br",
+    "url": "https://www.cnnbrasil.com.br/internacional/israel-prepara-grande-operacao-militar-na-cisjordania-apos-mortes/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.17,
+    "approach_a": {
+      "chars": 4824,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "As Forças Armadas de Israel iniciaram nesta sexta-feira (24) preparativos para uma operação em larga escala na Cisjordânia, após a morte de quatro palestinos e dois israelenses em confrontos na região. O Exército informo"
+    },
+    "approach_b": {
+      "chars": 4771,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "As Forças Armadas de Israel iniciaram nesta sexta-feira (24) preparativos para uma operação em larga escala na Cisjordânia, após a morte de quatro palestinos e dois israelenses em confrontos na região.  O Exército inform"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "cnnbrasil.com.br",
+    "url": "https://www.cnnbrasil.com.br/internacional/ira-diz-que-ataque-dos-eua-teve-quartel-da-guarda-revolucionaria-como-alvo/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 3927,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Um ataque com míssil atingiu um quartel-general do IRGC (Corpo da Guarda Revolucionária Islâmica) do Irã, na província de Gilan, no norte do país, danificando parte dos equipamentos da instalação, informou a agência de n"
+    },
+    "approach_b": {
+      "chars": 3908,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Um ataque com míssil atingiu um quartel-general do IRGC (Corpo da Guarda Revolucionária Islâmica) do Irã, na província de Gilan, no norte do país, danificando parte dos equipamentos da instalação, informou a agência de n"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "cnnbrasil.com.br",
+    "url": "https://www.cnnbrasil.com.br/internacional/navios-sauditas-passam-por-bab-el-mandeb-apesar-de-ameacas-dos-houthis/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 1872,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Dados de rastreamento mostram que dois navios-tanque transportando milhões de barris de petróleo bruto saudita estão navegando pelo Golfo de Aden, após terem atravessado com sucesso o Estreito de Bab el-Mandeb, apesar da"
+    },
+    "approach_b": {
+      "chars": 1881,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Dados de rastreamento mostram que dois navios-tanque transportando milhões de barris de petróleo bruto saudita estão navegando pelo Golfo de Aden, após terem atravessado com sucesso o Estreito de Bab el-Mandeb, apesar da"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "veja.abril.com.br",
+    "url": "https://veja.abril.com.br/brasil/brasileiras-ja-podem-comprar-spray-de-pimenta-para-defesa-pessoal/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 2266,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Brasileiras já podem comprar spray de pimenta para defesa pessoal Nova lei exige que as compradoras sejam identificadas pelas lojas e proíbe venda de frascos com mais de 50 mL para cidadãs comuns A partir desta sexta-fei"
+    },
+    "approach_b": {
+      "chars": 2001,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A partir desta sexta-feira, 24, mulheres brasileiras estão autorizadas a comprar spray de pimenta para defesa pessoal . A lei que permite a venda em todo o território nacional foi aprovada pelo Congresso em junho e sanci"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "veja.abril.com.br",
+    "url": "https://veja.abril.com.br/brasil/ex-prefeito-e-esposa-sao-favoritos-contra-aliados-de-lula-e-alcolumbre-no-amapa-diz-pesquisa/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 2636,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Ex-prefeito e esposa são favoritos contra aliados de Lula e Alcolumbre no Amapá, diz pesquisa Antônio Furlan lidera disputa pelo governo e Rayssa Furlan encabeça a corrida ao Senado, superando Clécio Luís e Randolfe Rodr"
+    },
+    "approach_b": {
+      "chars": 1986,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O ex-prefeito de Macapá, Antônio Furlan (PSD), lidera a disputa pelo governo do Amapá com até 36 pontos de vantagem sobre o atual governador, Clécio Luís (União Brasil). A pesquisa Real Time Big Data no estado foi public"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "veja.abril.com.br",
+    "url": "https://veja.abril.com.br/brasil/inqueritos-contra-autoridades-explodem-no-stj-apos-mudanca-da-regra-do-foro-no-supremo/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.15,
+    "approach_a": {
+      "chars": 1348,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Inquéritos contra autoridades explodem no STJ, após mudança da regra do foro no Supremo Número de ações dobrou depois de o STF reestabelecer o controle sobre investigações contra políticos Em março do ano passado, o STF "
+    },
+    "approach_b": {
+      "chars": 1162,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Em março do ano passado, o STF estabeleceu uma nova regra para processos envolvendo autoridades com foro privilegiado. Num momento em que a Corte buscava recuperar poder sobre o Congresso, que discutia projetos de reduçã"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "valor.globo.com",
+    "url": "https://valor.globo.com/brasil/noticia/2026/07/24/consumo-sustentou-economia-do-brasil-diz-fmi.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.43,
+    "approach_a": {
+      "chars": 448,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Consumo sustentou economia do Brasil, diz FMI Relatório diz que mercado de trabalho aquecido, ganho de renda e crédito impulsionam atividade A recuperação do consumo privado é o fator principal que sustentou a expansão d"
+    },
+    "approach_b": {
+      "chars": 242,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A recuperação do consumo privado é o fator principal que sustentou a expansão da economia brasileira no período pós-pandemia, segundo avaliação do Fundo Monetário Internacional (FMI) publicado em relatório sobre o país n"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "valor.globo.com",
+    "url": "https://valor.globo.com/brasil/noticia/2026/07/24/eua-confirmam-tarifa-por-trabalho-forcado.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.3,
+    "approach_a": {
+      "chars": 548,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "EUA confirmam tarifa por trabalho forçado Washington diz que Brasil importa produtos sem verificação para justificar sobretaxa de 12,5% Em mais uma medida protecionista, os Estados Unidos decidiram nesta quinta-feira (23"
+    },
+    "approach_b": {
+      "chars": 347,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Em mais uma medida protecionista, os Estados Unidos decidiram nesta quinta-feira (23) sobretaxar em 12,5% todos os produtos brasileiros vendidos ao mercado americano sob a alegação de que o país falha em combater prática"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "valor.globo.com",
+    "url": "https://valor.globo.com/brasil/noticia/2026/07/23/fiscal-preocupa-mas-dimensao-do-problema-divide-economistas.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.49,
+    "approach_a": {
+      "chars": 425,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Fiscal preocupa, mas dimensão do problema divide economistas Especialistas dizem que nova reforma é necessária e terá de incluir previdência e benefícios sociais Crise fiscal iminente, reforma fiscal abrangente que inclu"
+    },
+    "approach_b": {
+      "chars": 1622,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Crise fiscal iminente, reforma fiscal abrangente que inclua revisão de benefícios sociais e previdência, ambiente internacional que não permite mais ajuste gradual e situação que não é de desespero.  Acompanhe os mercado"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "exame.com",
+    "url": "https://exame.com/invest/mercados/sete-magnificas-perdem-r-45-tri-em-um-dia-com-temor-por-gastos-em-ia/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.17,
+    "approach_a": {
+      "chars": 3750,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Sete Magníficas: grupo de gigantes de tecnologia perdeu quase US$ 890 bilhões em um dia. (Montagem EXAME) O grupo das sete maiores empresas de tecnologia dos Estados Unidos, conhecido como \"Sete Magníficas\", viveu nesta "
+    },
+    "approach_b": {
+      "chars": 4296,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Sete Magníficas: grupo de gigantes de tecnologia perdeu quase US$ 890 bilhões em um dia. (Montagem EXAME)  Repórter de Invest  Publicado em 24 de julho de 2026 às 08h44 .  O grupo das sete maiores empresas de tecnologia "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "exame.com",
+    "url": "https://exame.com/invest/mercados/ibovespa-volta-a-cair-com-pressao-de-vale-petrobras-e-bancos/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.17,
+    "approach_a": {
+      "chars": 4680,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Ibovespa: o principal índice acionário da B3 recuava 0,96%, aos 175.076 pontos, com 60 das 78 ações que compõem a referência acionária em queda (Germano Lüders/Exame) O Ibovespa amplia as perdas iniciadas na véspera e re"
+    },
+    "approach_b": {
+      "chars": 5092,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Ibovespa: o principal índice acionário da B3 recuava 0,96%, aos 175.076 pontos, com 60 das 78 ações que compõem a referência acionária em queda (Germano Lüders/Exame)  Repórter de Invest  Publicado em 24 de julho de 2026"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "exame.com",
+    "url": "https://exame.com/invest/mercados/petroleo-e-juros-por-que-a-estagflacao-voltou-a-preocupar-o-mercado/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 2.05,
+    "approach_a": {
+      "chars": 4545,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Petróleo: disparada da commodity reacende temor de estagflação. (Fikri Rasyid /Unsplash) A nova escalada dos ataques no Oriente Médio recolocou no radar dos investidores o risco de estagflação, que é a combinação de infl"
+    },
+    "approach_b": {
+      "chars": 5208,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Petróleo: disparada da commodity reacende temor de estagflação. (Fikri Rasyid /Unsplash)  Repórter de Invest  Publicado em 24 de julho de 2026 às 09h17 .  A nova escalada dos ataques no Oriente Médio recolocou no radar d"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "r7.com",
+    "url": "https://noticias.r7.com/economia/piora-o-que-ja-estava-ruim-afirma-setor-de-calcados-sobre-nova-tarifa-dos-eua-24072026",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.22,
+    "approach_a": {
+      "chars": 2558,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Após o anúncio dos Estados Unidos de aplicar uma nova tarifa de 12,5% sobre produtos brasileiros, a Abicalçados (Associação Brasileira das Indústrias de Calçados) projeta prejuízos para o setor. Para o presidente executi"
+    },
+    "approach_b": {
+      "chars": 2700,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Adicione como fonte preferencial no Google  Produzido pela Ri7a - a Inteligência Artificial do R7  Após o anúncio dos Estados Unidos de aplicar uma nova tarifa de 12,5% sobre produtos brasileiros, a Abicalçados (Associaç"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "r7.com",
+    "url": "https://noticias.r7.com/economia/receita-abre-consulta-ao-terceiro-lote-de-restituicao-do-irpf-2026-nesta-sexta-feira-24-24072026",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 2068,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A Receita Federal irá disponibilizar, a partir das 9h desta sexta-feira (24), a consulta ao terceiro lote de restituição do IRPF (Imposto sobre a Renda da Pessoa Física) 2026. O objetivo é encerrar a fila de reembolsos a"
+    },
+    "approach_b": {
+      "chars": 1974,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Adicione como fonte preferencial no Google  Produzido pela Ri7a - a Inteligência Artificial do R7  A Receita Federal irá disponibilizar, a partir das 9h desta sexta-feira (24) , a consulta ao terceiro lote de restituição"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "r7.com",
+    "url": "https://noticias.r7.com/economia/vai-ter-impacto-no-emprego-e-na-renda-diz-economista-sobre-setores-afetados-por-tarifaco-24072026",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.24,
+    "approach_a": {
+      "chars": 1755,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Por conta de supostas práticas comerciais ilegais e da acusação de falha no combate ao trabalho forçado, os Estados Unidos anunciaram na quinta-feira (23) uma tarifa adicional de 12,5% a produtos brasileiros. Adicionada "
+    },
+    "approach_b": {
+      "chars": 1918,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Adicione como fonte preferencial no Google  Produzido pela Ri7a - a Inteligência Artificial do R7  Por conta de supostas práticas comerciais ilegais e da acusação de falha no combate ao trabalho forçado , os Estados Unid"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "terra.com.br",
+    "url": "https://www.terra.com.br/noticias/brasil/acidente-da-voepass-o-que-causou-a-queda-do-aviao-em-sp,dad0d28e8c1bbd1a824b30aa4551fb49ivdtnkne.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.08,
+    "approach_a": {
+      "chars": 8373,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Acidente da Voepass: o que causou a queda do avião em SP? Relatório do Cenipa aponta 19 fatores contribuintes para a queda do voo 2283 em 2024, incluindo falhas técnicas, erros operacionais e uma cultura organizacional q"
+    },
+    "approach_b": {
+      "chars": 8348,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Relatório do Cenipa aponta 19 fatores contribuintes para a queda do voo 2283 em 2024, incluindo falhas técnicas, erros operacionais e uma cultura organizacional que teria normalizado desvios de segurança.Quase dois anos "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "terra.com.br",
+    "url": "https://www.terra.com.br/noticias/brasil/brasil-e-o-maior-perdedor-das-tarifas-adicionais-de-trump-diz-financial-times,2e5d09810020221b3ac3ab20f7d45551glwlutoo.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.11,
+    "approach_a": {
+      "chars": 4644,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Brasil é o maior perdedor das tarifas adicionais de Trump, diz Financial Times Enquanto diversas economias europeias tiveram redução nas tarifas, Brasil ampliou sua desvantagem competitiva com as sobretaxas adicionais an"
+    },
+    "approach_b": {
+      "chars": 4396,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O Brasil é o país mais prejudicado pela reformulação da política tarifária dos Estados Unidos, segundo análise do Financial Times.  \"De longe, o maior perdedor é o Brasil\", afirma reportagem do jornal britânico, publicad"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "terra.com.br",
+    "url": "https://www.terra.com.br/economia/governo-lula-diminui-bloqueio-no-orcamento-e-libera-r-57-bilhoes-em-gastos-na-vespera-de-campanha,bba6831dc04e52c1d4256172cff557bfphvfbve9.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.08,
+    "approach_a": {
+      "chars": 2796,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Governo Lula diminui bloqueio no Orçamento e libera R$ 5,7 bilhões em gastos na véspera de campanha Com decisão, R$ 17,9 bilhões em despesas ainda ficam bloqueados para cumprir arcabouço fiscal BRASÍLIA — O governo do pr"
+    },
+    "approach_b": {
+      "chars": 2590,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "BRASÍLIA — O governo do presidente Luiz Inácio Lula da Silva liberou R$ 5,7 bilhões em gastos na véspera de começar a campanha presidencial. A decisão foi anunciada nesta sexta-feira, 24, pelo Ministério do Planejamento "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "metropoles.com",
+    "url": "https://www.metropoles.com/brasil/apos-tarifaco-lula-fala-em-nao-deixar-ninguem-meter-o-nariz-no-pais",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.5,
+    "approach_a": {
+      "chars": 2790,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O presidente Luiz Inácio Lula da Silva (PT) afirmou, nesta sexta-feira (24/7), que quer investir nas Forças Armadas do Brasil e deixá-las bem equipadas para “ninguém meter o nariz no nosso país”. “[Quero as Forças Armada"
+    },
+    "approach_b": {
+      "chars": 2414,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O presidente Luiz Inácio Lula da Silva (PT) afirmou, nesta sexta-feira (24/7), que quer investir nas Forças Armadas do Brasil e deixá-las bem equipadas para “ninguém meter o nariz no nosso país”.  “[Quero as Forças Armad"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "metropoles.com",
+    "url": "https://www.metropoles.com/brasil/produtos-brasileiros-serao-taxados-em-ate-375-a-partir-desta-6a-veja-lista",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 7370,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A nova tarifa de 12,5% anunciada nessa quinta-feira (23/7) pelos Estados Unidos para produtos brasileiros entra em vigor já nesta sexta-feira (24/7) e, para a maior parte das exportações afetadas, será somada à sobretaxa"
+    },
+    "approach_b": {
+      "chars": 5363,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A nova tarifa de 12,5% anunciada nessa quinta-feira (23/7) pelos Estados Unidos para produtos brasileiros entra em vigor já nesta sexta-feira (24/7) e, para a maior parte das exportações afetadas, será somada à sobretaxa"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "metropoles.com",
+    "url": "https://www.metropoles.com/brasil/governo-lula-reage-a-nova-tarifa-e-promete-acionar-reciprocidade",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.15,
+    "approach_a": {
+      "chars": 4104,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O governo brasileiro rechaçou a decisão do governo dos Estados Unidos de sobretaxar o país com uma tarifa adicional de 12,5% sobre produtos brasileiros e prometeu acionar “imediatamente” os instrumentos previstos na Lei "
+    },
+    "approach_b": {
+      "chars": 3734,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O governo brasileiro rechaçou a decisão do governo dos Estados Unidos de sobretaxar o país com uma tarifa adicional de 12,5% sobre produtos brasileiros e prometeu acionar “imediatamente” os instrumentos previstos na Lei "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "poder360.com.br",
+    "url": "https://www.poder360.com.br/poder-economia/jbs-mira-expansao-global-com-listagem-nos-eua-e-aquisicao-em-oma/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.13,
+    "approach_a": {
+      "chars": 5843,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "JBS mira expansão global com listagem nos EUA e aquisição em Omã Gilberto Tomazoni disse que listagem nos EUA ampliou investidores e que Brasil é parceiro estratégico para países no setor A listagem das ações da JBS nos "
+    },
+    "approach_b": {
+      "chars": 0,
+      "ok_length": false,
+      "noise_hits": null,
+      "sample": null
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "poder360.com.br",
+    "url": "https://www.poder360.com.br/poder-governo/so-vou-falar-do-tarifaco-quando-trump-falar-diz-lula/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.13,
+    "approach_a": {
+      "chars": 2860,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Só vou falar do tarifaço quando Trump falar, diz Lula Tarifas de 25% foram oficializadas na 4ª feira (15.jul); governo classifica medida dos EUA como “um marco lastimável” O presidente Luiz Inácio Lula da Silva (PT) decl"
+    },
+    "approach_b": {
+      "chars": 0,
+      "ok_length": false,
+      "noise_hits": null,
+      "sample": null
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "poder360.com.br",
+    "url": "https://www.poder360.com.br/poder-economia/saiba-quais-indicadores-internacionais-saem-nesta-semana-15/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.11,
+    "approach_a": {
+      "chars": 1901,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Saiba quais indicadores internacionais saem nesta semana Inflação nos EUA, China e Zona do Euro, PIB chinês e decisão de juros no Canadá estão entre os destaques O Poder360 apresenta os principais indicadores econômicos "
+    },
+    "approach_b": {
+      "chars": 0,
+      "ok_length": false,
+      "noise_hits": null,
+      "sample": null
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "gzh.com.br",
+    "url": "https://gauchazh.clicrbs.com.br/viral/noticia/2026/07/joao-gomes-cancela-shows-apos-ser-hospitalizado-com-influenza-cmrz4oac601sg014crnxsl3md.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 1.13,
+    "approach_a": {
+      "chars": 659,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Em razão do estado de saúde, pelo menos dois shows que seriam realizados nesta sexta-feira (24), em Salgueiro, Pernambuco, e no sábado (25), em Jacuípe, Bahia, foram cancelados. \"Após avaliação médica e confirmação do di"
+    },
+    "approach_b": {
+      "chars": 837,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O cantor João Gomes foi hospitalizado após ser diagnosticado com influenza . A informação foi divulgada nesta sexta-feira (24), nas redes sociais do artista (leia abaixo).  Em razão do estado de saúde, pelo menos dois sh"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "gzh.com.br",
+    "url": "https://gauchazh.clicrbs.com.br/colunistas/gisele-loeblein/noticia/2026/07/brasil-proibe-foie-gras-e-franca-reage-entenda-a-disputa-por-tras-da-iguaria-de-luxo-cmrza1zq501wa0163q6yjjuq9.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.82,
+    "approach_a": {
+      "chars": 4379,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A jornalista Carolina Pastl colabora com a colunista Gisele Loeblein, titular deste espaço. A sanção da lei que proíbe a produção e a comercialização de foie gras no Brasil provocou uma reação imediata na França e coloco"
+    },
+    "approach_b": {
+      "chars": 3786,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A jornalista Carolina Pastl colabora com a colunista Gisele Loeblein, titular deste espaço.  A sanção da lei que proíbe a produção e a comercialização de foie gras no Brasil provocou uma reação imediata na França e coloc"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "correiobraziliense.com.br",
+    "url": "https://www.correiobraziliense.com.br/politica/2026/07/7467410-pp-opta-pela-neutralidade-nacional-e-libera-palanques-para-eleicoes.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 1385,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A direção nacional do Progressistas (PP) decidiu adotar uma posição de neutralidade na disputa presidencial e dará liberdade para que diretórios estaduais definam seus próprios palanques nas eleições. Segundo um cacique "
+    },
+    "approach_b": {
+      "chars": 1805,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A direção nacional do Progressistas (PP) decidiu adotar uma posição de neutralidade na disputa presidencial e dará liberdade para que diretórios estaduais definam seus próprios palanques nas eleições. Segundo um cacique "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "correiobraziliense.com.br",
+    "url": "https://www.correiobraziliense.com.br/brasil/2026/07/7467405-mulheres-ja-podem-comprar-spray-de-pimenta-para-defesa-pessoal-veja-regras.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 2422,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "As mulheres maiores de idade, em todo território brasileiro, estão liberadas a adquirir e usar spray de pimenta para fins de defesa pessoal. A medida foi sancionada pelo governo na Lei nº 15.474, e publicada, nesta sexta"
+    },
+    "approach_b": {
+      "chars": 3654,
+      "ok_length": true,
+      "noise_hits": 4,
+      "sample": "As mulheres maiores de idade, em todo território brasileiro, estão liberadas a adquirir e usar spray de pimenta para fins de defesa pessoal. A medida foi sancionada pelo governo na Lei nº 15.474, e publicada, nesta sexta"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "correiobraziliense.com.br",
+    "url": "https://www.correiobraziliense.com.br/brasil/2026/07/7467426-alem-do-spray-4-itens-de-defesa-pessoal-permitidos-por-lei-no-pais.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.13,
+    "approach_a": {
+      "chars": 2795,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "A sanção da Lei 15.474/2026, nesta sexta-feira (24), que autoriza o porte de sprays de pimenta para mulheres como item de defesa pessoal acendeu um debate e aumentou o interesse por outras ferramentas de proteção. Além d"
+    },
+    "approach_b": {
+      "chars": 3887,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A sanção da Lei 15.474/2026, nesta sexta-feira (24), que autoriza o porte de sprays de pimenta para mulheres como item de defesa pessoal acendeu um debate e aumentou o interesse por outras ferramentas de proteção.  Siga "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "agenciabrasil.ebc.com.br",
+    "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/eua-impoem-nova-tarifa-de-125-produtos-brasileiros",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.07,
+    "approach_a": {
+      "chars": 5027,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "EUA impõem nova tarifa de 12,5% a produtos brasileiros Os Estados Unidos anunciaram nesta quinta-feira (23) a aplicação de uma nova sobretaxa de 12,5% sobre produtos brasileiros, sob a alegação de que o Brasil não adota "
+    },
+    "approach_b": {
+      "chars": 4878,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Os Estados Unidos anunciaram nesta quinta-feira (23) a aplicação de uma nova sobretaxa de 12,5% sobre produtos brasileiros, sob a alegação de que o Brasil não adota mecanismos eficazes para impedir a importação de mercad"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "agenciabrasil.ebc.com.br",
+    "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/ministro-chama-tarifa-dos-eua-de-indevida-e-promete-reacao",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.08,
+    "approach_a": {
+      "chars": 3947,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Ministro chama tarifa dos EUA de \"indevida\" e promete reação O ministro do Desenvolvimento, Indústria, Comércio e Serviços (MDIC), Márcio Elias Rosa, classificou como \"indevida\" a nova tarifa de 12,5% imposta pelos Estad"
+    },
+    "approach_b": {
+      "chars": 4065,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O ministro do Desenvolvimento, Indústria, Comércio e Serviços (MDIC), Márcio Elias Rosa, classificou como \"indevida\" a nova tarifa de 12,5% imposta pelos Estados Unidos sobre produtos brasileiros e afirmou que a medida s"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "agenciabrasil.ebc.com.br",
+    "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/estados-unidos-isentam-471-produtos-de-nova-tarifa-de-125",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.07,
+    "approach_a": {
+      "chars": 3467,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Estados Unidos isentam 471 produtos de nova tarifa de 12,5% Os Estados Unidos divulgaram uma lista com 471 produtos brasileiros que ficarão isentos da nova sobretaxa de 12,5% imposta sob a alegação de falhas no combate a"
+    },
+    "approach_b": {
+      "chars": 2965,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Os Estados Unidos divulgaram uma lista com 471 produtos brasileiros que ficarão isentos da nova sobretaxa de 12,5% imposta sob a alegação de falhas no combate ao trabalho forçado. Entre os itens poupados da medida estão "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "otempo.com.br",
+    "url": "https://www.otempo.com.br/politica/2026/7/24/dataprev-formaliza-reajuste-em-contrato-de-tecnologia-com-a-teletex",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 4317,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A Empresa de Tecnologia e Informações da Previdência (Dataprev) oficializou a aplicação de um reajuste financeiro no contrato mantido com a Teletex Computadores e Sistemas Ltda. A decisão, formalizada por meio do Termo d"
+    },
+    "approach_b": {
+      "chars": 4243,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A Empresa de Tecnologia e Informações da Previdência (Dataprev) oficializou a aplicação de um reajuste financeiro no contrato mantido com a Teletex Computadores e Sistemas Ltda. A decisão, formalizada por meio do Termo d"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "otempo.com.br",
+    "url": "https://www.otempo.com.br/politica/governo/2026/7/14/na-vespera-de-decisao-governo-lula-faz-reuniao-com-eua-e-fala-em-carater-injusto-de-tarifas",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.12,
+    "approach_a": {
+      "chars": 2462,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "BRASÍLIA - Na véspera da decisão dos Estados Unidos sobre a aplicação de novas tarifas ao Brasil, equipes do governo do presidente Luiz Inácio Lula da Silva (PT) se reuniram com o representante de Comércio dos EUA, Jamie"
+    },
+    "approach_b": {
+      "chars": 2907,
+      "ok_length": true,
+      "noise_hits": 2,
+      "sample": "Com localizações salvas você poderá receber alertas de lugares que você \t\t\t\t\tescolheu e da sua atual localização.  Compartilhe sua localização para sempre receber alertas locais,                     independente da sua p"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "otempo.com.br",
+    "url": "https://www.otempo.com.br/cidades/2026/7/24/justica-decide-na-proxima-quarta-se-acusado-de-matar-sargento-roger-dias-ira-a-juri-popular",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.12,
+    "approach_a": {
+      "chars": 3835,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A 7ª Câmara Criminal do Tribunal de Justiça de Minas Gerais (TJMG) julga na próxima quarta-feira (29), às 13h, o recurso apresentado pela defesa de Welbert de Souza Fagundes, acusado de matar o sargento da Polícia Milita"
+    },
+    "approach_b": {
+      "chars": 4241,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Com localizações salvas você poderá receber alertas de lugares que você \t\t\t\t\tescolheu e da sua atual localização.  Compartilhe sua localização para sempre receber alertas locais,                     independente da sua p"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "band.uol.com.br",
+    "url": "https://www.band.com.br/noticias/justica-decreta-prisao-preventiva-de-homem-que-atropelou-e-matou-pm-em-sp-202607241436",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.13,
+    "approach_a": {
+      "chars": 2255,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A Justiça de São Paulo decretou, nesta sexta-feira (24), a prisão preventiva do motorista que atropelou e matou o PM Fábio Ferreira de Souza, na madrugada desta quinta-feira (23), na Avenida Nove de Julho, em São Paulo. "
+    },
+    "approach_b": {
+      "chars": 2371,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "A Justiça de São Paulo decretou, nesta sexta-feira (24), a prisão preventiva do motorista que atropelou e matou o PM Fábio Ferreira de Souza, na madrugada desta quinta-feira (23), na Avenida Nove de Julho, em São Paulo. "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "band.uol.com.br",
+    "url": "https://www.band.com.br/noticias/entenda-o-que-esta-por-tras-do-acordo-nuclear-entre-eua-e-arabia-saudita-202607241419",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 10548,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Resumo Anúncio do presidente Donald Trump condiciona o acordo nuclear com a Arábia Saudita ao reconhecimento do Estado de Israel, surpreendendo ao incluir uma exigência política não revelada anteriormente e ainda depende"
+    },
+    "approach_b": {
+      "chars": 10513,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Donald Trump na cúpula da Otan em Ancara, na Turquia  REUTERS/Jonathan Ernst  Anúncio do presidente Donald Trump condiciona o acordo nuclear com a Arábia Saudita ao reconhecimento do Estado de Israel, surpreendendo ao in"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "band.uol.com.br",
+    "url": "https://www.band.com.br/economia/noticias/tarifaco-de-trump-veja-como-os-paises-reagiram-a-nova-sobretaxa-de-ate-125-imposta-pelos-eua-202607241157",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.12,
+    "approach_a": {
+      "chars": 7678,
+      "ok_length": true,
+      "noise_hits": 2,
+      "sample": "Nas últimas horas, Brasil, China, União Europeia e outros países afetados pela nova sobretaxa de até 12,5% reagiram à medida anunciada pelos Estados Unidos na tarde de quinta-feira (23), que entrou em vigor às 0h01 no ho"
+    },
+    "approach_b": {
+      "chars": 7655,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Donald Trump na Casa Branca  Nathan Howard/Reuters  Nas últimas horas, Brasil, China, União Europeia e outros países afetados pela nova sobretaxa de até 12,5% reagiram à medida anunciada pelos Estados Unidos na tarde de "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "ge.globo.com",
+    "url": "https://ge.globo.com/futebol/times/cruzeiro/noticia/2026/07/24/cruzeiro-vai-contratar-substituto-de-gabriel-pec-entenda-planos.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.2,
+    "approach_a": {
+      "chars": 1730,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O Cruzeiro teve a confirmação da baixa Gabriel Pec, uma das contratações da Raposa nesta janela de transferência. Segundo apuração do ge, o prazo de recuperação é de três a quatro meses. Por isso, e com a janela aberta a"
+    },
+    "approach_b": {
+      "chars": 2052,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Sem Pec, Cruzeiro deve contratar? Ge analisa  O Cruzeiro teve a confirmação da baixa Gabriel Pec , uma das contratações da Raposa nesta janela de transferência. Segundo apuração do ge , o prazo de recuperação é de três a"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "ge.globo.com",
+    "url": "https://ge.globo.com/futebol/copa-do-mundo/noticia/2026/06/12/copa-do-mundo-2026-veja-ranking-de-artilheiros-e-garcons.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.19,
+    "approach_a": {
+      "chars": 7676,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Mbappé ultrapassou Messi e terminou como artilheiro da Copa do Mundo 2026 — Foto: REUTERS/Paul Childs Veja os artilheiros da Copa do Mundo 2026 1. Mbappé (França): 10 2. Messi (Argentina): 8 3. Bellingham (Inglaterra) e "
+    },
+    "approach_b": {
+      "chars": 8035,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Espanha 1 x 0 Argentina | Melhores momentos | Final | Copa do Mundo Fifa 2026 | ge tv  + Mbappé é o primeiro a tornar-se artilheiro em duas edições de Copa do Mundo; veja lista + Mbappé ultrapassa Messi no topo do rankin"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "ge.globo.com",
+    "url": "https://ge.globo.com/gato-mestre/dicas/noticia/2026/07/24/palpites-e-dicas-para-bahia-x-corinthians-pelo-brasileirao.ghtml",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.21,
+    "approach_a": {
+      "chars": 2526,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Historicamente, o Corinthians é um adversário desafiador para o Bahia em Salvador. Desde 2006, foram 12 confrontos com este mando, com quatro triunfos baianos, quatro empates e quatro vitórias do Corinthians, a última em"
+    },
+    "approach_b": {
+      "chars": 2667,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Trio perde espaço, e meio-campo do Bahia muda de estilo  Historicamente, o Corinthians é um adversário desafiador para o Bahia em Salvador. Desde 2006, foram 12 confrontos com este mando, com quatro triunfos baianos, qua"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "espn.com.br",
+    "url": "https://www.espn.com.br/futebol/sao-paulo/artigo/_/id/16096849/sao-paulo-acerta-negociacao-tripla-com-river-plate-e-encaminha-novidades-para-2026",
+    "download_ok": false,
+    "download_error": "HTTP 202",
+    "elapsed_s": 0.11,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "espn.com.br",
+    "url": "https://www.espn.com.br/futebol/copa-do-mundo/artigo/_/id/16551330/copa-do-mundo-tera-nove-representantes-arbitragem-brasil-veja-nomes",
+    "download_ok": false,
+    "download_error": "HTTP 202",
+    "elapsed_s": 0.1,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "aosfatos.org",
+    "url": "https://aosfatos.org/noticias/brastemp-consul-fabrica-brasil/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.15,
+    "approach_a": {
+      "chars": 3049,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Não é verdade que a multinacional Whirlpool, dona das marcas Brastemp e Consul, vai fechar uma fábrica no Brasil, como afirmam postagens nas redes sociais. A empresa decidiu encerrar as atividades de uma de suas unidades"
+    },
+    "approach_b": {
+      "chars": 2694,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Compartilhe  Adicione o Aos Fatos às suas fontes do Google  Não é verdade que a multinacional Whirlpool, dona das marcas Brastemp e Consul, vai fechar uma fábrica no Brasil, como afirmam postagens nas redes sociais. A em"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "aosfatos.org",
+    "url": "https://aosfatos.org/noticias/moraes-trump-visitar-bolsonaro/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.17,
+    "approach_a": {
+      "chars": 4020,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Não é verdade que o ministro Alexandre de Moraes tenha declarado que nem o presidente dos Estados Unidos, Donald Trump, poderia visitar o ex-presidente Jair Bolsonaro (PL) na prisão domiciliar, como afirmam postagens nas"
+    },
+    "approach_b": {
+      "chars": 3707,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Não é verdade que o ministro Alexandre de Moraes tenha declarado que nem o presidente dos Estados Unidos, Donald Trump, poderia visitar o ex-presidente Jair Bolsonaro (PL) na prisão domiciliar, como afirmam postagens nas"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "aosfatos.org",
+    "url": "https://aosfatos.org/noticias/governo-idade-minima-aposentadoria/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.15,
+    "approach_a": {
+      "chars": 2742,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Não é verdade que o governo federal apresentou uma proposta que aumenta para 67 anos a idade mínima para se aposentar no Brasil, como afirmam postagens nas redes sociais. O Ministério da Previdência Social desmentiu a ex"
+    },
+    "approach_b": {
+      "chars": 2805,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Compartilhe  Adicione o Aos Fatos às suas fontes do Google  Não é verdade que o governo federal apresentou uma proposta que aumenta para 67 anos a idade mínima para se aposentar no Brasil, como afirmam postagens nas rede"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "lupa.uol.com.br",
+    "url": "https://www.agencialupa.org/noticias/2026/07/21/e-falso-que-luciano-hang-anunciou-plataforma-que-rende-ate-r-220-mil-por-mes/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.15,
+    "approach_a": {
+      "chars": 4808,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Circula no Facebook um vídeo em que o empresário, Luciano Hang, dono das lojas Havan, afirma ter lançado uma plataforma de investimentos exclusiva para brasileiros e capaz de mudar a realidade financeira de muitas pessoa"
+    },
+    "approach_b": {
+      "chars": 4881,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Circula no Facebook um vídeo em que o empresário, Luciano Hang, dono das lojas Havan, afirma ter lançado uma plataforma de investimentos exclusiva para brasileiros e capaz de mudar a realidade financeira de muitas pessoa"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "lupa.uol.com.br",
+    "url": "https://www.agencialupa.org/verificacao/2026/07/02/e-golpe-site-que-simula-plataforma-de-investimento-da-petrobras/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 5690,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Circula no WhatsApp um link que leva a uma suposta página da Petrobras. O site, que utiliza o layout da empresa, anuncia oportunidades de investimento em ações de gigantes da tecnologia por, no mínimo, R$ 100. É falso. T"
+    },
+    "approach_b": {
+      "chars": 5634,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Circula no WhatsApp um link que leva a uma suposta página da Petrobras. O site, que utiliza o layout da empresa, anuncia oportunidades de investimento em ações de gigantes da tecnologia por, no mínimo, R$ 100. É falso. T"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "lupa.uol.com.br",
+    "url": "https://www.agencialupa.org/institucional/2026/07/21/aqui-nao-tem-propaganda-de-bets/",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.13,
+    "approach_a": {
+      "chars": 3830,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Quando a saúde, o bem estar e o orçamento das famílias brasileiras estão em risco, é dever do jornalismo profissional se posicionar. Quando um setor econômico traz mais malefícios do que benefícios à população, é com o j"
+    },
+    "approach_b": {
+      "chars": 3829,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Quando a saúde, o bem estar e o orçamento das famílias brasileiras estão em risco, é dever do jornalismo profissional se posicionar.  Quando um setor econômico traz mais malefícios do que benefícios à população, é com o "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "bbc.com",
+    "url": "https://www.bbc.com/portuguese/articles/c75yy56153xo",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.45,
+    "approach_a": {
+      "chars": 724,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Como os Estados Unidos viraram um país Há 250 anos, um grupo de colônias britânicas se declarou os Estados Unidos da América. A partir desse território, os EUA se expandiram e chegaram à dimensão de hoje. Mas história de"
+    },
+    "approach_b": {
+      "chars": 689,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Há 250 anos, um grupo de colônias britânicas se declarou os Estados Unidos da América . A partir desse território, os EUA se expandiram e chegaram à dimensão de hoje.  Mas história de como esse país surgiu tem início em "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "bbc.com",
+    "url": "https://www.bbc.com/portuguese/articles/c8rn582102vo",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 4939,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Por que PF vai investigar repasses de Vorcaro para filme sobre Jair Bolsonaro feitos a pedido de Flávio O ministro André Mendonça, do Supremo Tribunal Federal (STF), autorizou a abertura de inquérito pela Polícia Federal"
+    },
+    "approach_b": {
+      "chars": 4926,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Crédito, Divulgação  O ministro André Mendonça, do Supremo Tribunal Federal (STF) , autorizou a abertura de inquérito pela Polícia Federal (PF) para investigar os repasses de Daniel Vorcaro , dono do Banco Master, para a"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "bbc.com",
+    "url": "https://www.bbc.com/portuguese/articles/cz64le56412o",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 3124,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Trabalho no feriado: o que muda para farmácias, supermercados, comércio e outros setores afetados por nova regra em vigor - Author, Redação - Role, BBC News Brasil   - Published - Tempo de leitura: 3 min O governo federa"
+    },
+    "approach_b": {
+      "chars": 2437,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Crédito, Getty Images  O governo federal anunciou nesta terça-feira (21/7) novas regras para o funcionamento do comércio durante os feriados .  A portaria anunciada pelo Ministério do Trabalho e Emprego (MTE) determina q"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "dw.com",
+    "url": "https://www.dw.com/pt-br/falta-de-emprego-entre-jovens-vira-desafio-global/a-78052376",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.16,
+    "approach_a": {
+      "chars": 7023,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A dificuldade de inserção de jovens no mercado de trabalho deixou de ser um problema localizado e passou a mobilizar diferentes países. No ano passado, o desemprego persistente e a escassez de oportunidades levaram manif"
+    },
+    "approach_b": {
+      "chars": 7061,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "A dificuldade de inserção de jovens no mercado de trabalho deixou de ser um problema localizado e passou a mobilizar diferentes países. No ano passado, o desemprego persistente e a escassez de oportunidades levaram manif"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "dw.com",
+    "url": "https://www.dw.com/pt-br/alvo-de-tarifaço-brasil-é-há-décadas-fonte-de-superávit-recorde-para-os-eua/a-78090576",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 1.41,
+    "approach_a": {
+      "chars": 9248,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Novamente na mira de tarifas impostas pelo governo Donald Trump, o Brasil acumula um déficit de 144 bilhões de dólares (R$ 734 bilhões) em quatro décadas de comércio de bens com os Estados Unidos. Ou seja, a balança entr"
+    },
+    "approach_b": {
+      "chars": 9273,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Novamente na mira de tarifas impostas pelo governo Donald Trump, o Brasil acumula um déficit de 144 bilhões de dólares (R$ 734 bilhões) em quatro décadas de comércio de bens com os Estados Unidos . Ou seja, a balança ent"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "dw.com",
+    "url": "https://www.dw.com/pt-br/flávio-e-michelle-fazem-as-pazes-antes-de-convenção-do-pl/a-78105395",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.75,
+    "approach_a": {
+      "chars": 4344,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Às vésperas da convenção nacional do PL que ocorre neste sábado (25/07), o senador Flávio Bolsonaro e a ex-primeira-dama Michelle Bolsonaro trocaram pedidos públicos de desculpas em uma tentativa de encerrar semanas de a"
+    },
+    "approach_b": {
+      "chars": 4290,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Às vésperas da convenção nacional do PL que ocorre neste sábado (25/07), o senador Flávio Bolsonaro e a ex-primeira-dama Michelle Bolsonaro trocaram pedidos públicos de desculpas em uma tentativa de encerrar semanas de a"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "elpais.com",
+    "url": "https://elpais.com/internacional/2026-07-24/trump-impone-un-sistema-comercial-caotico-en-su-tercera-ronda-arancelaria.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.18,
+    "approach_a": {
+      "chars": 6995,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Como Sísifo empujando la roca en la montaña, Donald Trump reconstruye una barrera arancelaria una y otra vez pese a los continuos reveses de los tribunales. El presidente estadounidense ha levantado un muro amorfo, caóti"
+    },
+    "approach_b": {
+      "chars": 6956,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Como Sísifo empujando la roca en la montaña, Donald Trump reconstruye una barrera arancelaria una y otra vez pese a los continuos reveses de los tribunales. El presidente estadounidense ha levantado un muro amorfo, caóti"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "elpais.com",
+    "url": "https://elpais.com/internacional/2026-07-24/las-claves-de-los-nuevos-aranceles-de-trump-que-suponen-a-que-paises-afectan-y-cuando-entran-en-vigor.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.2,
+    "approach_a": {
+      "chars": 7616,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Estados Unidos acaba de aprobar una nueva ronda de aranceles que amenazan con avivar una guerra comercial. Las tasas de entre el 10% y el 12,5% a más de 60 economías sustituyen al arancel universal del 10% que vencía est"
+    },
+    "approach_b": {
+      "chars": 7313,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Estados Unidos acaba de aprobar una nueva ronda de aranceles que amenazan con avivar una guerra comercial. Las tasas de entre el 10% y el 12,5% a más de 60 economías sustituyen al arancel universal del 10% que vencía est"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "elpais.com",
+    "url": "https://elpais.com/internacional/2026-07-24/bruselas-recibe-con-cautela-los-nuevos-aranceles-de-trump-a-la-union-europea.html",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.19,
+    "approach_a": {
+      "chars": 6243,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "La Comisión Europea ha acogido con cautela la entrada en vigor de los nuevos aranceles —de entre el 10% y el 12,5%— aprobados la víspera por el Gobierno de Estados Unidos. En un escenario de golpes y amenazas constantes "
+    },
+    "approach_b": {
+      "chars": 6240,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "La Comisión Europea ha acogido con  cautela la entrada en vigor de los nuevos aranceles —de entre el 10% y el 12,5%— aprobados la víspera por el Gobierno de Estados Unidos. En un escenario de golpes y amenazas constantes"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "reuters.com",
+    "url": "https://www.reuters.com/world/",
+    "download_ok": false,
+    "download_error": "HTTP 401",
+    "elapsed_s": 0.13,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "reuters.com",
+    "url": "https://www.reuters.com/business/",
+    "download_ok": false,
+    "download_error": "HTTP 401",
+    "elapsed_s": 0.13,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "apnews.com",
+    "url": "https://apnews.com/article/iran-us-hormuz-strait-war-24-july-2026-78c2dbf538f6e61ab816479a4d9bdd85",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.19,
+    "approach_a": {
+      "chars": 8653,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "US military says it fired on another merchant vessel trying to breach its blockade of Iranian ports US military says it fired on another merchant vessel trying to breach its blockade of Iranian ports IRBIL, Iraq (AP) — T"
+    },
+    "approach_b": {
+      "chars": 9248,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "At least seven explosions broke out near a military base hosting U.S. forces in the northern Iraqi city of Irbil. The city is in the country’s semi-autonomous Kurdish region.  The U.S. military announced the 13th night o"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "apnews.com",
+    "url": "https://apnews.com/article/usvi-lawsuit-guns-concealed-2nd-amendment-1039052c4389483e4be4ed23f30ef82b",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.17,
+    "approach_a": {
+      "chars": 2712,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "US Virgin Islands faces second lawsuit over right to bear arms as Florida resident seeks license SAN JUAN, Puerto Rico (AP) — Gun Owners of America and Gun Owners Foundation are suing the government of the U.S. Virgin Is"
+    },
+    "approach_b": {
+      "chars": 2629,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "SAN JUAN, Puerto Rico (AP) — Gun Owners of America and Gun Owners Foundation are suing the government of the U.S. Virgin Islands and its police commissioner as a fight over the Second Amendment deepens.  The nonprofits a"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "apnews.com",
+    "url": "https://apnews.com/article/usmediatimesair-force-one-42429e4d4da8accc42b6c3ddf3f4fed5",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.2,
+    "approach_a": {
+      "chars": 7321,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Government withdraws subpoenas of 3 reporters for The New York Times after admitting legal errors NEW YORK (AP) — Criticized by a federal judge for sloppy legal work, the government on Thursday grudgingly withdrew subpoe"
+    },
+    "approach_b": {
+      "chars": 7153,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "NEW YORK (AP) — Criticized by a federal judge for sloppy legal work, the government on Thursday grudgingly withdrew subpoenas that would have compelled three New York Times reporters to testify about their sources for ar"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "gov.br",
+    "url": "https://agenciagov.ebc.com.br/noticias/202607/governo-brasileiro-rechaca-alegacoes-dos-eua-para-impor-nova-taxa",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.14,
+    "approach_a": {
+      "chars": 3071,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Governo brasileiro rechaça alegações dos EUA para impor nova tarifa Em nota, Executivo reafirma compromisso com a defesa do trabalho decente e o combate ao trabalho forçado; Brasil é signatário de 66 convenções da Organi"
+    },
+    "approach_b": {
+      "chars": 2965,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Em nota, Executivo reafirma compromisso com a defesa do trabalho decente e o combate ao trabalho forçado; Brasil é signatário de 66 convenções da Organização Internacional do Trabalho e os EUA, de apenas dez  Nesta quint"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "gov.br",
+    "url": "https://agenciagov.ebc.com.br/noticias/202607/enade-2026-prazo-para-solicitar-atendimento-especializado-e-nome-social-termina-hoje-24",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.08,
+    "approach_a": {
+      "chars": 1212,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Enade: prazo para solicitar atendimento especializado e nome social termina nesta sexta (24) Participantes de cursos de bacharelado e superiores de tecnologia podem fazer as solicitações. Resultado preliminar será divulg"
+    },
+    "approach_b": {
+      "chars": 1097,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Participantes de cursos de bacharelado e superiores de tecnologia podem fazer as solicitações. Resultado preliminar será divulgado em 31 de julho  O prazo para solicitação de atendimento especializado e para requerimento"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "gov.br",
+    "url": "https://agenciagov.ebc.com.br/noticias/202607/cnpj-alfanumerico-o-que-muda-para-empresas-e-empreendedores",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.07,
+    "approach_a": {
+      "chars": 6727,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "CNPJ alfanumérico: o que muda para empresas e empreendedores? Novo formato começa a ser utilizado em novas inscrições, sem alterar os CNPJs já existentes A partir de 31 de julho, a Receita Federal inicia a implantação pr"
+    },
+    "approach_b": {
+      "chars": 6534,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Novo formato começa a ser utilizado em novas inscrições, sem alterar os CNPJs já existentes  A partir de 31 de julho, a Receita Federal inicia a implantação progressiva do CNPJ alfanumérico, formato que combina letras e "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "camara.leg.br",
+    "url": "https://www.camara.leg.br/noticias/1290742-projeto-preve-avaliacao-de-risco-de-feminicidio-durante-atendimento-a-vitimas-de-violencia",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.17,
+    "approach_a": {
+      "chars": 2517,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Projeto prevê avaliação de risco de feminicídio durante atendimento a vítimas de violência O Projeto de Lei 1207/26 cria, nos serviços de saúde, um instrumento nacional de avaliação de risco de feminicídio e um modelo pa"
+    },
+    "approach_b": {
+      "chars": 0,
+      "ok_length": false,
+      "noise_hits": null,
+      "sample": null
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "camara.leg.br",
+    "url": "https://www.camara.leg.br/noticias/1285520-projeto-protege-sigilo-do-local-de-trabalho-de-servidoras-com-medida-protetiva",
+    "download_ok": false,
+    "download_error": "HTTP 500",
+    "elapsed_s": 0.21,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "camara.leg.br",
+    "url": "https://www.camara.leg.br/noticias/1293099-retrospectiva-deputados-aprovaram-minirreforma-eleitoral-no-primeiro-semestre-deste-ano",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.09,
+    "approach_a": {
+      "chars": 5113,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Retrospectiva: deputados aprovaram minirreforma eleitoral no primeiro semestre deste ano A minirreforma eleitoral de 2026 aprovada pela Câmara dos Deputados limita as multas eleitorais por contas desaprovadas de partidos"
+    },
+    "approach_b": {
+      "chars": 0,
+      "ok_length": false,
+      "noise_hits": null,
+      "sample": null
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "senado.leg.br",
+    "url": "https://www12.senado.leg.br/noticias/materias/2026/07/24/eleicoes-o-que-e-permitido-e-o-que-e-proibido-nas-redes-sociais",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.61,
+    "approach_a": {
+      "chars": 8249,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Eleições: o que é permitido e o que é proibido nas redes sociais Da Agência Senado | 24/07/2026, 10h17 Com a proximidade das eleições de 2026 e a pré-campanha já em andamento, o ambiente digital começa a fervilhar. Por i"
+    },
+    "approach_b": {
+      "chars": 8050,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Com a proximidade das eleições de 2026 e a pré-campanha já em andamento, o ambiente digital começa a fervilhar. Por isso, é preciso estar atento às regras sobre o que é permitido e o que é proibido em redes sociais, apli"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "senado.leg.br",
+    "url": "https://www12.senado.leg.br/noticias/materias/2026/07/24/lei-autoriza-venda-de-spray-de-pimenta-para-seguranca-das-mulheres",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.25,
+    "approach_a": {
+      "chars": 4991,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Lei autoriza venda de spray de pimenta para segurança das mulheres Da Agência Senado | 24/07/2026, 11h32 Está em vigor a Lei 15.474, que autoriza a comercialização, aquisição e posse de aerossol de extratos vegetais (um "
+    },
+    "approach_b": {
+      "chars": 4840,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Está em vigor a Lei 15.474 , que autoriza a comercialização, aquisição e posse de aerossol de extratos vegetais (um tipo de spray de pimenta) em todo o território nacional, para fins de defesa pessoal das mulheres maiore"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "stf.jus.br",
+    "url": "https://noticias.stf.jus.br/postsnoticias/stf-revoga-medidas-cautelares-impostas-a-investigados-por-envolvimento-com-grupos-criminosos-violentos-no-rj",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.75,
+    "approach_a": {
+      "chars": 2565,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "STF revoga medidas cautelares de investigados após comprovação de regularidade de armas aprendidas em operação no RJ Ministro Alexandre de Moraes considerou que, no momento, não há elementos que apontem para a prática do"
+    },
+    "approach_b": {
+      "chars": 2454,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Ministro Alexandre de Moraes considerou que, no momento, não há elementos que apontem para a prática do crime  O ministro Alexandre de Moraes, do Supremo Tribunal Federal (STF), revogou as medidas cautelares impostas ao "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "stf.jus.br",
+    "url": "https://noticias.stf.jus.br/postsnoticias/decisao-do-stf-permite-retomada-da-cobranca-de-iptu-em-teresina",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.71,
+    "approach_a": {
+      "chars": 2862,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Decisão do STF permite retomada da cobrança de IPTU em Teresina Ministro Alexandre de Moraes considerou impacto na arrecadação municipal, que poderia comprometer prestação de serviços públicos O ministro Alexandre de Mor"
+    },
+    "approach_b": {
+      "chars": 2774,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Ministro Alexandre de Moraes considerou  impacto na arrecadação municipal, que poderia comprometer prestação de serviços públicos  O ministro Alexandre de Moraes, no exercício da Presidência do Supremo Tribunal Federal ("
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "stf.jus.br",
+    "url": "https://noticias.stf.jus.br/postsnoticias/rede-questiona-falta-de-responsabilizacao-de-parlamentares-por-emendas-impositivas",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 1.17,
+    "approach_a": {
+      "chars": 1671,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Rede questiona falta de responsabilização de parlamentares por emendas impositivas Partido pede ao STF que deputados federais e senadores sejam submetidos às regras aplicáveis a ordenadores de despesas O Supremo Tribunal"
+    },
+    "approach_b": {
+      "chars": 1593,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Partido pede ao STF que deputados federais e senadores sejam submetidos às regras aplicáveis a ordenadores de despesas  O Supremo Tribunal Federal (STF) recebeu uma ação da Rede Sustentabilidade em que o partido pede que"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "tse.jus.br",
+    "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Julho/manual-do-eleitor-entenda-como-vai-funcionar-a-biometria-nas-eleicoes-2026",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.1,
+    "approach_a": {
+      "chars": 4332,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Página interna do portal Seção de conteúdo Desde 2008, a biometria faz parte do processo de modernização das eleições brasileiras e, atualmente, é uma importante aliada da Justiça Eleitoral para tornar a identificação do"
+    },
+    "approach_b": {
+      "chars": 4462,
+      "ok_length": true,
+      "noise_hits": 1,
+      "sample": "Desde 2008, a biometria faz parte do processo de modernização das eleições brasileiras e, atualmente, é uma importante aliada da Justiça Eleitoral para tornar a identificação do eleitorado mais segura. Nas Eleições 2026,"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "tse.jus.br",
+    "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Julho/justica-eleitoral-completa-94-anos-de-atuacao-na-paraiba",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.1,
+    "approach_a": {
+      "chars": 1872,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Página interna do portal Seção de conteúdo Para celebrar os 94 anos da Justiça Eleitoral na Paraíba, o Tribunal Regional Eleitoral do estado (TRE-PB) realizará, em 30 de julho, uma sessão de julgamento no Museu da Justiç"
+    },
+    "approach_b": {
+      "chars": 1768,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Para celebrar os 94 anos da Justiça Eleitoral na Paraíba, o Tribunal Regional Eleitoral do estado (TRE-PB) realizará, em 30 de julho, uma sessão de julgamento no Museu da Justiça Eleitoral – Memorial da Democracia, espaç"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "tse.jus.br",
+    "url": "https://www.tse.jus.br/comunicacao/noticias/2026/Abril/justica-eleitoral-conclui-atualizacao-tecnologica-dos-portais-reforcando-modernizacao-e-seguranca",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.07,
+    "approach_a": {
+      "chars": 3958,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Página interna do portal Seção de conteúdo O Tribunal Superior Eleitoral (TSE) concluiu a atualização tecnológica dos portais da Justiça Eleitoral para a versão mais recente da plataforma de gestão de conteúdos Plone, co"
+    },
+    "approach_b": {
+      "chars": 3809,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "O Tribunal Superior Eleitoral (TSE) concluiu a atualização tecnológica dos portais da Justiça Eleitoral para a versão mais recente da plataforma de gestão de conteúdos Plone , com aprimoramentos na apresentação e na infr"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  },
+  {
+    "domain": "ibge.gov.br",
+    "url": "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47613-ibge-participa-da-78-reuniao-anual-da-sbpc-e-convida-publico-a-conhecer-suas-atividades",
+    "download_ok": false,
+    "download_error": "HTTP 403",
+    "elapsed_s": 0.15,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "ibge.gov.br",
+    "url": "https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/47506-cumprimento-a-legislacao-eleitoral-a-partir-de-4-de-julho",
+    "download_ok": false,
+    "download_error": "HTTP 403",
+    "elapsed_s": 0.11,
+    "approach_a": null,
+    "approach_b": null,
+    "js_dependent": null,
+    "paywall": null,
+    "winner": "N/A (download falhou)"
+  },
+  {
+    "domain": "who.int",
+    "url": "https://www.who.int/news/item/02-07-2026-who-adds-first-diagnostic-test-for-ebola-bundibugyo-virus-to-its-emergency-use-listing",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.13,
+    "approach_a": {
+      "chars": 4715,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Today, the World Health Organization (WHO) has added the first molecular diagnostic test for Bundibugyo virus (BDBV) to its Emergency Use Listing (EUL). The test detects the virus by identifying its genetic material in b"
+    },
+    "approach_b": {
+      "chars": 4721,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "Today, the World Health Organization (WHO) has added the first molecular diagnostic test for Bundibugyo virus (BDBV) to its Emergency Use Listing (EUL) . The test detects the virus by identifying its genetic material in "
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "B (heurística)"
+  },
+  {
+    "domain": "who.int",
+    "url": "https://www.who.int/news/item/03-02-2026-who-launches-2026-appeal-to-help-millions-of-people-in-health-emergencies-and-crisis-settings",
+    "download_ok": true,
+    "download_error": null,
+    "elapsed_s": 0.15,
+    "approach_a": {
+      "chars": 4380,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "The World Health Organization (WHO) today launched its 2026 global appeal to ensure that millions of people living in humanitarian crises and conflicts can access health care. In 2025, WHO and partners supported 30 milli"
+    },
+    "approach_b": {
+      "chars": 3711,
+      "ok_length": true,
+      "noise_hits": 0,
+      "sample": "The World Health Organization (WHO) today launched its 2026 global appeal to ensure that millions of people living in humanitarian crises and conflicts can access health care.  In 2025, WHO and partners supported 30 mill"
+    },
+    "js_dependent": false,
+    "paywall": false,
+    "winner": "A (trafilatura)"
+  }
+]

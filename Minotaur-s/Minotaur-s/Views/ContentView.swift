@@ -53,7 +53,7 @@ struct ContentView: View {
                             }
                             
                             NavigationLink(destination: VerificadorView()) {
-                                Text("Verificador")
+                                Text("Verificar Notícia")
                                     .font(.largeTitle)
                                     .bold()
                                     .foregroundColor(Color.white)

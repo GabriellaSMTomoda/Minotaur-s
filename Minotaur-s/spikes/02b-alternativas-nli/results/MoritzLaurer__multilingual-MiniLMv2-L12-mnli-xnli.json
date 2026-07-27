@@ -1,0 +1,15 @@
+{
+  "id": "MoritzLaurer/multilingual-MiniLMv2-L12-mnli-xnli",
+  "converts": true,
+  "num_labels": 3,
+  "id2label": {
+    "0": "entailment",
+    "1": "neutral",
+    "2": "contradiction"
+  },
+  "fp16_mb": 224.6,
+  "int8_mb": 113.3,
+  "logits_cos": 1.0,
+  "argmax_match": true,
+  "error": null
+}

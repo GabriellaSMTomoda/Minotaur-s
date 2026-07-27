@@ -1,0 +1,8 @@
+name = "minotaurs-tavily-proxy"
+main = "src/index.js"
+compatibility_date = "2026-07-26"
+
+# A chave da Tavily NÃO fica aqui. É um secret, definido fora do repositório:
+#     wrangler secret put TAVILY_API_KEY
+# Colocar a chave neste arquivo a commitaria no git — exatamente o problema que o proxy
+# existe para evitar (DT-21 / NF-09).

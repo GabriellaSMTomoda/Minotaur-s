@@ -1,0 +1,109 @@
+
+=== FASE 1 — 20 buscas, include_domains = allowlist completa (30 domínios) ===
+
+[1/20] Governo federal anuncia isenção de imposto de renda para quem ganha at...
+    status=200 resultados=5 fora_da_allowlist=4 tempo=1.25s
+    !!! ATENÇÃO: hosts fora da allowlist: ['en.wikipedia.org', 'governo.it', 'youtube.com', 'collinsdictionary.com']
+
+[2/20] Banco Central decide manter taxa Selic inalterada na última reunião do...
+    status=200 resultados=4 fora_da_allowlist=0 tempo=1.72s
+
+[3/20] Seleção brasileira de futebol se classifica para as quartas de final d...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.66s
+
+[4/20] OMS declara fim da emergência de saúde pública para determinada doença...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.8s
+
+[5/20] STF julga ação sobre marco temporal de terras indígenas...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=2.41s
+
+[6/20] Senado aprova projeto de lei sobre regulamentação de inteligência arti...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.8s
+
+[7/20] Inflação medida pelo IPCA acelera no último mês segundo dados oficiais...
+    status=200 resultados=5 fora_da_allowlist=4 tempo=1.2s
+    !!! ATENÇÃO: hosts fora da allowlist: ['portal-da-inflacao-ibre.fgv.br', 'br.investing.com', 'debit.com.br', 'pt.wikipedia.org']
+
+[8/20] Presidente dos Estados Unidos anuncia novas tarifas sobre produtos imp...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=2.08s
+
+[9/20] Ibovespa fecha em alta puxado por ações de empresas de commodities...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.86s
+
+[10/20] Ministério da Saúde inicia campanha nacional de vacinação contra a gri...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.58s
+
+[11/20] União Europeia fecha acordo comercial com o Mercosul após anos de nego...
+    status=200 resultados=5 fora_da_allowlist=5 tempo=1.29s
+    !!! ATENÇÃO: hosts fora da allowlist: ['dictionary.cambridge.org', 'pt.wikipedia.org', 'linguee.com.br', 'dicio.com.br', 'sinonimos.com.br']
+
+[12/20] Polícia Federal deflagra operação contra fraude em benefícios do INSS...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.99s
+
+[13/20] Câmara dos Deputados vota reforma tributária em segundo turno...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.56s
+
+[14/20] Cientistas brasileiros publicam estudo sobre variante de vírus respira...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.72s
+
+[15/20] Prefeitura de São Paulo anuncia novo plano de mobilidade urbana para a...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.24s
+
+[16/20] Papa faz visita oficial ao Brasil e celebra missa campal...
+    status=200 resultados=5 fora_da_allowlist=5 tempo=1.2s
+    !!! ATENÇÃO: hosts fora da allowlist: ['papa.com', 'app.papa.com', 'papa.com', 'en.wiktionary.org', 'youtube.com']
+
+[17/20] TSE define novas regras de propaganda eleitoral para as eleições munic...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.27s
+
+[18/20] Justiça determina bloqueio de bens de empresa investigada por lavagem ...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.73s
+
+[19/20] Petrobras anuncia novo investimento em exploração de petróleo no pré-s...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.55s
+
+[20/20] Nasa confirma data de lançamento de nova missão espacial tripulada...
+    status=200 resultados=5 fora_da_allowlist=0 tempo=1.56s
+
+=== FASE 2 — teste de exclusão (domínio fora da allowlist incluso em include_domains) ===
+
+[misto] extra_domain=wikipedia.org claim=Governo federal anuncia isenção de imposto de renda para que...
+    misto: resultados=10 extra_domain_apareceu=False
+    [controle isolado] include_domains=[wikipedia.org]
+    isolado: resultados=5
+
+[misto] extra_domain=cnn.com claim=Banco Central decide manter taxa Selic inalterada na última ...
+    misto: resultados=9 extra_domain_apareceu=False
+    [controle isolado] include_domains=[cnn.com]
+    isolado: resultados=5
+
+[misto] extra_domain=reuters.com claim=Seleção brasileira de futebol se classifica para as quartas ...
+    misto: resultados=10 extra_domain_apareceu=False
+    [controle isolado] include_domains=[reuters.com]
+    isolado: resultados=5
+
+=== FASE 3 — teste de 'nenhum resultado' (RF-04.4) ===
+    status=200 resultados=5
+
+=== FASE 4 — teste de chave de API inválida ===
+    status=401
+
+Concluído. Resultados em results.json.
+{
+  "query": "zzxqvbnmqwpfjtlorkhsdcbgy 9284710583 xkcvbnmqwertyuiopasdfghjklzx qwoieurytlaksjdhfg",
+  "status_code": 200,
+  "elapsed_s": 1.26,
+  "credit_related_headers": {},
+  "tavily_response_time_field": 0.75,
+  "result_count": 0,
+  "results": [],
+  "response_keys": [
+    "answer",
+    "follow_up_questions",
+    "images",
+    "query",
+    "request_id",
+    "response_time",
+    "results"
+  ]
+}
