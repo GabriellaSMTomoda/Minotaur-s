@@ -53,5 +53,9 @@ struct VerificationResult: Codable {
     let claim: String
     let createdAt: Date
     let verdict: Verdict
+    /// Domínios consultados nesta verificação (RF-09.6 / DT-32). Presente mesmo quando
+    /// `sources` está vazio — é justamente em `NAO_ENCONTRADO` que a CA-02 exige informar
+    /// o que foi consultado.
+    let consultedDomains: [String]
     let sources: [SourceResult]
 }

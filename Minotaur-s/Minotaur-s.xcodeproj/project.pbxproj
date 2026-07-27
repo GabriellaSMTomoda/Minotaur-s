@@ -24,7 +24,6 @@
 		8549411F6B8EB14490681906 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA7A6D486FCC86FB5D3FBF /* ContentView.swift */; };
 		911AD7D23044E0C773BAE61B /* Minotaur_sApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1A84B83C662BF6DDAF2399 /* Minotaur_sApp.swift */; };
 		948B8FA52CDAFE3C0C0D6041 /* Minotaur_sTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F643C8965D55192F706B6420 /* Minotaur_sTests.swift */; };
-		A59FDB472E86C9C4003873E8 /* Verificador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59FDB462E86C9BC003873E8 /* Verificador.swift */; };
 		A59FDB492E8AA71F003873E8 /* Banco_noticias220.tsv in Resources */ = {isa = PBXBuildFile; fileRef = A59FDB482E8AA71F003873E8 /* Banco_noticias220.tsv */; };
 		C55F4D93089419682A7F0C2F /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DAD2FA3DDE89BD1DB0964 /* GameState.swift */; };
 		C817AE2DCCAEC99869837C10 /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */; };
@@ -67,7 +66,6 @@
 		803F9AED4600A8448D843247 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8295FC063DF268891CDC90CE /* Minotaur-sTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Minotaur-sTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C88C837C02BD4C80FFF837B /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
-		A59FDB462E86C9BC003873E8 /* Verificador.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verificador.swift; sourceTree = "<group>"; };
 		A59FDB482E8AA71F003873E8 /* Banco_noticias220.tsv */ = {isa = PBXFileReference; lastKnownFileType = text; path = Banco_noticias220.tsv; sourceTree = "<group>"; };
 		A5C171B230131E2A00F90300 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAUDE.md; sourceTree = "<group>"; };
 		A5FF76FB3012C15D00F28810 /* spec.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = spec.md; sourceTree = "<group>"; };
@@ -87,6 +85,7 @@
 		7A1C4E9B2F53D8460AC7B1E3 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
 		FA5E0008000000000000AA01 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
 		FA5E0009000000000000AA01 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
+		FA5E000B000000000000AA01 /* Verificador */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Verificador; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +187,7 @@
 		EEEE0870FDD87D8E220DB6E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A59FDB462E86C9BC003873E8 /* Verificador.swift */,
+				FA5E000B000000000000AA01 /* Verificador */,
 				0017FF1D2E673B7700DF2FC5 /* PerguntaDoDiaView.swift */,
 				CEDA7A6D486FCC86FB5D3FBF /* ContentView.swift */,
 				618FD4B5DEA9B9D67654BA03 /* GameReportView.swift */,
@@ -257,6 +256,7 @@
 				6FD2CC67DB918E3213E5A524 /* Verificador */,
 				7A1C4E9B2F53D8460AC7B1E3 /* Verificador */,
 				FA5E0008000000000000AA01 /* Resources */,
+				FA5E000B000000000000AA01 /* Verificador */,
 			);
 			name = "Minotaur-s";
 			packageProductDependencies = (
@@ -339,7 +339,6 @@
 				00E5B4202E7853490017DF24 /* DateFormatterStorage.swift in Sources */,
 				31479711E40E2DC5784EEC03 /* Fact.swift in Sources */,
 				0017FF232E68693200DF2FC5 /* QuestionSession.swift in Sources */,
-				A59FDB472E86C9C4003873E8 /* Verificador.swift in Sources */,
 				45DDC27FE971ACD00E24806D /* FactLoader.swift in Sources */,
 				0017FE9E2E65C46F00DF2FC5 /* QuestionsDayLoader.swift in Sources */,
 				339DACD1B3AF7C43737EB8D7 /* GamePersistence.swift in Sources */,

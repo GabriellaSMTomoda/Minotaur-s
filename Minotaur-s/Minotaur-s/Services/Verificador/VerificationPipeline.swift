@@ -25,6 +25,10 @@ enum VerificationStage: Equatable, Sendable {
 
 /// Busca de artigos na allowlist (RF-04). Implementada por `TavilySearchService`.
 protocol ArticleSearching: Sendable {
+    /// Domínios efetivamente consultados (RF-09.6 / DT-32) — pela porta, não pelo tipo
+    /// concreto, para que produção e mocks de teste alimentem `VerificationResult` do mesmo
+    /// jeito.
+    var consultedDomains: [String] { get }
     func search(query: String) async throws -> [SearchResultItem]
 }
 
@@ -108,13 +112,6 @@ struct VerificationPipeline {
         )
     }
 
-    /// Domínios consultados em qualquer verificação (RF-09.6 / CA-02).
-    ///
-    /// É a allowlist inteira porque a restrição vai em `include_domains` numa única chamada
-    /// (RF-02.3) — inclusive quando a busca não devolve nada, que é justamente o caso em que a
-    /// CA-02 exige informar o que foi consultado.
-    static var consultedDomains: [String] { TavilySearchService.consultedDomains }
-
     // MARK: - Fluxo
 
     /// Executa a verificação completa da afirmação.
@@ -145,7 +142,7 @@ struct VerificationPipeline {
         //    Um resultado que só existia fora da allowlist já foi descartado pelo filtro
         //    (RF-03.5) e chega aqui como lista vazia — para o usuário é o mesmo caso.
         guard !results.isEmpty else {
-            return Self.result(claim: claim, sources: [])
+            return result(claim: claim, sources: [])
         }
 
         // 3. Extração em paralelo (RF-05.6).
@@ -161,7 +158,7 @@ struct VerificationPipeline {
         // 5. Agregação (RF-08). Lista vazia de fontes vira `NAO_ENCONTRADO` dentro do
         //    agregador — inclusive quando a busca achou artigos mas todos foram descartados
         //    por paywall, timeout ou irrelevância (RF-08.1).
-        return Self.result(claim: claim, sources: sources)
+        return result(claim: claim, sources: sources)
     }
 
     // MARK: - Etapa 1: busca
@@ -315,12 +312,13 @@ struct VerificationPipeline {
 
     // MARK: - Resultado
 
-    private static func result(claim: String, sources: [SourceResult]) -> VerificationResult {
+    private func result(claim: String, sources: [SourceResult]) -> VerificationResult {
         VerificationResult(
             id: UUID(),
             claim: claim,
             createdAt: Date(),
             verdict: VerdictAggregator.verdict(for: sources),
+            consultedDomains: search.consultedDomains,
             sources: sources
         )
     }

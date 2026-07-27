@@ -111,9 +111,10 @@ struct VerificationPipelineTests {
         #expect(stages.recorded == [.searching])
 
         // CA-02 também exige informar quais domínios foram consultados — a allowlist inteira,
-        // já que a restrição vai em `include_domains` numa única chamada (RF-02.3 / RF-09.6).
-        #expect(VerificationPipeline.consultedDomains.count == TrustedDomain.allowlist.count)
-        #expect(!VerificationPipeline.consultedDomains.isEmpty)
+        // já que a restrição vai em `include_domains` numa única chamada (RF-02.3 / RF-09.6),
+        // e chega pelo `VerificationResult` (DT-32), não por um utilitário estático à parte.
+        #expect(result.consultedDomains.count == TrustedDomain.allowlist.count)
+        #expect(!result.consultedDomains.isEmpty)
     }
 
     @Test("Busca com resultados, mas todos descartados na extração → NÃO ENCONTRADO")
@@ -431,6 +432,8 @@ private final class MockSearch: ArticleSearching, @unchecked Sendable {
 
     init(returning items: [SearchResultItem]) { outcome = .success(items) }
     init(failingWith error: Error) { outcome = .failure(error) }
+
+    let consultedDomains = TrustedDomain.allowlist.sorted()
 
     var callCount: Int { lock.withLock { calls } }
     var lastQuery: String? { lock.withLock { query } }

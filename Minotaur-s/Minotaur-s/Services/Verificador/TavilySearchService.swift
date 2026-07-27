@@ -23,7 +23,7 @@ struct TavilySearchService: Sendable {
     /// haja uma URL aqui, `search` falha com `.searchRequestFailed` antes de tocar a rede.
     /// Preencher com a URL devolvida por `wrangler deploy` (ver `proxy/README.md`).
     /// Nunca colocar a chave da Tavily neste arquivo — é justamente o que o proxy evita.
-    static let proxyEndpoint = ""
+    static let proxyEndpoint = "https://minotaurs-tavily-proxy.hen-lac-sil.workers.dev"
 
     /// Quantos resultados pedir à API (RF-04.3 / DT-19).
     ///
@@ -71,6 +71,11 @@ struct TavilySearchService: Sendable {
     static var consultedDomains: [String] {
         TrustedDomain.allowlist.sorted()
     }
+
+    /// Satisfaz `ArticleSearching.consultedDomains` (RF-09.6 / DT-32): o coordenador lê essa
+    /// lista pela porta, não pelo tipo concreto, para que `VerificationResult.consultedDomains`
+    /// venha do mesmo lugar em produção e em teste (mocks têm a própria lista fixa).
+    var consultedDomains: [String] { Self.consultedDomains }
 
     // MARK: - Retry
 
