@@ -17,7 +17,8 @@ import Testing
 /// Se o tokenizador Swift divergir do HF, os dois modelos recebem entrada errada e devolvem
 /// um resultado com aparência perfeitamente normal. Nenhum outro teste pegaria isso.
 ///
-/// A referência é `parity_fixture.json`, gerado por `spikes/07-tokenizer-parity/export_assets.py`.
+/// A referência de embeddings nasceu no Spike 7; os pares NLI são regenerados pelo
+/// `spikes/09-nli-base-search/export_app_assets.py` a partir do checkpoint selecionado.
 struct TokenizerParityTests {
 
     private struct Fixture: Decodable {
@@ -35,10 +36,14 @@ struct TokenizerParityTests {
             let premise: String
             let hypothesis: String
             let inputIDs: [Int]
+            let attentionMask: [Int]
+            let tokenTypeIDs: [Int]
 
             enum CodingKeys: String, CodingKey {
                 case premise, hypothesis
                 case inputIDs = "input_ids"
+                case attentionMask = "attention_mask"
+                case tokenTypeIDs = "token_type_ids"
             }
         }
 
@@ -72,24 +77,23 @@ struct TokenizerParityTests {
 
     // MARK: - Par premissa/hipótese (modelo NLI)
 
-    @Test("Ids do par premissa/hipótese batem com o Hugging Face")
+    @Test("Três entradas do par BERT batem com o Hugging Face")
     func pairParity() throws {
         let fixture = try loadFixture()
-        let tokenizer = try XLMRTokenizer.nli()
+        let tokenizer = try BERTTokenizer.nli()
 
         #expect(!fixture.pairs.isEmpty)
         for sample in fixture.pairs {
-            // O swift-transformers 1.3.3 não tem encode(text:textPair:) — o par é montado à
-            // mão como `<s> A </s></s> B </s>`. Este é o teste que prova que a montagem
-            // manual reproduz o HF exatamente.
             let produced = tokenizer.encodePair(
                 premise: sample.premise,
                 hypothesis: sample.hypothesis
             )
-            #expect(produced == sample.inputIDs,
+            #expect(produced.inputIDs == sample.inputIDs,
                     Comment(rawValue: "Divergência no par:\n\(sample.premise)\n"
                         + "\(sample.hypothesis)\nesperado: \(sample.inputIDs)\n"
-                        + "obtido:   \(produced)"))
+                        + "obtido:   \(produced.inputIDs)"))
+            #expect(produced.attentionMask == sample.attentionMask)
+            #expect(produced.tokenTypeIDs == sample.tokenTypeIDs)
         }
     }
 
@@ -104,42 +108,48 @@ struct TokenizerParityTests {
         #expect(ids.last == 2)   // </s>
     }
 
-    @Test("Par tem o separador duplo do XLM-R")
-    func pairHasDoubleSeparator() throws {
-        let tokenizer = try XLMRTokenizer.nli()
-        let ids = tokenizer.encodePair(premise: "A premissa.", hypothesis: "A hipótese.")
+    @Test("Par tem estrutura e segmentos do BERT")
+    func pairHasBERTStructure() throws {
+        let tokenizer = try BERTTokenizer.nli()
+        let pair = tokenizer.encodePair(premise: "A premissa.", hypothesis: "A hipótese.")
 
-        #expect(ids.first == 0)
-        #expect(ids.last == 2)
-        // `</s></s>` no meio é o separador de par do XLM-R, não um erro de duplicação.
-        let doubleSeparator = ids.indices.dropLast().contains { ids[$0] == 2 && ids[$0 + 1] == 2 }
-        #expect(doubleSeparator)
+        #expect(pair.inputIDs.first == 101) // [CLS]
+        #expect(pair.inputIDs.last == 102)  // [SEP]
+        #expect(pair.inputIDs.filter { $0 == 102 }.count == 2)
+        #expect(pair.inputIDs.count == pair.attentionMask.count)
+        #expect(pair.inputIDs.count == pair.tokenTypeIDs.count)
+        #expect(pair.attentionMask.allSatisfy { $0 == 1 })
+        let firstSegmentOne = try #require(pair.tokenTypeIDs.firstIndex(of: 1))
+        #expect(pair.tokenTypeIDs[..<firstSegmentOne].allSatisfy { $0 == 0 })
+        #expect(pair.tokenTypeIDs[firstSegmentOne...].allSatisfy { $0 == 1 })
+        #expect(pair.inputIDs[firstSegmentOne - 1] == 102)
     }
 
     @Test("Truncagem respeita o limite de 512 tokens (RF-06.2)")
     func respectsMaxLength() throws {
-        let tokenizer = try XLMRTokenizer.nli()
+        let tokenizer = try BERTTokenizer.nli()
         let huge = String(repeating: "palavra qualquer para encher o contexto. ", count: 500)
 
         let single = try XLMRTokenizer.embeddings().encode(huge)
         #expect(single.count <= XLMRTokenizer.maxSequenceLength)
 
         let pair = tokenizer.encodePair(premise: huge, hypothesis: "A afirmação do usuário.")
-        #expect(pair.count <= XLMRTokenizer.maxSequenceLength)
+        #expect(pair.inputIDs.count <= BERTTokenizer.maxSequenceLength)
     }
 
     @Test("Quem encolhe no par é a premissa, nunca a hipótese")
     func truncationPreservesHypothesis() throws {
-        let tokenizer = try XLMRTokenizer.nli()
+        let tokenizer = try BERTTokenizer.nli()
         let hypothesis = "O desemprego caiu para o menor nível já registrado no país inteiro."
         let huge = String(repeating: "texto de enchimento do artigo. ", count: 500)
 
         let pair = tokenizer.encodePair(premise: huge, hypothesis: hypothesis)
-        let hypothesisIDs = tokenizer.encode(hypothesis).dropFirst().dropLast() // sem <s>/</s>
+        let hypothesisOnly = tokenizer.encodePair(premise: "", hypothesis: hypothesis)
+        let hypothesisSuffix = hypothesisOnly.inputIDs.dropFirst(2) // sem [CLS][SEP]
 
         // Cortar a hipótese mudaria a pergunta feita ao modelo; ela tem de sobreviver inteira.
-        #expect(pair.count <= XLMRTokenizer.maxSequenceLength)
-        #expect(pair.suffix(hypothesisIDs.count + 1).dropLast() == Array(hypothesisIDs)[...])
+        #expect(pair.inputIDs.count <= BERTTokenizer.maxSequenceLength)
+        #expect(pair.inputIDs.suffix(hypothesisSuffix.count) == Array(hypothesisSuffix)[...])
     }
 
     // MARK: - Rótulos do NLI

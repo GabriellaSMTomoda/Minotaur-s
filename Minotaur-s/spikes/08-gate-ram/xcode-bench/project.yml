@@ -1,0 +1,30 @@
+# SPIKE 8 — harness do gate de RAM (item aberto 27).
+#
+# Os dois .mlpackage entram como `sources` e não como `resources`: assim o Xcode os
+# compila para .mlmodelc na hora do build, como acontece no app real. O caminho de
+# `resources` (usado no Spike 7) faria o app compilar o modelo em runtime, no device —
+# e foi exatamente isso que abortou por falta de disco lá ("LLVM ERROR: IO failure on
+# output stream"). Aqui não há motivo para repetir isso.
+name: RAMGate8
+options:
+  bundleIdPrefix: com.spike.ramgate8
+targets:
+  RAMGate8:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Sources
+      - path: ../build/fixture.json
+        buildPhase: resources
+      - path: ../../02-coreml-latencia/build/Embeddings_int8.mlpackage
+      - path: ../../07-nli-ptbr-negacao/build/plue_bertimbau_int8.mlpackage
+      # Modelo NLI de hoje (Spike 2c), só como linha de comparação do cenário `atual`.
+      - path: ../../02c-nli-executavel/build/L6_int8.mlpackage
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.spike.ramgate8
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"

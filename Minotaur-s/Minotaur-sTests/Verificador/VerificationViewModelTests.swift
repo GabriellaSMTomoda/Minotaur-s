@@ -237,15 +237,20 @@ struct VerificationViewModelTests {
         )
     }
 
-    /// Espera uma condição, com teto de tempo para o teste falhar em vez de travar a suíte.
+    /// Espera uma condição, com teto de 2.500 ciclos para falhar em vez de travar a suíte.
+    ///
+    /// Contar ciclos evita falso timeout quando a preparação paralela dos modelos Core ML
+    /// suspende esta task por vários segundos: relógio de parede avançaria sem o teste ter tido
+    /// oportunidade de observar a condição. Em execução normal, 2.500 × 2 ms mantêm o teto de
+    /// aproximadamente cinco segundos.
     private func waitUntil(_ condition: () -> Bool) async throws {
         struct WaitTimeout: Error {}
 
-        let deadline = Date().addingTimeInterval(5)
-        while !condition() {
-            guard Date() < deadline else { throw WaitTimeout() }
+        for _ in 0..<2_500 {
+            if condition() { return }
             try await Task.sleep(nanoseconds: 2_000_000)
         }
+        throw WaitTimeout()
     }
 }
 

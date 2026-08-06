@@ -1,4 +1,5 @@
 {
+  "evidence": "Spike 9 empirical probes; config id2label not used",
   "id2label": {
     "0": "entailment",
     "1": "neutral",

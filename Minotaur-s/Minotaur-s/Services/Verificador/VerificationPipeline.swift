@@ -246,7 +246,15 @@ struct VerificationPipeline {
             // Antes de cada artigo: cancelar não pode deixar o próximo artigo inferir (CA-09).
             try Task.checkCancellation()
 
-            let chunks = chunker.chunks(from: article.text)
+            // DT-33: byline, navegação, legenda e título de página saem antes dos embeddings.
+            // Antes dos embeddings, e não entre a similaridade e o NLI, porque eles repetem as
+            // palavras-chave da afirmação e pontuam alto — deixá-los concorrer no top-3 (RF-06.6)
+            // custa uma vaga de chunk com proposição de verdade.
+            //
+            // Sobrar zero chunk é resultado legítimo: o artigo não vira fonte válida e é
+            // descartado pelo mesmo caminho de uma extração fracassada (RF-05.3), sem abortar as
+            // demais. Foi o caso do artigo cujo único chunk era o título de um Web Story.
+            let chunks = ChunkQualityFilter.keeping(chunker.chunks(from: article.text))
             guard !chunks.isEmpty else { continue }
 
             let selected = try runInference { try embeddings.selectTopChunks(claim: claim, chunks: chunks) }
@@ -278,17 +286,17 @@ struct VerificationPipeline {
 
     /// Orçamento de tokens por chunk, descontando a afirmação do usuário (RF-06.2).
     ///
-    /// O limite de 512 é do **par** `<s> chunk </s></s> afirmação </s>`, não do chunk sozinho.
+    /// O limite de 512 é do **par** `[CLS] chunk [SEP] afirmação [SEP]`, não do chunk sozinho.
     /// Chunk dimensionado para 512 cheios faria o tokenizador cortar a premissa na hora do NLI
-    /// (ver `XLMRTokenizer.encodePair`) — o fim do chunk vencedor sumiria da inferência sem
+    /// (ver `BERTTokenizer.encodePair`) — o fim do chunk vencedor sumiria da inferência sem
     /// nenhum sinal. O piso de `minimumChunkTokens` evita que uma afirmação no limite da
     /// RF-01.2 (1.000 caracteres) produza chunks pequenos demais para carregar sentido.
     ///
     /// A contagem é a estimativa conservadora do `TextChunker`, não o tokenizador real: errar
     /// para mais mantém o par dentro do limite, que é o objetivo.
     private static func chunker(for claim: String) -> TextChunker {
-        let specialTokens = 4 // <s> … </s></s> … </s>
-        let budget = XLMRTokenizer.maxSequenceLength
+        let specialTokens = 3 // [CLS] … [SEP] … [SEP]
+        let budget = BERTTokenizer.maxSequenceLength
             - specialTokens
             - TextChunker.conservativeTokenEstimate(claim)
 

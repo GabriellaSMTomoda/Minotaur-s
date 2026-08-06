@@ -10,11 +10,9 @@ import Foundation
 
 /// Classifica a relação entre um chunk de artigo e a afirmação do usuário (RF-07).
 ///
-/// Modelo: `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli` INT8, em `.cpuOnly` (DT-18).
-/// A escolha do modelo é o resultado direto do Spike 2c: o `mDeBERTa-v3-base-xnli`, com 100%
-/// de acerto em PT-BR e conversão idêntica ao original, **não executa em device físico**
-/// (crash de MPSGraph em `.all`, erro de BNNS em `.cpuOnly`). Este roda a 90% e executa —
-/// trade-off aceito conscientemente.
+/// Modelo: BERTimbau-base fine-tuned em PLUE/MNLI, INT8, em `.cpuOnly` (Spike 9).
+/// Foi selecionado exclusivamente pelo macro-F1 do PLUE dev_matched e passou depois pelo gate
+/// adversarial, pela paridade PyTorch/Core ML e pelos limites de RAM e latência em iPhone físico.
 struct NLIService {
 
     /// Limiar mínimo de confiança (RF-07.5 / DT-25). Abaixo dele o rótulo vira `neutral`.
@@ -26,7 +24,7 @@ struct NLIService {
     static let minimumConfidence: Double = 0.50
 
     private let model: MLModel
-    private let tokenizer: XLMRTokenizer
+    private let tokenizer: BERTTokenizer
 
     /// Ordem das classes na saída do modelo, lida de `NLILabels.json`.
     ///
@@ -35,7 +33,7 @@ struct NLIService {
     /// inverteria o veredito sem erro visível em lugar nenhum.
     private let labels: [NLILabel]
 
-    init(model: MLModel, tokenizer: XLMRTokenizer, labels: [NLILabel]) {
+    init(model: MLModel, tokenizer: BERTTokenizer, labels: [NLILabel]) {
         self.model = model
         self.tokenizer = tokenizer
         self.labels = labels
@@ -45,8 +43,7 @@ struct NLIService {
 
     /// Carrega o modelo do bundle em `.cpuOnly`.
     ///
-    /// `.cpuOnly` não é fallback: no Spike 2c ele foi **mais rápido** que `.all` neste modelo
-    /// (2 ms contra 10,5 ms), porque o shape dinâmico `RangeDim` não aproveita bem a ANE.
+    /// `.cpuOnly` é o caminho medido no gate físico do Spike 9 e parte do contrato operacional.
     static func loadFromBundle(_ bundle: Bundle = .main) throws -> NLIService {
         let configuration = MLModelConfiguration()
         configuration.computeUnits = .cpuOnly
@@ -58,7 +55,7 @@ struct NLIService {
         )
         return NLIService(
             model: model,
-            tokenizer: try XLMRTokenizer.nli(bundle: bundle),
+            tokenizer: try BERTTokenizer.nli(bundle: bundle),
             labels: try loadLabels(bundle: bundle)
         )
     }
@@ -109,19 +106,22 @@ struct NLIService {
     ///   limiar da RF-07.4 — o rebaixamento acontece por artigo, em `label(for:)`, depois de
     ///   comparar todos os chunks.
     func predict(premise: String, hypothesis: String) throws -> Prediction {
-        let ids = tokenizer.encodePair(premise: premise, hypothesis: hypothesis)
-        let count = ids.count
+        let encoded = tokenizer.encodePair(premise: premise, hypothesis: hypothesis)
+        let count = encoded.inputIDs.count
 
         let inputIDs = try MLMultiArray(shape: [1, NSNumber(value: count)], dataType: .int32)
         let attentionMask = try MLMultiArray(shape: [1, NSNumber(value: count)], dataType: .int32)
+        let tokenTypeIDs = try MLMultiArray(shape: [1, NSNumber(value: count)], dataType: .int32)
         for index in 0..<count {
-            inputIDs[index] = NSNumber(value: Int32(ids[index]))
-            attentionMask[index] = 1 // sem padding: um par por predição
+            inputIDs[index] = NSNumber(value: Int32(encoded.inputIDs[index]))
+            attentionMask[index] = NSNumber(value: Int32(encoded.attentionMask[index]))
+            tokenTypeIDs[index] = NSNumber(value: Int32(encoded.tokenTypeIDs[index]))
         }
 
         let input = try MLDictionaryFeatureProvider(dictionary: [
             "input_ids": MLFeatureValue(multiArray: inputIDs),
             "attention_mask": MLFeatureValue(multiArray: attentionMask),
+            "token_type_ids": MLFeatureValue(multiArray: tokenTypeIDs),
         ])
 
         let output = try model.prediction(from: input)

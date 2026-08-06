@@ -289,6 +289,39 @@ struct VerificationPipelineTests {
         #expect(nli.callCount == 1)
     }
 
+    @Test("DT-33: artigo cujo único chunk é ruído não vira fonte e não custa inferência")
+    func noiseOnlyArticleIsDiscardedLikeAFailedExtraction() async throws {
+        let items = [
+            item("https://g1.globo.com/a"),
+            item("https://cnnbrasil.com.br/webstories/bahia"),
+        ]
+        let extractor = MockExtractor(texts: [
+            items[0].url: Self.articleText,
+            // O caso real: extração "bem-sucedida", mas o texto inteiro é o título da página.
+            items[1].url: "Title: Torcida do Bahia faz mosaico para Everton Ribeiro após cura do câncer | Web Stories CNN Brasil",
+        ])
+        let embeddings = MockEmbeddings { _, _ in [scored()] }
+        let nli = MockNLI { _, _ in label(.entailment) }
+
+        let pipeline = VerificationPipeline(
+            search: MockSearch(returning: items),
+            extractor: extractor,
+            embeddings: embeddings,
+            nli: nli
+        )
+        let result = try await pipeline.verify(claim: Self.claim)
+
+        // Mesmo caminho de uma extração fracassada (RF-05.3): a fonte some da lista sem abortar
+        // a verificação — e sem votar na agregação da RF-08.3, que era o dano.
+        #expect(result.sources.count == 1)
+        #expect(result.sources.first?.domain == "g1.globo.com")
+
+        // Descartado antes dos embeddings: o artigo de ruído não custa nenhuma das duas
+        // inferências, nem a barata nem a cara.
+        #expect(embeddings.callCount == 1)
+        #expect(nli.callCount == 1)
+    }
+
     @Test("Artigo cujo NLI não devolve rótulo não entra na lista de fontes")
     func articleWithoutLabelIsNotASource() async throws {
         let items = [item("https://g1.globo.com/a")]
