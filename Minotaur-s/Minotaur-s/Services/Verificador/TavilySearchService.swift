@@ -1,9 +1,4 @@
-//
-//  TavilySearchService.swift
-//  Minotaur-s
-//
-//  Created by Claude Code on 26/07/26.
-//
+
 
 import Foundation
 

@@ -74,7 +74,6 @@ struct ContentView: View {
             }
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
         }
     }
 }

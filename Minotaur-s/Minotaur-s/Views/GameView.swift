@@ -39,17 +39,12 @@ struct GameView: View {
     @State private var respostaCorreta = false
     @State private var fimDePartida = false
     @State private var popupAppIntent = false
-//<<<<<<< persistencia-de-dados
-    @State private var mostrarConfirmacaoSair = false
-//=======
     @State private var explicacao_inicial = false
     @State private var tutorialStep: Int = 0
     @State private var frames: [String: CGRect] = [:]
-//>>>>>>> main
 
     var body: some View {
-        NavigationStack {
-            ZStack {
+        ZStack {
                 VStack(spacing: 0) {
                     VStack {
                         Spacer()
@@ -110,6 +105,7 @@ struct GameView: View {
                                 Color.clear.preference(key: ViewFrameKey.self, value: ["newsArea": proxy.frame(in: .global)])
                             })
                         }
+                        .scrollIndicators(.hidden)
                         Spacer()
                         // Botões de resposta
                         HStack {
@@ -468,18 +464,6 @@ struct GameView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        mostrarConfirmacaoSair = true
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                    }
-                    .disabled(explicacao_inicial)
-                }
-                
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         popupAppIntent = true
@@ -490,14 +474,7 @@ struct GameView: View {
                     .disabled(explicacao_inicial)
                 }
             }
-            .navigationBarBackButtonHidden(true)
-            .alert("Deseja realmente sair do jogo?", isPresented: $mostrarConfirmacaoSair) {
-                                Button("Cancelar", role: .cancel) {}
-                                Button("Sair", role: .destructive) {
-                                    dismiss()
-                                }
-                            }
-        }
+            .toolbarRole(.navigationStack)
     }
 
     // Computes the rect to highlight for the current tutorial step
@@ -572,4 +549,3 @@ struct GameView: View {
 #Preview {
     GameView()
 }
-

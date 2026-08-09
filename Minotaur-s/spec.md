@@ -44,6 +44,9 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 - RF-01.3 — Botão "Verificar notícia" dispara o fluxo completo.
 - RF-01.4 — Durante o processamento, exibir indicador de progresso por etapa (buscando → lendo fontes → analisando).
 - RF-01.5 — Botão de cancelar disponível durante todo o processamento; cancelar aborta requisições de rede em andamento.
+- RF-01.6 — Após consultar um resultado, o usuário deve conseguir voltar diretamente ao campo
+  de entrada, editar a afirmação preservada e iniciar outra verificação sem sair da feature nem
+  retornar à tela inicial do app.
 
 ### RF-02 — Geração da query de busca
 - RF-02.1 — Se a entrada tiver mais de 200 caracteres, o app deve extrair uma query reduzida (palavras-chave) em vez de enviar o texto inteiro ao buscador.
@@ -104,7 +107,8 @@ Reconstruir a feature "Verificar Notícia" do app para que, dada uma afirmação
 *(Nota: o layout/design visual atual da tela de resultado pode ser reaproveitado onde fizer sentido — ver seção 0 e DT-15. Os requisitos abaixo descrevem o que a tela deve exibir, não como deve ser desenhada.)*
 - RF-09.1 — Exibir o veredito agregado com destaque visual e ícone/cor correspondente.
 - RF-09.2 — Listar as fontes analisadas, cada uma com: nome do veículo, título do artigo, rótulo individual, score de confiança e link para o artigo original.
-- RF-09.3 — Ao tocar em uma fonte, abrir o artigo original no navegador (`SFSafariViewController`).
+- RF-09.3 — Cada fonte deve oferecer um botão explícito e destacado, seguindo componentes e
+  cores semânticas do iOS, para abrir o artigo original no navegador (`SFSafariViewController`).
 - RF-09.4 — Exibir um trecho curto (máx. 300 caracteres) do chunk que motivou o rótulo, com atribuição explícita ao veículo e link para o original.
 - RF-09.5 — Exibir aviso permanente e visível: o resultado é uma análise automatizada, pode conter erros, e não substitui leitura das fontes.
 - RF-09.6 — Listar quais domínios foram consultados naquela verificação. Exposto via `VerificationResult.consultedDomains` (ver DT-32 e seção 3.5) — presente mesmo em `NAO_ENCONTRADO` (CA-02).
@@ -263,6 +267,11 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 **Dado** qualquer veredito exibido,
 **quando** a tela de resultado é renderizada,
 **então** o aviso de que o resultado é automatizado e não substitui a leitura das fontes está visível sem necessidade de rolagem.
+
+### CA-12 — Nova verificação na mesma sessão
+**Dado** que uma verificação foi concluída e o resultado está visível,
+**quando** o usuário volta para a entrada, toca no campo, edita a afirmação e verifica novamente,
+**então** a segunda verificação é iniciada com o novo texto sem retornar à tela inicial do app.
 
 ---
 

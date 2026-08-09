@@ -107,6 +107,26 @@ struct VerificationViewModelTests {
         #expect(viewModel.claimText == Self.claim)
     }
 
+    @Test("Editar a entrada após o resultado permite verificar outra notícia na mesma tela")
+    func editingAfterResultStartsANewVerification() async throws {
+        let search = MockSearch(returning: [item("https://g1.globo.com/economia/desemprego")])
+        let viewModel = makeViewModel(search: search)
+        viewModel.claimText = Self.claim
+
+        viewModel.verify()
+        try await waitUntil { viewModel.result != nil }
+        viewModel.dismissResult()
+
+        let secondClaim = "A vacinação contra a gripe reduz o risco de infarto."
+        viewModel.claimText = secondClaim
+        viewModel.verify()
+        try await waitUntil { viewModel.result?.claim == secondClaim }
+
+        #expect(search.callCount == 2)
+        #expect(viewModel.result?.claim == secondClaim)
+        #expect(viewModel.claimText == secondClaim)
+    }
+
     // MARK: - CA-09: cancelamento
 
     @Test("CA-09: cancelar volta à tela inicial com o texto preservado")

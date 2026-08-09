@@ -15,53 +15,57 @@ import SwiftUI
 /// nenhum dos dois diretamente, só o modelo de tela.
 struct VerificadorView: View {
     @StateObject private var viewModel = VerificationViewModel()
+    @FocusState private var isClaimFocused: Bool
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    if !viewModel.isAvailable {
-                        unavailableBanner
-                    }
-
-                    if let stage = viewModel.stage {
-                        progressIndicator(for: stage)
-                    }
-
-                    GroupBox("Sua Notícia") {
-                        TextField("Cole ou digite a notícia aqui", text: $viewModel.claimText, axis: .vertical)
-                            .lineLimit(4...8)
-                            .disabled(viewModel.isVerifying)
-                    }
-
-                    // RF-01.2 / CA-03: motivo da desabilitação, visível junto ao campo.
-                    if let message = viewModel.validation.message {
-                        Text(message)
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-
-                    actionButtons
-
-                    if let failure = viewModel.failure {
-                        errorBanner(for: failure)
-                    }
-
-                    Spacer(minLength: 0)
+        ScrollView {
+            VStack(spacing: 16) {
+                if !viewModel.isAvailable {
+                    unavailableBanner
                 }
-                .padding()
+
+                if let stage = viewModel.stage {
+                    progressIndicator(for: stage)
+                }
+
+                GroupBox("Sua Notícia") {
+                    TextField("Digite a notícia aqui", text: $viewModel.claimText, axis: .vertical)
+                        .lineLimit(4...8)
+                        .focused($isClaimFocused)
+                        .disabled(viewModel.isVerifying)
+                        .accessibilityHint("Edite a afirmação para fazer uma nova verificação.")
+                }
+
+                // RF-01.2 / CA-03: motivo da desabilitação, visível junto ao campo.
+                if let message = viewModel.validation.message {
+                    Text(message)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                actionButtons
+
+                if let failure = viewModel.failure {
+                    errorBanner(for: failure)
+                }
+
+                Spacer(minLength: 0)
             }
-            .background(Color("background").ignoresSafeArea())
-            .navigationTitle("Verificar Notícia")
-            .toolbarBackground(Color("azul"), for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarColorScheme(.dark, for: .navigationBar)
-            .navigationDestination(isPresented: resultPresented) {
-                if let result = viewModel.result {
-                    VerificationResultView(result: result)
-                }
+            .padding()
+        }
+        .scrollDismissesKeyboard(.interactively)
+        .background(Color("background").ignoresSafeArea())
+        .navigationTitle("Verificar Notícia")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(Color("azul"), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarRole(.navigationStack)
+        .navigationDestination(isPresented: resultPresented) {
+            if let result = viewModel.result {
+                VerificationResultView(result: result)
             }
         }
         // Carrega os modelos ao abrir a tela, fora da main thread (RF-10.3 / NF-04) — não no
@@ -78,7 +82,13 @@ struct VerificadorView: View {
         Binding(
             get: { viewModel.result != nil },
             set: { isPresented in
-                if !isPresented { viewModel.dismissResult() }
+                // SwiftUI também escreve `false` durante a montagem inicial. Só focamos a
+                // entrada quando havia de fato um resultado sendo fechado.
+                if !isPresented, viewModel.result != nil {
+                    viewModel.dismissResult()
+                    // Ao voltar do resultado, a entrada já fica pronta para a próxima notícia.
+                    isClaimFocused = true
+                }
             }
         )
     }
@@ -103,32 +113,33 @@ struct VerificadorView: View {
 
     private var actionButtons: some View {
         HStack {
+            Spacer(minLength: 0)
+
             if viewModel.isVerifying {
                 Button("Cancelar") {
                     viewModel.cancel()
                 }
-                .font(.headline)
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .accessibilityHint("Interrompe a verificação em andamento.")
+            } else {
+                Button {
+                    isClaimFocused = false
+                    viewModel.verify()
+                } label: {
+                    Label("Verificar notícia", systemImage: "globe")
+                        .labelStyle(.titleAndIcon)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .tint(Color("azul"))
+                .frame(minHeight: 44)
+                .accessibilityLabel("Verificar notícia")
+                .accessibilityHint("Toque para verificar essa notícia contra fontes confiáveis.")
+                .disabled(!viewModel.canVerify)
             }
-
-            Spacer()
-
-            Button {
-                viewModel.verify()
-            } label: {
-                Label("Verificar notícia", systemImage: "globe")
-                    .labelStyle(.titleAndIcon)
-            }
-            .font(.headline)
-            .bold()
-            .foregroundColor(Color.white)
-            .frame(height: 48)
-            .frame(minWidth: 160)
-            .background(Color("azul"))
-            .cornerRadius(20)
-            .accessibilityLabel("Verificar notícia")
-            .accessibilityHint("Toque para verificar essa notícia contra fontes confiáveis.")
-            .disabled(!viewModel.canVerify)
         }
+        .frame(maxWidth: .infinity, alignment: .trailing)
     }
 
     // MARK: - Indisponibilidade do modelo (RF-10.3)
@@ -187,5 +198,7 @@ struct VerificadorView: View {
 }
 
 #Preview {
-    VerificadorView()
+    NavigationStack {
+        VerificadorView()
+    }
 }

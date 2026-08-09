@@ -2,26 +2,25 @@ import SwiftUI
 struct GameReportView: View {
     
     @EnvironmentObject private var gameState: GameState
-    @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    acertosSection
-                    errosSection
-                    pulosSection
-                }
-                .padding(.vertical, 16)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                acertosSection
+                errosSection
+                pulosSection
             }
-            .background(Color(.systemGroupedBackground))
-            .navigationTitle("Revisão")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(Color("azul"), for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarColorScheme(.dark, for: .navigationBar)
+            .padding(.vertical, 16)
         }
+        .background(Color(.systemGroupedBackground))
+        .navigationTitle("Revisão")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(Color("azul"), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarRole(.navigationStack)
     }
+
     
     // Seção de acertos
     private var acertosSection: some View {
@@ -100,8 +99,10 @@ struct GameReportView: View {
 }
 
 #Preview {
-    GameReportView()
-        .environmentObject(GameState())
+    NavigationStack {
+        GameReportView()
+            .environmentObject(GameState())
+    }
 }
 
 // Helpers
@@ -262,4 +263,3 @@ private struct Pill: View {
             .accessibilityLabel(text)
     }
 }
-
