@@ -1,128 +1,166 @@
 # Minotaur-s — Fato ou Farsa
 
-App iOS nativo (SwiftUI) para combater desinformação de duas formas: um **quiz educativo** sobre notícias reais e falsas, e um **verificador de notícias** que confere uma afirmação digitada pelo usuário contra veículos de imprensa confiáveis, usando modelos de IA rodando **100% no dispositivo**.
+Aplicativo iOS nativo, em SwiftUI, voltado à educação midiática e à checagem assistida de notícias em português. O app combina um quiz curado de **Fato ou Farsa** com um **Verificador de Notícias** que compara uma afirmação às publicações de uma lista fechada de veículos e órgãos confiáveis.
 
-O nome de exibição do app é "ato ou arsa" (com os ícones "F" formando "Fato ou Farsa").
+> Situação em 10 de agosto de 2026: as duas funcionalidades estão implementadas. O verificador usa busca via Tavily/Cloudflare e modelos Core ML no aparelho. A auditoria final passou na suíte completa e no build Release arm64 sem assinatura; a distribuição continua bloqueada por provisioning de Siri e pelos itens de loja descritos em [Estado e limitações](#estado-e-limitações).
 
----
+## Funcionalidades
 
-## Visão geral
+### Quiz “Fato ou Farsa”
 
-O app tem duas funcionalidades principais, acessadas a partir da tela inicial (`ContentView`):
+- apresenta notícias reais e falsas de uma base local;
+- registra acertos, erros e pulos durante a partida;
+- mostra uma revisão detalhada no final;
+- oferece a “Pergunta do Dia” por App Intents, Siri e Atalhos;
+- preserva localmente o estado necessário ao jogo.
 
-### 1. Jogar (quiz "Fato ou Farsa")
-O usuário recebe notícias reais (curadas em uma base local) e precisa adivinhar se são fato ou farsa, acumulando acertos/erros/pulos por partida. Inclui também uma "Pergunta do Dia", exposta como **App Intent** (integração com Siri/Atalhos), que sorteia uma pergunta por dia e a mantém fixa até a virada do dia.
+### Verificador de Notícias
 
-### 2. Verificar Notícia
-O usuário cola ou digita uma afirmação/notícia. O app:
-1. gera uma query de busca a partir da afirmação;
-2. busca artigos apenas em uma lista fechada (`allowlist`) de ~30 veículos de imprensa confiáveis, via API de busca (Tavily), através de um proxy que protege a chave;
-3. baixa e extrai o texto principal de cada artigo (algoritmo tipo Readability sobre HTML);
-4. divide o texto em trechos (*chunks*), gera embeddings de cada um e da afirmação do usuário, e seleciona os trechos mais similares semanticamente;
-5. roda um modelo de **NLI** (Natural Language Inference) on-device para classificar cada trecho selecionado como `entailment` (confirma), `contradiction` (contradiz) ou `neutral` (não fala sobre);
-6. agrega os resultados por artigo e por veículo em um veredito final: **Confirmado pelas fontes**, **Contradito pelas fontes**, **Fontes divergentes**, **Sem informação suficiente** ou **Não encontrado**.
+O usuário digita ou cola uma afirmação entre 15 e 1.000 caracteres. O app então:
 
-O veredito nunca afirma "isso é verdade/mentira" — sempre referencia o que as fontes confiáveis dizem, com link e trecho de cada artigo citado.
+1. usa a primeira frase, limitada a 200 caracteres, como query;
+2. consulta a Tavily por meio de um proxy Cloudflare Workers, restringindo a busca a 31 domínios que representam 30 veículos/órgãos;
+3. aplica novamente a allowlist no aparelho e mantém até cinco resultados;
+4. baixa os artigos em paralelo e extrai o texto principal com SwiftSoup;
+5. remove trechos sem valor proposicional e divide o conteúdo em chunks;
+6. usa embeddings para selecionar até três chunks semanticamente relevantes por artigo;
+7. classifica cada par `(chunk, afirmação)` com NLI on-device;
+8. agrega os votos em **Confirmado pelas fontes**, **Contradito pelas fontes**, **Fontes divergentes**, **Sem informação suficiente** ou **Não encontrado**.
 
-A especificação técnica completa dessa feature está em [`spec.md`](./spec.md).
+O resultado sempre informa o que as fontes encontradas dizem. Ele não declara que uma afirmação é uma verdade ou mentira absoluta e exibe, para cada fonte, trecho, atribuição e link do artigo original.
 
----
+A especificação detalhada está em [`spec.md`](./spec.md).
 
-## Tecnologias
+## Arquitetura do verificador
+
+```text
+entrada
+  → SearchQueryBuilder
+  → TavilySearchService (proxy Cloudflare)
+  → AllowlistFilter
+  → ArticleExtractor
+  → TextChunker + ChunkQualityFilter
+  → EmbeddingService (cosseno ≥ 0,25; top 3)
+  → NLIService (confiança ≥ 0,50)
+  → VerdictAggregator
+  → VerificationResult
+```
+
+O `VerificationPipeline` coordena as etapas. A UI acessa o pipeline por `VerificationViewModel`; os serviços não conhecem a tela nem coordenam uns aos outros.
+
+## Stack atual
 
 | Camada | Tecnologia |
 |---|---|
-| Linguagem | Swift 5 |
-| UI | SwiftUI |
-| iOS mínimo | 17.0 |
-| Inferência de ML | Core ML (on-device, sem chamadas a LLM em nuvem) |
-| Modelo de embeddings | `paraphrase-multilingual-MiniLM-L12-v2` (convertido para Core ML, INT8, ~113 MB) |
-| Modelo de NLI | `MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli` (Core ML, INT8, ~103 MB, `.cpuOnly`) |
-| Tokenização | [`swift-transformers`](https://github.com/huggingface/swift-transformers) (produto `Tokenizers`) |
-| Parsing de HTML | [SwiftSoup](https://github.com/scinfu/SwiftSoup) |
-| Álgebra vetorial | Accelerate (similaridade de cosseno) |
-| Rede | `URLSession` (async/await) |
-| Busca web | [Tavily](https://tavily.com) API, restrita por `include_domains` |
-| Proxy de API | Cloudflare Workers (protege a chave da Tavily; o app nunca a embarca) |
-| Conversão de modelos (offline) | Python + `coremltools` + `transformers` |
-| Geração do projeto Xcode | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) |
-| Integração com Siri/Atalhos | `AppIntents` |
+| Linguagem e UI | Swift 5 + SwiftUI |
+| Deployment target | iOS 17.0 |
+| Inferência | Core ML, on-device, `.cpuOnly` para o NLI |
+| Embeddings | `paraphrase-multilingual-MiniLM-L12-v2`, INT8, ~113 MB |
+| NLI | BERTimbau-base, fine-tune próprio em PLUE/MNLI, INT8, ~104 MB |
+| Tokenização | XLM-R via `swift-transformers` para embeddings; WordPiece próprio para NLI |
+| HTML | SwiftSoup |
+| Vetores | Accelerate |
+| Rede | `URLSession` com async/await |
+| Busca | Tavily `basic`, por proxy Cloudflare Workers |
+| Projeto | Xcode project versionado; `project.yml` existe, mas está incompleto em relação ao `.xcodeproj` atual |
+| Testes | Swift Testing + fixtures e `MockURLProtocol` |
 
-Todo o processamento de linguagem da verificação (embeddings + NLI) roda localmente no aparelho — nenhum texto do usuário é enviado a um servidor de IA. A única informação que sai do dispositivo é a query de busca, enviada ao proxy que consulta a Tavily.
+Os modelos somam aproximadamente 217 MB; os dois tokenizers versionados somam aproximadamente 17 MB. Nenhum texto é enviado a um serviço de IA: embeddings e NLI rodam localmente. Somente a query de busca sai do aparelho, passando pelo proxy stateless até a Tavily.
 
----
+## Estrutura
 
-## Estrutura do projeto
-
-```
+```text
 Minotaur-s/
-├── Minotaur-s/                     # target do app
-│   ├── Minotaur_sApp.swift         # entry point
-│   ├── Views/                      # telas (ContentView, GameView, quiz, verificador...)
-│   │   └── Verificador/            # UI da feature de verificação
-│   ├── Models/                     # modelos de dados (Fact, Question, GameState...)
-│   │   └── Verificador/            # modelos da feature de verificação
-│   ├── Services/                   # lógica de negócio, persistência, rede
-│   │   └── Verificador/            # busca, extração, embeddings, NLI, agregação
-│   ├── Intents/                    # App Intents (Siri/Atalhos, "Pergunta do Dia")
+├── Minotaur-s/
+│   ├── Views/                  # tela inicial, jogo, revisão e verificador
+│   ├── Models/                 # domínio do jogo e do verificador
+│   ├── Services/               # persistência, dados locais e pipeline de verificação
+│   ├── Intents/                # Siri/Atalhos e Pergunta do Dia
 │   ├── Resources/
-│   │   ├── Models/                 # .mlpackage (Core ML) — não versionados, ver abaixo
-│   │   └── Tokenizers/             # arquivos de tokenizer versionados
+│   │   ├── Models/             # Core ML ignorado pelo Git; gerado por sync-models.sh
+│   │   └── Tokenizers/         # tokenizers e mapa de labels versionados
 │   └── Assets.xcassets/
-├── Minotaur-sTests/                # testes unitários (incl. Verificador/)
-├── Minotaur-sUITests/               # testes de UI
-├── proxy/                          # Cloudflare Worker que protege a chave da Tavily
-├── scripts/sync-models.sh          # copia os modelos Core ML já convertidos para o app
-├── spikes/                         # protótipos técnicos descartáveis (não fazem parte do app)
-├── project.yml                     # definição do projeto para o XcodeGen
-└── spec.md                         # especificação técnica da feature "Verificar Notícia"
+├── Minotaur-sTests/            # testes unitários e de integração local
+├── Minotaur-sUITests/          # target de testes de UI
+├── proxy/                      # Cloudflare Worker da Tavily
+├── scripts/sync-models.sh      # sincroniza os modelos validados para o bundle
+├── spikes/                     # evidências técnicas e scripts de pesquisa (Spikes 1–9)
+├── Minotaur-s.xcodeproj/       # projeto Xcode usado atualmente
+├── project.yml                 # definição XcodeGen ainda não sincronizada com o projeto atual
+├── spec.md                     # especificação do Verificador de Notícias
+└── CLAUDE.md                   # regras operacionais para agentes de código
 ```
 
-A pasta `spikes/` guarda os experimentos que validaram cada decisão técnica antes da implementação final (modelos em PT-BR, conversão para Core ML, extração de texto, scraping vs. API de busca) — é código de pesquisa, não faz parte do app publicado.
+`spikes/` contém pesquisa reproduzível, resultados de conversão, gates de aparelho e fine-tune. Esses arquivos não fazem parte do target do aplicativo.
 
----
-
-## Como rodar
+## Como executar
 
 ### Pré-requisitos
-- Xcode (iOS 17+)
-- [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`) — o `.xcodeproj` é gerado a partir de `project.yml` e não é versionado
 
-### Passos
+- macOS com Xcode capaz de compilar para iOS 17 ou superior;
+- dependências Swift Package Manager resolvidas pelo Xcode;
+- builds locais dos dois modelos Core ML, que não são versionados por excederem o limite de arquivo do GitHub.
+
+### Preparação
+
 ```bash
-xcodegen generate
 ./scripts/sync-models.sh
 open Minotaur-s.xcodeproj
 ```
 
-### Antes do primeiro build: modelos Core ML
+O script copia:
 
-O `sync-models.sh` copia os modelos já convertidos de:
-- `spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage`
-- `spikes/02c-nli-executavel/build/L6_int8.mlpackage`
+- `spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage`;
+- `spikes/09-nli-base-search/build/trained/bertimbau_base_plue_dynamic512_int8.mlpackage`.
 
-para `Minotaur-s/Resources/Models/{Embeddings,NLI}.mlpackage`.
+Os destinos são `Minotaur-s/Resources/Models/Embeddings.mlpackage` e `NLI.mlpackage`. Sem os pesos completos, o verificador permanece indisponível e reporta `.modelLoadFailed` sem derrubar o restante do app.
 
-Esses `.mlpackage` (113 MB + 103 MB) **não são versionados no git** — os `weight.bin` excedem o limite de 100 MB por arquivo do GitHub. Sem esse passo, os serviços de embeddings e NLI falham ao carregar o modelo (`.modelLoadFailed`).
+Se os builds dos spikes não existirem na máquina, execute primeiro os scripts de conversão indicados por `scripts/sync-models.sh`.
 
-> Numa máquina nova, sem os builds dos spikes 2 e 2c já existentes localmente, o script falha e aponta para rodar `convert_embeddings.py` (spike 02) e `convert_and_reference.py` (spike 02c) antes.
+> Não rode `xcodegen generate` no estado atual: `project.yml` ainda não representa as dependências SPM, o nome de exibição e todas as configurações presentes no `.xcodeproj` versionado.
 
-Os arquivos de tokenizer em `Resources/Tokenizers/` já estão versionados — nenhum passo manual é necessário em um clone normal. Só é preciso regerá-los (`spikes/07-tokenizer-parity/export_assets.py`) se houver suspeita de *drift* do modelo/tokenizer no Hugging Face.
+### Busca web
 
-### Proxy da Tavily
+O endpoint do Worker está configurado em `TavilySearchService.proxyEndpoint`. A chave `TAVILY_API_KEY` permanece somente como secret do Cloudflare Worker; nunca deve ser adicionada ao app ou ao repositório. O contrato do proxy está documentado em [`proxy/README.md`](./proxy/README.md).
 
-A feature de verificação depende de um endpoint próprio (Cloudflare Workers) que injeta a chave da API da Tavily — o app nunca chama a Tavily diretamente nem embarca a chave. O deploy é responsabilidade de quem mantém o projeto; instruções em [`proxy/README.md`](./proxy/README.md). Enquanto `TavilySearchService.proxyEndpoint` estiver vazio, a busca falha antes de tocar a rede.
+## Testes e evidências
 
----
+Os testes de `Minotaur-sTests/Verificador/` cobrem validação e apresentação, allowlist, busca e retry, extração, chunking, qualidade de chunks, tokenização, paridade Core ML, agregação, cancelamento e pipeline.
 
-## Testes
+Auditoria final de release executada em 10 de agosto de 2026:
 
-`Minotaur-sTests/Verificador/` cobre cada etapa do pipeline de verificação isoladamente (filtro de allowlist, extração de artigo, busca na Tavily, construção de query, serviços de ML, paridade de tokenizer, agregação de veredito, e o pipeline ponta a ponta), com fixtures e um `MockURLProtocol` para simular respostas de rede sem chamadas reais.
+- **143/143** testes Swift Testing e **6/6** testes de UI no iPhone 16 Pro Simulator com iOS 18.6;
+- **28/28** testes focados de NLI/tokenização no iPhone 16;
+- build e lançamento no simulador e no aparelho: aprovados;
+- build Release arm64 sem assinatura: aprovado.
+- `.app` Release arm64 sem assinatura: **267.536 KiB (261 MiB)**, com exatamente dois recursos Core ML compilados (`Embeddings.mlmodelc` e `NLI.mlmodelc`);
+- versão **1.0**, build **1**, deployment target iOS **17.0**, bundle identifier `com.julia.fatoufarsa2025` e AppIcon 1024×1024 válidos no build;
+- ATS padrão, sem exceções de transporte; nenhum segredo de aplicação encontrado na varredura dos arquivos versionados.
 
----
+Os detalhes e caminhos dos result bundles estão em [`spikes/09-nli-base-search/INTEGRACAO_RESULTADO.md`](./spikes/09-nli-base-search/INTEGRACAO_RESULTADO.md).
+
+### Checklist final RF/NF/CA
+
+- **RF:** RF-01–RF-10 possuem cobertura automatizada da lógica e apresentação; a suíte completa passou. Permanecem sem comprovação ponta a ponta de produção o paywall parcial, o retry por artigo e as respostas reais de cota/rate-limit da Tavily.
+- **NF:** arquitetura, concorrência, inferência on-device, limite de tamanho do `.app`, RAM/latência no iPhone 16, HTTPS/ATS e ausência de chave no app estão comprovados. Continuam pendentes o gate direto no iPhone 13, o tempo total com rede real, política/aviso de privacidade, `robots.txt` e o tamanho de distribuição assinado.
+- **CA:** CA-01–CA-12 possuem testes automatizados correspondentes e passaram; CA-01 não teve nesta auditoria uma medição ponta a ponta com busca/artigos reais abaixo de 15 s, e CA-05 não comprova empiricamente paywall parcial.
+
+## Estado e limitações
+
+- O BERTimbau-base integrado marcou **13/15** nos pares adversariais reais e **6/6** nos casos críticos de Terra plana e vacina; os dois erros residuais envolvem nuances da alegação de “cura do câncer”.
+- A estabilidade a pequenas variações de afirmações curtas ficou em **2/3 famílias**. O aviso de análise automatizada e os links para as fontes continuam obrigatórios.
+- O gate físico mediu até **383,7 MB** de memória residente e **66,5 ms** aquecidos a 512 tokens no iPhone 16. A validação direta no iPhone 13 ainda é recomendada antes do lançamento.
+- O app Release arm64 sem assinatura ocupou 267.536 KiB (261 MiB) descompactados. Archive, `.ipa` e estimativa da App Store não puderam ser medidos sem assinatura válida.
+- O archive assinado falha porque `iOS Team Provisioning Profile: *` não inclui a capability Siri nem o entitlement `com.apple.developer.siri`. É necessário entrar no Xcode com a conta Apple da equipe `2DK23BZ7KB` e regenerar/baixar o profile de `com.julia.fatoufarsa2025` com Siri habilitada.
+- A política de privacidade e o aviso de primeira execução exigidos pela spec ainda não aparecem no código atual.
+- Não há privacy manifest próprio do app; o bundle contém apenas o `PrivacyInfo.xcprivacy` transitivo de `swift-crypto`.
+- Política de `robots.txt`, paywall parcial e retry por artigo continuam pendências de conformidade/robustez.
+- O verificador depende da disponibilidade e da cota da Tavily e do proxy.
 
 ## Privacidade
 
-- Nenhum backend próprio além do proxy stateless da Tavily (que não armazena nada).
-- O texto digitado pelo usuário só sai do dispositivo como query de busca.
-- Verificações não são persistidas — cada resultado existe apenas em memória durante a sessão.
+- verificações não são persistidas;
+- o proxy é stateless e não possui KV, D1 ou cache de conteúdo;
+- o texto completo fica no aparelho; apenas a query reduzida é transmitida para busca;
+- não há chamadas a LLM ou a outro serviço de inferência em nuvem;
+- trechos exibidos têm no máximo 300 caracteres, com atribuição e link para o original.

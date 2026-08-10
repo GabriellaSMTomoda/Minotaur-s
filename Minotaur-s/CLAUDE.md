@@ -1,111 +1,145 @@
-# Instruções para Claude Code neste projeto
+# Instruções para agentes de código neste projeto
 
-Este arquivo orienta como trabalhar neste repositório. A especificação técnica completa está em [`spec.md`](./spec.md) — leia-a por inteiro antes de qualquer alteração de código. Este `CLAUDE.md` não substitui a spec, apenas fixa regras operacionais de como aplicá-la.
+Este arquivo registra o estado operacional do repositório. Para mudanças no **Verificador de Notícias**, leia também [`spec.md`](./spec.md) por inteiro: ela é a fonte de verdade dos requisitos, decisões e riscos da feature.
 
----
+## Estado atual — 10 de agosto de 2026
 
-## Estado atual do projeto
+O app possui duas áreas funcionais: o quiz “Fato ou Farsa”, incluindo Pergunta do Dia/App Intents, e o Verificador de Notícias. A reconstrução do verificador e a troca do NLI estão concluídas no código.
 
-A feature **"Verificar Notícia"** foi **reconstruída e está implementada** (Fases 1–5 concluídas). O pipeline atual é:
+Pipeline atual:
 
-```
-entrada → SearchQueryBuilder → TavilySearchService (via proxy Cloudflare)
+```text
+entrada → SearchQueryBuilder → TavilySearchService (proxy Cloudflare)
 → AllowlistFilter → ArticleExtractor → TextChunker → ChunkQualityFilter
-→ EmbeddingService (similaridade de cosseno, top-3) → NLIService
+→ EmbeddingService (cosseno, top 3) → NLIService (BERTimbau-base)
 → VerdictAggregator → VerificationResult
 ```
 
-Coordenado por `VerificationPipeline`, consumido por `VerificadorView`. Sem `FoundationModels`, sem scraping do DuckDuckGo — ambos foram destruídos na Fase 5 (DT-15).
+`VerificationPipeline` é o único coordenador. `VerificationViewModel` mantém a inferência fora da main thread e traduz progresso, cancelamento, resultado e falhas para a UI.
 
-**Onde as coisas vivem:**
+Não existem mais `FoundationModels` nem scraping do DuckDuckGo. Não reintroduza nenhum dos dois.
 
-| Diretório | Conteúdo |
+### Modelo NLI integrado
+
+- BERTimbau-base, fine-tune próprio de três classes em PLUE/MNLI (Spike 9);
+- MLProgram INT8/FP16, ~104 MB, `.cpuOnly`;
+- tokenização WordPiece dedicada em `BERTTokenizer.swift`;
+- entradas `input_ids`, `attention_mask` e `token_type_ids`;
+- ordem empírica de labels: `[entailment, neutral, contradiction]`;
+- limite de 512 tokens por par, com orçamento do chunk descontando a hipótese;
+- resultado adversarial: 13/15, incluindo 6/6 nos casos críticos;
+- gate físico: até 383,7 MB residentes e 66,5 ms aquecidos em 512 tokens no iPhone 16.
+
+O BERTimbau-large do Spike 7 **não** é o modelo atual: ele reprovou RAM e latência no Spike 8 e foi substituído pelo fine-tune base do Spike 9.
+
+## Estado de validação e distribuição
+
+A auditoria final de 10 de agosto de 2026 registrou:
+
+- 143/143 testes Swift Testing e 6/6 testes de UI no iPhone 16 Pro Simulator/iOS 18.6;
+- 28/28 testes focados no iPhone 16;
+- paridade WordPiece/Hugging Face e PyTorch/Core ML;
+- build e lançamento no simulador e em aparelho;
+- build Release arm64 sem assinatura aprovado;
+- `.app` sem assinatura com 267.536 KiB (261 MiB), dois modelos Core ML únicos, AppIcon 1024×1024, versão 1.0/build 1 e ATS sem exceções.
+
+O archive assinado continua bloqueado por configuração externa: `Provisioning profile "iOS Team Provisioning Profile: *" doesn't include the Siri capability.` e `doesn't include the com.apple.developer.siri entitlement.` A correção mínima é autenticar no Xcode a conta da equipe `2DK23BZ7KB` e regenerar/baixar o profile de `com.julia.fatoufarsa2025` com Siri habilitada. Não remova entitlements, Siri, bundle identifier ou equipe para contornar o bloqueio.
+
+Não existe política de privacidade acessível nem aviso de primeira execução; também não há privacy manifest próprio do app (somente o manifest transitivo de `swift-crypto`). Archive, `.ipa` e estimativa da App Store só podem ser medidos depois da correção de assinatura.
+
+O modelo ainda tem limitações conhecidas: dois erros em 15 pares adversariais, ambos ligados à nuance de “cura do câncer”, e estabilidade de claims curtos em 2/3 famílias. Não descreva a feature como detector infalível nem remova os avisos/links que contextualizam o resultado.
+
+## Onde trabalhar
+
+| Diretório | Responsabilidade |
 |---|---|
-| `Models/Verificador/` | `TrustedDomain`, `VerificationResult`, `VerificationError` |
-| `Services/Verificador/` | Os 9 serviços do pipeline + o coordenador |
-| `Views/Verificador/` | UI: `Verificador.swift`, `VerificationViewModel`, `VerificationPresentation`, `VerificationResultView`, `SafariView` |
-| `Minotaur-sTests/Verificador/` | Testes (swift-testing) |
-| `spikes/` | Código descartável de validação (Spikes 1–7), com `RESULTADO.md` cada |
-| `proxy/` | Worker Cloudflare que injeta a chave da Tavily (DT-21) |
+| `Models/Verificador/` | `TrustedDomain`, resultado e erros de domínio |
+| `Services/Verificador/` | busca, extração, chunks, ML, agregação e coordenador |
+| `Views/Verificador/` | entrada, resultado, apresentação e Safari |
+| `Minotaur-sTests/Verificador/` | testes Swift Testing e fixtures |
+| `spikes/` | pesquisa descartável/reproduzível; não entra no app |
+| `proxy/` | Worker stateless que protege a chave da Tavily |
 
-Todos esses são grupos sincronizados no Xcode — arquivo novo entra sozinho, sem editar `project.pbxproj`.
+Para uma tarefa restrita ao verificador, não altere outras features por efeito colateral. O acoplamento externo intencional é o `NavigationLink` de `ContentView` para `VerificadorView()`; preserve o nome e o inicializador sem argumentos, salvo se o usuário pedir uma mudança transversal.
 
-**Tarefa ativa: Fase 6** — trocar o modelo de NLI (DT-18 revisada 2ª vez), conforme o resultado do Spike 7. Ver item aberto 27 (gate de RAM) e o risco materializado em 7.1 da spec.
+## Projeto Xcode e dependências
 
-**Nenhuma outra funcionalidade do app deve ser tocada.** Antes de editar qualquer arquivo, pergunte: *"isso pertence exclusivamente ao fluxo de Verificar Notícia?"* Se a resposta for não ou for incerta, pare e pergunte ao usuário em vez de decidir sozinho. O único acoplamento externo conhecido é `ContentView.swift:55` (`NavigationLink` para `VerificadorView()`) — não edite esse arquivo; preserve o nome do tipo e o `init()` sem argumentos.
+O arquivo usado hoje é `Minotaur-s.xcodeproj`, que está versionado e contém SwiftSoup, `swift-transformers`, nome de exibição e configurações que ainda não existem em `project.yml`.
 
----
+**Não execute `xcodegen generate` sem antes sincronizar e revisar `project.yml`.** No estado atual, regenerar o projeto removeria configuração válida.
 
-## Bloqueio de lançamento em aberto
+Configuração relevante:
 
-O pipeline **confirma notícias comprovadamente falsas** (risco materializado, seção 7.1 da spec). A causa foi isolada — não é bug de código, é julgamento do modelo de NLI — e a correção decidida é a troca de modelo da Fase 6. Enquanto ela não for integrada e validada ponta a ponta, **o produto não está pronto para lançar**, por mais que compile e passe nos testes.
+- Swift 5;
+- deployment target iOS 17.0;
+- SwiftSoup a partir de 2.9.6;
+- `swift-transformers` 1.3.3, produto `Tokenizers`;
+- grupos sincronizados no Xcode: arquivos Swift novos nas pastas de sources entram automaticamente.
 
-Isso importa para o seu trabalho: "141 testes passando" não é evidência de que a feature funciona. Os testes usam mocks e pares limpos; o defeito só apareceu em texto real de artigo.
+## Assets de ML
 
----
-
-## Lições estruturais deste projeto (não repetir)
-
-Três erros já custaram caro aqui. Aplique-os como regra, não como curiosidade:
-
-1. **"Converte sem erro" ≠ "executa em device"** (Spike 2). O mDeBERTa convertia para Core ML e batia logits com PyTorch, mas travava em todo device físico testado. Desde o Spike 2c, o gate de execução em device vem **antes** da avaliação de qualidade — nunca o contrário.
-2. **"Acerta pares limpos" ≠ "acerta texto real"** (Spike 7). O modelo escolhido tinha 90% em dataset limpo e 20% em pares adversariais colhidos de artigos reais. Validação de NLI neste projeto exige pares reais, extraídos do pipeline em funcionamento.
-3. **Não confie no `id2label` do config** (Spike 7). Confirme a ordem índice→rótulo empiricamente, com sondas inequívocas, antes de medir qualquer coisa. Uma ordem trocada inverte o veredito sem erro visível em lugar nenhum.
-
-E uma armadilha já encontrada em integração: o `swift-transformers` despacha o tokenizador pelo `tokenizer_class` do config, não pelo `model.type`, e cai em `fatalError` (não em `throw`) quando erra a escolha.
-
----
-
-## Como trabalhar
-
-1. **Leia `spec.md` inteiro** antes de gerar código. Não implemente a partir da memória de conversa — a spec é a fonte de verdade. Se o working tree tiver uma `spec.md` diferente do `HEAD`, a do working tree é a mais recente (o usuário sincroniza manualmente).
-2. **Quando resolver um item marcado `[EM ABERTO]` na spec, avise o usuário.** O mesmo vale para reabrir uma DT-XX já decidida.
-3. **Você pode editar `spec.md` ou este arquivo sempre que achar necessário, desde que avise o usuário. É importante sempre manter os dois arquivos atualizados para a próxima conversa entender o momento atual do projeto.**.
-4. **Trace cada requisito funcional (RF-XX) implementado até um trecho de código identificável.** Se não der para apontar onde um RF foi atendido, ele não foi implementado.
-5. **Testes saem dos Critérios de Aceitação (CA-01 a CA-11).** O padrão do projeto é swift-testing em `Minotaur-sTests/Verificador`. Os stubs em `Minotaur-sUITests` são gerados pelo Xcode, não são padrão a seguir.
-6. **Avise sempre que implementar algo listado em "Fora de Escopo" (seção 5)**, mesmo que pareça melhoria óbvia.
-7. **Spikes são código descartável**, vivem em `spikes/NN-nome/` com um `RESULTADO.md`, e não fazem parte do app.
-8. **Quando a tarefa for investigar antes de corrigir, investigue e pare.** Relatar causa com evidência vale mais que uma correção rápida na causa errada.
-
----
-
-## Pré-requisitos de build
-
-Os `.mlpackage` (113 MB + 320 MB) não são versionados. Antes do primeiro build em qualquer máquina:
+Os pesos Core ML não são versionados. Antes de compilar em uma máquina nova:
 
 ```bash
 ./scripts/sync-models.sh
 ```
 
-`export_assets.py` (em `spikes/07-tokenizer-parity/`) gera tokenizers e fixtures de paridade e **é** versionado — só precisa rodar de novo em caso de suspeita de drift. A validação real é o `TokenizerParityTests`, não a existência do arquivo. Ver DT-31.
+O script copia:
 
-O proxy da Tavily precisa estar deployado e sua URL colada em `TavilySearchService.proxyEndpoint`, ou toda busca falha antes da rede.
+- embeddings de `spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage`;
+- NLI de `spikes/09-nli-base-search/build/trained/bertimbau_base_plue_dynamic512_int8.mlpackage`.
 
----
+Os recursos de tokenizer e labels em `Minotaur-s/Resources/Tokenizers/` são versionados. Para regenerar os assets do NLI selecionado, use `spikes/09-nli-base-search/export_app_assets.py`; não use o export antigo do Spike 7.
 
-## Ao final de uma alteração
+## Busca e proxy
 
-- [ ] Nenhum arquivo fora do escopo da feature "Verificar Notícia" foi alterado.
-- [ ] `ContentView.swift` intocado; `VerificadorView()` continua instanciável sem argumentos.
-- [ ] Separação por responsabilidade mantida — nenhum serviço conhece os demais; só o coordenador conhece a ordem.
-- [ ] Cada CA relevante verificado (por teste ou manualmente), com a lacuna declarada quando houver.
-- [ ] Avisar se algo "Fora de Escopo" foi implementado.
-- [ ] Avisar se `[EM ABERTO]` continuam abertos, ou foram resolvidos.
-- [ ] Avisar se DT-XX foi reaberta.
-- [ ] Achados colaterais relevantes sinalizados ao usuário, mesmo que fora do escopo da tarefa.
+O Worker está implantado e `TavilySearchService.proxyEndpoint` aponta para ele. A chave deve existir apenas no secret `TAVILY_API_KEY` do Cloudflare. Nunca coloque a chave em Swift, arquivos de configuração versionados, fixtures ou logs.
 
----
+A allowlist possui 31 domínios para 30 veículos. O `include_domains` da Tavily não é considerado uma barreira rígida: `AllowlistFilter` deve continuar obrigatório antes do truncamento para cinco resultados.
 
-## Referência rápida da spec
+## Regras de implementação
 
-| Seção | Conteúdo |
-|---|---|
-| 0 | Estado atual vs. estado anterior (motivação da reconstrução) |
-| 1 | Objetivo da feature |
-| 2 (RF-01 a RF-10) | Requisitos funcionais — pipeline completo |
-| 3 (NF-01 a NF-15) | Stack, modelos de ML, performance, segurança, formatos de dados |
-| 4 (CA-01 a CA-11) | Critérios de aceitação — base para os testes |
-| 5 | Fora de escopo — não implementar |
-| 6 (DT-01 a DT-34) | Decisões técnicas já tomadas — não reabrir sem decisão do usuário |
-| 7.1 / 7.2 | Riscos técnicos e de produto (inclui o risco materializado de confirmação de notícias falsas) |
-| 7.3 | Pontos `[EM ABERTO]` — hoje: 9, 11, 12, 14, 17, 18, 19, 20, 21, 22, 23, 26, 27 |
+1. Leia a spec inteira antes de mudar o verificador e trate o working tree como mais recente que o `HEAD`.
+2. Mantenha os serviços independentes; somente `VerificationPipeline` conhece a ordem das etapas.
+3. Preserve os contratos de privacidade: sem persistência das verificações, sem IA em nuvem e sem log do texto/query no proxy.
+4. Preserve a linguagem referenciada às fontes. Nunca transforme os vereditos em “verdadeiro” ou “falso”.
+5. Mantenha o aviso de limitação visível sem rolagem e os trechos limitados a 300 caracteres com atribuição e link.
+6. Valide a ordem índice→label empiricamente ao trocar qualquer modelo. Não confie apenas em `id2label` remoto.
+7. Toda mudança de modelo exige, nesta ordem: execução em aparelho, paridade, RAM/latência e avaliação com pares adversariais reais.
+8. Não altere limiares (`0,25` de similaridade; `0,50` de confiança), votação ou margem para mascarar regressão sem reabrir formalmente as DT correspondentes.
+9. Testes derivam dos critérios de aceitação. Use Swift Testing em `Minotaur-sTests/Verificador`; os stubs de `Minotaur-sUITests` não são o padrão do projeto.
+10. Se uma investigação foi pedida, apresente causa e evidência antes de implementar correção.
+
+## Lições que não podem regredir
+
+- “Converteu” não significa “roda no aparelho”: o mDeBERTa passou conversão/paridade e falhou em device.
+- Acurácia em pares limpos não prevê texto jornalístico real: o MiniLM antigo acertava o dataset limpo e confirmava desinformação quando o artigo repetia a alegação para refutá-la.
+- INT8 reduz disco, mas pode não reduzir proporcionalmente a RAM do caminho CPU.
+- Espaço livre baixo contaminou fortemente medições no Spike 8; todo gate físico deve registrar preflight de armazenamento.
+- `token_type_ids` não pode ser substituído por zeros: isso muda logits silenciosamente.
+- O tokenizador do NLI é WordPiece próprio; `XLMRTokenizer` continua exclusivo dos embeddings.
+
+## Pendências atuais
+
+Consulte a seção 7.3 da spec para o registro completo. As principais são:
+
+- validar diretamente RAM/latência no aparelho-alvo mais antigo (iPhone 13);
+- medir o tamanho final assinado/`.ipa` e corrigir o provisioning de Siri;
+- publicar/expor a política de privacidade e implementar o aviso de primeira execução sobre a query enviada;
+- definir política de `robots.txt`;
+- decidir retry por artigo e validar paywall parcial;
+- documentar/comprovar o tratamento real de cota e rate-limit da Tavily;
+- avaliar `search_depth="advanced"` e o peso transitivo de `swift-transformers`;
+- decidir se nomes amigáveis de veículos substituem os domínios na UI;
+- acompanhar os dois erros adversariais residuais e a estabilidade 2/3 de claims curtos.
+
+## Checklist de entrega
+
+- [ ] Alterações limitadas ao escopo pedido pelo usuário.
+- [ ] `VerificadorView()` continua instanciável sem argumentos, quando aplicável.
+- [ ] Nenhuma chave ou peso grande entrou no Git.
+- [ ] Critérios de aceitação relevantes exercitados; lacunas declaradas.
+- [ ] Testes focados e, quando viável, suíte completa executados.
+- [ ] Mudanças de modelo validadas em aparelho físico com espaço livre registrado.
+- [ ] `spec.md`, `README.md` e este arquivo continuam coerentes.
+- [ ] Itens `[EM ABERTO]`, DT reabertas e alterações fora de escopo informados ao usuário.
