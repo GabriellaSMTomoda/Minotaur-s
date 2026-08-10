@@ -11,9 +11,9 @@ import Testing
 
 /// Referência PyTorch para os pares de NLI, lida de `parity_fixture.json`.
 ///
-/// Gerada por `spikes/07-tokenizer-parity/export_assets.py` rodando o modelo original do
-/// Hugging Face. É contra ela que a saída em Swift é comparada — não contra um rótulo que
-/// alguém escreveu à mão.
+/// Regenerada por `spikes/09-nli-base-search/export_app_assets.py` com o checkpoint escolhido
+/// exclusivamente em PLUE. É contra ela que a saída em Swift é comparada — não contra um
+/// rótulo escrito à mão.
 enum NLIReferenceFixture {
 
     struct Sample {

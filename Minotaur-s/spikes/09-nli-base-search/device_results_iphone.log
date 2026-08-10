@@ -1,0 +1,332 @@
+===== BUILD bertimbau_base_dynamic512 =====
+    /usr/bin/touch -c /tmp/spike09-architecture-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+** BUILD SUCCEEDED **
+
+APPSIZE bertimbau_base_dynamic512 219 MB
+• launchServicesIdentifier: unknown
+• databaseUUID: BACDB21F-844D-4DAA-99AB-814ACA9143D2
+• databaseSequenceNumber: 15248
+• options: 
+---- bertimbau_base_dynamic512 / preflight ----
+22:36:36  Acquired tunnel connection to device.
+22:36:36  Enabling developer disk image services.
+22:36:36  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · preflight ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"preflight","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1591,"resident_mb":34.7,"footprint_mb":9.0,"peak_resident_mb":34.7,"peak_footprint_mb":9.0,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_dynamic512 / parity ----
+22:36:39  Acquired tunnel connection to device.
+22:36:39  Enabling developer disk image services.
+22:36:39  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · parity ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"parity","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1575,"resident_mb":29.7,"footprint_mb":8.9,"peak_resident_mb":29.7,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"parity","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1575,"resident_mb":47.2,"footprint_mb":24.3,"peak_resident_mb":383.3,"peak_footprint_mb":25.4,"elapsed_ms":868.7,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"parity","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":1575,"resident_mb":43.0,"footprint_mb":24.8,"peak_resident_mb":354.9,"peak_footprint_mb":26.0,"elapsed_ms":709.4,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+PARITYLINE {"variant":"bertimbau_base_dynamic512","kind":"entailment","sequence_length":17,"expected":[0.047760,0.190796,-0.163086],"actual":[0.047760,0.190796,-0.163086],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_dynamic512","kind":"contradiction","sequence_length":15,"expected":[0.090393,0.196899,-0.217896],"actual":[0.090393,0.196899,-0.217896],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_dynamic512","kind":"neutral","sequence_length":21,"expected":[0.086304,-0.132202,0.014183],"actual":[0.086304,-0.132202,0.014183],"cosine":1.000000,"expected_argmax":0,"actual_argmax":0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_dynamic512 / real ----
+22:36:43  Acquired tunnel connection to device.
+22:36:43  Enabling developer disk image services.
+22:36:43  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · real ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"real","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1132,"resident_mb":29.9,"footprint_mb":9.0,"peak_resident_mb":29.9,"peak_footprint_mb":9.0,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"real","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1132,"resident_mb":38.6,"footprint_mb":16.1,"peak_resident_mb":38.6,"peak_footprint_mb":16.7,"elapsed_ms":32.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"real","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":1132,"resident_mb":40.2,"footprint_mb":16.3,"peak_resident_mb":40.2,"peak_footprint_mb":16.4,"elapsed_ms":26.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"real","stage":"embeddings_180","detail":"carga real","free_disk_mb":1132,"resident_mb":117.0,"footprint_mb":16.5,"peak_resident_mb":117.0,"peak_footprint_mb":18.3,"elapsed_ms":738.7,"predictions":180,"median_ms":4.1,"mean_ms":4.1,"min_ms":1.7,"max_ms":8.1}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"real","stage":"nli_15","detail":"carga real; comprimentos=143,140,147,137,136,152,143,145,135,229,235,241,212,167,138","free_disk_mb":1132,"resident_mb":294.3,"footprint_mb":16.5,"peak_resident_mb":294.3,"peak_footprint_mb":20.2,"elapsed_ms":380.7,"predictions":15,"median_ms":21.9,"mean_ms":25.3,"min_ms":21.2,"max_ms":34.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"real","stage":"second_verification","detail":"mesma carga com modelos quentes","free_disk_mb":1132,"resident_mb":294.3,"footprint_mb":14.7,"peak_resident_mb":294.3,"peak_footprint_mb":20.2,"elapsed_ms":1120.1,"predictions":195,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_dynamic512 / len-77 ----
+22:36:48  Acquired tunnel connection to device.
+22:36:48  Enabling developer disk image services.
+22:36:48  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · len-77 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-77","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1622,"resident_mb":29.8,"footprint_mb":8.9,"peak_resident_mb":29.8,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-77","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1622,"resident_mb":47.2,"footprint_mb":24.3,"peak_resident_mb":383.3,"peak_footprint_mb":25.0,"elapsed_ms":652.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-77","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":1622,"resident_mb":49.0,"footprint_mb":24.8,"peak_resident_mb":359.9,"peak_footprint_mb":25.9,"elapsed_ms":540.1,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-77","stage":"latency_cold","detail":"1 par; seq=77","free_disk_mb":1622,"resident_mb":213.2,"footprint_mb":24.8,"peak_resident_mb":213.2,"peak_footprint_mb":25.9,"elapsed_ms":20.4,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-77","stage":"latency_warm","detail":"9 pares; seq=77; ambos modelos vivos","free_disk_mb":1622,"resident_mb":213.2,"footprint_mb":24.8,"peak_resident_mb":213.2,"peak_footprint_mb":25.9,"elapsed_ms":127.9,"predictions":9,"median_ms":14.2,"mean_ms":14.2,"min_ms":14.1,"max_ms":14.3}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_dynamic512 / len-128 ----
+22:36:51  Acquired tunnel connection to device.
+22:36:51  Enabling developer disk image services.
+22:36:52  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · len-128 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-128","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1187,"resident_mb":29.7,"footprint_mb":8.8,"peak_resident_mb":29.7,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-128","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1187,"resident_mb":38.5,"footprint_mb":16.0,"peak_resident_mb":38.5,"peak_footprint_mb":16.6,"elapsed_ms":30.6,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-128","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":1187,"resident_mb":40.1,"footprint_mb":16.2,"peak_resident_mb":40.1,"peak_footprint_mb":16.4,"elapsed_ms":24.9,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-128","stage":"latency_cold","detail":"1 par; seq=128","free_disk_mb":1187,"resident_mb":205.7,"footprint_mb":16.2,"peak_resident_mb":205.7,"peak_footprint_mb":18.1,"elapsed_ms":25.6,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-128","stage":"latency_warm","detail":"9 pares; seq=128; ambos modelos vivos","free_disk_mb":1187,"resident_mb":205.8,"footprint_mb":16.2,"peak_resident_mb":205.8,"peak_footprint_mb":18.1,"elapsed_ms":170.6,"predictions":9,"median_ms":18.9,"mean_ms":18.9,"min_ms":18.7,"max_ms":19.5}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_dynamic512 / len-256 ----
+22:36:54  Acquired tunnel connection to device.
+22:36:54  Enabling developer disk image services.
+22:36:54  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · len-256 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-256","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1185,"resident_mb":29.8,"footprint_mb":8.9,"peak_resident_mb":29.8,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-256","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1185,"resident_mb":38.5,"footprint_mb":16.0,"peak_resident_mb":38.5,"peak_footprint_mb":16.6,"elapsed_ms":31.4,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-256","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":1185,"resident_mb":40.1,"footprint_mb":16.2,"peak_resident_mb":40.1,"peak_footprint_mb":16.2,"elapsed_ms":36.2,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-256","stage":"latency_cold","detail":"1 par; seq=256","free_disk_mb":1185,"resident_mb":208.5,"footprint_mb":16.3,"peak_resident_mb":208.5,"peak_footprint_mb":20.2,"elapsed_ms":210.5,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-256","stage":"latency_warm","detail":"9 pares; seq=256; ambos modelos vivos","free_disk_mb":1185,"resident_mb":208.5,"footprint_mb":16.3,"peak_resident_mb":208.5,"peak_footprint_mb":20.2,"elapsed_ms":288.9,"predictions":9,"median_ms":31.6,"mean_ms":32.1,"min_ms":31.4,"max_ms":33.1}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_dynamic512 / len-384 ----
+22:36:58  Acquired tunnel connection to device.
+22:36:58  Enabling developer disk image services.
+22:36:58  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · len-384 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-384","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1184,"resident_mb":29.7,"footprint_mb":8.8,"peak_resident_mb":29.7,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-384","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1184,"resident_mb":38.5,"footprint_mb":15.9,"peak_resident_mb":38.5,"peak_footprint_mb":16.5,"elapsed_ms":41.9,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-384","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":1184,"resident_mb":40.1,"footprint_mb":16.2,"peak_resident_mb":40.1,"peak_footprint_mb":16.2,"elapsed_ms":36.7,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-384","stage":"latency_cold","detail":"1 par; seq=384","free_disk_mb":1184,"resident_mb":213.4,"footprint_mb":16.3,"peak_resident_mb":213.4,"peak_footprint_mb":24.4,"elapsed_ms":230.6,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-384","stage":"latency_warm","detail":"9 pares; seq=384; ambos modelos vivos","free_disk_mb":1184,"resident_mb":213.4,"footprint_mb":16.3,"peak_resident_mb":213.4,"peak_footprint_mb":24.4,"elapsed_ms":436.8,"predictions":9,"median_ms":48.1,"mean_ms":48.5,"min_ms":47.8,"max_ms":51.3}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_dynamic512 / len-512 ----
+22:37:01  Acquired tunnel connection to device.
+22:37:01  Enabling developer disk image services.
+22:37:01  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_dynamic512 · len-512 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-512","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1183,"resident_mb":29.7,"footprint_mb":8.9,"peak_resident_mb":29.7,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-512","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1183,"resident_mb":38.5,"footprint_mb":16.0,"peak_resident_mb":38.5,"peak_footprint_mb":16.2,"elapsed_ms":29.5,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-512","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":1183,"resident_mb":40.1,"footprint_mb":16.2,"peak_resident_mb":40.1,"peak_footprint_mb":16.3,"elapsed_ms":24.4,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-512","stage":"latency_cold","detail":"1 par; seq=512","free_disk_mb":1183,"resident_mb":220.0,"footprint_mb":16.3,"peak_resident_mb":220.0,"peak_footprint_mb":30.3,"elapsed_ms":82.5,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_dynamic512","scenario":"len-512","stage":"latency_warm","detail":"9 pares; seq=512; ambos modelos vivos","free_disk_mb":1183,"resident_mb":220.1,"footprint_mb":16.3,"peak_resident_mb":220.1,"peak_footprint_mb":30.3,"elapsed_ms":620.6,"predictions":9,"median_ms":69.4,"mean_ms":68.9,"min_ms":67.1,"max_ms":71.1}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+===== BUILD bertimbau_base_fixed256 =====
+    /usr/bin/touch -c /tmp/spike09-architecture-gate/dd-fixed256/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+** BUILD SUCCEEDED **
+
+APPSIZE bertimbau_base_fixed256 219 MB
+• launchServicesIdentifier: unknown
+• databaseUUID: BACDB21F-844D-4DAA-99AB-814ACA9143D2
+• databaseSequenceNumber: 15256
+• options: 
+---- bertimbau_base_fixed256 / preflight ----
+22:37:28  Acquired tunnel connection to device.
+22:37:28  Enabling developer disk image services.
+22:37:28  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed256 · preflight ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"preflight","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1566,"resident_mb":34.6,"footprint_mb":8.9,"peak_resident_mb":34.6,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed256 / parity ----
+22:37:31  Acquired tunnel connection to device.
+22:37:31  Enabling developer disk image services.
+22:37:31  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed256 · parity ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"parity","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1551,"resident_mb":29.6,"footprint_mb":8.7,"peak_resident_mb":29.6,"peak_footprint_mb":8.7,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"parity","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1551,"resident_mb":47.2,"footprint_mb":24.2,"peak_resident_mb":383.3,"peak_footprint_mb":24.5,"elapsed_ms":870.9,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"parity","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=256","free_disk_mb":1551,"resident_mb":52.1,"footprint_mb":29.1,"peak_resident_mb":363.8,"peak_footprint_mb":30.3,"elapsed_ms":876.6,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+PARITYLINE {"variant":"bertimbau_base_fixed256","kind":"entailment","sequence_length":256,"expected":[0.051147,0.189331,-0.162598],"actual":[0.051147,0.189331,-0.162598],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_fixed256","kind":"contradiction","sequence_length":256,"expected":[0.089050,0.195557,-0.217896],"actual":[0.089050,0.195557,-0.217896],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_fixed256","kind":"neutral","sequence_length":256,"expected":[0.089905,-0.125610,0.009163],"actual":[0.089905,-0.125610,0.009163],"cosine":1.000000,"expected_argmax":0,"actual_argmax":0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed256 / real ----
+22:37:35  Acquired tunnel connection to device.
+22:37:35  Enabling developer disk image services.
+22:37:35  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed256 · real ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"real","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1119,"resident_mb":29.9,"footprint_mb":9.0,"peak_resident_mb":29.9,"peak_footprint_mb":9.0,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"real","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1119,"resident_mb":38.6,"footprint_mb":16.1,"peak_resident_mb":38.6,"peak_footprint_mb":16.2,"elapsed_ms":31.7,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"real","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=256","free_disk_mb":1119,"resident_mb":39.0,"footprint_mb":16.3,"peak_resident_mb":39.2,"peak_footprint_mb":16.6,"elapsed_ms":25.8,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"real","stage":"embeddings_180","detail":"carga real","free_disk_mb":1119,"resident_mb":115.8,"footprint_mb":16.6,"peak_resident_mb":115.8,"peak_footprint_mb":18.4,"elapsed_ms":734.0,"predictions":180,"median_ms":4.1,"mean_ms":4.0,"min_ms":1.6,"max_ms":8.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"real","stage":"nli_15","detail":"carga real; comprimentos=256,256,256,256,256,256,256,256,256,256,256,256,256,256,256","free_disk_mb":1119,"resident_mb":294.1,"footprint_mb":16.8,"peak_resident_mb":294.1,"peak_footprint_mb":19.9,"elapsed_ms":333.0,"predictions":15,"median_ms":21.6,"mean_ms":22.1,"min_ms":20.9,"max_ms":27.7}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"real","stage":"second_verification","detail":"mesma carga com modelos quentes","free_disk_mb":1119,"resident_mb":294.1,"footprint_mb":14.8,"peak_resident_mb":294.2,"peak_footprint_mb":19.9,"elapsed_ms":1076.0,"predictions":195,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed256 / len-256 ----
+22:37:40  Acquired tunnel connection to device.
+22:37:40  Enabling developer disk image services.
+22:37:40  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed256 · len-256 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"len-256","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1132,"resident_mb":29.6,"footprint_mb":8.7,"peak_resident_mb":29.6,"peak_footprint_mb":8.7,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"len-256","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1132,"resident_mb":38.4,"footprint_mb":15.8,"peak_resident_mb":38.4,"peak_footprint_mb":16.4,"elapsed_ms":31.1,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"len-256","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=256","free_disk_mb":1132,"resident_mb":38.7,"footprint_mb":16.0,"peak_resident_mb":38.8,"peak_footprint_mb":16.2,"elapsed_ms":26.2,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"len-256","stage":"latency_cold","detail":"1 par; seq=256","free_disk_mb":1132,"resident_mb":207.8,"footprint_mb":16.2,"peak_resident_mb":207.8,"peak_footprint_mb":19.4,"elapsed_ms":29.7,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed256","scenario":"len-256","stage":"latency_warm","detail":"9 pares; seq=256; ambos modelos vivos","free_disk_mb":1132,"resident_mb":207.9,"footprint_mb":16.2,"peak_resident_mb":207.9,"peak_footprint_mb":19.4,"elapsed_ms":185.0,"predictions":9,"median_ms":20.7,"mean_ms":20.6,"min_ms":19.4,"max_ms":21.4}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+===== BUILD bertimbau_base_fixed384 =====
+    /usr/bin/touch -c /tmp/spike09-architecture-gate/dd-fixed384/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+** BUILD SUCCEEDED **
+
+APPSIZE bertimbau_base_fixed384 219 MB
+• launchServicesIdentifier: unknown
+• databaseUUID: BACDB21F-844D-4DAA-99AB-814ACA9143D2
+• databaseSequenceNumber: 15264
+• options: 
+---- bertimbau_base_fixed384 / preflight ----
+22:38:06  Acquired tunnel connection to device.
+22:38:06  Enabling developer disk image services.
+22:38:06  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed384 · preflight ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"preflight","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1580,"resident_mb":34.7,"footprint_mb":9.0,"peak_resident_mb":34.7,"peak_footprint_mb":9.0,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed384 / parity ----
+22:38:09  Acquired tunnel connection to device.
+22:38:09  Enabling developer disk image services.
+22:38:09  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed384 · parity ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"parity","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1560,"resident_mb":29.7,"footprint_mb":8.9,"peak_resident_mb":29.7,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"parity","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1560,"resident_mb":47.4,"footprint_mb":24.4,"peak_resident_mb":383.4,"peak_footprint_mb":25.6,"elapsed_ms":1021.5,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"parity","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=384","free_disk_mb":1560,"resident_mb":52.2,"footprint_mb":29.3,"peak_resident_mb":364.2,"peak_footprint_mb":30.5,"elapsed_ms":745.5,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+PARITYLINE {"variant":"bertimbau_base_fixed384","kind":"entailment","sequence_length":384,"expected":[0.051147,0.189331,-0.162598],"actual":[0.051147,0.189331,-0.162598],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_fixed384","kind":"contradiction","sequence_length":384,"expected":[0.089050,0.195557,-0.217896],"actual":[0.089050,0.195557,-0.217896],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_fixed384","kind":"neutral","sequence_length":384,"expected":[0.089905,-0.125610,0.009163],"actual":[0.089905,-0.125610,0.009163],"cosine":1.000000,"expected_argmax":0,"actual_argmax":0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed384 / real ----
+22:38:13  Acquired tunnel connection to device.
+22:38:13  Enabling developer disk image services.
+22:38:13  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed384 · real ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"real","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1121,"resident_mb":29.7,"footprint_mb":8.8,"peak_resident_mb":29.7,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"real","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1121,"resident_mb":38.5,"footprint_mb":15.9,"peak_resident_mb":38.5,"peak_footprint_mb":16.1,"elapsed_ms":29.1,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"real","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=384","free_disk_mb":1121,"resident_mb":38.8,"footprint_mb":16.1,"peak_resident_mb":38.8,"peak_footprint_mb":16.2,"elapsed_ms":24.3,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"real","stage":"embeddings_180","detail":"carga real","free_disk_mb":1121,"resident_mb":115.7,"footprint_mb":16.4,"peak_resident_mb":115.7,"peak_footprint_mb":18.2,"elapsed_ms":726.8,"predictions":180,"median_ms":3.9,"mean_ms":4.0,"min_ms":1.6,"max_ms":7.9}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"real","stage":"nli_15","detail":"carga real; comprimentos=384,384,384,384,384,384,384,384,384,384,384,384,384,384,384","free_disk_mb":1121,"resident_mb":297.0,"footprint_mb":16.6,"peak_resident_mb":297.0,"peak_footprint_mb":22.5,"elapsed_ms":477.9,"predictions":15,"median_ms":31.5,"mean_ms":31.7,"min_ms":30.4,"max_ms":37.2}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"real","stage":"second_verification","detail":"mesma carga com modelos quentes","free_disk_mb":1121,"resident_mb":297.0,"footprint_mb":14.5,"peak_resident_mb":297.0,"peak_footprint_mb":22.5,"elapsed_ms":1200.3,"predictions":195,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed384 / len-384 ----
+22:38:18  Acquired tunnel connection to device.
+22:38:18  Enabling developer disk image services.
+22:38:18  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed384 · len-384 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"len-384","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1117,"resident_mb":29.8,"footprint_mb":9.0,"peak_resident_mb":29.8,"peak_footprint_mb":9.0,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"len-384","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1117,"resident_mb":38.6,"footprint_mb":16.1,"peak_resident_mb":38.6,"peak_footprint_mb":16.3,"elapsed_ms":40.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"len-384","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=384","free_disk_mb":1117,"resident_mb":38.9,"footprint_mb":16.3,"peak_resident_mb":39.5,"peak_footprint_mb":17.0,"elapsed_ms":26.3,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"len-384","stage":"latency_cold","detail":"1 par; seq=384","free_disk_mb":1117,"resident_mb":211.4,"footprint_mb":16.5,"peak_resident_mb":211.4,"peak_footprint_mb":22.4,"elapsed_ms":220.5,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed384","scenario":"len-384","stage":"latency_warm","detail":"9 pares; seq=384; ambos modelos vivos","free_disk_mb":1117,"resident_mb":211.4,"footprint_mb":16.5,"peak_resident_mb":211.4,"peak_footprint_mb":22.4,"elapsed_ms":285.3,"predictions":9,"median_ms":31.7,"mean_ms":31.7,"min_ms":30.2,"max_ms":33.3}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+===== BUILD bertimbau_base_fixed512 =====
+    /usr/bin/touch -c /tmp/spike09-architecture-gate/dd-fixed512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+** BUILD SUCCEEDED **
+
+APPSIZE bertimbau_base_fixed512 219 MB
+• launchServicesIdentifier: unknown
+• databaseUUID: BACDB21F-844D-4DAA-99AB-814ACA9143D2
+• databaseSequenceNumber: 15272
+• options: 
+---- bertimbau_base_fixed512 / preflight ----
+22:38:43  Acquired tunnel connection to device.
+22:38:43  Enabling developer disk image services.
+22:38:43  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed512 · preflight ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"preflight","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1563,"resident_mb":34.6,"footprint_mb":8.9,"peak_resident_mb":34.6,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed512 / parity ----
+22:38:45  Acquired tunnel connection to device.
+22:38:45  Enabling developer disk image services.
+22:38:45  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed512 · parity ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"parity","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1555,"resident_mb":29.8,"footprint_mb":8.9,"peak_resident_mb":29.8,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"parity","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1555,"resident_mb":47.4,"footprint_mb":24.5,"peak_resident_mb":383.5,"peak_footprint_mb":25.5,"elapsed_ms":808.1,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"parity","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=512","free_disk_mb":1555,"resident_mb":52.3,"footprint_mb":29.3,"peak_resident_mb":364.5,"peak_footprint_mb":30.5,"elapsed_ms":490.8,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+PARITYLINE {"variant":"bertimbau_base_fixed512","kind":"entailment","sequence_length":512,"expected":[0.051147,0.189331,-0.162598],"actual":[0.051147,0.189331,-0.162598],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_fixed512","kind":"contradiction","sequence_length":512,"expected":[0.089050,0.195557,-0.217896],"actual":[0.089050,0.195557,-0.217896],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+PARITYLINE {"variant":"bertimbau_base_fixed512","kind":"neutral","sequence_length":512,"expected":[0.089905,-0.125610,0.009163],"actual":[0.089905,-0.125610,0.009163],"cosine":1.000000,"expected_argmax":0,"actual_argmax":0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed512 / real ----
+22:38:49  Acquired tunnel connection to device.
+22:38:49  Enabling developer disk image services.
+22:38:49  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed512 · real ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"real","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1119,"resident_mb":29.7,"footprint_mb":8.8,"peak_resident_mb":29.7,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"real","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1119,"resident_mb":38.6,"footprint_mb":16.0,"peak_resident_mb":38.6,"peak_footprint_mb":16.6,"elapsed_ms":38.5,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"real","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=512","free_disk_mb":1119,"resident_mb":38.9,"footprint_mb":16.2,"peak_resident_mb":38.9,"peak_footprint_mb":16.3,"elapsed_ms":26.5,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"real","stage":"embeddings_180","detail":"carga real","free_disk_mb":1119,"resident_mb":115.9,"footprint_mb":16.6,"peak_resident_mb":115.9,"peak_footprint_mb":18.4,"elapsed_ms":923.5,"predictions":180,"median_ms":4.7,"mean_ms":5.1,"min_ms":1.7,"max_ms":48.8}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"real","stage":"nli_15","detail":"carga real; comprimentos=512,512,512,512,512,512,512,512,512,512,512,512,512,512,512","free_disk_mb":1119,"resident_mb":300.9,"footprint_mb":16.8,"peak_resident_mb":300.9,"peak_footprint_mb":26.3,"elapsed_ms":866.9,"predictions":15,"median_ms":45.6,"mean_ms":57.6,"min_ms":44.5,"max_ms":223.2}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"real","stage":"second_verification","detail":"mesma carga com modelos quentes","free_disk_mb":1119,"resident_mb":300.9,"footprint_mb":14.7,"peak_resident_mb":301.0,"peak_footprint_mb":26.3,"elapsed_ms":1424.4,"predictions":195,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_fixed512 / len-512 ----
+22:38:55  Acquired tunnel connection to device.
+22:38:55  Enabling developer disk image services.
+22:38:55  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_fixed512 · len-512 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"len-512","stage":"baseline","detail":"processo sem modelos","free_disk_mb":1117,"resident_mb":29.7,"footprint_mb":8.9,"peak_resident_mb":29.7,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"len-512","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":1117,"resident_mb":38.6,"footprint_mb":16.1,"peak_resident_mb":38.6,"peak_footprint_mb":16.7,"elapsed_ms":31.6,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"len-512","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=512","free_disk_mb":1117,"resident_mb":38.9,"footprint_mb":16.3,"peak_resident_mb":38.9,"peak_footprint_mb":16.3,"elapsed_ms":26.2,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"len-512","stage":"latency_cold","detail":"1 par; seq=512","free_disk_mb":1117,"resident_mb":215.8,"footprint_mb":16.4,"peak_resident_mb":215.8,"peak_footprint_mb":26.0,"elapsed_ms":51.8,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_fixed512","scenario":"len-512","stage":"latency_warm","detail":"9 pares; seq=512; ambos modelos vivos","free_disk_mb":1117,"resident_mb":216.0,"footprint_mb":16.5,"peak_resident_mb":216.0,"peak_footprint_mb":26.0,"elapsed_ms":408.5,"predictions":9,"median_ms":45.1,"mean_ms":45.4,"min_ms":44.0,"max_ms":47.4}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.

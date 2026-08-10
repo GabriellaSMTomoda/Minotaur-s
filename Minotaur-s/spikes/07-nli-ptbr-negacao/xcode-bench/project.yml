@@ -1,0 +1,23 @@
+# GERADO POR run_gate_device.sh — não editar à mão.
+# Um modelo por projeto: os três .mlpackage juntos não cabem no device.
+name: CoreMLBench7
+options:
+  bundleIdPrefix: com.spike.coremlbench7
+targets:
+  CoreMLBench7:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Sources
+      - path: ../build/manifest.json
+        buildPhase: resources
+      - path: ../build/plue_xlmr_int8.mlpackage
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.spike.coremlbench7
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"

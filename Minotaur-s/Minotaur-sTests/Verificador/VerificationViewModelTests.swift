@@ -107,6 +107,26 @@ struct VerificationViewModelTests {
         #expect(viewModel.claimText == Self.claim)
     }
 
+    @Test("Editar a entrada após o resultado permite verificar outra notícia na mesma tela")
+    func editingAfterResultStartsANewVerification() async throws {
+        let search = MockSearch(returning: [item("https://g1.globo.com/economia/desemprego")])
+        let viewModel = makeViewModel(search: search)
+        viewModel.claimText = Self.claim
+
+        viewModel.verify()
+        try await waitUntil { viewModel.result != nil }
+        viewModel.dismissResult()
+
+        let secondClaim = "A vacinação contra a gripe reduz o risco de infarto."
+        viewModel.claimText = secondClaim
+        viewModel.verify()
+        try await waitUntil { viewModel.result?.claim == secondClaim }
+
+        #expect(search.callCount == 2)
+        #expect(viewModel.result?.claim == secondClaim)
+        #expect(viewModel.claimText == secondClaim)
+    }
+
     // MARK: - CA-09: cancelamento
 
     @Test("CA-09: cancelar volta à tela inicial com o texto preservado")
@@ -237,15 +257,20 @@ struct VerificationViewModelTests {
         )
     }
 
-    /// Espera uma condição, com teto de tempo para o teste falhar em vez de travar a suíte.
+    /// Espera uma condição, com teto de 2.500 ciclos para falhar em vez de travar a suíte.
+    ///
+    /// Contar ciclos evita falso timeout quando a preparação paralela dos modelos Core ML
+    /// suspende esta task por vários segundos: relógio de parede avançaria sem o teste ter tido
+    /// oportunidade de observar a condição. Em execução normal, 2.500 × 2 ms mantêm o teto de
+    /// aproximadamente cinco segundos.
     private func waitUntil(_ condition: () -> Bool) async throws {
         struct WaitTimeout: Error {}
 
-        let deadline = Date().addingTimeInterval(5)
-        while !condition() {
-            guard Date() < deadline else { throw WaitTimeout() }
+        for _ in 0..<2_500 {
+            if condition() { return }
             try await Task.sleep(nanoseconds: 2_000_000)
         }
+        throw WaitTimeout()
     }
 }
 

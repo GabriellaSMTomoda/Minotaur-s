@@ -183,7 +183,7 @@ struct MLServicesTests {
         // Esta é a asserção que importa, e substitui um "esperado: entailment" escrito por
         // mim: comparar com o PyTorch mede se o caminho Swift (tokenização + Core ML +
         // softmax) está correto. Escrever o rótulo que um humano daria mediria a acurácia do
-        // modelo — que é de ~90% em PT-BR por decisão consciente (DT-18), não um bug do app.
+        // modelo — medida separadamente no conjunto adversarial do Spike 9, não um bug do app.
         let service = try NLIService.loadFromBundle()
 
         for sample in try NLIReferenceFixture.load() {
@@ -215,6 +215,66 @@ struct MLServicesTests {
 
         #expect(prediction.label == .contradiction)
         #expect(prediction.confidence > NLIService.minimumConfidence)
+    }
+
+    @Test("NLI não confirma os seis casos críticos de Terra plana e vacina")
+    func rejectsMaterializedHarmCases() throws {
+        let service = try NLIService.loadFromBundle()
+        let cases: [(premise: String, hypothesis: String, acceptsNeutral: Bool)] = [
+            (
+                "Algumas teorias da conspiração que afirmam que a Terra é plana continuam "
+                    + "se espalhando. Estas são algumas maneiras simples de comprovar que a "
+                    + "Terra é redonda e rebater essas ideias dos terraplanistas.",
+                "A Terra é plana.",
+                false
+            ),
+            (
+                "Pode parecer mentira, mas em pleno século 21 ainda é necessário insistir que "
+                    + "a Terra é redonda, algo que se sabe há mais de 2 mil anos. Algumas "
+                    + "teorias da conspiração que afirmam que a Terra é plana continuam se "
+                    + "espalhando.",
+                "A Terra é plana.",
+                false
+            ),
+            (
+                "Se a Terra fosse plana e você olhasse para longe, veria a mesma paisagem se "
+                    + "estivesse no chão ou na copa da árvore.",
+                "A Terra é plana.",
+                true
+            ),
+            (
+                "A vacinação contra a gripe pode reduzir significativamente o risco de infarto "
+                    + "e AVC (acidente vascular cerebral), explicou o Dr. Roberto Kalil.",
+                "Vacina da gripe causa infarto.",
+                false
+            ),
+            (
+                "\"A vacina para a gripe se torna extremamente importante ao reduzir de 20% a "
+                    + "30% a incidência de infarto e acidente vascular cerebral\", afirmou Dr. "
+                    + "Kalil.",
+                "Vacina da gripe causa infarto.",
+                false
+            ),
+            (
+                "A vacinação contra o vírus Influenza tem como principal objetivo proteger a "
+                    + "população da gripe. No entanto, há benefícios secundários: a proteção "
+                    + "contra infartos e acidentes vasculares cerebrais (AVC).",
+                "Vacina da gripe causa infarto.",
+                false
+            ),
+        ]
+
+        for sample in cases {
+            let prediction = try service.predict(
+                premise: sample.premise,
+                hypothesis: sample.hypothesis
+            )
+            if sample.acceptsNeutral {
+                #expect(prediction.label != .entailment)
+            } else {
+                #expect(prediction.label == .contradiction)
+            }
+        }
     }
 
     @Test("Rótulo abaixo de 0,50 de confiança é rebaixado para neutral (RF-07.4)")

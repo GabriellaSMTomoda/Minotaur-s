@@ -1,0 +1,25 @@
+name: ArchitectureGate9
+options:
+  bundleIdPrefix: com.spike.architecturegate9
+targets:
+  ArchitectureGate9:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Sources
+      - path: ../../08-gate-ram/build/fixture.json
+        buildPhase: resources
+      - path: ../build/device_fixture.json
+        buildPhase: resources
+      - path: ../build/trained_device_fixture.json
+        buildPhase: resources
+      - path: ../../02-coreml-latencia/build/Embeddings_int8.mlpackage
+      - path: ../build/NLI_Selected.mlpackage
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.spike.architecturegate9
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"

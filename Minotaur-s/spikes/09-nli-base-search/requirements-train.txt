@@ -1,0 +1,3 @@
+# Versions already validated by the local disposable spike environment.
+torch==2.7.0
+transformers==4.46.3

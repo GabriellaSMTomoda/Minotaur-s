@@ -45,6 +45,7 @@ struct VerificationResultView: View {
         .toolbarBackground(Color("azul"), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarRole(.navigationStack)
         .sheet(item: $openArticle) { article in
             SafariView(url: article.url)
                 .ignoresSafeArea()
@@ -181,21 +182,20 @@ struct VerificationResultView: View {
                 .font(.caption2)
                 .foregroundStyle(.secondary)
 
-            // Link para o artigo original (RF-09.2 / RF-09.4). Presente sempre, inclusive
-            // quando o card inteiro já é tocável: a CA-10 pede link explícito junto do trecho.
-            Label("Ler no site do veículo", systemImage: "safari")
-                .font(.footnote)
-                .foregroundStyle(Color("azul"))
+            // Link explícito e semântico para o artigo original (RF-09.2 / RF-09.4).
+            Button {
+                openArticle = ArticleLink(source: source)
+            } label: {
+                Label("Ler no site do veículo", systemImage: "safari")
+                    .font(.subheadline.weight(.semibold))
+            }
+            .controlSize(.regular)
+            .tint(.blue)
+            .accessibilityHint("Abre o artigo original de \(source.domain).")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
-        .contentShape(Rectangle())
-        // RF-09.3: tocar na fonte abre o artigo original no SFSafariViewController.
-        .onTapGesture { openArticle = ArticleLink(source: source) }
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isButton)
-        .accessibilityHint("Abre o artigo original de \(source.domain).")
     }
 
     private func labelBadge(_ label: NLILabel) -> some View {

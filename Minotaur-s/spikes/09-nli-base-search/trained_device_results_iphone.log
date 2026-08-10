@@ -1,0 +1,282 @@
+===== BUILD bertimbau_base_plue_dynamic512 =====
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench/ArchitectureGate9.xcodeproj -scheme ArchitectureGate9 -sdk iphoneos -configuration Release -destination platform=iOS,id=EFEE75FC-18B6-5948-BC37-9F9A6AA0C0F8 -derivedDataPath /private/tmp/spike09-trained-gate/dd-dynamic512 DEVELOPMENT_TEAM=2DK23BZ7KB CODE_SIGN_STYLE=Automatic -allowProvisioningUpdates build
+
+Build settings from command line:
+    CODE_SIGN_STYLE = Automatic
+    DEVELOPMENT_TEAM = 2DK23BZ7KB
+    SDKROOT = iphoneos26.5
+
+2026-08-05 08:44:15.240 xcodebuild[26184:5804566] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'ArchitectureGate9' in project 'ArchitectureGate9' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /usr/bin/what -q /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/coremlc
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/coremlc generate /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/DerivedSources/CoreMLGenerated/Embeddings_int8 --dry-run yes --deployment-target 17.0 --sdkroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk --platform ios --output-partial-info-plist /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Embeddings_int8-CoreMLPartialInfo.plist --container bundle-resources --language Swift --swift-version 5.0
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/coremlc generate /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/NLI_Selected.mlpackage /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/DerivedSources/CoreMLGenerated/NLI_Selected --dry-run yes --deployment-target 17.0 --sdkroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk --platform ios --output-partial-info-plist /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/NLI_Selected-CoreMLPartialInfo.plist --container bundle-resources --language Swift --swift-version 5.0
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: e2b3240ae7164e4f8a65d39fbc7c667a
+Build description path: /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/XCBuildData/e2b3240ae7164e4f8a65d39fbc7c667a.xcbuilddata
+CreateBuildDirectory /tmp/spike09-trained-gate/dd-dynamic512/Build/Products
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench/ArchitectureGate9.xcodeproj
+    builtin-create-build-directory /tmp/spike09-trained-gate/dd-dynamic512/Build/Products
+
+CreateBuildDirectory /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench/ArchitectureGate9.xcodeproj
+    builtin-create-build-directory /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos
+
+MkDir /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /bin/mkdir -p /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+ProcessProductPackaging /Users/henriquelacerdasilveira/Library/Developer/Xcode/UserData/Provisioning\ Profiles/5f66a41e-a70c-4e92-9b25-d35b2ba58116.mobileprovision /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/embedded.mobileprovision (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-productPackagingUtility /Users/henriquelacerdasilveira/Library/Developer/Xcode/UserData/Provisioning\ Profiles/5f66a41e-a70c-4e92-9b25-d35b2ba58116.mobileprovision -o /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/embedded.mobileprovision
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk /tmp/spike09-trained-gate/dd-dynamic512/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench/ArchitectureGate9.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -o /tmp/spike09-trained-gate/dd-dynamic512/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache
+
+Ld /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ArchitectureGate9 normal (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -Os -L/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/EagerLinkingTBDs/Release-iphoneos -L/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos -F/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/EagerLinkingTBDs/Release-iphoneos -F/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos -filelist /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9_lto.o -Xlinker -dependency_info -Xlinker /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.swiftmodule @/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9-linker-args.resp -Xlinker -no_adhoc_codesign -o /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ArchitectureGate9
+
+CoreMLModelCompile /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /usr/bin/sandbox-exec -D SCRIPT_OUTPUT_FILE_0\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Embeddings_int8.mlmodelc -D SCRIPT_OUTPUT_FILE_1\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Embeddings_int8-CoreMLPartialInfo.plist -D SCRIPT_INPUT_FILE_0\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage -D SCRIPT_INPUT_FILE_1\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage -D SCRIPT_INPUT_ANCESTOR_0\=/ -D SCRIPT_INPUT_ANCESTOR_1\=/Users -D SCRIPT_INPUT_ANCESTOR_2\=/Users/henriquelacerdasilveira -D SCRIPT_INPUT_ANCESTOR_3\=/Users/henriquelacerdasilveira/Documents -D SCRIPT_INPUT_ANCESTOR_4\=/Users/henriquelacerdasilveira/Documents/Academy -D SCRIPT_INPUT_ANCESTOR_5\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s -D SCRIPT_INPUT_ANCESTOR_6\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s -D SCRIPT_INPUT_ANCESTOR_7\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes -D SCRIPT_INPUT_ANCESTOR_8\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/02-coreml-latencia -D SCRIPT_INPUT_ANCESTOR_9\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/02-coreml-latencia/build -D SCRIPT_OUTPUT_ANCESTOR_0\=/ -D SCRIPT_OUTPUT_ANCESTOR_1\=/tmp -D SCRIPT_OUTPUT_ANCESTOR_2\=/tmp/spike09-trained-gate -D SCRIPT_OUTPUT_ANCESTOR_3\=/tmp/spike09-trained-gate/dd-dynamic512 -D SCRIPT_OUTPUT_ANCESTOR_4\=/tmp/spike09-trained-gate/dd-dynamic512/Build -D SCRIPT_OUTPUT_ANCESTOR_5\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex -D SCRIPT_OUTPUT_ANCESTOR_6\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build -D SCRIPT_OUTPUT_ANCESTOR_7\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos -D SCRIPT_OUTPUT_ANCESTOR_8\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build -D SCRIPT_OUTPUT_ANCESTOR_9\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products -D SCRIPT_OUTPUT_ANCESTOR_10\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos -D SCRIPT_OUTPUT_ANCESTOR_11\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app -D SRCROOT\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D PROJECT_DIR\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D OBJROOT\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex -D SYMROOT\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products -D DSTROOT\=/tmp/ArchitectureGate9.dst -D SHARED_PRECOMPS_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/PrecompiledHeaders -D CACHE_ROOT\=/var/folders/t9/kv0v9q2j19jgqv4mks30t1dr0000gp/C/com.apple.DeveloperTools/26.6-17F113/Xcode -D CONFIGURATION_BUILD_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos -D CONFIGURATION_TEMP_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos -D LOCROOT\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D LOCSYMROOT\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D INDEX_PRECOMPS_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Index.noindex/PrecompiledHeaders -D INDEX_DATA_STORE_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Index.noindex/DataStore -D TEMP_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build -D TARGET_TEMP_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build -D DERIVED_FILE_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/DerivedSources -f /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/03c9b7a0699e0a47abe55fb3115e2ad6.sb /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/coremlc compile /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/02-coreml-latencia/build/Embeddings_int8.mlpackage /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ --deployment-target 17.0 --sdkroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk --platform ios --output-partial-info-plist /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Embeddings_int8-CoreMLPartialInfo.plist --container bundle-resources
+/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Embeddings_int8.mlmodelc/coremldata.bin
+
+CoreMLModelCompile /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/NLI_Selected.mlpackage (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /usr/bin/sandbox-exec -D SCRIPT_OUTPUT_FILE_0\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/NLI_Selected.mlmodelc -D SCRIPT_OUTPUT_FILE_1\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/NLI_Selected-CoreMLPartialInfo.plist -D SCRIPT_INPUT_FILE_0\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/NLI_Selected.mlpackage -D SCRIPT_INPUT_FILE_1\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/NLI_Selected.mlpackage -D SCRIPT_INPUT_ANCESTOR_0\=/ -D SCRIPT_INPUT_ANCESTOR_1\=/Users -D SCRIPT_INPUT_ANCESTOR_2\=/Users/henriquelacerdasilveira -D SCRIPT_INPUT_ANCESTOR_3\=/Users/henriquelacerdasilveira/Documents -D SCRIPT_INPUT_ANCESTOR_4\=/Users/henriquelacerdasilveira/Documents/Academy -D SCRIPT_INPUT_ANCESTOR_5\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s -D SCRIPT_INPUT_ANCESTOR_6\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s -D SCRIPT_INPUT_ANCESTOR_7\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes -D SCRIPT_INPUT_ANCESTOR_8\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search -D SCRIPT_INPUT_ANCESTOR_9\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build -D SCRIPT_OUTPUT_ANCESTOR_0\=/ -D SCRIPT_OUTPUT_ANCESTOR_1\=/tmp -D SCRIPT_OUTPUT_ANCESTOR_2\=/tmp/spike09-trained-gate -D SCRIPT_OUTPUT_ANCESTOR_3\=/tmp/spike09-trained-gate/dd-dynamic512 -D SCRIPT_OUTPUT_ANCESTOR_4\=/tmp/spike09-trained-gate/dd-dynamic512/Build -D SCRIPT_OUTPUT_ANCESTOR_5\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex -D SCRIPT_OUTPUT_ANCESTOR_6\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build -D SCRIPT_OUTPUT_ANCESTOR_7\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos -D SCRIPT_OUTPUT_ANCESTOR_8\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build -D SCRIPT_OUTPUT_ANCESTOR_9\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products -D SCRIPT_OUTPUT_ANCESTOR_10\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos -D SCRIPT_OUTPUT_ANCESTOR_11\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app -D SRCROOT\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D PROJECT_DIR\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D OBJROOT\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex -D SYMROOT\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products -D DSTROOT\=/tmp/ArchitectureGate9.dst -D SHARED_PRECOMPS_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/PrecompiledHeaders -D CACHE_ROOT\=/var/folders/t9/kv0v9q2j19jgqv4mks30t1dr0000gp/C/com.apple.DeveloperTools/26.6-17F113/Xcode -D CONFIGURATION_BUILD_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos -D CONFIGURATION_TEMP_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos -D LOCROOT\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D LOCSYMROOT\=/Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench -D INDEX_PRECOMPS_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Index.noindex/PrecompiledHeaders -D INDEX_DATA_STORE_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Index.noindex/DataStore -D TEMP_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build -D TARGET_TEMP_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build -D DERIVED_FILE_DIR\=/tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/DerivedSources -f /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/0cc9454c56df2ff0486c7bbe6d0c2ee7.sb /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/coremlc compile /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/NLI_Selected.mlpackage /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ --deployment-target 17.0 --sdkroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk --platform ios --output-partial-info-plist /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/NLI_Selected-CoreMLPartialInfo.plist --container bundle-resources
+/tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/NLI_Selected.mlmodelc/coremldata.bin
+
+Copy /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/arm64-apple-ios.abi.json /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.abi.json (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.abi.json /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/arm64-apple-ios.abi.json
+
+Copy /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/arm64-apple-ios.swiftmodule /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.swiftmodule (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.swiftmodule /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/arm64-apple-ios.swiftmodule
+
+CpResource /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/fixture.json /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/08-gate-ram/build/fixture.json (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/08-gate-ram/build/fixture.json /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+CpResource /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/trained_device_fixture.json /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/trained_device_fixture.json (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/trained_device_fixture.json /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+Copy /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/arm64-apple-ios.swiftdoc /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.swiftdoc (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.swiftdoc /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/arm64-apple-ios.swiftdoc
+
+CpResource /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/device_fixture.json /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/device_fixture.json (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/build/device_fixture.json /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+Copy /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.swiftsourceinfo (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.swiftsourceinfo /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo
+
+ExtractAppIntentsMetadata (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name ArchitectureGate9 --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk --xcode-version 17F113 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.spike.architecturegate9 --output /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app --target-triple arm64-apple-ios17.0 --binary-file /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ArchitectureGate9 --dependency-file /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9_dependency_info.dat --stringsdata-file /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.SwiftFileList --metadata-file-list /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/ArchitectureGate9.DependencyMetadataFileList --static-metadata-file-list /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/ArchitectureGate9.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Objects-normal/arm64/ArchitectureGate9.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-08-05 08:44:16.840 appintentsmetadataprocessor[26457:5805023] Starting appintentsmetadataprocessor export
+2026-08-05 08:44:16.841 appintentsmetadataprocessor[26457:5805023] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+ProcessInfoPlistFile /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Info.plist /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/empty-ArchitectureGate9.plist (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-infoPlistUtility /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/empty-ArchitectureGate9.plist -producttype com.apple.product-type.application -genpkginfo /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -additionalcontentfile /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/Embeddings_int8-CoreMLPartialInfo.plist -additionalcontentfile /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/NLI_Selected-CoreMLPartialInfo.plist -requiredArchitecture arm64 -o /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Info.plist
+
+AppIntentsSSUTraining (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Info.plist --temp-dir-path /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/ssu --bundle-id com.spike.architecturegate9 --product-path /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app --extracted-metadata-path /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Metadata.appintents --metadata-file-list /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/ArchitectureGate9.DependencyMetadataFileList --source-file /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Info.plist --archive-ssu-assets
+2026-08-05 08:44:16.860 appintentsnltrainingprocessor[26458:5805028] Parsing options for appintentsnltrainingprocessor
+2026-08-05 08:44:16.860 appintentsnltrainingprocessor[26458:5805028] Starting AppIntents SSU YAML Generation
+2026-08-05 08:44:16.860 appintentsnltrainingprocessor[26458:5805028] No AppShortcuts found - Skipping.
+
+CopySwiftLibs /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-swiftStdLibTool --copy --verbose --sign A5B598BBD768F2C3E84A5795DE76A8E6719C21AD --scan-executable /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ArchitectureGate9 --scan-folder /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Frameworks --scan-folder /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/PlugIns --scan-folder /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/SystemExtensions --scan-folder /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Extensions --platform iphoneos --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+
+GenerateDSYMFile /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app.dSYM /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ArchitectureGate9 (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app/ArchitectureGate9 -o /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app.dSYM
+
+CodeSign /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    
+    Signing Identity:     "Apple Development: Henrique Silveira (LG3S5A3RK7)"
+    Provisioning Profile: "iOS Team Provisioning Profile: *"
+                          (5f66a41e-a70c-4e92-9b25-d35b2ba58116)
+    
+    /usr/bin/codesign --force --sign A5B598BBD768F2C3E84A5795DE76A8E6719C21AD --entitlements /tmp/spike09-trained-gate/dd-dynamic512/Build/Intermediates.noindex/ArchitectureGate9.build/Release-iphoneos/ArchitectureGate9.build/ArchitectureGate9.app.xcent --timestamp\=none --generate-entitlement-der /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+RegisterExecutionPolicyException /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-RegisterExecutionPolicyException /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+Validate /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    builtin-validationUtility /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app (in target 'ArchitectureGate9' from project 'ArchitectureGate9')
+    cd /Users/henriquelacerdasilveira/Documents/Academy/Minotaur-s/Minotaur-s/spikes/09-nli-base-search/xcode-bench
+    /usr/bin/touch -c /tmp/spike09-trained-gate/dd-dynamic512/Build/Products/Release-iphoneos/ArchitectureGate9.app
+
+** BUILD SUCCEEDED **
+
+APPSIZE bertimbau_base_plue_dynamic512 219 MB
+08:44:18  Acquired tunnel connection to device.
+08:44:18  Enabling developer disk image services.
+08:44:18  Acquired usage assertion.
+App installed:
+• bundleID: com.spike.architecturegate9
+• installationURL: file:///private/var/containers/Bundle/Application/7D9DECAD-5DED-4BDF-9946-67D3E3EF9830/ArchitectureGate9.app/
+• launchServicesIdentifier: unknown
+• databaseUUID: BACDB21F-844D-4DAA-99AB-814ACA9143D2
+• databaseSequenceNumber: 15404
+• options: 
+---- bertimbau_base_plue_dynamic512 / preflight ----
+08:44:33  Acquired tunnel connection to device.
+08:44:33  Enabling developer disk image services.
+08:44:33  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · preflight ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"preflight","stage":"baseline","detail":"processo sem modelos","free_disk_mb":2664,"resident_mb":34.7,"footprint_mb":8.8,"peak_resident_mb":34.7,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_plue_dynamic512 / parity ----
+08:44:36  Acquired tunnel connection to device.
+08:44:36  Enabling developer disk image services.
+08:44:36  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · parity ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"parity","stage":"baseline","detail":"processo sem modelos","free_disk_mb":2979,"resident_mb":29.9,"footprint_mb":8.9,"peak_resident_mb":29.9,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"parity","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":2979,"resident_mb":47.4,"footprint_mb":24.5,"peak_resident_mb":383.7,"peak_footprint_mb":25.6,"elapsed_ms":941.3,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"parity","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":2979,"resident_mb":49.2,"footprint_mb":25.0,"peak_resident_mb":360.1,"peak_footprint_mb":26.1,"elapsed_ms":767.3,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+PARITYLINE {"variant":"bertimbau_base_plue_dynamic512","kind":"entailment","sequence_length":13,"expected":[3.966797,-0.954102,-2.908203],"actual":[3.966797,-0.954102,-2.908203],"cosine":1.000000,"expected_argmax":0,"actual_argmax":0}
+PARITYLINE {"variant":"bertimbau_base_plue_dynamic512","kind":"contradiction","sequence_length":20,"expected":[-1.884766,-1.847656,3.300781],"actual":[-1.884766,-1.847656,3.300781],"cosine":1.000000,"expected_argmax":2,"actual_argmax":2}
+PARITYLINE {"variant":"bertimbau_base_plue_dynamic512","kind":"neutral","sequence_length":19,"expected":[-2.017578,2.619141,-0.265625],"actual":[-2.017578,2.619141,-0.265625],"cosine":1.000000,"expected_argmax":1,"actual_argmax":1}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_plue_dynamic512 / real ----
+08:44:40  Acquired tunnel connection to device.
+08:44:40  Enabling developer disk image services.
+08:44:40  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · real ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"real","stage":"baseline","detail":"processo sem modelos","free_disk_mb":2578,"resident_mb":29.8,"footprint_mb":8.9,"peak_resident_mb":29.8,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"real","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":2578,"resident_mb":38.6,"footprint_mb":16.0,"peak_resident_mb":38.6,"peak_footprint_mb":16.7,"elapsed_ms":33.8,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"real","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":2578,"resident_mb":40.2,"footprint_mb":16.3,"peak_resident_mb":40.2,"peak_footprint_mb":16.5,"elapsed_ms":25.8,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"real","stage":"embeddings_180","detail":"carga real","free_disk_mb":2578,"resident_mb":117.0,"footprint_mb":16.5,"peak_resident_mb":117.0,"peak_footprint_mb":18.3,"elapsed_ms":727.7,"predictions":180,"median_ms":4.0,"mean_ms":4.0,"min_ms":1.6,"max_ms":7.8}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"real","stage":"nli_15","detail":"carga real; comprimentos=143,140,147,137,136,152,143,145,135,229,235,241,212,167,138","free_disk_mb":2578,"resident_mb":294.3,"footprint_mb":16.5,"peak_resident_mb":294.3,"peak_footprint_mb":20.2,"elapsed_ms":361.5,"predictions":15,"median_ms":21.2,"mean_ms":24.0,"min_ms":20.5,"max_ms":31.8}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"real","stage":"second_verification","detail":"mesma carga com modelos quentes","free_disk_mb":2578,"resident_mb":294.3,"footprint_mb":14.6,"peak_resident_mb":294.3,"peak_footprint_mb":20.2,"elapsed_ms":1047.1,"predictions":195,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_plue_dynamic512 / len-77 ----
+08:44:45  Acquired tunnel connection to device.
+08:44:45  Enabling developer disk image services.
+08:44:45  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · len-77 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-77","stage":"baseline","detail":"processo sem modelos","free_disk_mb":3012,"resident_mb":29.8,"footprint_mb":8.9,"peak_resident_mb":29.8,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-77","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":3012,"resident_mb":47.4,"footprint_mb":24.4,"peak_resident_mb":383.5,"peak_footprint_mb":25.3,"elapsed_ms":624.7,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-77","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":3012,"resident_mb":49.2,"footprint_mb":24.9,"peak_resident_mb":360.1,"peak_footprint_mb":25.6,"elapsed_ms":490.9,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-77","stage":"latency_cold","detail":"1 par; seq=77","free_disk_mb":3012,"resident_mb":213.4,"footprint_mb":24.9,"peak_resident_mb":213.4,"peak_footprint_mb":26.1,"elapsed_ms":20.2,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-77","stage":"latency_warm","detail":"9 pares; seq=77; ambos modelos vivos","free_disk_mb":3012,"resident_mb":213.4,"footprint_mb":24.9,"peak_resident_mb":213.4,"peak_footprint_mb":26.1,"elapsed_ms":126.7,"predictions":9,"median_ms":14.1,"mean_ms":14.1,"min_ms":14.0,"max_ms":14.1}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_plue_dynamic512 / len-128 ----
+08:44:49  Acquired tunnel connection to device.
+08:44:49  Enabling developer disk image services.
+08:44:49  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · len-128 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-128","stage":"baseline","detail":"processo sem modelos","free_disk_mb":2580,"resident_mb":29.7,"footprint_mb":8.8,"peak_resident_mb":29.7,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-128","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":2580,"resident_mb":38.5,"footprint_mb":15.9,"peak_resident_mb":38.5,"peak_footprint_mb":16.5,"elapsed_ms":31.2,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-128","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":2580,"resident_mb":40.1,"footprint_mb":16.2,"peak_resident_mb":40.1,"peak_footprint_mb":16.4,"elapsed_ms":24.8,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-128","stage":"latency_cold","detail":"1 par; seq=128","free_disk_mb":2580,"resident_mb":205.7,"footprint_mb":16.2,"peak_resident_mb":205.7,"peak_footprint_mb":18.1,"elapsed_ms":25.1,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-128","stage":"latency_warm","detail":"9 pares; seq=128; ambos modelos vivos","free_disk_mb":2580,"resident_mb":205.8,"footprint_mb":16.2,"peak_resident_mb":205.8,"peak_footprint_mb":18.1,"elapsed_ms":168.5,"predictions":9,"median_ms":18.7,"mean_ms":18.7,"min_ms":18.6,"max_ms":19.2}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_plue_dynamic512 / len-256 ----
+08:44:51  Acquired tunnel connection to device.
+08:44:51  Enabling developer disk image services.
+08:44:52  Acquired usage assertion.
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · len-256 ===
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-256","stage":"baseline","detail":"processo sem modelos","free_disk_mb":3007,"resident_mb":29.7,"footprint_mb":8.8,"peak_resident_mb":29.7,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-256","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":3007,"resident_mb":38.5,"footprint_mb":15.9,"peak_resident_mb":38.5,"peak_footprint_mb":16.1,"elapsed_ms":29.8,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-256","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":3007,"resident_mb":40.1,"footprint_mb":16.2,"peak_resident_mb":40.1,"peak_footprint_mb":16.2,"elapsed_ms":24.3,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-256","stage":"latency_cold","detail":"1 par; seq=256","free_disk_mb":3007,"resident_mb":208.4,"footprint_mb":16.2,"peak_resident_mb":208.4,"peak_footprint_mb":20.1,"elapsed_ms":39.2,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-256","stage":"latency_warm","detail":"9 pares; seq=256; ambos modelos vivos","free_disk_mb":3007,"resident_mb":208.5,"footprint_mb":16.2,"peak_resident_mb":208.5,"peak_footprint_mb":20.1,"elapsed_ms":296.1,"predictions":9,"median_ms":32.6,"mean_ms":32.9,"min_ms":32.5,"max_ms":34.5}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_plue_dynamic512 / len-384 ----
+08:44:54  Acquired tunnel connection to device.
+08:44:54  Enabling developer disk image services.
+08:44:55  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · len-384 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-384","stage":"baseline","detail":"processo sem modelos","free_disk_mb":3006,"resident_mb":29.8,"footprint_mb":8.9,"peak_resident_mb":29.8,"peak_footprint_mb":8.9,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-384","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":3006,"resident_mb":38.6,"footprint_mb":16.0,"peak_resident_mb":38.6,"peak_footprint_mb":16.3,"elapsed_ms":32.1,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-384","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":3006,"resident_mb":40.2,"footprint_mb":16.3,"peak_resident_mb":40.2,"peak_footprint_mb":16.3,"elapsed_ms":24.5,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-384","stage":"latency_cold","detail":"1 par; seq=384","free_disk_mb":3006,"resident_mb":213.3,"footprint_mb":16.3,"peak_resident_mb":213.3,"peak_footprint_mb":24.5,"elapsed_ms":56.5,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-384","stage":"latency_warm","detail":"9 pares; seq=384; ambos modelos vivos","free_disk_mb":3006,"resident_mb":213.5,"footprint_mb":16.3,"peak_resident_mb":213.5,"peak_footprint_mb":24.5,"elapsed_ms":438.4,"predictions":9,"median_ms":49.2,"mean_ms":48.7,"min_ms":47.5,"max_ms":49.7}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.
+---- bertimbau_base_plue_dynamic512 / len-512 ----
+08:44:58  Acquired tunnel connection to device.
+08:44:58  Enabling developer disk image services.
+08:44:58  Acquired usage assertion.
+Launched application with com.spike.architecturegate9 bundle identifier.
+Waiting for the application to terminate…
+=== SPIKE 9 ETAPA 2 · bertimbau_base_plue_dynamic512 · len-512 ===
+iPhone · iOS 26.3.1
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-512","stage":"baseline","detail":"processo sem modelos","free_disk_mb":3006,"resident_mb":29.8,"footprint_mb":8.8,"peak_resident_mb":29.8,"peak_footprint_mb":8.8,"elapsed_ms":0.0,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-512","stage":"load_embeddings","detail":".cpuOnly","free_disk_mb":3006,"resident_mb":38.6,"footprint_mb":16.0,"peak_resident_mb":38.6,"peak_footprint_mb":16.2,"elapsed_ms":31.9,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-512","stage":"load_nli","detail":".cpuOnly; embeddings vivo; fixed=none","free_disk_mb":3006,"resident_mb":40.2,"footprint_mb":16.2,"peak_resident_mb":40.2,"peak_footprint_mb":16.2,"elapsed_ms":24.8,"predictions":0,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-512","stage":"latency_cold","detail":"1 par; seq=512","free_disk_mb":3006,"resident_mb":220.1,"footprint_mb":16.3,"peak_resident_mb":220.1,"peak_footprint_mb":30.3,"elapsed_ms":76.7,"predictions":1,"median_ms":0.0,"mean_ms":0.0,"min_ms":0.0,"max_ms":0.0}
+GATELINE {"variant":"bertimbau_base_plue_dynamic512","scenario":"len-512","stage":"latency_warm","detail":"9 pares; seq=512; ambos modelos vivos","free_disk_mb":3006,"resident_mb":220.2,"footprint_mb":16.3,"peak_resident_mb":220.2,"peak_footprint_mb":30.3,"elapsed_ms":608.2,"predictions":9,"median_ms":66.5,"mean_ms":67.6,"min_ms":66.3,"max_ms":70.2}
+=== FIM SPIKE 9 ETAPA 2 ===
+The app terminated with the exit code 0.

@@ -181,11 +181,16 @@ struct TextChunker {
 
     /// Parágrafos do texto extraído. A extração de RF-05.2 entrega um parágrafo por linha,
     /// então qualquer sequência de quebras de linha separa parágrafos.
+    ///
+    /// Linhas que são estrutura de página (navegação, título de Web Story) saem aqui, antes da
+    /// montagem — DT-33. É antes e não depois por causa da sobreposição de uma frase: uma linha
+    /// de navegação sobrevivente seria arrastada como prefixo do chunk seguinte e levaria junto
+    /// o parágrafo legítimo logo abaixo dela. Ver `ChunkQualityFilter.isStructuralBoilerplate`.
     private static func paragraphs(in text: String) -> [String] {
         text
             .split(whereSeparator: \.isNewline)
             .map { $0.trimmingCharacters(in: .whitespaces) }
-            .filter { !$0.isEmpty }
+            .filter { !$0.isEmpty && !ChunkQualityFilter.isStructuralBoilerplate($0) }
     }
 
     /// Segmenta em frases com `NLTokenizer`, on-device e sem dependência externa.

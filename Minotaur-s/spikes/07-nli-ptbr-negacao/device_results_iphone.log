@@ -1,0 +1,12 @@
+# SPIKE 7 — FILTRO 2, iPhone 16 físico (iOS 26.3.1). Consolidado das execuções.
+# Aparelho com pouco armazenamento: ver ressalva no RESULTADO.md.
+# plue_xlmr: signal 9 em .cpuOnly e .all, 2 tentativas, ~4s -> morte no carregamento.
+# inferbr .all e 2a tentativa de plue_bertimbau .all: "No space left on device" (ANE precisa de disco).
+
+BENCHLINE {"model":"inferbr","units":"cpuOnly","loaded":true,"ran":true,"logits":[-3.5547,6.5352,-3.5586],"cos":1.0000,"argmax_match":true,"expected_argmax":1,"got_argmax":1,"seq":77,"runs":50,"median_ms":40.2587,"mean_ms":40.4078,"min_ms":39.1683,"max_ms":43.7586,"ram_before_mb":35.1094,"ram_peak_mb":643.0938,"error":""}
+BENCHLINE {"model":"plue_bertimbau","units":"cpuOnly","loaded":true,"ran":true,"logits":[3.0391,-0.7583,-2.0645],"cos":1.0000,"argmax_match":true,"expected_argmax":0,"got_argmax":0,"seq":77,"runs":50,"median_ms":40.2968,"mean_ms":40.6432,"min_ms":39.4372,"max_ms":43.8473,"ram_before_mb":35.1406,"ram_peak_mb":643.3906,"error":""}
+
+# .all de plue_bertimbau — capturado na 1a rodada, quando ainda havia espaço no
+# aparelho. O log daquela rodada foi truncado pela repetição; a linha é preservada
+# aqui porque é o único dado de .all do spike.
+BENCHLINE {"model":"plue_bertimbau","units":"all","loaded":true,"ran":true,"logits":[3.0254,-0.7559,-2.0742],"cos":1.0000,"argmax_match":true,"expected_argmax":0,"got_argmax":0,"seq":77,"runs":50,"median_ms":114.7859,"mean_ms":115.3716,"min_ms":108.5888,"max_ms":124.4918,"ram_before_mb":30.2500,"ram_peak_mb":1154.1094,"error":""}
