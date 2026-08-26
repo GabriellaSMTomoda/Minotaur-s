@@ -1,7 +1,7 @@
 # Especificação Técnica — Feature "Verificar Notícia" (iOS)
 
-**Versão:** 0.4
-**Status:** Implementado (Fases 1–6 concluídas). Auditoria final em 10/08/2026: 143 testes Swift + 6 testes de UI passaram e o Release arm64 sem assinatura foi aprovado. A distribuição permanece bloqueada pelo provisioning de Siri, pela política/aviso de privacidade e pelas validações listadas na seção 7.3.
+**Versão:** 0.5
+**Status:** Implementado (Fases 1–6 concluídas). A auditoria histórica de 10/08/2026 permanece registrada na seção 7.3. Em 26/08/2026, a validação incremental de privacidade passou com 149 testes Swift + 8 testes de UI e build Release arm64 sem assinatura. A distribuição permanece bloqueada pelo provisioning de Siri, pela URL pública da política para a ficha da App Store e pelas validações listadas na seção 7.3.
 **Escopo:** especificação e manutenção de UMA feature dentro de um app iOS com múltiplas funcionalidades.
 
 ---
@@ -47,6 +47,8 @@ Manter a feature "Verificar Notícia" capaz de determinar se uma afirmação dig
 - RF-01.6 — Após consultar um resultado, o usuário deve conseguir voltar diretamente ao campo
   de entrada, editar a afirmação preservada e iniciar outra verificação sem sair da feature nem
   retornar à tela inicial do app.
+- RF-01.7 — Na primeira entrada no Verificador, uma sheet não dispensável deve informar, antes de qualquer requisição, que somente a primeira frase limitada a `SearchQueryBuilder.maxQueryLength` é enviada ao proxy e à Tavily. Somente “Entendi e continuar” registra o reconhecimento; uma versão nova do aviso deve reapresentá-lo.
+- RF-01.8 — A política de privacidade completa deve permanecer acessível offline por um botão `hand.raised` no toolbar, inclusive depois do reconhecimento do aviso.
 
 ### RF-02 — Geração da query de busca
 - RF-02.1 — O app deve enviar como query somente a primeira frase da entrada, limitada a 200 caracteres; o texto completo nunca é enviado ao buscador.
@@ -162,11 +164,11 @@ Versões mínimas configuradas na integração (DT-30): SwiftSoup 2.9.6; `swift-
 - NF-06 — Uso de RAM em pico durante a análise: < 1 GB. **Atendido no gate do Spike 9:** 383,7 MB residentes máximos no iPhone 16 com o BERTimbau-base, contra 1.224 MB do BERTimbau-large descartado. A medição em aparelho de 4 GB continua desejável, mas o modelo atual recuperou margem substancial sob o teto.
 
 ### 3.4 Segurança e privacidade
-- NF-07 — Nenhum backend stateful: o único endpoint próprio é o proxy serverless da Tavily, sem persistência ou cache do conteúdo. O texto completo não é armazenado nem enviado remotamente.
-- NF-08 — O texto do usuário só sai do dispositivo na forma da primeira frase limitada a 200 caracteres, enviada como query ao proxy/Tavily. **[EM ABERTO]** Informar isso explicitamente na política de privacidade e na primeira execução.
+- NF-07 — Nenhum backend próprio stateful: o único endpoint próprio é o proxy serverless da Tavily, sem KV, D1, cache de conteúdo ou logging explícito do corpo. O texto completo não é armazenado nem enviado remotamente; a Tavily pode reter a query reduzida conforme sua política.
+- NF-08 — **Resolvido em 26/08/2026:** o texto do usuário só sai do dispositivo na forma da primeira frase limitada a 200 caracteres, enviada como query ao proxy/Tavily. O aviso de primeira execução e a política informam o contrato, e um teste de integração inspeciona o corpo HTTP real antes do proxy.
 - NF-09 — **Resolvido:** a chave de API da Tavily é protegida por um proxy serverless (Cloudflare Workers, tier gratuito — ver DT-21). O app nunca embarca a chave nem a envia diretamente à Tavily; toda chamada de busca passa pela URL do Worker, que injeta a chave e repassa a resposta.
 - NF-10 — Todo o tráfego via HTTPS. ATS (App Transport Security) mantido com configuração padrão, sem exceções de domínio.
-- NF-11 — Política de privacidade publicada e acessível dentro do app. **[EM ABERTO]** Não há tela/link de privacidade no código atual.
+- NF-11 — Política de privacidade acessível dentro do app e por URL pública na ficha da loja. **[PARCIALMENTE RESOLVIDO em 26/08/2026]** A política offline está permanentemente acessível no toolbar e o manifesto próprio está no bundle; ainda falta publicar uma URL pública para o App Store Connect.
 
 ### 3.5 Formatos de dados
 
@@ -272,6 +274,11 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 **quando** o usuário volta para a entrada, toca no campo, edita a afirmação e verifica novamente,
 **então** a segunda verificação é iniciada com o novo texto sem retornar à tela inicial do app.
 
+### CA-13 — Privacidade na primeira entrada e acesso permanente
+**Dado** uma instalação nova ou uma versão do aviso ainda não reconhecida,
+**quando** o usuário entra no Verificador,
+**então** o aviso não dispensável aparece antes de qualquer requisição, a política completa pode ser lida sem registrar reconhecimento, somente “Entendi e continuar” persiste a versão e o botão de política continua acessível após o relançamento sem reapresentar o aviso reconhecido.
+
 ---
 
 ## 5. Fora de Escopo (nesta fase)
@@ -315,7 +322,7 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 | DT-10 (revisada) | Allowlist embarcada e fixa em `TrustedDomain.allowlist`, fora da camada de UI | Preserva a curadoria e separa dados de negócio da View, alinhado a DT-17 |
 | DT-11 (revisada 2ª vez) | **Tavily** como provedor de busca, substituindo o scraping do DuckDuckGo | O scraping do DDG bloqueou de forma sistemática em 2 clientes HTTP diferentes (Python e Swift/URLSession — Spikes 4 e 4b), inclusive em uso leve. As 3 alternativas originalmente pesquisadas (Bing, Brave, Google Custom Search) estão inviabilizadas: Bing foi descontinuada (ago/2025), Brave eliminou o tier gratuito (fev/2026, exige cartão sem teto de gasto), Google Custom Search está fechada para novos clientes desde 2025. Tavily oferece 1.000 créditos/mês grátis sem cartão, com `include_domains` nativo, validado tecnicamente no Spike 5 (100% de disponibilidade em 20 buscas, latência média 1,62s, sem nenhum sinal de bloqueio) |
 | DT-12 | Vereditos referenciam as fontes, nunca afirmam verdade absoluta | Reduz risco de dano informacional e de rejeição na revisão da App Store |
-| DT-13 | Nenhum servidor próprio tradicional; sem coleta de dados | Simplicidade, custo zero, menor exigência regulatória. Exceção pontual: DT-21 (proxy serverless da Tavily) — não é um servidor mantido, mas tecnicamente um endpoint existe; o proxy é stateless (só repassa a requisição, não armazena nada) |
+| DT-13 | Nenhum servidor próprio tradicional ou histórico de verificações; transmissão limitada à query reduzida | Simplicidade, custo zero e minimização de dados. Exceção pontual: DT-21 (proxy serverless da Tavily) — o proxy não persiste conteúdo, mas a query reduzida é transmitida à Cloudflare/Tavily e pode ser retida pela Tavily conforme sua política |
 | DT-14 | Trechos citados limitados e sempre com link para o original | Reduz risco de violação de direitos autorais e de rejeição pela guideline 5.2 |
 | DT-15 | A antiga lógica monolítica de `Verificador.swift` foi descartada e reconstruída | A versão que enviava o artigo inteiro a `FoundationModels` errava com frequência; a lógica atual está nos serviços e no coordenador |
 | DT-16 | Design visual/estrutura de UI da tela atual pode ser reaproveitado quando razoável | Não há problema identificado na UI, só na lógica de verificação; evita retrabalho desnecessário |
@@ -340,6 +347,7 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 | DT-35 | **Fine-tune próprio executado:** BERTimbau-base de 3 classes treinado em PLUE/MNLI | O Spike 8 provou que BERT-large não cabia. A arquitetura base reduziu RAM/latência e manteve qualidade adversarial superior aos modelos públicos avaliados; não existia checkpoint público equivalente de três classes |
 | DT-36 | **Ordem de gates para o fine-tune**: medir RAM e latência da *arquitetura* (BERTimbau-base convertido com cabeça de 3 classes **não treinada**) **antes** de gastar tempo de GPU no treino | RAM e latência dependem da arquitetura e do shape, não dos valores dos pesos. Se a arquitetura não couber na NF-06/NF-02, o treino seria desperdiçado. Extensão natural da lição do Spike 2c (gate de execução antes de qualidade) para o caso em que a "qualidade" custa dias de trabalho |
 | DT-37 | Integração do checkpoint BERTimbau-base selecionado no Spike 9, preservando os limiares, agregação e contrato de UI existentes | A troca passou paridade, gates adversariais, 145 testes no simulador, 28 testes físicos e build Release sem assinatura. Não houve migração de dados nem alteração dos vereditos; o rollback é de código e assets |
+| DT-38 | Aviso do Verificador reconhecido por versão inteira em `UserDefaults.standard`, política offline no app e manifesto próprio com `Other User Content`, `Search History` e motivo `CA92.1` para UserDefaults | Reapresenta mudanças materiais sem manter histórico de verificações; alinha o bundle ao envio real da query reduzida. O proxy continua stateless, mas a política distingue o possível processamento técnico da Cloudflare e a retenção declarada pela Tavily |
 
 ---
 
@@ -401,8 +409,9 @@ Resultado da verificação (modelo em memória, existe apenas durante a sessão 
 27. ~~RAM e latência que bloqueavam a Fase 6~~ — resolvido pelo fine-tune BERTimbau-base (DT-35/DT-36): 383,7 MB residentes máximos e 66,5 ms aquecidos a 512 tokens no iPhone 16. **[EM ABERTO, release]** Repetir o gate no iPhone 13/4 GB para validar diretamente o aparelho-alvo mais antigo.
 28. ~~Contaminação de medições por pouco espaço em disco~~ — transformada em regra operacional: todo gate físico deve registrar o espaço livre e exigir preflight confortável. A integração do Spike 9 foi executada com 2.636 MB livres.
 29. **[EM ABERTO — BLOQUEIA DISTRIBUIÇÃO ASSINADA]** Em 10/08/2026, o archive falhou com `Provisioning profile "iOS Team Provisioning Profile: *" doesn't include the Siri capability.` e `doesn't include the com.apple.developer.siri entitlement.` Ação mínima: autenticar no Xcode a conta da equipe `2DK23BZ7KB` e regenerar/baixar o profile de `com.julia.fatoufarsa2025` com Siri; não remover Siri ou entitlements.
-30. **[EM ABERTO — BLOQUEIA PREPARAÇÃO DE LOJA]** NF-08/NF-11: publicar uma política de privacidade, torná-la acessível no app e informar na primeira execução que a primeira frase da afirmação é enviada à busca. Não há implementação correspondente no código atual, nem privacy manifest próprio do app; só foi encontrado o manifest transitivo de `swift-crypto`.
+30. **[PARCIALMENTE RESOLVIDO — AINDA BLOQUEIA PREPARAÇÃO DE LOJA]** Em 26/08/2026, NF-08 e a parte local de NF-11 foram implementadas: aviso versionado e não dispensável, política offline permanente e `PrivacyInfo.xcprivacy` próprio na raiz do bundle. Falta publicar a política em uma URL pública para o App Store Connect.
 31. **[AUDITORIA FINAL 10/08/2026]** RF-01–RF-10 e CA-01–CA-12 têm cobertura automatizada e passaram (143 testes Swift + 6 UI). Lacunas não comprovadas nesta execução: CA-01/NF-03 ponta a ponta com rede real abaixo de 15 s, paywall parcial, respostas reais de cota/rate-limit, iOS 17 runtime e gate direto no iPhone 13. ATS permaneceu padrão sem exceções, AppIcon 1024×1024 e versão 1.0/build 1 foram compilados, e a varredura de segredos de aplicação nos arquivos versionados não encontrou credenciais.
+32. **[VALIDAÇÃO INCREMENTAL 26/08/2026]** 149/149 testes Swift Testing e 8/8 testes de UI passaram no iPhone 16e Simulator/iOS 18.6. Foram comprovados: instalação nova e versionamento do aviso, reconhecimento explícito, relançamento, acesso permanente à política, limite de 200 caracteres no corpo enviado ao proxy, conteúdo obrigatório da política, manifesto exato, modo claro/escuro, Dynamic Type de acessibilidade XXXL e rótulos acessíveis básicos. `plutil` aprovou o manifesto-fonte e o manifesto copiado sem alteração para a raiz do `.app`; o build Release arm64 sem assinatura passou e mediu 268.516 KiB. A URL pública continua fora do repositório e pendente.
 
 ### 7.4 Ordem obrigatória para futuras trocas estruturais
 

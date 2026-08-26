@@ -2,7 +2,7 @@
 
 Este arquivo registra o estado operacional do repositório. Para mudanças no **Verificador de Notícias**, leia também [`spec.md`](./spec.md) por inteiro: ela é a fonte de verdade dos requisitos, decisões e riscos da feature.
 
-## Estado atual — 10 de agosto de 2026
+## Estado atual — 26 de agosto de 2026
 
 O app possui duas áreas funcionais: o quiz “Fato ou Farsa”, incluindo Pergunta do Dia/App Intents, e o Verificador de Notícias. A reconstrução do verificador e a troca do NLI estão concluídas no código.
 
@@ -43,9 +43,11 @@ A auditoria final de 10 de agosto de 2026 registrou:
 - build Release arm64 sem assinatura aprovado;
 - `.app` sem assinatura com 267.536 KiB (261 MiB), dois modelos Core ML únicos, AppIcon 1024×1024, versão 1.0/build 1 e ATS sem exceções.
 
+A validação incremental de privacidade de 26 de agosto de 2026 registrou 149/149 testes Swift Testing e 8/8 testes de UI no iPhone 16e Simulator/iOS 18.6, `plutil` aprovado, build Release arm64 sem assinatura aprovado e `PrivacyInfo.xcprivacy` próprio copiado sem alteração para a raiz do `.app`. O fluxo de primeira entrada, reconhecimento, relançamento, acesso permanente, modo escuro e Dynamic Type de acessibilidade XXXL passou.
+
 O archive assinado continua bloqueado por configuração externa: `Provisioning profile "iOS Team Provisioning Profile: *" doesn't include the Siri capability.` e `doesn't include the com.apple.developer.siri entitlement.` A correção mínima é autenticar no Xcode a conta da equipe `2DK23BZ7KB` e regenerar/baixar o profile de `com.julia.fatoufarsa2025` com Siri habilitada. Não remova entitlements, Siri, bundle identifier ou equipe para contornar o bloqueio.
 
-Não existe política de privacidade acessível nem aviso de primeira execução; também não há privacy manifest próprio do app (somente o manifest transitivo de `swift-crypto`). Archive, `.ipa` e estimativa da App Store só podem ser medidos depois da correção de assinatura.
+Existe política de privacidade offline no toolbar do Verificador, aviso obrigatório e versionado na primeira entrada e manifesto próprio do app. A URL pública da política exigida para a ficha da App Store ainda não existe. Archive, `.ipa` e estimativa da App Store só podem ser medidos depois da correção de assinatura.
 
 O modelo ainda tem limitações conhecidas: dois erros em 15 pares adversariais, ambos ligados à nuance de “cura do câncer”, e estabilidade de claims curtos em 2/3 famílias. Não descreva a feature como detector infalível nem remova os avisos/links que contextualizam o resultado.
 
@@ -54,8 +56,9 @@ O modelo ainda tem limitações conhecidas: dois erros em 15 pares adversariais,
 | Diretório | Responsabilidade |
 |---|---|
 | `Models/Verificador/` | `TrustedDomain`, resultado e erros de domínio |
-| `Services/Verificador/` | busca, extração, chunks, ML, agregação e coordenador |
-| `Views/Verificador/` | entrada, resultado, apresentação e Safari |
+| `Services/Verificador/` | busca, extração, chunks, ML, agregação, coordenador e reconhecimento do aviso |
+| `Views/Verificador/` | entrada, resultado, política/aviso, apresentação e Safari |
+| `Resources/PrivacyInfo.xcprivacy` | manifesto de privacidade próprio copiado para a raiz do bundle |
 | `Minotaur-sTests/Verificador/` | testes Swift Testing e fixtures |
 | `spikes/` | pesquisa descartável/reproduzível; não entra no app |
 | `proxy/` | Worker stateless que protege a chave da Tavily |
@@ -101,14 +104,15 @@ A allowlist possui 31 domínios para 30 veículos. O `include_domains` da Tavily
 
 1. Leia a spec inteira antes de mudar o verificador e trate o working tree como mais recente que o `HEAD`.
 2. Mantenha os serviços independentes; somente `VerificationPipeline` conhece a ordem das etapas.
-3. Preserve os contratos de privacidade: sem persistência das verificações, sem IA em nuvem e sem log do texto/query no proxy.
+3. Preserve os contratos de privacidade: sem persistência das verificações, sem inferência em nuvem e sem log explícito do texto/query no proxy. Não descreva o fluxo como “sem retenção por terceiros”: a Tavily pode reter a query reduzida conforme sua política.
 4. Preserve a linguagem referenciada às fontes. Nunca transforme os vereditos em “verdadeiro” ou “falso”.
 5. Mantenha o aviso de limitação visível sem rolagem e os trechos limitados a 300 caracteres com atribuição e link.
 6. Valide a ordem índice→label empiricamente ao trocar qualquer modelo. Não confie apenas em `id2label` remoto.
 7. Toda mudança de modelo exige, nesta ordem: execução em aparelho, paridade, RAM/latência e avaliação com pares adversariais reais.
 8. Não altere limiares (`0,25` de similaridade; `0,50` de confiança), votação ou margem para mascarar regressão sem reabrir formalmente as DT correspondentes.
-9. Testes derivam dos critérios de aceitação. Use Swift Testing em `Minotaur-sTests/Verificador`; os stubs de `Minotaur-sUITests` não são o padrão do projeto.
-10. Se uma investigação foi pedida, apresente causa e evidência antes de implementar correção.
+9. Testes derivam dos critérios de aceitação. Use Swift Testing em `Minotaur-sTests/Verificador`; fluxos persistentes e de primeira execução podem usar `Minotaur-sUITests` com reset disponível somente em Debug.
+10. Se o envio de dados mudar, incremente `VerificationPrivacyNoticeStore.currentVersion`, atualize a política e revise `PrivacyInfo.xcprivacy` no mesmo change set.
+11. Se uma investigação foi pedida, apresente causa e evidência antes de implementar correção.
 
 ## Lições que não podem regredir
 
@@ -125,7 +129,7 @@ Consulte a seção 7.3 da spec para o registro completo. As principais são:
 
 - validar diretamente RAM/latência no aparelho-alvo mais antigo (iPhone 13);
 - medir o tamanho final assinado/`.ipa` e corrigir o provisioning de Siri;
-- publicar/expor a política de privacidade e implementar o aviso de primeira execução sobre a query enviada;
+- publicar a política de privacidade em uma URL pública para o App Store Connect; a política local, o aviso e o manifesto já estão implementados;
 - definir política de `robots.txt`;
 - decidir retry por artigo e validar paywall parcial;
 - documentar/comprovar o tratamento real de cota e rate-limit da Tavily;

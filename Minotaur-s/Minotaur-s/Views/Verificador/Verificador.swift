@@ -16,6 +16,15 @@ import SwiftUI
 struct VerificadorView: View {
     @StateObject private var viewModel = VerificationViewModel()
     @FocusState private var isClaimFocused: Bool
+    @State private var activePrivacySheet: PrivacySheet?
+
+    private let privacyNoticeStore: VerificationPrivacyNoticeStore
+
+    init(
+        privacyNoticeStore: VerificationPrivacyNoticeStore = VerificationPrivacyNoticeStore()
+    ) {
+        self.privacyNoticeStore = privacyNoticeStore
+    }
 
     var body: some View {
         ScrollView {
@@ -63,14 +72,49 @@ struct VerificadorView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbarRole(.navigationStack)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    activePrivacySheet = .policy
+                } label: {
+                    Image(systemName: "hand.raised")
+                }
+                .accessibilityLabel("Política de privacidade")
+                .accessibilityHint("Abre a política de privacidade do app.")
+                .accessibilityIdentifier("verificationPrivacyPolicyButton")
+            }
+        }
         .navigationDestination(isPresented: resultPresented) {
             if let result = viewModel.result {
                 VerificationResultView(result: result)
             }
         }
+        .sheet(item: $activePrivacySheet) { sheet in
+            switch sheet {
+            case .firstRunNotice:
+                VerificationPrivacyNoticeView {
+                    privacyNoticeStore.acknowledgeNotice()
+                    activePrivacySheet = nil
+                }
+            case .policy:
+                VerificationPrivacyPolicySheet()
+            }
+        }
+        .onAppear {
+            if activePrivacySheet == nil, privacyNoticeStore.shouldShowNotice {
+                activePrivacySheet = .firstRunNotice
+            }
+        }
         // Carrega os modelos ao abrir a tela, fora da main thread (RF-10.3 / NF-04) — não no
         // toque do botão, que somaria segundos ao orçamento da NF-03.
         .task { await viewModel.prepare() }
+    }
+
+    private enum PrivacySheet: String, Identifiable {
+        case firstRunNotice
+        case policy
+
+        var id: String { rawValue }
     }
 
     // MARK: - Navegação para o resultado (RF-09)

@@ -2,7 +2,7 @@
 
 Aplicativo iOS nativo, em SwiftUI, voltado à educação midiática e à checagem assistida de notícias em português. O app combina um quiz curado de **Fato ou Farsa** com um **Verificador de Notícias** que compara uma afirmação às publicações de uma lista fechada de veículos e órgãos confiáveis.
 
-> Situação em 10 de agosto de 2026: as duas funcionalidades estão implementadas. O verificador usa busca via Tavily/Cloudflare e modelos Core ML no aparelho. A auditoria final passou na suíte completa e no build Release arm64 sem assinatura; a distribuição continua bloqueada por provisioning de Siri e pelos itens de loja descritos em [Estado e limitações](#estado-e-limitações).
+> Situação em 26 de agosto de 2026: as duas funcionalidades estão implementadas. O verificador usa busca via Tavily/Cloudflare e modelos Core ML no aparelho, apresenta um aviso de privacidade versionado na primeira entrada e mantém a política completa acessível no toolbar. A suíte completa e o build Release arm64 sem assinatura passaram; a distribuição continua bloqueada por provisioning de Siri e pelos itens externos de loja descritos em [Estado e limitações](#estado-e-limitações).
 
 ## Funcionalidades
 
@@ -28,6 +28,8 @@ O usuário digita ou cola uma afirmação entre 15 e 1.000 caracteres. O app ent
 8. agrega os votos em **Confirmado pelas fontes**, **Contradito pelas fontes**, **Fontes divergentes**, **Sem informação suficiente** ou **Não encontrado**.
 
 O resultado sempre informa o que as fontes encontradas dizem. Ele não declara que uma afirmação é uma verdade ou mentira absoluta e exibe, para cada fonte, trecho, atribuição e link do artigo original.
+
+Na primeira abertura do Verificador, uma sheet não dispensável informa que somente a primeira frase, limitada a 200 caracteres, é enviada ao proxy e à Tavily. O reconhecimento é versionado e só é salvo ao tocar em “Entendi e continuar”. A política completa permanece disponível pelo botão de mão no toolbar.
 
 A especificação detalhada está em [`spec.md`](./spec.md).
 
@@ -65,7 +67,7 @@ O `VerificationPipeline` coordena as etapas. A UI acessa o pipeline por `Verific
 | Projeto | Xcode project versionado; `project.yml` existe, mas está incompleto em relação ao `.xcodeproj` atual |
 | Testes | Swift Testing + fixtures e `MockURLProtocol` |
 
-Os modelos somam aproximadamente 217 MB; os dois tokenizers versionados somam aproximadamente 17 MB. Nenhum texto é enviado a um serviço de IA: embeddings e NLI rodam localmente. Somente a query de busca sai do aparelho, passando pelo proxy stateless até a Tavily.
+Os modelos somam aproximadamente 217 MB; os dois tokenizers versionados somam aproximadamente 17 MB. Nenhum serviço de nuvem produz o veredito: embeddings e NLI rodam localmente. A primeira frase, limitada a 200 caracteres, sai do aparelho como query de busca, passa pelo proxy stateless e chega à Tavily; a Tavily pode reter queries conforme sua política.
 
 ## Estrutura
 
@@ -78,7 +80,8 @@ Minotaur-s/
 │   ├── Intents/                # Siri/Atalhos e Pergunta do Dia
 │   ├── Resources/
 │   │   ├── Models/             # Core ML ignorado pelo Git; gerado por sync-models.sh
-│   │   └── Tokenizers/         # tokenizers e mapa de labels versionados
+│   │   ├── Tokenizers/         # tokenizers e mapa de labels versionados
+│   │   └── PrivacyInfo.xcprivacy
 │   └── Assets.xcassets/
 ├── Minotaur-sTests/            # testes unitários e de integração local
 ├── Minotaur-sUITests/          # target de testes de UI
@@ -139,11 +142,19 @@ Auditoria final de release executada em 10 de agosto de 2026:
 
 Os detalhes e caminhos dos result bundles estão em [`spikes/09-nli-base-search/INTEGRACAO_RESULTADO.md`](./spikes/09-nli-base-search/INTEGRACAO_RESULTADO.md).
 
+Validação incremental de privacidade executada em 26 de agosto de 2026, preservando a auditoria histórica acima:
+
+- **149/149** testes Swift Testing e **8/8** testes de UI no iPhone 16e Simulator com iOS 18.6;
+- teste de UI da primeira entrada, reconhecimento explícito, acesso permanente e relançamento aprovado;
+- modo claro e modo escuro, Dynamic Type de acessibilidade XXXL e rótulo acessível “Política de privacidade” verificados no Simulator;
+- `PrivacyInfo.xcprivacy` aprovado por `plutil`, copiado sem alteração para a raiz do `.app` Release;
+- build Release arm64 sem assinatura aprovado; `.app` com **268.516 KiB**, incluindo o manifesto próprio.
+
 ### Checklist final RF/NF/CA
 
 - **RF:** RF-01–RF-10 possuem cobertura automatizada da lógica e apresentação; a suíte completa passou. Permanecem sem comprovação ponta a ponta de produção o paywall parcial, o retry por artigo e as respostas reais de cota/rate-limit da Tavily.
-- **NF:** arquitetura, concorrência, inferência on-device, limite de tamanho do `.app`, RAM/latência no iPhone 16, HTTPS/ATS e ausência de chave no app estão comprovados. Continuam pendentes o gate direto no iPhone 13, o tempo total com rede real, política/aviso de privacidade, `robots.txt` e o tamanho de distribuição assinado.
-- **CA:** CA-01–CA-12 possuem testes automatizados correspondentes e passaram; CA-01 não teve nesta auditoria uma medição ponta a ponta com busca/artigos reais abaixo de 15 s, e CA-05 não comprova empiricamente paywall parcial.
+- **NF:** arquitetura, concorrência, inferência on-device, limite de tamanho do `.app`, RAM/latência no iPhone 16, HTTPS/ATS, ausência de chave no app, aviso local, política no app e manifesto próprio estão comprovados. Continuam pendentes o gate direto no iPhone 13, o tempo total com rede real, a URL pública da política para a ficha da App Store, `robots.txt` e o tamanho de distribuição assinado.
+- **CA:** CA-01–CA-13 possuem testes automatizados correspondentes e passaram; CA-01 não teve nesta auditoria uma medição ponta a ponta com busca/artigos reais abaixo de 15 s, e CA-05 não comprova empiricamente paywall parcial.
 
 ## Estado e limitações
 
@@ -152,15 +163,20 @@ Os detalhes e caminhos dos result bundles estão em [`spikes/09-nli-base-search/
 - O gate físico mediu até **383,7 MB** de memória residente e **66,5 ms** aquecidos a 512 tokens no iPhone 16. A validação direta no iPhone 13 ainda é recomendada antes do lançamento.
 - O app Release arm64 sem assinatura ocupou 267.536 KiB (261 MiB) descompactados. Archive, `.ipa` e estimativa da App Store não puderam ser medidos sem assinatura válida.
 - O archive assinado falha porque `iOS Team Provisioning Profile: *` não inclui a capability Siri nem o entitlement `com.apple.developer.siri`. É necessário entrar no Xcode com a conta Apple da equipe `2DK23BZ7KB` e regenerar/baixar o profile de `com.julia.fatoufarsa2025` com Siri habilitada.
-- A política de privacidade e o aviso de primeira execução exigidos pela spec ainda não aparecem no código atual.
-- Não há privacy manifest próprio do app; o bundle contém apenas o `PrivacyInfo.xcprivacy` transitivo de `swift-crypto`.
+- A política está disponível offline dentro do app, mas ainda precisa ser publicada em uma URL pública para o campo exigido pelo App Store Connect.
 - Política de `robots.txt`, paywall parcial e retry por artigo continuam pendências de conformidade/robustez.
 - O verificador depende da disponibilidade e da cota da Tavily e do proxy.
 
 ## Privacidade
 
 - verificações não são persistidas;
-- o proxy é stateless e não possui KV, D1 ou cache de conteúdo;
-- o texto completo fica no aparelho; apenas a query reduzida é transmitida para busca;
+- a afirmação completa e o resultado ficam apenas em memória;
+- o proxy é stateless, não possui KV, D1 ou cache de conteúdo e não faz logging explícito do corpo;
+- o texto completo fica no aparelho; apenas a primeira frase, limitada a 200 caracteres, é transmitida ao proxy e à Tavily;
+- a infraestrutura da Cloudflare pode processar metadados técnicos, e a Tavily pode reter queries e usá-las para melhoria conforme suas políticas;
+- os artigos são baixados diretamente dos sites das fontes; abri-los no Safari é opcional;
 - não há chamadas a LLM ou a outro serviço de inferência em nuvem;
+- não há anúncios, tracking, analytics ou crash reporting de terceiros;
 - trechos exibidos têm no máximo 300 caracteres, com atribuição e link para o original.
+
+A política completa, em vigor desde 26/08/2026, está no próprio app. Políticas externas: [Tavily](https://www.tavily.com/privacy), [Cloudflare](https://www.cloudflare.com/privacypolicy/) e [Apple](https://www.apple.com/legal/privacy/).

@@ -117,6 +117,40 @@ struct VerificationPipelineTests {
         #expect(!result.consultedDomains.isEmpty)
     }
 
+    @Test("NF-08: pipeline envia ao corpo do proxy só a primeira frase limitada a 200")
+    func searchRequestContainsOnlyReducedQuery() async throws {
+        let (session, scenario) = MockURLProtocol.makeSession([
+            .success(status: 200, body: Data(#"{"results":[]}"#.utf8)),
+        ])
+        let search = ServiceBackedSearch(
+            service: TavilySearchService(
+                session: session,
+                endpoint: "https://proxy.exemplo.workers.dev"
+            )
+        )
+        let pipeline = VerificationPipeline(
+            search: search,
+            extractor: MockExtractor(texts: [:]),
+            embeddings: MockEmbeddings { _, _ in [scored()] },
+            nli: MockNLI { _, _ in label() }
+        )
+        let privateRemainder = "DADO-QUE-NAO-PODE-SAIR"
+        let longFirstSentence = String(repeating: "palavra ", count: 40) + "."
+        let claim = "\(longFirstSentence) \(privateRemainder)"
+
+        _ = try await pipeline.verify(claim: claim)
+
+        let body = try #require(scenario.lastBody)
+        let json = try #require(
+            try JSONSerialization.jsonObject(with: body) as? [String: Any]
+        )
+        let transmitted = try #require(json["query"] as? String)
+
+        #expect(transmitted == SearchQueryBuilder.query(from: claim))
+        #expect(transmitted.count <= SearchQueryBuilder.maxQueryLength)
+        #expect(!transmitted.contains(privateRemainder))
+    }
+
     @Test("Busca com resultados, mas todos descartados na extração → NÃO ENCONTRADO")
     func allSourcesDiscardedIsNotFound() async throws {
         let items = [item("https://g1.globo.com/a"), item("https://bbc.com/b")]
@@ -477,6 +511,16 @@ private final class MockSearch: ArticleSearching, @unchecked Sendable {
             self.query = query
         }
         return try outcome.get()
+    }
+}
+
+/// Usa o serviço HTTP real sobre `MockURLProtocol` para cobrir query builder → pipeline → JSON.
+private struct ServiceBackedSearch: ArticleSearching, Sendable {
+    let service: TavilySearchService
+    let consultedDomains = TrustedDomain.allowlist.sorted()
+
+    func search(query: String) async throws -> [SearchResultItem] {
+        try await service.search(query: query)
     }
 }
 
