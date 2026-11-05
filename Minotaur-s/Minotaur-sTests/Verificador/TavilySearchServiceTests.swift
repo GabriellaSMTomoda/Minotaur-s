@@ -73,12 +73,12 @@ struct TavilySearchServiceTests {
         #expect(scenario.requestCount == 1)
     }
 
-    @Test("429 nunca é reafetado e vira quota esgotada")
+    @Test("429 sem marcador de cota é limite temporário e não é reafetado")
     func neverRetriesOnRateLimit() async {
         let (service, scenario) = makeService([.success(status: 429, body: Data())])
 
         // RF-10.2: mensagem específica de limite atingido, não erro genérico.
-        await #expect(throws: VerificationError.searchQuotaExceeded) {
+        await #expect(throws: VerificationError.searchRateLimited) {
             try await service.search(query: "teste")
         }
         #expect(scenario.requestCount == 1)
@@ -97,12 +97,12 @@ struct TavilySearchServiceTests {
 
     // MARK: - RF-04.3 / DT-19: over-fetch, filtrar, truncar
 
-    @Test("Pede 10 resultados à API")
+    @Test("Pede 20 candidatos à API antes de ranquear diversidade")
     func requestsTenResults() {
-        #expect(TavilySearchService.requestedResultCount == 10)
+        #expect(TavilySearchService.requestedResultCount == 20)
     }
 
-    @Test("Filtra a allowlist e trunca em 5, nessa ordem")
+    @Test("Filtra a allowlist e preserva os candidatos para o ranking híbrido")
     func filtersThenTruncates() async throws {
         // 3 vazados no topo do ranking + 6 válidos: truncar antes de filtrar devolveria 2.
         let urls = ["https://pt.wikipedia.org/1", "https://cnn.com/2", "https://dicio.com.br/3",
@@ -114,7 +114,7 @@ struct TavilySearchServiceTests {
 
         let results = try await service.search(query: "teste")
 
-        #expect(results.count == AllowlistFilter.maxAcceptedSources)
+        #expect(results.count == 6)
         #expect(results.allSatisfy { AllowlistFilter.isAllowed(urlString: $0.url) })
     }
 
@@ -170,7 +170,11 @@ struct TavilySearchServiceTests {
         let json = try #require(try JSONSerialization.jsonObject(with: body) as? [String: Any])
 
         #expect(json["query"] as? String == "a inflação subiu")
-        #expect(json["max_results"] as? Int == 10)
+        #expect(json["max_results"] as? Int == 20)
+        #expect(json["include_answer"] as? Bool == false)
+        #expect(json["auto_parameters"] as? Bool == false)
+        #expect(json["language"] as? String == "pt")
+        #expect(json["filter_by_language"] as? Bool == true)
         #expect(json["search_depth"] as? String == "basic")
         #expect((json["include_domains"] as? [String])?.count == TrustedDomain.allowlist.count)
         // NF-09: a chave nunca sai do proxy. Se ela aparecer aqui, o modelo de segurança caiu.

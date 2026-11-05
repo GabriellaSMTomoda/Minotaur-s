@@ -48,16 +48,16 @@ struct VerdictAggregatorTests {
 
     // MARK: - E vs. C
 
-    @Test("E > C → CONFIRMADO")
+    @Test("Maioria de apoio não apaga contradição válida")
     func entailmentWins() {
         let sources = [source(.entailment), source(.entailment), source(.contradiction)]
-        #expect(VerdictAggregator.verdict(for: sources) == .confirmado)
+        #expect(VerdictAggregator.verdict(for: sources) == .divergente)
     }
 
-    @Test("C > E → CONTRADITO")
+    @Test("Maioria de contradição não apaga apoio válido")
     func contradictionWins() {
         let sources = [source(.contradiction), source(.contradiction), source(.entailment)]
-        #expect(VerdictAggregator.verdict(for: sources) == .contradito)
+        #expect(VerdictAggregator.verdict(for: sources) == .divergente)
     }
 
     @Test("E = C > 0 → DIVERGENTE")

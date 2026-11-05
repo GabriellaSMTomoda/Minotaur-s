@@ -19,6 +19,28 @@ import Foundation
 struct TrustedDomain {
     private init() {}
 
+    enum Kind: String { case journalism, factCheck, primary }
+    struct Profile {
+        let name: String
+        let kind: Kind
+        let editorialOrigin: String
+        let specialties: Set<String>
+    }
+    static let factCheckDomains = ["aosfatos.org", "www.agencialupa.org", "g1.globo.com", "estadao.com.br"]
+    static func profile(for domain: String) -> Profile {
+        let clean = domain.replacingOccurrences(of: "www.", with: "")
+        let names = ["g1.globo.com": "G1", "aosfatos.org": "Aos Fatos", "agencialupa.org": "Lupa",
+                     "agenciabrasil.ebc.com.br": "Agência Brasil", "bbc.com": "BBC", "who.int": "OMS",
+                     "camara.leg.br": "Câmara dos Deputados", "senado.leg.br": "Senado Federal",
+                     "tse.jus.br": "Tribunal Superior Eleitoral", "stf.jus.br": "Supremo Tribunal Federal"]
+        let primary = clean.hasSuffix("gov.br") || clean.hasSuffix("leg.br") || clean.hasSuffix("jus.br") || clean == "who.int"
+        let factCheck = ["aosfatos.org", "agencialupa.org"].contains(clean)
+        let origin = clean.hasSuffix("globo.com") ? "grupo-globo" : clean.hasSuffix("ebc.com.br") ? "ebc" : clean
+        let specialties: Set<String> = clean == "who.int" ? ["saude"] : clean == "tse.jus.br" ? ["eleicoes"] : []
+        return Profile(name: names[clean] ?? clean, kind: primary ? .primary : factCheck ? .factCheck : .journalism,
+                       editorialOrigin: origin, specialties: specialties)
+    }
+
     /// Domínios enviados em `include_domains` na chamada de busca (RF-02.3) e usados pelo
     /// `AllowlistFilter` para descartar o que vazar (RF-03.5).
     ///

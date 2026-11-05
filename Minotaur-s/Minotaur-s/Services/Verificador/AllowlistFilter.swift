@@ -89,7 +89,7 @@ enum AllowlistFilter {
     }
 
     static func isAllowed(_ url: URL) -> Bool {
-        matchedDomain(for: url) != nil
+        url.scheme?.lowercased() == "https" && url.user == nil && url.password == nil && matchedDomain(for: url) != nil
     }
 
     /// Sobrecarga para URL em string — formato em que a Tavily devolve o campo `url`.

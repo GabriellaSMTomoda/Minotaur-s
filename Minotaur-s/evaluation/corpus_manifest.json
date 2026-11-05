@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "status": "awaiting_independent_human_annotation",
+  "target_counts": {
+    "train": 600,
+    "calibration": 300,
+    "test": 300
+  },
+  "pending_candidates": 204,
+  "reviewed_claims": 0,
+  "known_regression_pairs": 15,
+  "notes": [
+    "Quiz verdicts are suggestions only; no copied rationale is gold.",
+    "Event/family/source grouping requires human review before partitioning.",
+    "Known regressions cannot be used as blind test claims."
+  ]
+}

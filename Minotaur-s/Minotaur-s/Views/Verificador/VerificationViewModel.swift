@@ -81,9 +81,11 @@ final class VerificationViewModel: ObservableObject {
     /// Falso quando os modelos não carregam: a verificação fica bloqueada, mas o app continua
     /// funcionando (RF-10.3).
     @Published private(set) var isAvailable: Bool = true
+    @Published private(set) var claimCandidates: [String] = []
 
     private let runner: VerificationRunner
     private var runningTask: Task<Void, Never>?
+    private var runID: UUID?
 
     init(runner: VerificationRunner = .production()) {
         self.runner = runner
@@ -130,6 +132,31 @@ final class VerificationViewModel: ObservableObject {
         guard canVerify else { return }
 
         let claim = claimText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let analysis = ClaimAnalyzer.analyze(claim)
+        guard !analysis.needsRephrasing else { failure = .claimNeedsRephrasing; return }
+        guard analysis.candidates.count == 1 else {
+            claimCandidates = analysis.candidates
+            failure = .claimNeedsSelection
+            return
+        }
+        start(claim: claim)
+    }
+
+    func selectClaim(_ claim: String) {
+        guard claimCandidates.contains(claim), !isVerifying else { return }
+        guard VerificationPresentation.validate(claim: claim).allowsVerification else {
+            failure = .claimNeedsRephrasing; claimCandidates = []; return
+        }
+        claimCandidates = []
+        claimText = claim
+        verify()
+    }
+
+    func dismissClaimSelection() { claimCandidates = []; failure = nil }
+
+    private func start(claim: String) {
+        let id = UUID()
+        runID = id
         failure = nil
         result = nil
         stage = .searching
@@ -137,15 +164,17 @@ final class VerificationViewModel: ObservableObject {
         // O handler é montado aqui, e não dentro do `Task`, para capturar `self` uma única vez:
         // capturar de novo lá dentro seria referência a variável capturada em código
         // concorrente (erro no modo Swift 6).
-        let onProgress = progressHandler()
+        let onProgress = progressHandler(id: id)
 
         // O `Task` herda o isolamento do `MainActor`, então `finish` é chamado direto; quem
         // sai da main thread é o `verify` do coordenador, que é uma função não-isolada.
         runningTask = Task { [weak self, runner] in
             do {
                 let verification = try await runner.verify(claim: claim, onProgress: onProgress)
+                guard self?.runID == id else { return }
                 self?.finish(with: verification)
             } catch {
+                guard self?.runID == id else { return }
                 self?.finish(withError: error)
             }
         }
@@ -155,12 +184,12 @@ final class VerificationViewModel: ObservableObject {
     ///
     /// Chega do executor de fundo, então salta para o `MainActor` antes de tocar em estado de
     /// UI. `nonisolated` porque a closure precisa ser `@Sendable`.
-    private nonisolated func progressHandler() -> VerificationPipeline.ProgressHandler {
+    private nonisolated func progressHandler(id: UUID) -> VerificationPipeline.ProgressHandler {
         { [weak self] stage in
             Task { @MainActor in
                 // Depois de cancelar, um progresso atrasado não pode reacender o indicador
                 // que a tela já apagou.
-                guard let self, self.isVerifying else { return }
+                guard let self, self.isVerifying, self.runID == id else { return }
                 self.stage = stage
             }
         }
@@ -173,6 +202,7 @@ final class VerificationViewModel: ObservableObject {
     /// coordenador impedem qualquer inferência adicional. Aqui só resta desfazer o estado de
     /// UI — **sem tocar em `claimText`** (CA-09).
     func cancel() {
+        runID = nil
         runningTask?.cancel()
         runningTask = nil
         stage = nil

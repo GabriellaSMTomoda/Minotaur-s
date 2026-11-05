@@ -16,6 +16,7 @@ import Foundation
 /// `convert_embeddings.py` do Spike 2), então a saída já é o vetor de sentença pronto —
 /// normalizar de novo em Swift seria redundante e mudaria a escala da similaridade.
 struct EmbeddingService {
+    private static let predictionLock = NSLock()
 
     /// Limiar mínimo de similaridade de cosseno (RF-06.7 / DT-24).
     ///
@@ -80,7 +81,7 @@ struct EmbeddingService {
             "attention_mask": MLFeatureValue(multiArray: attentionMask),
         ])
 
-        let output = try model.prediction(from: input)
+        let output = try Self.predictionLock.withLock { try model.prediction(from: input) }
         guard let array = output.featureValue(for: "embedding")?.multiArrayValue else {
             throw VerificationError.modelLoadFailed
         }
@@ -120,6 +121,34 @@ struct EmbeddingService {
     struct ScoredChunk: Equatable {
         let text: String
         let similarity: Double
+    }
+
+    func tokenCount(_ text: String) -> Int { tokenizer.tokenCount(text) }
+    func prepareClaim(_ claim: String) throws -> [Float]? { try embedding(for: claim) }
+
+    func selectTopChunks(claim: String, chunks: [String], claimVector: [Float]?,
+                         budget: VerificationBudget) throws -> [ScoredChunk] {
+        guard !chunks.isEmpty else { return [] }
+        let vector = try claimVector ?? embedding(for: claim)
+        let lexical = HybridRetrieval.bm25(query: claim, documents: chunks)
+        // Keep inference bounded even for very long articles. Include distributed windows
+        // alongside lexical matches so later corrections/semantically different text survive.
+        var candidates = Array(chunks.indices.sorted { lexical[$0] == lexical[$1] ? $0 < $1 : lexical[$0] > lexical[$1] }.prefix(48))
+        let strideSize = max(1, chunks.count / 16)
+        candidates += stride(from: 0, to: chunks.count, by: strideSize).prefix(16)
+        var seen = Set<Int>()
+        candidates = candidates.filter { seen.insert($0).inserted }.sorted()
+        var texts: [String] = [], similarities: [Double] = [], lexicalScores: [Double] = []
+        for index in candidates {
+            try budget.checkAnalysis()
+            texts.append(chunks[index])
+            let windowVector = try budget.embedding(for: chunks[index]) { try embedding(for: chunks[index]) }
+            similarities.append(Self.cosineSimilarity(vector, windowVector))
+            lexicalScores.append(lexical[index])
+        }
+        return HybridRetrieval.fusedOrder(lexical: lexicalScores, semantic: similarities)
+            .prefix(Self.topChunkCount)
+            .map { ScoredChunk(text: texts[$0], similarity: similarities[$0]) }
     }
 
     /// Os chunks de um artigo que seguem para o NLI (RF-06.6 / CA-07).

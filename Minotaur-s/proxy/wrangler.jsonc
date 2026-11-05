@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "minotaurs-tavily-proxy",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-04",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "d1_databases": [{
+    "binding": "SEARCH_BUDGET",
+    "database_name": "minotaurs-search-budget",
+    "database_id": "eca0d7e5-871b-46a9-b165-eb8d2d7e2b6a",
+    "migrations_dir": "migrations"
+  }]
+}

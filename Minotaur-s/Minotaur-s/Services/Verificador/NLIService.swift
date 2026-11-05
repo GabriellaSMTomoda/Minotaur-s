@@ -14,6 +14,9 @@ import Foundation
 /// Foi selecionado exclusivamente pelo macro-F1 do PLUE dev_matched e passou depois pelo gate
 /// adversarial, pela paridade PyTorch/Core ML e pelos limites de RAM e latência em iPhone físico.
 struct NLIService {
+    // A cancelled session may still be finishing one synchronous Core ML call when
+    // the user starts another. Never invoke the shared model concurrently.
+    private static let predictionLock = NSLock()
 
     /// Limiar mínimo de confiança (RF-07.5 / DT-25). Abaixo dele o rótulo vira `neutral`.
     ///
@@ -21,7 +24,7 @@ struct NLIService {
     /// confiança 0,66, na mesma faixa de um entailment correto. Quem o filtra é o piso de
     /// similaridade da RF-06.7 — o par tinha similaridade 0,09 e nem chega aqui. Os dois
     /// limiares resolvem o risco **em conjunto**; mexer em um sem o outro reabre o buraco.
-    static let minimumConfidence: Double = 0.50
+    static let minimumConfidence = EvidencePolicy.current.minimumConfidence
 
     private let model: MLModel
     private let tokenizer: BERTTokenizer
@@ -53,6 +56,9 @@ struct NLIService {
             configuration: configuration,
             bundle: bundle
         )
+        let metadata = model.modelDescription.metadata[.creatorDefinedKey] as? [String: String]
+        let version = metadata?["model_version"] ?? EvidencePolicy.baseline.modelVersion
+        guard version == EvidencePolicy.current.modelVersion else { throw VerificationError.modelLoadFailed }
         return NLIService(
             model: model,
             tokenizer: try BERTTokenizer.nli(bundle: bundle),
@@ -94,6 +100,8 @@ struct NLIService {
     struct Prediction: Equatable {
         let label: NLILabel
         let confidence: Double
+        let probabilities: NLIProbabilities
+        let rawLogits: [Double]
     }
 
     /// Roda o modelo para um par premissa/hipótese (RF-07.1 / RF-07.2).
@@ -124,7 +132,7 @@ struct NLIService {
             "token_type_ids": MLFeatureValue(multiArray: tokenTypeIDs),
         ])
 
-        let output = try model.prediction(from: input)
+        let output = try Self.predictionLock.withLock { try model.prediction(from: input) }
         guard let array = output.featureValue(for: "logits")?.multiArrayValue,
               array.count == labels.count
         else {
@@ -135,38 +143,36 @@ struct NLIService {
         for index in 0..<array.count {
             logits[index] = array[index].doubleValue
         }
+        guard logits.allSatisfy(\.isFinite) else { throw VerificationError.modelLoadFailed }
 
         // O grafo devolve logits crus — o softmax foi deixado de fora na conversão (Spike 2c).
-        let probabilities = Self.softmax(logits)
+        let probabilities = Self.softmax(logits.map { $0 / EvidencePolicy.current.temperature })
         guard let best = probabilities.indices.max(by: { probabilities[$0] < probabilities[$1] })
         else {
             throw VerificationError.modelLoadFailed
         }
-        return Prediction(label: labels[best], confidence: probabilities[best])
+        let values = Dictionary(uniqueKeysWithValues: zip(labels, probabilities))
+        return Prediction(label: labels[best], confidence: probabilities[best],
+                          probabilities: NLIProbabilities(entailment: values[.entailment] ?? 0,
+                                                          neutral: values[.neutral] ?? 0,
+                                                          contradiction: values[.contradiction] ?? 0), rawLogits: logits)
     }
 
-    /// Rótulo de um artigo a partir dos chunks selecionados (RF-07.3 / RF-07.4).
-    ///
-    /// **Neutro não compete entre chunks.** Vence a predição *direcional* (entailment ou
-    /// contradiction) de maior probabilidade; o artigo só fica neutro se nenhuma direcional
-    /// alcançar `minimumConfidence`.
-    ///
-    /// A leitura literal da RF-07.3 — argmax sobre todos os chunks, neutro incluído — foi
-    /// medida e não funciona: o modelo é confiantíssimo ao declarar neutralidade sobre texto
-    /// fora do assunto (0,9930 num chunk distrator, contra 0,9883 de um entailment correto no
-    /// mesmo artigo). Como a RF-06.6 sempre manda até 3 chunks e artigo real quase sempre tem
-    /// algum fora do assunto, o vencedor seria sistematicamente um neutro confiante e o
-    /// veredito colapsaria em `SEM_INFORMACAO`. Esta regra espelha no nível do artigo o mesmo
-    /// princípio que a DT-26 já adota no nível do veredito.
-    ///
-    /// O chunk vencedor é o que vira o trecho citado na tela (RF-09.4).
-    ///
-    /// - Returns: `nil` se não houver chunk selecionado; o artigo não vira fonte analisada.
+    /// Compatibility article label plus full passage evidence. Neutral distractors do
+    /// not defeat directional evidence; opposing qualified passages produce `mixed`.
+    /// The final aggregator applies single-origin thresholds to each passage separately.
     func label(for claim: String, chunks: [EmbeddingService.ScoredChunk]) throws -> ArticleLabel? {
+        try classify(claim: claim, chunks: chunks, budget: VerificationBudget())
+    }
+
+    func tokenCount(_ text: String) -> Int { tokenizer.tokenCount(text) }
+
+    func classify(claim: String, chunks: [EmbeddingService.ScoredChunk], budget: VerificationBudget) throws -> ArticleLabel? {
         guard !chunks.isEmpty else { return nil }
 
         var scored: [(chunk: EmbeddingService.ScoredChunk, prediction: Prediction)] = []
         for chunk in chunks {
+            try budget.reservePairs()
             scored.append((chunk, try predict(premise: chunk.text, hypothesis: claim)))
         }
 
@@ -175,12 +181,18 @@ struct NLIService {
             .filter { $0.prediction.label != .neutral }
             .filter { $0.prediction.confidence >= Self.minimumConfidence }
 
+        let evidence = scored.map { EvidencePassage(text: $0.chunk.text, probabilities: $0.prediction.probabilities,
+                                                    similarity: $0.chunk.similarity, rawLogits: $0.prediction.rawLogits) }
+        let hasSupport = directional.contains { $0.prediction.label == .entailment }
+        let hasRefutation = directional.contains { $0.prediction.label == .contradiction }
         if let best = directional.max(by: { $0.prediction.confidence < $1.prediction.confidence }) {
             return ArticleLabel(
                 label: best.prediction.label,
                 confidence: best.prediction.confidence,
                 similarity: best.chunk.similarity,
-                excerpt: best.chunk.text
+                excerpt: best.chunk.text,
+                stance: hasSupport && hasRefutation ? .mixed : hasSupport ? .supports : .refutes,
+                evidence: evidence
             )
         }
 
@@ -193,7 +205,7 @@ struct NLIService {
             label: .neutral,
             confidence: fallback.prediction.confidence,
             similarity: fallback.chunk.similarity,
-            excerpt: fallback.chunk.text
+            excerpt: fallback.chunk.text, stance: .insufficient, evidence: evidence
         )
     }
 
@@ -205,6 +217,8 @@ struct NLIService {
         /// Chunk que motivou o rótulo. O truncamento em 300 caracteres da RF-09.4 é feito
         /// pelo `SourceResult.init`, não aqui — o texto inteiro ainda pode ser útil.
         let excerpt: String
+        var stance: SourceStance? = nil
+        var evidence: [EvidencePassage] = []
     }
 
     // MARK: - Softmax

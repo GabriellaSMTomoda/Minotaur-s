@@ -26,3 +26,6 @@ xcuserdata/
 *.swp
 *.swo
 *.orig
+
+# Local Core ML weights; integrity manifest and restore scripts are versioned.
+Minotaur-s/Minotaur-s/Resources/Models/

@@ -246,6 +246,7 @@
 				34535AE799958938CFB251A6 /* Sources */,
 				FA5E0007000000000000AA01 /* Frameworks */,
 				ECB3BB9297AC8B912A5658A2 /* Resources */,
+				FA5E0010000000000000AA01 /* Verify local inference assets */,
 			);
 			buildRules = (
 			);
@@ -328,6 +329,55 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FA5E0010000000000000AA01 /* Verify local inference assets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = ();
+			inputPaths = (
+				"$(SRCROOT)/scripts/verify-model-assets.py",
+				"$(SRCROOT)/Minotaur-s/Resources/Verification/VerificationModelManifest.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/VerificationModelManifest.json",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/NLI.mlmodelc/analytics/coremldata.bin",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLI.mlmodelc/analytics/coremldata.bin",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/NLI.mlmodelc/coremldata.bin",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLI.mlmodelc/coremldata.bin",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/NLI.mlmodelc/metadata.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLI.mlmodelc/metadata.json",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/NLI.mlmodelc/model.mil",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLI.mlmodelc/model.mil",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/NLI.mlmodelc/weights/weight.bin",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLI.mlmodelc/weights/weight.bin",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/Embeddings.mlmodelc/analytics/coremldata.bin",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Embeddings.mlmodelc/analytics/coremldata.bin",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/Embeddings.mlmodelc/coremldata.bin",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Embeddings.mlmodelc/coremldata.bin",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/Embeddings.mlmodelc/metadata.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Embeddings.mlmodelc/metadata.json",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/Embeddings.mlmodelc/model.mil",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Embeddings.mlmodelc/model.mil",
+				"$(SRCROOT)/Minotaur-s/Resources/Models/Embeddings.mlmodelc/weights/weight.bin",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Embeddings.mlmodelc/weights/weight.bin",
+				"$(SRCROOT)/Minotaur-s/Resources/Tokenizers/EmbeddingsTokenizer.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/EmbeddingsTokenizer.json",
+				"$(SRCROOT)/Minotaur-s/Resources/Tokenizers/EmbeddingsTokenizerConfig.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/EmbeddingsTokenizerConfig.json",
+				"$(SRCROOT)/Minotaur-s/Resources/Tokenizers/NLILabels.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLILabels.json",
+				"$(SRCROOT)/Minotaur-s/Resources/Tokenizers/NLITokenizer.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLITokenizer.json",
+				"$(SRCROOT)/Minotaur-s/Resources/Tokenizers/NLITokenizerConfig.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLITokenizerConfig.json",
+			);
+			name = "Verify local inference assets";
+			outputPaths = ();
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = " /usr/bin/python3 \"$SRCROOT/scripts/verify-model-assets.py\" --resources \"$SRCROOT/Minotaur-s/Resources\" --bundle \"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		34535AE799958938CFB251A6 /* Sources */ = {

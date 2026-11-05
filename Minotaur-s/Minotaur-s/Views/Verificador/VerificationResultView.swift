@@ -26,6 +26,17 @@ struct VerificationResultView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     verdictCard
                     claimCard
+                    if !result.diagnostics.limitations.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Label("Limites desta análise", systemImage: "info.circle").font(.headline)
+                            ForEach(result.diagnostics.limitations, id: \.rawValue) { issue in
+                                Text(VerificationPresentation.limitationText(issue)).font(.footnote)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
+                    }
 
                     if result.sources.isEmpty {
                         emptySourcesNotice
@@ -107,11 +118,8 @@ struct VerificationResultView: View {
     }
 
     private var sourceCountText: String {
-        switch result.sources.count {
-        case 0: return "Nenhuma fonte analisada."
-        case 1: return "1 fonte analisada."
-        default: return "\(result.sources.count) fontes analisadas."
-        }
+        let stats = result.diagnostics
+        return "\(stats.foundArticles) artigos encontrados · \(stats.readArticles) lidos · \(stats.usedSources) usados na decisão · \(stats.independentOrigins) origens."
     }
 
     private var claimCard: some View {
@@ -122,6 +130,9 @@ struct VerificationResultView: View {
             Text(result.claim)
                 .font(.callout)
                 .fixedSize(horizontal: false, vertical: true)
+            if let context = result.context {
+                Text(periodText(context)).font(.caption).foregroundStyle(.secondary)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
@@ -145,12 +156,16 @@ struct VerificationResultView: View {
         VStack(alignment: .leading, spacing: 8) {
             // Nome do veículo + rótulo individual (RF-09.2).
             HStack(alignment: .firstTextBaseline) {
-                Text(source.domain)
+                Text(TrustedDomain.profile(for: source.domain).name)
                     .font(.caption)
                     .bold()
                     .foregroundStyle(.secondary)
                 Spacer(minLength: 8)
-                labelBadge(source.label)
+                if source.stance == .mixed {
+                    Text("Passagens divergentes").font(.caption2.bold()).foregroundStyle(.orange)
+                } else {
+                    labelBadge(source.isEligible ? source.label : .neutral)
+                }
             }
 
             Text(source.title)
@@ -178,9 +193,19 @@ struct VerificationResultView: View {
             }
 
             // Score de confiança (RF-09.2).
-            Text(VerificationPresentation.confidenceText(source.confidence))
+            Text(VerificationPresentation.evidenceText(source))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
+            if source.stance == .mixed {
+                ForEach(Array(source.evidence.filter { $0.probabilities.bestLabel != source.label }.prefix(1).enumerated()), id: \.offset) { _, passage in
+                    Text("“\(VerificationPresentation.excerptText(passage.text))”")
+                        .font(.footnote).italic()
+                }
+            }
+            if let publishedAt = source.publishedAt {
+                Text("Publicação: \(publishedAt.formatted(date: .abbreviated, time: .omitted))")
+                    .font(.caption2).foregroundStyle(.secondary)
+            }
 
             // Link explícito e semântico para o artigo original (RF-09.2 / RF-09.4).
             Button {
@@ -190,12 +215,20 @@ struct VerificationResultView: View {
                     .font(.subheadline.weight(.semibold))
             }
             .controlSize(.regular)
+            .frame(minHeight: 44)
             .tint(.blue)
             .accessibilityHint("Abre o artigo original de \(source.domain).")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    private func periodText(_ context: ClaimContext) -> String {
+        if let start = context.startDate, let end = context.endDate {
+            return "Período considerado: \(start.formatted(date: .abbreviated, time: .omitted)) a \(end.formatted(date: .abbreviated, time: .omitted))."
+        }
+        return "Sem período explícito. Verificação em \(context.referenceDate.formatted(date: .abbreviated, time: .omitted))."
     }
 
     private func labelBadge(_ label: NLILabel) -> some View {

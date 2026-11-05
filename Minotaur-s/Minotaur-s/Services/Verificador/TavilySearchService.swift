@@ -1,235 +1,115 @@
-
-
 import Foundation
+import OSLog
 
-/// Busca artigos nos veículos da allowlist via Tavily (RF-04).
-///
-/// O app **nunca** fala com a Tavily diretamente e **nunca** embarca a chave de API: toda
-/// chamada vai para um proxy serverless (Cloudflare Workers) que injeta a chave e repassa a
-/// resposta (NF-09 / DT-21). Chave embarcada no binário é extraível por engenharia reversa,
-/// então o proxy é a única proteção real. O código do Worker está em `proxy/`.
-/// `Sendable` porque o coordenador o usa de dentro de tarefas concorrentes: os dois campos são
-/// imutáveis e a `URLSession` já é segura entre threads.
+/// Official search API only. All queries/retries in a verification share one budget.
 struct TavilySearchService: Sendable {
-
-    /// URL do Worker que faz o proxy da Tavily.
-    ///
-    /// **Ainda não configurada** — o Worker em `proxy/` existe mas não foi deployado. Até que
-    /// haja uma URL aqui, `search` falha com `.searchRequestFailed` antes de tocar a rede.
-    /// Preencher com a URL devolvida por `wrangler deploy` (ver `proxy/README.md`).
-    /// Nunca colocar a chave da Tavily neste arquivo — é justamente o que o proxy evita.
+    private static let logger = Logger(subsystem: "com.julia.fatoufarsa2025", category: "SearchTransport")
     static let proxyEndpoint = "https://minotaurs-tavily-proxy.hen-lac-sil.workers.dev"
-
-    /// Quantos resultados pedir à API (RF-04.3 / DT-19).
-    ///
-    /// Pedimos mais do que os 5 que serão usados porque o `include_domains` da Tavily não é
-    /// um filtro rígido: o Spike 5 mediu vazamento em 4 de 20 buscas. Pedir 10 e truncar
-    /// depois do filtro local reduziu o vazamento na evidência observada.
-    static let requestedResultCount = 10
-
-    /// Timeout da chamada de busca. Mais folgado que os 8 s por artigo (RF-05.4) porque a
-    /// busca é ponto único de falha da verificação inteira; a latência média medida no
-    /// Spike 5 foi de 1,62 s.
-    static let timeout: TimeInterval = 15
-
+    static let requestedResultCount = 20
+    // Worker permits 4.5 s upstream; leave room for TLS, routing and body transfer.
+    // The shared 11 s collection deadline still caps this request and its retry.
+    static let timeout: TimeInterval = 6
     private let session: URLSession
     private let endpoint: String
-
-    /// - Parameters:
-    ///   - session: injetável para teste sem rede (`URLProtocol` mock).
-    ///   - endpoint: injetável para teste; o padrão é o Worker de produção.
     init(session: URLSession = .shared, endpoint: String = TavilySearchService.proxyEndpoint) {
-        self.session = session
-        self.endpoint = endpoint
+        self.session = session; self.endpoint = endpoint
     }
-
-    // MARK: - Busca
-
-    /// Busca artigos para a query, já filtrados pela allowlist e truncados (RF-04.3).
-    ///
-    /// A ordem é obrigatória e não é intercambiável: **filtrar por allowlist e só então
-    /// truncar** em 5. Truncar antes deixaria resultados vazados ocuparem vagas de fontes
-    /// válidas (RF-03.5 seguido de RF-04.3).
-    ///
-    /// - Returns: array vazio quando a busca não encontrou nada, ou quando tudo que voltou
-    ///   estava fora da allowlist. Quem transforma isso em `NÃO ENCONTRADO` é o agregador
-    ///   (RF-04.4) — o vazio aqui **não** é erro, e é por isso que falha de rede lança em vez
-    ///   de devolver vazio (RF-04.5).
-    /// - Throws: `VerificationError` mapeado por `mapError`.
-    func search(query: String) async throws -> [SearchResultItem] {
-        let response = try await performWithRetry(query: query)
-        return AllowlistFilter.filter(response.results, url: \.resolvedURL)
-    }
-
-    /// Lista de domínios efetivamente consultados numa verificação (RF-09.6).
-    /// É a allowlist inteira: a restrição vai em `include_domains` numa única chamada (RF-02.3).
-    static var consultedDomains: [String] {
-        TrustedDomain.allowlist.sorted()
-    }
-
-    /// Satisfaz `ArticleSearching.consultedDomains` (RF-09.6 / DT-32): o coordenador lê essa
-    /// lista pela porta, não pelo tipo concreto, para que `VerificationResult.consultedDomains`
-    /// venha do mesmo lugar em produção e em teste (mocks têm a própria lista fixa).
+    static var consultedDomains: [String] { TrustedDomain.allowlist.sorted() }
     var consultedDomains: [String] { Self.consultedDomains }
 
-    // MARK: - Retry
+    func search(query: String) async throws -> [SearchResultItem] {
+        let context = ClaimAnalyzer.context(for: query)
+        return try await search(SearchQuery(text: query, kind: .descriptive, context: context), budget: VerificationBudget())
+    }
 
-    /// Executa a busca com **uma única** tentativa adicional (RF-04.6 / DT-27).
-    ///
-    /// A tentativa extra vale só para erro transitório — HTTP 5xx e timeout. `401` e `429`
-    /// **nunca** são reafetados: repetir uma chave inválida não a torna válida, e repetir um
-    /// rate-limit só piora o rate-limit.
-    ///
-    /// Retry por artigo individual continua em aberto (item 14 da seção 7.3) e não é feito
-    /// aqui nem no `ArticleExtractor`.
-    private func performWithRetry(query: String) async throws -> TavilyResponse {
-        do {
-            return try await perform(query: query)
-        } catch let failure as SearchFailure {
-            guard failure.isRetriable else { throw failure.verificationError }
-
+    func search(_ query: SearchQuery, budget: VerificationBudget) async throws -> [SearchResultItem] {
+        for attempt in 0..<2 {
             do {
-                return try await perform(query: query)
-            } catch let retryFailure as SearchFailure {
-                throw retryFailure.verificationError
+                try budget.reserveSearch()
+                let response = try await perform(query, budget: budget)
+                return AllowlistFilter.filter(response.results, url: \.resolvedURL, limit: 20)
+            } catch {
+                try Task.checkCancellation()
+                if let failure = error as? SearchFailure {
+                    if attempt == 0 && failure.retriable && budget.searchCalls < 3 && budget.networkRemaining > 0.5 { continue }
+                    throw failure.error
+                }
+                throw error
             }
         }
+        throw VerificationError.searchRequestFailed
     }
 
-    private func perform(query: String) async throws -> TavilyResponse {
-        guard !endpoint.isEmpty, let url = URL(string: endpoint) else {
-            // Worker ainda não deployado (ver `proxyEndpoint`). Falha antes da rede, com a
-            // categoria de erro que a UI já sabe exibir (RF-10.4). Não é retriável: repetir
-            // não faz surgir um endpoint.
-            throw SearchFailure.requestFailed
-        }
-
+    private func perform(_ query: SearchQuery, budget: VerificationBudget) async throws -> TavilyResponse {
+        guard let url = URL(string: endpoint), url.scheme == "https", url.host != nil else { throw SearchFailure.failed }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.timeoutInterval = min(Self.timeout, budget.networkRemaining)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = Self.timeout
-        request.httpBody = try JSONEncoder().encode(
-            TavilyRequest(
-                query: query,
-                searchDepth: "basic",
-                maxResults: Self.requestedResultCount,
-                includeDomains: TrustedDomain.allowlist.sorted()
-            )
-        )
-
+        var body: [String: Any] = ["query": String(query.text.prefix(200)), "search_depth": "basic",
+                                  "max_results": 20, "include_domains": query.domains,
+                                  "include_domains_mode": "restrict", "include_answer": false,
+                                  "auto_parameters": false, "include_usage": true,
+                                  "language": "pt", "filter_by_language": true,
+                                  "include_published_date": true, "query_kind": query.kind.rawValue]
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "America/Sao_Paulo")
+        formatter.dateFormat = "yyyy-MM-dd"
+        // Historical events may be covered retrospectively; do not impose publication
+        // dates for those queries. Validate the event context in the extracted evidence.
+        if query.context.temporalKind == .current || query.context.temporalKind == .recent {
+            if let start = query.context.startDate { body["start_date"] = formatter.string(from: start) }
+            body["topic"] = "news"
+        }
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
         let data: Data
         let response: URLResponse
-        do {
-            (data, response) = try await session.data(for: request)
-        } catch {
-            throw Self.mapTransportError(error)
+        do { (data, response) = try await session.data(for: request) }
+        catch {
+            try Task.checkCancellation()
+            Self.logger.error("Search transport failed, code \((error as? URLError)?.code.rawValue ?? 0, privacy: .public)")
+            switch (error as? URLError)?.code {
+            case .notConnectedToInternet, .networkConnectionLost, .dataNotAllowed: throw SearchFailure.offline
+            case .timedOut: throw SearchFailure.timeout
+            default: throw SearchFailure.failed
+            }
         }
-
-        guard let http = response as? HTTPURLResponse else {
-            throw SearchFailure.requestFailed
+        guard let http = response as? HTTPURLResponse else { throw SearchFailure.failed }
+        if !(200...299).contains(http.statusCode) {
+            Self.logger.error("Search HTTP status \(http.statusCode, privacy: .public)")
         }
-        try Self.validate(status: http.statusCode)
-
-        do {
-            return try JSONDecoder().decode(TavilyResponse.self, from: data)
-        } catch {
-            // Resposta 200 malformada é falha de busca, não "nada encontrado" (RF-04.5).
-            // Não é retriável: um corpo que não decodifica não decodifica de novo.
-            throw SearchFailure.requestFailed
-        }
-    }
-
-    // MARK: - Classificação de falha
-
-    private static func mapTransportError(_ error: Error) -> SearchFailure {
-        guard let urlError = error as? URLError else { return .requestFailed }
-        switch urlError.code {
-        case .notConnectedToInternet, .networkConnectionLost, .dataNotAllowed:
-            return .noConnection // RF-10.1 / CA-08
-        case .timedOut:
-            return .timedOut // transitório: vale a tentativa extra (DT-27)
-        default:
-            return .requestFailed
-        }
-    }
-
-    private static func validate(status: Int) throws {
-        switch status {
-        case 200...299:
-            return
-        case 401, 403:
-            // Chave inválida/ausente no Worker. Formato documentado no Spike 5:
-            // {"detail": {"error": "Unauthorized: missing or invalid API key."}}.
-            // Nunca reafetado (DT-27) — é erro de configuração, não transitório.
-            throw SearchFailure.unauthorized
+        switch http.statusCode {
+        case 200...299: break
+        case 401, 403: throw SearchFailure.unauthorized
         case 429:
-            throw SearchFailure.rateLimited // RF-10.2, nunca reafetado
-        case 500...599:
-            throw SearchFailure.serverError // transitório: vale a tentativa extra
-        default:
-            throw SearchFailure.requestFailed
+            if http.value(forHTTPHeaderField: "X-Search-Error") == "quota_exceeded" {
+                budget.record(.quota); throw SearchFailure.quota
+            }
+            budget.record(.rateLimit); throw SearchFailure.rateLimit
+        case 432, 433: budget.record(.quota); throw SearchFailure.quota
+        case 500...599: throw SearchFailure.server
+        default: throw SearchFailure.failed
         }
+        guard let decoded = try? JSONDecoder().decode(TavilyResponse.self, from: data) else {
+            Self.logger.error("Search response does not match the expected JSON schema")
+            throw SearchFailure.failed
+        }
+        return decoded
     }
 }
 
-// MARK: - Falha interna
-
-/// Classificação interna da falha de busca, com a informação que o `VerificationError` não
-/// carrega: **se vale ou não a tentativa extra** da RF-04.6.
-///
-/// Existe separado porque `VerificationError` é o contrato voltado ao usuário — um caso por
-/// categoria que a tela precisa distinguir (RF-10.4). Timeout e 5xx viram a mesma mensagem
-/// para quem lê, mas são a única razão para reafetar, então a distinção fica aqui dentro e
-/// some na fronteira.
 private enum SearchFailure: Error {
-    case noConnection
-    case timedOut
-    case serverError
-    case unauthorized
-    case rateLimited
-    case requestFailed
-
-    /// Só erro transitório é reafetado. `unauthorized` e `rateLimited` nunca são (DT-27).
-    var isRetriable: Bool {
+    case offline, timeout, failed, unauthorized, quota, rateLimit, server
+    var retriable: Bool { self == .timeout || self == .server }
+    var error: VerificationError {
         switch self {
-        case .timedOut, .serverError:
-            return true
-        case .noConnection, .unauthorized, .rateLimited, .requestFailed:
-            return false
-        }
-    }
-
-    var verificationError: VerificationError {
-        switch self {
-        case .noConnection:
-            return .noConnection
-        case .rateLimited:
-            return .searchQuotaExceeded
-        case .timedOut, .serverError, .unauthorized, .requestFailed:
-            return .searchRequestFailed
+        case .offline: return .noConnection
+        case .quota: return .searchQuotaExceeded
+        case .rateLimit: return .searchRateLimited
+        default: return .searchRequestFailed
         }
     }
 }
-
-// MARK: - Contrato do proxy
-
-/// Corpo enviado ao Worker. **Não contém `api_key`** — quem a injeta é o proxy (DT-21).
-private struct TavilyRequest: Encodable {
-    let query: String
-    let searchDepth: String
-    let maxResults: Int
-    let includeDomains: [String]
-
-    enum CodingKeys: String, CodingKey {
-        case query
-        case searchDepth = "search_depth"
-        case maxResults = "max_results"
-        case includeDomains = "include_domains"
-    }
-}
-
-/// Resposta da Tavily repassada pelo Worker. Só os campos usados são modelados; os demais
-/// (`answer`, `images`, `request_id`, `response_time`) são ignorados pelo decoder.
-struct TavilyResponse: Decodable {
-    let results: [SearchResultItem]
-}
+struct TavilyResponse: Decodable { let results: [SearchResultItem] }

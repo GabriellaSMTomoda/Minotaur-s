@@ -1,49 +1,45 @@
-//
-//  VerdictAggregator.swift
-//  Minotaur-s
-//
-//  Created by Claude Code on 26/07/26.
-//
-
 import Foundation
 
-/// Agrega os rótulos por fonte no veredito final da verificação (RF-08).
-///
-/// A regra é de contagem simples, sem ponderação por score: sejam `E` o número de fontes com
-/// rótulo `entailment` e `C` o de `contradiction` — **neutro não vota** (RF-08.3 / DT-26).
-/// Os rótulos que chegam aqui já passaram pelo rebaixamento de confiança da RF-07.4, então
-/// um `entailment` presente é um `entailment` acima do limiar.
-///
-/// **Sem piso mínimo de fontes válidas**: 1 fonte já basta para um veredito diferente de
-/// `naoEncontrado`. É decisão de produto explícita da DT-26, não omissão.
+/// Counts independent, complete, temporally compatible evidence. A majority cannot erase
+/// an eligible opposing source. Missing/partial evidence is never a negative vote.
 enum VerdictAggregator {
-
-    /// Veredito agregado a partir das fontes efetivamente analisadas.
-    ///
-    /// - Parameter sources: fontes que sobreviveram a busca, extração e NLI. Fonte descartada
-    ///   por paywall, timeout ou allowlist (RF-05.3/RF-05.4/RF-03.5) **não** entra na lista —
-    ///   por isso lista vazia significa "nenhuma fonte válida analisada", que é exatamente a
-    ///   condição de `naoEncontrado` na RF-08.1.
-    static func verdict(for sources: [SourceResult]) -> Verdict {
+    static func verdict(for sources: [SourceResult], policy: EvidencePolicy = .current) -> Verdict {
         guard !sources.isEmpty else { return .naoEncontrado }
-
-        let entailment = sources.count { $0.label == .entailment }
-        let contradiction = sources.count { $0.label == .contradiction }
-
-        if entailment == 0 && contradiction == 0 {
-            // Há fonte analisada, mas nenhuma é direcional: todas neutras (RF-08.1).
-            // Distinto de `naoEncontrado`, que é ausência de fonte.
-            return .semInformacao
-        }
-        if entailment > contradiction { return .confirmado }
-        if contradiction > entailment { return .contradito }
-        return .divergente // E == C > 0
+        let decisive = votes(sources, policy: policy)
+        let support = decisive.contains { $0.label == .entailment }
+        let refute = decisive.contains { $0.label == .contradiction }
+        if support && refute { return .divergente }
+        if support { return .confirmado }
+        if refute { return .contradito }
+        return .semInformacao
     }
-}
 
-private extension Array {
-    /// `count(where:)` existe a partir do Swift 6; o alvo do projeto é Swift 5.
-    func count(_ isIncluded: (Element) -> Bool) -> Int {
-        reduce(0) { isIncluded($1) ? $0 + 1 : $0 }
+    static func contributingURLs(_ sources: [SourceResult], policy: EvidencePolicy = .current) -> Set<String> {
+        Set(votes(sources, policy: policy).map(\.url))
+    }
+
+    private struct Vote { let label: NLILabel; let confidence: Double; let origin: String; let url: String }
+    private static func votes(_ sources: [SourceResult], policy: EvidencePolicy) -> [Vote] {
+        var candidates: [Vote] = []
+        for source in sources where source.isEligible {
+            if !source.evidence.isEmpty {
+                for passage in source.evidence {
+                    let label = passage.probabilities.bestLabel
+                    let confidence = passage.probabilities.probability(of: label)
+                    if label != .neutral && confidence >= policy.minimumConfidence {
+                        candidates.append(Vote(label: label, confidence: confidence, origin: source.originGroup, url: source.url))
+                    }
+                }
+            } else if source.confidence >= policy.minimumConfidence {
+                if source.stance == .supports || source.stance == .mixed {
+                    candidates.append(Vote(label: .entailment, confidence: source.confidence, origin: source.originGroup, url: source.url))
+                }
+                if source.stance == .refutes || source.stance == .mixed {
+                    candidates.append(Vote(label: .contradiction, confidence: source.confidence, origin: source.originGroup, url: source.url))
+                }
+            }
+        }
+        let single = Set(candidates.map(\.origin)).count == 1
+        return candidates.filter { $0.confidence >= (single ? policy.singleSourceMinimumConfidence : policy.minimumConfidence) }
     }
 }

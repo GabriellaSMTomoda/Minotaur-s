@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "modelVersion": "bertimbau-base-plue-spike9",
+  "embeddingModel": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "labels": [
+    "entailment",
+    "neutral",
+    "contradiction"
+  ],
+  "recovery": "Compiled baseline recovered from the 2026-08-10 simulator app; NLI weight SHA-256 matches Spike 9 physical gate.",
+  "files": {
+    "NLI.mlmodelc/analytics/coremldata.bin": "9808f2ce576560bb881514df6b4783e402e8e36ebce043c0d08ce47094b01f3f",
+    "NLI.mlmodelc/coremldata.bin": "2683f1e7dbeaa2d98843df3aba2351933a6cd83b91c0ec0fc488b43d79ea6c27",
+    "NLI.mlmodelc/metadata.json": "bae409c704cc3970a3dc42202e1051c617ae4a428d84fe704fae6bb050ffd825",
+    "NLI.mlmodelc/model.mil": "ca458db9ed66bb84d00c4990c75885861256692aa1342daca22852b6c826db31",
+    "NLI.mlmodelc/weights/weight.bin": "8153a2b3aace8be194a1dd5577191a9f24980947f6d382935c26bbccdd5e2ac2",
+    "Embeddings.mlmodelc/analytics/coremldata.bin": "bbc8d303a2a5ab4b8b51b36058e4ae82e23ddce28e6712b2e584322089b2b6ea",
+    "Embeddings.mlmodelc/coremldata.bin": "853fcc51c06dd3065833dbe27757a7f42783c35b201759eab6878a15cdc36dd7",
+    "Embeddings.mlmodelc/metadata.json": "2a282af0ec53ff272b3d26d76592469b1cb65ef583a945271ec64869bee4bcab",
+    "Embeddings.mlmodelc/model.mil": "17f4f87a75e53ed618b023651f32a96329a5f54287079cc25ec4d09599007015",
+    "Embeddings.mlmodelc/weights/weight.bin": "fc85a3b3ab2394d829c9ed4fe70ec23a58d4b2e83be6101e5f8b08dee756423d",
+    "EmbeddingsTokenizer.json": "cad551d5600a84242d0973327029452a1e3672ba6313c2a3c3d69c4310e12719",
+    "EmbeddingsTokenizerConfig.json": "325ce3d25aefcbe9d7c89c0da7e143c29436a94926ab44d68c84da6c994c69ba",
+    "NLILabels.json": "a0b2a0bd55032dd53ff755fe74032eaa3ee051a4afab303926aba7d0cc9cbdcf",
+    "NLITokenizer.json": "a798785e1a91c93a634848b30705cae16b7a228303a899aca9997d77b6a53540",
+    "NLITokenizerConfig.json": "cfcc4a4dd9757a0ebb06c5ec8056d7dd4cb1eda36ca3609e4cfa7922c3b9f003"
+  }
+}

@@ -15,7 +15,7 @@ import Foundation
 ///
 /// Vive em `Models/` porque atravessa dois serviços: a busca o produz e o `ArticleExtractor`
 /// consome o `content` como fallback da RF-05.3.
-struct SearchResultItem: Decodable, Equatable {
+struct SearchResultItem: Decodable, Equatable, Sendable {
     /// Título da página, exibido na lista de fontes (RF-09.2).
     let title: String
 
@@ -31,6 +31,12 @@ struct SearchResultItem: Decodable, Equatable {
     /// Score de relevância (0–1) atribuído pelo provedor. Não participa do veredito — a
     /// relevância que conta no pipeline é a similaridade de cosseno da RF-06.5.
     let score: Double?
+    var publishedDate: String? = nil
+
+    enum CodingKeys: String, CodingKey {
+        case title, url, content, score
+        case publishedDate = "published_date"
+    }
 
     /// `url` convertida, ou `nil` se a string não for um URL absoluto — caso em que o
     /// resultado é descartado pelo filtro de allowlist (RF-03.5).

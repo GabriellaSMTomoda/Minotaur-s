@@ -16,6 +16,8 @@ import SwiftUI
 struct VerificadorView: View {
     @StateObject private var viewModel = VerificationViewModel()
     @FocusState private var isClaimFocused: Bool
+    @AppStorage("verificationPrivacyVersion") private var acceptedPrivacyVersion = 0
+    @State private var showsPrivacy = false
 
     var body: some View {
         ScrollView {
@@ -63,6 +65,39 @@ struct VerificadorView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbarRole(.navigationStack)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button { showsPrivacy = true } label: { Image(systemName: "hand.raised") }
+                    .accessibilityLabel("Privacidade do verificador")
+            }
+        }
+        .sheet(isPresented: $showsPrivacy) {
+            VerificationPrivacyView(requiresAcceptance: acceptedPrivacyVersion < 2) {
+                acceptedPrivacyVersion = max(2, acceptedPrivacyVersion)
+                showsPrivacy = false
+            }
+            .interactiveDismissDisabled(acceptedPrivacyVersion < 2)
+        }
+        .sheet(isPresented: Binding(get: { !viewModel.claimCandidates.isEmpty }, set: {
+            if !$0 { viewModel.dismissClaimSelection() }
+        })) {
+            NavigationStack {
+                List {
+                    Section("Escolha uma afirmação para verificar") {
+                        ForEach(viewModel.claimCandidates, id: \.self) { candidate in
+                            Button(candidate) { viewModel.selectClaim(candidate) }
+                                .foregroundStyle(.primary)
+                                .padding(.vertical, 8)
+                                .accessibilityHint("Verifica somente esta afirmação.")
+                        }
+                    }
+                }
+                .navigationTitle("Uma por vez")
+                .toolbar { ToolbarItem(placement: .cancellationAction) {
+                    Button("Voltar") { viewModel.dismissClaimSelection() }
+                } }
+            }
+        }
         .navigationDestination(isPresented: resultPresented) {
             if let result = viewModel.result {
                 VerificationResultView(result: result)
@@ -70,7 +105,10 @@ struct VerificadorView: View {
         }
         // Carrega os modelos ao abrir a tela, fora da main thread (RF-10.3 / NF-04) — não no
         // toque do botão, que somaria segundos ao orçamento da NF-03.
-        .task { await viewModel.prepare() }
+        .task {
+            showsPrivacy = acceptedPrivacyVersion < 2
+            await viewModel.prepare()
+        }
     }
 
     // MARK: - Navegação para o resultado (RF-09)
@@ -136,7 +174,7 @@ struct VerificadorView: View {
                 .frame(minHeight: 44)
                 .accessibilityLabel("Verificar notícia")
                 .accessibilityHint("Toque para verificar essa notícia contra fontes confiáveis.")
-                .disabled(!viewModel.canVerify)
+                .disabled(!viewModel.canVerify || acceptedPrivacyVersion < 2)
             }
         }
         .frame(maxWidth: .infinity, alignment: .trailing)

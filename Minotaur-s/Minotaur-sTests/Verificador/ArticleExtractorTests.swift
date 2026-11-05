@@ -225,7 +225,7 @@ struct ArticleExtractorTests {
         #expect(ArticleExtractor.timeout == 8)
     }
 
-    @Test("Erro HTTP descarta a fonte, sem retry (item 14 em aberto)")
+    @Test("Erro HTTP transitório permite exatamente um retry por artigo")
     func httpErrorDiscardsWithoutRetry() async {
         let (session, scenario) = MockURLProtocol.makeSession([.success(status: 500, body: Data())])
 
@@ -235,8 +235,8 @@ struct ArticleExtractorTests {
         let text = await ArticleExtractor(session: session).extractText(from: item)
 
         #expect(text == nil)
-        // Retry por artigo continua em aberto e não foi implementado: 1 requisição, só.
-        #expect(scenario.requestCount == 1)
+        // Uma única tentativa adicional para 5xx, dentro do orçamento global.
+        #expect(scenario.requestCount == 2)
     }
 }
 

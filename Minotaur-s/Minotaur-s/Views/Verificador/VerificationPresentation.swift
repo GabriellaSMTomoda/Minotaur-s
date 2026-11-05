@@ -156,7 +156,32 @@ enum VerificationPresentation {
 
     /// Score de confiança como porcentagem inteira (RF-09.2).
     static func confidenceText(_ confidence: Double) -> String {
-        "\(Int((confidence * 100).rounded()))% de confiança"
+        confidence >= 0.85 ? "Sinal semântico forte; confira o contexto nas fontes." : "Sinal semântico limitado; leia as evidências."
+    }
+
+    static func evidenceText(_ source: SourceResult) -> String {
+        if source.duplicateOf != nil { return "Mesma origem de outra matéria; não conta como evidência independente." }
+        if source.isPartial { return "Evidência parcial: o trecho disponível não decide o resultado." }
+        if source.temporalAlignment == .incompatible { return "A fonte trata de outro período." }
+        if source.temporalAlignment == .unknown { return "O período da fonte não pôde ser confirmado." }
+        if source.stance == .mixed { return "Foram encontradas passagens que sustentam e contradizem a afirmação." }
+        if source.stance == .insufficient { return "O conteúdo disponível não permite concluir." }
+        return "Evidência no corpo da matéria, com contexto disponível."
+    }
+
+    static func limitationText(_ issue: VerificationLimitation) -> String {
+        switch issue {
+        case .deadline: return "O prazo de coleta ou análise terminou; parte das fontes pode ter ficado de fora."
+        case .quota: return "A cota gratuita de buscas foi atingida durante a verificação."
+        case .rateLimit: return "O serviço de busca limitou temporariamente novas consultas."
+        case .searchFailure: return "Uma das buscas não pôde ser concluída."
+        case .readingFailure: return "Parte dos artigos não pôde ser lida integralmente."
+        case .partialContent: return "Trechos parciais foram mantidos apenas como contexto."
+        case .temporalUncertainty: return "Não foi possível confirmar o período de parte das fontes."
+        case .temporalMismatch: return "Fontes de outro período não participaram da decisão."
+        case .inferenceBudget: return "O limite de 24 trechos de análise foi atingido."
+        case .uncalibratedPolicy: return "A precisão desta versão ainda está em avaliação com exemplos revisados."
+        }
     }
 
     // MARK: - Atribuição (RF-09.4 / CA-10 / NF-12)
@@ -232,7 +257,7 @@ enum VerificationPresentation {
         case .searchQuotaExceeded:
             return ErrorPresentation(
                 title: "Limite de verificações atingido",
-                message: "O limite diário de verificações foi atingido. Tente novamente amanhã.",
+                message: "A cota gratuita de buscas deste mês foi atingida. Aguarde a renovação.",
                 systemImage: "hourglass",
                 // Repetir agora só consome o que já acabou.
                 isRetriable: false
@@ -246,6 +271,18 @@ enum VerificationPresentation {
                 // algo que a mesma sessão não vai entregar.
                 isRetriable: false
             )
+        case .deadlineExceeded, .searchBudgetExceeded, .inferenceBudgetExceeded:
+            return ErrorPresentation(title: "Tempo ou limite da análise atingido", message: error.localizedDescription,
+                                     systemImage: "clock", isRetriable: true)
+        case .searchRateLimited:
+            return ErrorPresentation(title: "Busca temporariamente limitada", message: error.localizedDescription,
+                                     systemImage: "hourglass", isRetriable: true)
+        case .readingIncomplete:
+            return ErrorPresentation(title: "Leitura incompleta", message: error.localizedDescription,
+                                     systemImage: "doc.text.magnifyingglass", isRetriable: true)
+        case .claimNeedsSelection, .claimNeedsRephrasing:
+            return ErrorPresentation(title: "Uma afirmação por vez", message: error.localizedDescription,
+                                     systemImage: "text.bubble", isRetriable: false)
         }
     }
 }

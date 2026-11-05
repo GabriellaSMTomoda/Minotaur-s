@@ -97,4 +97,8 @@ struct BERTTokenizer {
             tokenTypeIDs: tokenTypeIDs
         )
     }
+
+    func tokenCount(_ text: String) -> Int {
+        tokenizer.encode(text: text, addSpecialTokens: false).count
+    }
 }

@@ -69,15 +69,15 @@ struct VerificationPipelineTests {
         }
 
         // Todas as etapas rodaram, uma vez por artigo.
-        #expect(embeddings.callCount == 3)
-        #expect(nli.callCount == 3)
+        #expect(embeddings.callCount == 1) // Same article text: reuse evidence.
+        #expect(nli.callCount == 1)
         #expect(extractor.startedCount == 3)
 
         // RF-01.4: progresso na ordem buscando → lendo fontes → analisando.
         #expect(stages.recorded == [.searching, .readingSources, .analyzing])
 
         // RF-02: quem vai para a busca é a query reduzida, não a afirmação crua.
-        #expect(search.lastQuery == SearchQueryBuilder.query(from: Self.claim))
+        #expect(SearchQueryBuilder.plan(for: ClaimAnalyzer.context(for: Self.claim)).contains { $0.text == search.lastQuery })
 
         // O limite de 15 s da CA-01 (NF-03) não é asserível com mocks — é medição de rede e
         // device real. O que este teste garante é que o coordenador não acrescenta etapa
@@ -117,26 +117,17 @@ struct VerificationPipelineTests {
         #expect(!result.consultedDomains.isEmpty)
     }
 
-    @Test("Busca com resultados, mas todos descartados na extração → NÃO ENCONTRADO")
+    @Test("Artigos encontrados sem leitura utilizável geram erro específico")
     func allSourcesDiscardedIsNotFound() async throws {
-        let items = [item("https://g1.globo.com/a"), item("https://bbc.com/b")]
-        // Nenhum texto para nenhuma URL: é o que o extrator devolve em paywall, conteúdo via
-        // JavaScript ou timeout (RF-05.3/RF-05.4).
-        let extractor = MockExtractor(texts: [:])
-        let nli = MockNLI { _, _ in label() }
-
         let pipeline = VerificationPipeline(
-            search: MockSearch(returning: items),
-            extractor: extractor,
+            search: MockSearch(returning: [item("https://g1.globo.com/a")]),
+            extractor: MockExtractor(texts: [:]),
             embeddings: MockEmbeddings { _, _ in [scored()] },
-            nli: nli
+            nli: MockNLI { _, _ in label() }
         )
-        let result = try await pipeline.verify(claim: Self.claim)
-
-        // "Nenhuma fonte válida analisada → NÃO ENCONTRADO" (RF-08.1), distinto de busca vazia.
-        #expect(result.verdict == .naoEncontrado)
-        #expect(result.sources.isEmpty)
-        #expect(nli.callCount == 0)
+        await #expect(throws: VerificationError.readingIncomplete) {
+            try await pipeline.verify(claim: Self.claim)
+        }
     }
 
     // MARK: - CA-09: cancelamento
@@ -261,14 +252,14 @@ struct VerificationPipelineTests {
         #expect(result.sources.count == 2)
         #expect(result.sources.map(\.domain) == ["g1.globo.com", "estadao.com.br"])
         // A fonte descartada não gera inferência nenhuma.
-        #expect(nli.callCount == 2)
+        #expect(nli.callCount == 1) // Identical body is one evidence unit.
     }
 
     @Test("Artigo sem chunk acima do limiar não gera NLI nem vira fonte (RF-06.6 / CA-07)")
     func irrelevantArticleSkipsNLI() async throws {
         let items = [item("https://g1.globo.com/a"), item("https://bbc.com/b")]
         let extractor = MockExtractor(texts: Dictionary(
-            uniqueKeysWithValues: items.map { ($0.url, Self.articleText) }
+            uniqueKeysWithValues: items.map { ($0.url, $0.url.contains("bbc") ? "A cotação do dólar fechou em queda no mercado financeiro, segundo o relatório divulgado nesta quinta-feira pelos economistas." : Self.articleText) }
         ))
         let nli = MockNLI { _, _ in label(.entailment) }
         // Segundo artigo: nenhum chunk passou do limiar de similaridade (RF-06.7).
@@ -336,7 +327,7 @@ struct VerificationPipelineTests {
         let result = try await pipeline.verify(claim: Self.claim)
 
         #expect(result.sources.isEmpty)
-        #expect(result.verdict == .naoEncontrado)
+        #expect(result.verdict == .semInformacao)
     }
 
     // MARK: - RF-10: todo erro tem categoria

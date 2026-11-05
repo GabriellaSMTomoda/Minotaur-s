@@ -25,6 +25,13 @@ enum VerificationError: Error {
 
     /// RF-10.3 — falha ao carregar um modelo Core ML (embeddings ou NLI).
     case modelLoadFailed
+    case deadlineExceeded
+    case searchBudgetExceeded
+    case inferenceBudgetExceeded
+    case searchRateLimited
+    case readingIncomplete
+    case claimNeedsSelection
+    case claimNeedsRephrasing
 }
 
 extension VerificationError: LocalizedError {
@@ -35,9 +42,16 @@ extension VerificationError: LocalizedError {
         case .searchRequestFailed:
             return "Não foi possível concluir a busca. Tente novamente em instantes."
         case .searchQuotaExceeded:
-            return "Limite diário de verificações foi atingido. Tente novamente amanhã."
+            return "A cota gratuita de buscas deste mês foi atingida. Aguarde a renovação."
         case .modelLoadFailed:
             return "Não foi possível carregar o modelo de análise neste dispositivo."
+        case .deadlineExceeded: return "O tempo de análise terminou. Tente uma afirmação mais específica."
+        case .searchBudgetExceeded: return "As três tentativas de busca desta verificação foram usadas."
+        case .inferenceBudgetExceeded: return "O limite de trechos desta análise foi atingido."
+        case .searchRateLimited: return "Muitas buscas em pouco tempo. Aguarde alguns instantes."
+        case .readingIncomplete: return "Foram encontrados artigos, mas não foi possível ler evidências suficientes."
+        case .claimNeedsSelection: return "Escolha uma afirmação para verificar por vez."
+        case .claimNeedsRephrasing: return "Reescreva uma única afirmação completa, incluindo de quem ou do que ela trata."
         }
     }
 }

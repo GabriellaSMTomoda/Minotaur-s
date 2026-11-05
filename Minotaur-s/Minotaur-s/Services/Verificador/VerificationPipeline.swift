@@ -1,360 +1,308 @@
-//
-//  VerificationPipeline.swift
-//  Minotaur-s
-//
-//  Created by Claude Code on 26/07/26.
-//
-
 import Foundation
 
-/// Etapa corrente da verificação, exibida como indicador de progresso (RF-01.4).
-///
-/// Os três casos são exatamente os três da RF-01.4 — buscando → lendo fontes → analisando.
-/// O enum não carrega texto de UI: a cópia em português é decisão da tela (fase futura), não
-/// do coordenador.
-enum VerificationStage: Equatable, Sendable {
-    /// Consulta ao provedor de busca (RF-04).
-    case searching
-    /// Download e extração dos artigos aprovados, em paralelo (RF-05).
-    case readingSources
-    /// Embeddings, seleção de chunks e NLI (RF-06/RF-07).
-    case analyzing
-}
+enum VerificationStage: Equatable, Sendable { case searching, readingSources, analyzing }
 
-// MARK: - Portas do coordenador
-
-/// Busca de artigos na allowlist (RF-04). Implementada por `TavilySearchService`.
 protocol ArticleSearching: Sendable {
-    /// Domínios efetivamente consultados (RF-09.6 / DT-32) — pela porta, não pelo tipo
-    /// concreto, para que produção e mocks de teste alimentem `VerificationResult` do mesmo
-    /// jeito.
     var consultedDomains: [String] { get }
     func search(query: String) async throws -> [SearchResultItem]
+    func search(_ query: SearchQuery, budget: VerificationBudget) async throws -> [SearchResultItem]
 }
-
-/// Download e extração do texto principal (RF-05). Implementada por `ArticleExtractor`.
+extension ArticleSearching {
+    func search(_ query: SearchQuery, budget: VerificationBudget) async throws -> [SearchResultItem] {
+        try budget.reserveSearch()
+        return try await search(query: query.text)
+    }
+}
 protocol ArticleTextExtracting: Sendable {
     func extractText(from item: SearchResultItem) async -> String?
+    func extract(_ item: SearchResultItem, budget: VerificationBudget) async -> ArticleExtraction
 }
-
-/// Seleção dos chunks que seguem para o NLI (RF-06). Implementada por `EmbeddingService`.
+extension ArticleTextExtracting {
+    func extract(_ item: SearchResultItem, budget: VerificationBudget) async -> ArticleExtraction {
+        guard let text = await extractText(from: item) else { return ArticleExtraction(article: nil, discardReason: .network) }
+        return ArticleExtraction(article: ExtractedArticle(item: item, text: text, finalURL: item.url))
+    }
+}
 protocol ChunkSelecting {
     func selectTopChunks(claim: String, chunks: [String]) throws -> [EmbeddingService.ScoredChunk]
+    func selectTopChunks(claim: String, chunks: [String], claimVector: [Float]?, budget: VerificationBudget) throws -> [EmbeddingService.ScoredChunk]
+    func prepareClaim(_ claim: String) throws -> [Float]?
+    func tokenCount(_ text: String) -> Int
 }
-
-/// Rótulo de NLI por artigo (RF-07). Implementada por `NLIService`.
+extension ChunkSelecting {
+    func prepareClaim(_ claim: String) throws -> [Float]? { nil }
+    func tokenCount(_ text: String) -> Int { TextChunker.conservativeTokenEstimate(text) }
+    func selectTopChunks(claim: String, chunks: [String], claimVector: [Float]?, budget: VerificationBudget) throws -> [EmbeddingService.ScoredChunk] {
+        try budget.checkAnalysis()
+        return try selectTopChunks(claim: claim, chunks: chunks)
+    }
+}
 protocol ChunkClassifying {
     func label(for claim: String, chunks: [EmbeddingService.ScoredChunk]) throws -> NLIService.ArticleLabel?
+    func classify(claim: String, chunks: [EmbeddingService.ScoredChunk], budget: VerificationBudget) throws -> NLIService.ArticleLabel?
+    func tokenCount(_ text: String) -> Int
 }
-
+extension ChunkClassifying {
+    func tokenCount(_ text: String) -> Int { TextChunker.conservativeTokenEstimate(text) }
+    func classify(claim: String, chunks: [EmbeddingService.ScoredChunk], budget: VerificationBudget) throws -> NLIService.ArticleLabel? {
+        try budget.reservePairs(chunks.count)
+        return try label(for: claim, chunks: chunks)
+    }
+}
 extension TavilySearchService: ArticleSearching {}
 extension ArticleExtractor: ArticleTextExtracting {}
 extension EmbeddingService: ChunkSelecting {}
 extension NLIService: ChunkClassifying {}
 
-// MARK: - Coordenador
-
-/// Orquestra a verificação de ponta a ponta: busca → extração → embeddings → NLI → veredito.
-///
-/// É o único ponto do pipeline que conhece a **ordem** das etapas; cada serviço continua
-/// ignorando os demais (DT-17). Não tem estado: uma instância serve para verificações
-/// sucessivas, e nada de uma verificação sobrevive à outra (§5 — nenhuma persistência).
-///
-/// **Dependências por protocolo, não por tipo concreto.** `EmbeddingService` e `NLIService`
-/// carregam um `MLModel` do bundle, então um teste que dependesse deles precisaria de 216 MB
-/// de modelo e de hardware real. As quatro portas acima existem para que os testes de fluxo
-/// (CA-01/CA-02/CA-09) rodem só com mocks — os testes que exercitam os modelos de verdade
-/// continuam em `MLServicesTests`, onde a dependência é intencional.
-///
-/// **Isolamento.** `verify` é uma função async não-isolada, então roda no executor genérico
-/// mesmo quando chamada de dentro de um `Task` da View (`@MainActor`) — a inferência de Core
-/// ML nunca cai na main thread (NF-04). Marcar este tipo com `@MainActor` na fase de UI
-/// desfaria essa garantia.
+/// The only coordinator; all session content stays in memory. Network work is raced against
+/// an 11-second monotonic deadline; synchronous Core ML is checked between every prediction.
 struct VerificationPipeline {
-
-    /// Recebe cada mudança de etapa (RF-01.4).
-    ///
-    /// É chamado fora da main thread, pelo motivo do parágrafo de isolamento acima — quem
-    /// atualizar estado de UI a partir daqui precisa saltar para o `MainActor`.
     typealias ProgressHandler = @Sendable (VerificationStage) -> Void
-
-    /// Piso do orçamento de tokens por chunk, ver `chunker(for:)`.
     static let minimumChunkTokens = 64
-
     private let search: any ArticleSearching
     private let extractor: any ArticleTextExtracting
     private let embeddings: any ChunkSelecting
     private let nli: any ChunkClassifying
+    private let makeBudget: @Sendable () -> VerificationBudget
+    private let catalog: ReviewedFactCatalog
+    private let referenceDate: @Sendable () -> Date
 
-    init(
-        search: any ArticleSearching,
-        extractor: any ArticleTextExtracting,
-        embeddings: any ChunkSelecting,
-        nli: any ChunkClassifying
-    ) {
-        self.search = search
-        self.extractor = extractor
-        self.embeddings = embeddings
-        self.nli = nli
+    init(search: any ArticleSearching, extractor: any ArticleTextExtracting,
+         embeddings: any ChunkSelecting, nli: any ChunkClassifying,
+         makeBudget: @escaping @Sendable () -> VerificationBudget = { VerificationBudget() },
+         catalog: ReviewedFactCatalog = .load(), referenceDate: @escaping @Sendable () -> Date = { Date() }) {
+        self.search = search; self.extractor = extractor; self.embeddings = embeddings; self.nli = nli
+        self.makeBudget = makeBudget
+        self.catalog = catalog
+        self.referenceDate = referenceDate
     }
-
-    /// Monta o pipeline de produção, carregando os dois modelos Core ML do bundle.
-    ///
-    /// - Throws: `VerificationError.modelLoadFailed` (RF-10.3). Falhar aqui, e não no meio de
-    ///   uma verificação, é o comportamento desejado: a tela bloqueia a funcionalidade com
-    ///   mensagem própria em vez de o usuário descobrir o problema depois de esperar a busca.
     static func loadFromBundle(_ bundle: Bundle = .main) throws -> VerificationPipeline {
-        VerificationPipeline(
-            search: TavilySearchService(),
-            extractor: ArticleExtractor(),
-            embeddings: try EmbeddingService.loadFromBundle(bundle),
-            nli: try NLIService.loadFromBundle(bundle)
-        )
+        VerificationPipeline(search: TavilySearchService(), extractor: ArticleExtractor(),
+                             embeddings: try EmbeddingService.loadFromBundle(bundle), nli: try NLIService.loadFromBundle(bundle))
     }
 
-    // MARK: - Fluxo
-
-    /// Executa a verificação completa da afirmação.
-    ///
-    /// **Cancelamento (RF-01.5 / CA-09).** É cooperativo, via cancelamento do `Task` que
-    /// chamou este método: a View guarda o handle e chama `cancel()` no botão Cancelar. Há
-    /// checagem entre todas as etapas e **dentro** de cada tarefa paralela de extração — não
-    /// só na entrada. O motivo está em `extractArticles`.
-    ///
-    /// - Parameter onProgress: notificado a cada etapa, na ordem da RF-01.4.
-    /// - Returns: resultado em memória, com o veredito agregado e as fontes analisadas. Nunca
-    ///   é persistido (§5).
-    /// - Throws: `CancellationError` se a verificação foi cancelada; caso contrário sempre um
-    ///   caso de `VerificationError` (RF-10.4) — nunca um erro cru de rede ou de Core ML.
-    func verify(
-        claim: String,
-        onProgress: ProgressHandler = { _ in }
-    ) async throws -> VerificationResult {
+    func verify(claim: String, onProgress: ProgressHandler = { _ in }) async throws -> VerificationResult {
         try Task.checkCancellation()
-
-        // 1. Busca (RF-02 / RF-04).
+        let analysis = ClaimAnalyzer.analyze(claim)
+        guard !analysis.needsRephrasing else { throw VerificationError.claimNeedsRephrasing }
+        guard analysis.candidates.count == 1 else { throw VerificationError.claimNeedsSelection }
+        guard nli.tokenCount(claim) <= 509 - Self.minimumChunkTokens else { throw VerificationError.claimNeedsRephrasing }
+        let context = ClaimAnalyzer.context(for: claim, at: referenceDate())
+        let budget = makeBudget()
+        if let source = catalog.match(context) {
+            return makeResult(context: context, sources: [source], collection: Collection(items: [], articles: []), budget: budget)
+        }
         onProgress(.searching)
-        let query = SearchQueryBuilder.query(from: claim)
-        let results = try await runSearch(query: query)
+        let collected = try await collect(context: context, budget: budget, onProgress: onProgress)
         try Task.checkCancellation()
-
-        // 2. Zero resultados: veredito direto, sem extração, embeddings ou NLI (RF-04.4/CA-02).
-        //    Um resultado que só existia fora da allowlist já foi descartado pelo filtro
-        //    (RF-03.5) e chega aqui como lista vazia — para o usuário é o mesmo caso.
-        guard !results.isEmpty else {
-            return result(claim: claim, sources: [])
+        if collected.items.isEmpty {
+            if budget.limitations.contains(.deadline) { throw VerificationError.deadlineExceeded }
+            return makeResult(context: context, sources: [], collection: collected, budget: budget)
         }
-
-        // 3. Extração em paralelo (RF-05.6).
-        onProgress(.readingSources)
-        let articles = try await extractArticles(results)
-        try Task.checkCancellation()
-
-        // 4. Análise: embeddings → top-3 → NLI (RF-06 / RF-07).
+        guard !collected.articles.isEmpty else {
+            if budget.limitations.contains(.deadline) { throw VerificationError.deadlineExceeded }
+            throw VerificationError.readingIncomplete
+        }
         onProgress(.analyzing)
-        let sources = try analyze(claim: claim, articles: articles)
+        let sources = try analyze(context: context, articles: collected.articles, budget: budget)
         try Task.checkCancellation()
-
-        // 5. Agregação (RF-08). Lista vazia de fontes vira `NAO_ENCONTRADO` dentro do
-        //    agregador — inclusive quando a busca achou artigos mas todos foram descartados
-        //    por paywall, timeout ou irrelevância (RF-08.1).
-        return result(claim: claim, sources: sources)
+        return makeResult(context: context, sources: sources, collection: collected, budget: budget)
     }
 
-    // MARK: - Etapa 1: busca
-
-    private func runSearch(query: String) async throws -> [SearchResultItem] {
-        do {
-            return try await search.search(query: query)
-        } catch {
-            // Cancelar durante a busca chega aqui como `URLError.cancelled`, que o serviço já
-            // achatou em `.searchRequestFailed`. Cancelamento não é falha de busca: a checagem
-            // vem antes do mapeamento para não exibir "erro de rede" a quem tocou em Cancelar.
-            try Task.checkCancellation()
-            throw Self.mapped(error, to: .searchRequestFailed)
-        }
+    private struct Collection {
+        var items: [SearchResultItem] = []
+        var articles: [ExtractedArticle] = []
+    }
+    private enum NetworkEvent {
+        case search(Result<[SearchResultItem], Error>)
+        case article(ArticleExtraction)
+        case deadline
     }
 
-    // MARK: - Etapa 2: extração
-
-    /// Artigo aprovado na busca e com texto extraído com sucesso.
-    private struct Article {
-        let item: SearchResultItem
-        let text: String
-    }
-
-    /// Baixa e extrai os artigos **em paralelo** (RF-05.6), preservando a ordem da busca.
-    ///
-    /// A checagem de cancelamento **dentro** de cada tarefa filha não é redundante com a da
-    /// entrada: `ArticleExtractor.extractText` devolve `nil` para qualquer falha, cancelamento
-    /// incluído (é o que faz timeout e paywall descartarem a fonte sem abortar o fluxo,
-    /// CA-05/CA-06). Sem a checagem explícita depois da chamada, uma verificação cancelada no
-    /// meio do download degradaria silenciosamente para "todas as fontes foram descartadas" e
-    /// seguiria para a inferência — o oposto do que a CA-09 exige.
-    ///
-    /// Sair do grupo por erro cancela as tarefas filhas restantes, e o `URLSession` aborta os
-    /// downloads pendentes: nenhuma requisição sobrevive ao cancelamento (CA-09).
-    private func extractArticles(_ items: [SearchResultItem]) async throws -> [Article] {
-        let extractor = self.extractor
-
-        let texts = try await withThrowingTaskGroup(
-            of: (offset: Int, text: String)?.self
-        ) { group in
-            for (offset, item) in items.enumerated() {
-                group.addTask {
-                    try Task.checkCancellation()
-                    let text = await extractor.extractText(from: item)
-                    try Task.checkCancellation()
-
-                    // `nil` aqui é fonte descartada (RF-05.3/RF-05.4), não erro: o fluxo
-                    // continua com as demais.
-                    guard let text else { return nil }
-                    return (offset, text)
+    private func collect(context: ClaimContext, budget: VerificationBudget, onProgress: ProgressHandler) async throws -> Collection {
+        let queries = SearchQueryBuilder.plan(for: context)
+        guard let primary = queries.first else { throw VerificationError.claimNeedsRephrasing }
+        let search = self.search, extractor = self.extractor
+        return try await withThrowingTaskGroup(of: NetworkEvent.self) { group in
+            group.addTask {
+                do { return .search(.success(try await search.search(primary, budget: budget))) }
+                catch { return .search(.failure(error)) }
+            }
+            group.addTask {
+                try await Task.sleep(nanoseconds: UInt64(max(0, budget.networkRemaining) * 1_000_000_000))
+                return .deadline
+            }
+            var collection = Collection()
+            var pendingSearches = 1, activeDownloads = 0, scheduledDownloads = 0
+            var queue: [SearchResultItem] = []
+            var seenURLs = Set<String>(), scheduledURLs = Set<String>()
+            var expanded = false
+            var firstError: Error?
+            while let event = try await group.next() {
+                try Task.checkCancellation()
+                switch event {
+                case .deadline:
+                    budget.record(.deadline); group.cancelAll()
+                    return collection
+                case .search(let response):
+                    pendingSearches -= 1
+                    switch response {
+                    case .success(let items):
+                        for item in items where item.resolvedURL.map(AllowlistFilter.isAllowed) == true {
+                            if seenURLs.insert(HybridRetrieval.canonicalURL(item.url)).inserted { collection.items.append(item) }
+                        }
+                        queue = HybridRetrieval.rankArticles(collection.items, claim: context.text)
+                            .filter { !scheduledURLs.contains(HybridRetrieval.canonicalURL($0.url)) }
+                        let origins = Set(collection.items.compactMap { $0.resolvedURL.flatMap(AllowlistFilter.matchedDomain).map { TrustedDomain.profile(for: $0).editorialOrigin } })
+                        // Expand early while first downloads are in flight, not after spending
+                        // the network deadline reading them. Empty results also get a rescue query.
+                        if !expanded && (origins.count < 2 || collection.items.count < 4) && budget.networkRemaining > 1 {
+                            expanded = true
+                            for query in queries.dropFirst().prefix(max(0, 3 - budget.searchCalls)) {
+                                pendingSearches += 1
+                                group.addTask {
+                                    do { return .search(.success(try await search.search(query, budget: budget))) }
+                                    catch { return .search(.failure(error)) }
+                                }
+                            }
+                        }
+                    case .failure(let error):
+                        if error is CancellationError { throw CancellationError() }
+                        let failure = error as? VerificationError ?? .searchRequestFailed
+                        if failure != .searchBudgetExceeded {
+                            firstError = firstError ?? failure
+                            budget.record(failure == .searchQuotaExceeded ? .quota : failure == .searchRateLimited ? .rateLimit : .searchFailure)
+                        }
+                    }
+                case .article(let extraction):
+                    activeDownloads -= 1
+                    if let article = extraction.article { collection.articles.append(article) }
+                    if extraction.article?.isPartial == true { budget.record(.partialContent) }
+                    if extraction.discardReason != nil { budget.record(.readingFailure) }
+                    let needsRescue = extraction.article.map {
+                        $0.isPartial || context.alignment(publishedAt: $0.publishedAt, text: $0.text) != .compatible
+                    } ?? true
+                    if !expanded && needsRescue && budget.networkRemaining > 1.5 {
+                        expanded = true
+                        for query in queries.dropFirst().prefix(max(0, 3 - budget.searchCalls)) {
+                            pendingSearches += 1
+                            group.addTask {
+                                do { return .search(.success(try await search.search(query, budget: budget))) }
+                                catch { return .search(.failure(error)) }
+                            }
+                        }
+                    }
+                }
+                while activeDownloads < 4 && scheduledDownloads < 8 && !queue.isEmpty && budget.networkRemaining > 0 {
+                    if pendingSearches > 0 && scheduledDownloads >= 4 { break }
+                    let item = queue.removeFirst()
+                    guard scheduledURLs.insert(HybridRetrieval.canonicalURL(item.url)).inserted else { continue }
+                    activeDownloads += 1; scheduledDownloads += 1
+                    if scheduledDownloads == 1 { onProgress(.readingSources) }
+                    group.addTask {
+                        try Task.checkCancellation()
+                        let result = await extractor.extract(item, budget: budget)
+                        try Task.checkCancellation()
+                        return .article(result)
+                    }
+                }
+                if pendingSearches == 0 && activeDownloads == 0 {
+                    group.cancelAll()
+                    if collection.items.isEmpty, let firstError { throw firstError }
+                    let order = Dictionary(uniqueKeysWithValues: collection.items.enumerated().map { ($0.element.url, $0.offset) })
+                    collection.articles.sort { (order[$0.item.url] ?? 0) < (order[$1.item.url] ?? 0) }
+                    return collection
                 }
             }
-
-            var byOffset: [Int: String] = [:]
-            for try await produced in group {
-                guard let produced else { continue }
-                byOffset[produced.offset] = produced.text
-            }
-            return byOffset
-        }
-
-        // A ordem de conclusão das tarefas é arbitrária; a lista de fontes segue o ranking da
-        // busca, que é o que o usuário vê na tela (RF-09.2).
-        return items.enumerated().compactMap { offset, item in
-            texts[offset].map { Article(item: item, text: $0) }
+            return collection
         }
     }
 
-    // MARK: - Etapa 3: análise
-
-    /// Roda embeddings e NLI por artigo, em série.
-    ///
-    /// Serial de propósito, ao contrário da extração: os dois modelos rodam em `.cpuOnly`
-    /// (DT-18) e disputariam os mesmos núcleos, sem ganho de tempo e com pico de RAM maior
-    /// (NF-06). O paralelismo que a spec pede é o de rede (RF-05.6), e ele acontece antes.
-    ///
-    /// Artigo sem chunk acima do limiar de similaridade não gera inferência de NLI nenhuma
-    /// (RF-06.6 / CA-07) e não vira fonte analisada.
-    private func analyze(claim: String, articles: [Article]) throws -> [SourceResult] {
-        let chunker = Self.chunker(for: claim)
+    private func analyze(context: ClaimContext, articles: [ExtractedArticle], budget: VerificationBudget) throws -> [SourceResult] {
         var sources: [SourceResult] = []
-
-        for article in articles {
-            // Antes de cada artigo: cancelar não pode deixar o próximo artigo inferir (CA-09).
+        var previous: [(article: ExtractedArticle, source: SourceResult)] = []
+        do {
+            try budget.checkAnalysis()
+            let claimVector = try embeddings.prepareClaim(context.text)
+            for article in articles.sorted(by: { !$0.isPartial && $1.isPartial }) {
+                try budget.checkAnalysis()
+                if let duplicate = previous.first(where: {
+                    HybridRetrieval.canonicalURL($0.article.canonicalURL ?? $0.article.finalURL) == HybridRetrieval.canonicalURL(article.canonicalURL ?? article.finalURL)
+                    || HybridRetrieval.nearDuplicate($0.article.text, article.text)
+                }) {
+                    var copy = duplicate.source
+                    copy = SourceResult(url: article.finalURL, domain: domain(article.item), title: article.title ?? article.item.title,
+                                        label: copy.label, confidence: copy.confidence, similarity: copy.similarity, excerpt: copy.excerpt,
+                                        stance: copy.stance, provenance: article.provenance, isPartial: article.isPartial,
+                                        publishedAt: article.publishedAt, temporalAlignment: copy.temporalAlignment,
+                                        originGroup: copy.originGroup, duplicateOf: copy.url, evidence: copy.evidence,
+                                        reason: "Republicação ou conteúdo equivalente a outra matéria analisada.")
+                    sources.append(copy)
+                    continue
+                }
+                let premiseBudget = 509 - nli.tokenCount(context.text)
+                let nliChunker = TextChunker(maxTokens: premiseBudget, estimateTokens: nli.tokenCount)
+                let windows = ChunkQualityFilter.keeping(TextChunker(maxTokens: 126, estimateTokens: embeddings.tokenCount)
+                    .chunks(from: article.text).flatMap { nliChunker.chunks(from: $0) })
+                guard !windows.isEmpty else { continue }
+                let selected = try embeddings.selectTopChunks(claim: context.text, chunks: windows, claimVector: claimVector, budget: budget)
+                guard !selected.isEmpty else { continue }
+                let expanded = expand(selected, in: windows, claim: context.text)
+                guard let label = try nli.classify(claim: context.text, chunks: expanded, budget: budget) else { continue }
+                let alignment = context.alignment(publishedAt: article.publishedAt, text: label.evidence.map(\.text).joined(separator: " ") + " " + label.excerpt)
+                if article.isPartial { budget.record(.partialContent) }
+                if alignment == .unknown { budget.record(.temporalUncertainty) }
+                if alignment == .incompatible { budget.record(.temporalMismatch) }
+                let sourceDomain = domain(article.item)
+                let origin = article.originalSource.map(HybridRetrieval.canonicalURL)
+                    ?? TrustedDomain.profile(for: sourceDomain == "gov.br" ? URL(string: article.finalURL)?.host ?? sourceDomain : sourceDomain).editorialOrigin
+                let source = SourceResult(url: article.finalURL, domain: sourceDomain, title: article.title ?? article.item.title,
+                                          label: label.label, confidence: label.confidence, similarity: label.similarity, excerpt: label.excerpt,
+                                          stance: label.stance, provenance: article.provenance, isPartial: article.isPartial,
+                                          publishedAt: article.publishedAt, temporalAlignment: alignment, originGroup: origin, evidence: label.evidence,
+                                          reason: article.isPartial ? "Conteúdo parcial: usado apenas como contexto." : alignment != .compatible ? "O período da evidência não pôde ser confirmado." : nil)
+                sources.append(source); previous.append((article, source))
+            }
+        } catch let error as VerificationError where error == .deadlineExceeded || error == .inferenceBudgetExceeded {
+            budget.record(error == .deadlineExceeded ? .deadline : .inferenceBudget)
+        } catch {
             try Task.checkCancellation()
-
-            // DT-33: byline, navegação, legenda e título de página saem antes dos embeddings.
-            // Antes dos embeddings, e não entre a similaridade e o NLI, porque eles repetem as
-            // palavras-chave da afirmação e pontuam alto — deixá-los concorrer no top-3 (RF-06.6)
-            // custa uma vaga de chunk com proposição de verdade.
-            //
-            // Sobrar zero chunk é resultado legítimo: o artigo não vira fonte válida e é
-            // descartado pelo mesmo caminho de uma extração fracassada (RF-05.3), sem abortar as
-            // demais. Foi o caso do artigo cujo único chunk era o título de um Web Story.
-            let chunks = ChunkQualityFilter.keeping(chunker.chunks(from: article.text))
-            guard !chunks.isEmpty else { continue }
-
-            let selected = try runInference { try embeddings.selectTopChunks(claim: claim, chunks: chunks) }
-            guard !selected.isEmpty else { continue }
-
-            // Entre embeddings e NLI: são duas rodadas de inferência distintas, e a segunda é
-            // a cara. Cancelar durante a primeira não pode disparar a segunda.
-            try Task.checkCancellation()
-
-            guard let label = try runInference({ try nli.label(for: claim, chunks: selected) })
-            else { continue }
-
-            sources.append(
-                SourceResult(
-                    url: article.item.url,
-                    domain: Self.domain(of: article.item),
-                    title: article.item.title,
-                    label: label.label,
-                    confidence: label.confidence,
-                    similarity: label.similarity,
-                    // O corte em 300 caracteres da RF-09.4/CA-10 é feito pelo `SourceResult`.
-                    excerpt: label.excerpt
-                )
-            )
+            throw error as? VerificationError ?? .modelLoadFailed
         }
-
         return sources
     }
 
-    /// Orçamento de tokens por chunk, descontando a afirmação do usuário (RF-06.2).
-    ///
-    /// O limite de 512 é do **par** `[CLS] chunk [SEP] afirmação [SEP]`, não do chunk sozinho.
-    /// Chunk dimensionado para 512 cheios faria o tokenizador cortar a premissa na hora do NLI
-    /// (ver `BERTTokenizer.encodePair`) — o fim do chunk vencedor sumiria da inferência sem
-    /// nenhum sinal. O piso de `minimumChunkTokens` evita que uma afirmação no limite da
-    /// RF-01.2 (1.000 caracteres) produza chunks pequenos demais para carregar sentido.
-    ///
-    /// A contagem é a estimativa conservadora do `TextChunker`, não o tokenizador real: errar
-    /// para mais mantém o par dentro do limite, que é o objetivo.
-    private static func chunker(for claim: String) -> TextChunker {
-        let specialTokens = 3 // [CLS] … [SEP] … [SEP]
-        let budget = BERTTokenizer.maxSequenceLength
-            - specialTokens
-            - TextChunker.conservativeTokenEstimate(claim)
-
-        return TextChunker(maxTokens: max(minimumChunkTokens, budget))
-    }
-
-    /// Executa uma inferência mapeando qualquer erro para a categoria da RF-10.3.
-    ///
-    /// Falha de Core ML no meio da análise aborta a verificação inteira em vez de descartar só
-    /// aquele artigo: o modelo é o mesmo para todos, então o que falhou num artigo falharia em
-    /// todos. Degradar silenciosamente produziria um veredito com menos fontes e sem nenhum
-    /// sinal de que a análise está quebrada.
-    private func runInference<T>(_ body: () throws -> T) throws -> T {
-        do {
-            return try body()
-        } catch {
-            try Task.checkCancellation()
-            throw Self.mapped(error, to: .modelLoadFailed)
+    private func expand(_ selected: [EmbeddingService.ScoredChunk], in windows: [String], claim: String) -> [EmbeddingService.ScoredChunk] {
+        let available = max(1, 509 - nli.tokenCount(claim))
+        var seen = Set<String>()
+        return selected.compactMap { selected in
+            var text = selected.text
+            if let index = windows.firstIndex(of: text) {
+                // Prefer the following paragraph: rebuttals frequently follow a quoted claim.
+                for neighbor in [index + 1, index - 1] where windows.indices.contains(neighbor) {
+                    let candidate = neighbor > index ? text + " " + windows[neighbor] : windows[neighbor] + " " + text
+                    if nli.tokenCount(candidate) <= available { text = candidate }
+                }
+            }
+            guard seen.insert(text).inserted else { return nil }
+            return EmbeddingService.ScoredChunk(text: text, similarity: selected.similarity)
         }
     }
 
-    // MARK: - Resultado
-
-    private func result(claim: String, sources: [SourceResult]) -> VerificationResult {
-        VerificationResult(
-            id: UUID(),
-            claim: claim,
-            createdAt: Date(),
-            verdict: VerdictAggregator.verdict(for: sources),
-            consultedDomains: search.consultedDomains,
-            sources: sources
-        )
+    private func domain(_ item: SearchResultItem) -> String {
+        item.resolvedURL.flatMap(AllowlistFilter.matchedDomain) ?? item.resolvedURL?.host ?? ""
     }
-
-    /// Veículo a que a fonte pertence, para exibição (RF-09.2) e rastreio (RF-03.3).
-    ///
-    /// A entrada da allowlist é o valor esperado — o item já passou pelo filtro da RF-03.5, e
-    /// só chegaria aqui sem correspondência se a lista mudasse no meio da verificação. Nesse
-    /// caso vale mais mostrar o host do que descartar uma fonte já analisada.
-    private static func domain(of item: SearchResultItem) -> String {
-        guard let url = item.resolvedURL else { return item.url }
-        return AllowlistFilter.matchedDomain(for: url)
-            ?? AllowlistFilter.normalizedHost(from: url)
-            ?? item.url
-    }
-
-    // MARK: - Erros
-
-    /// Converte um erro qualquer numa categoria que a tela sabe exibir (RF-10.4).
-    ///
-    /// Não é catch-all: o `fallback` é escolhido por etapa (falha de busca na busca, modelo na
-    /// inferência), e erro que já é `VerificationError` passa intacto — é como `.noConnection`
-    /// (CA-08) e `.searchQuotaExceeded` (RF-10.2) chegam à tela com a mensagem certa.
-    /// `CancellationError` nunca vira erro de categoria: cancelar não é falhar.
-    private static func mapped(_ error: Error, to fallback: VerificationError) -> Error {
-        if error is CancellationError { return error }
-        if let error = error as? VerificationError { return error }
-        if let error = error as? URLError, error.code == .cancelled { return CancellationError() }
-        return fallback
+    private func makeResult(context: ClaimContext, sources: [SourceResult], collection: Collection, budget: VerificationBudget) -> VerificationResult {
+        var result = VerificationResult(id: UUID(), claim: context.text, createdAt: context.referenceDate,
+                                        verdict: sources.isEmpty && !collection.items.isEmpty ? .semInformacao : VerdictAggregator.verdict(for: sources),
+                                        consultedDomains: search.consultedDomains, sources: sources, context: context)
+        if !EvidencePolicy.current.calibrated && !sources.allSatisfy({ $0.provenance == .reviewedCatalog }) { budget.record(.uncalibratedPolicy) }
+        let contributing = VerdictAggregator.contributingURLs(sources)
+        result.diagnostics = VerificationDiagnostics(foundArticles: collection.items.count, readArticles: collection.articles.count,
+                                                    usedSources: contributing.count,
+                                                    independentOrigins: Set(sources.filter { contributing.contains($0.url) }.map(\.originGroup)).count,
+                                                    searchCalls: budget.searchCalls, nliPairs: budget.nliPairs,
+                                                    elapsedSeconds: budget.elapsed, limitations: budget.limitations)
+        return result
     }
 }

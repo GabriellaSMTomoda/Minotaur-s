@@ -8,7 +8,7 @@
 import Foundation
 
 /// Veredito agregado de uma verificação, conforme RF-08.1.
-enum Verdict: String, Codable {
+enum Verdict: String, Codable, CaseIterable {
     case confirmado = "CONFIRMADO"
     case contradito = "CONTRADITO"
     case divergente = "DIVERGENTE"
@@ -32,10 +32,23 @@ struct SourceResult: Codable {
     let confidence: Double
     let similarity: Double
     let excerpt: String
+    var stance: SourceStance
+    var provenance: TextProvenance
+    var isPartial: Bool
+    var publishedAt: Date?
+    var temporalAlignment: TemporalAlignment
+    var originGroup: String
+    var duplicateOf: String?
+    var evidence: [EvidencePassage]
+    var reason: String?
 
     /// `excerpt` é truncado para no máximo 300 caracteres (RF-09.4 / CA-10).
     init(url: String, domain: String, title: String, label: NLILabel,
-         confidence: Double, similarity: Double, excerpt: String) {
+         confidence: Double, similarity: Double, excerpt: String,
+         stance: SourceStance? = nil, provenance: TextProvenance = .articleBody,
+         isPartial: Bool = false, publishedAt: Date? = nil,
+         temporalAlignment: TemporalAlignment = .compatible, originGroup: String? = nil,
+         duplicateOf: String? = nil, evidence: [EvidencePassage] = [], reason: String? = nil) {
         self.url = url
         self.domain = domain
         self.title = title
@@ -43,6 +56,15 @@ struct SourceResult: Codable {
         self.confidence = confidence
         self.similarity = similarity
         self.excerpt = String(excerpt.prefix(300))
+        self.stance = stance ?? (label == .entailment ? .supports : label == .contradiction ? .refutes : .insufficient)
+        self.provenance = provenance; self.isPartial = isPartial; self.publishedAt = publishedAt
+        self.temporalAlignment = temporalAlignment
+        self.originGroup = originGroup ?? domain
+        self.duplicateOf = duplicateOf; self.evidence = evidence; self.reason = reason
+    }
+
+    var isEligible: Bool {
+        !isPartial && provenance != .searchSnippet && temporalAlignment == .compatible && duplicateOf == nil
     }
 }
 
@@ -58,4 +80,6 @@ struct VerificationResult: Codable {
     /// o que foi consultado.
     let consultedDomains: [String]
     let sources: [SourceResult]
+    var context: ClaimContext? = nil
+    var diagnostics = VerificationDiagnostics()
 }

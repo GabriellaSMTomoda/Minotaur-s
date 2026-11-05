@@ -59,7 +59,11 @@ struct ChunkQualityFilterTests {
 
     @Test("Manchete nominal sem verbo é descartada")
     func verblessHeadlineIsRejected() {
-        #expect(ChunkQualityFilter.rejection(for: "Balanço do mercado imobiliário no primeiro semestre de 2025") == .noVerb)
+        let text = "Balanço do mercado imobiliário no primeiro semestre de 2025"
+        // On a physical device NLTagger can finish loading language assets between two
+        // calls. Exercise both states without assuming the first call fixes the second.
+        #expect(ChunkQualityFilter.rejection(for: text, verbDetector: { _ in false }) == .noVerb)
+        #expect(ChunkQualityFilter.rejection(for: text, verbDetector: { _ in nil }) == nil)
     }
 
     // MARK: - O que precisa continuar passando

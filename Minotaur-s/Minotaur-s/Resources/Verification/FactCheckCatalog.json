@@ -1,0 +1,33 @@
+[
+  {
+    "id": "aosfatos-celular-seguro-2023",
+    "claim": "Em 2023, o aplicativo Celular Seguro permitia ao governo acessar o conteúdo do aparelho.",
+    "entities": [
+      "Celular Seguro"
+    ],
+    "eventYear": 2023,
+    "verdict": "CONTRADITO",
+    "url": "https://www.aosfatos.org/noticias/falso-app-celular-seguro-permite-governo-acessar-conteudo/",
+    "title": "Checagem: permissões do Celular Seguro",
+    "excerpt": "É falso que app Celular Seguro permite ao governo acessar conteúdo de aparelho",
+    "publishedAt": "2023-12-26T18:16:00-03:00",
+    "status": "pending_project_review",
+    "reviewerIDs": []
+  },
+  {
+    "id": "aosfatos-qdenga-2023",
+    "claim": "Em 2023, Lula recusou vacina japonesa contra a dengue para esperar imunizante nacional.",
+    "entities": [
+      "Lula",
+      "dengue"
+    ],
+    "eventYear": 2023,
+    "verdict": "CONTRADITO",
+    "url": "https://www.aosfatos.org/noticias/falso-lula-recusou-vacina-japonesa-contra-dengue/",
+    "title": "Checagem sobre a vacina QDenga",
+    "excerpt": "É falso que Lula recusou vacina japonesa contra a dengue para esperar imunizante nacional",
+    "publishedAt": "2024-01-03T15:20:00-03:00",
+    "status": "pending_project_review",
+    "reviewerIDs": []
+  }
+]

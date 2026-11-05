@@ -90,7 +90,7 @@ enum ChunkQualityFilter {
     ///
     /// A ordem das regras é a da DT-33 e importa para o diagnóstico, não para o resultado: um
     /// chunk reprovado por mais de uma regra reporta a primeira.
-    static func rejection(for chunk: String) -> Rejection? {
+    static func rejection(for chunk: String, verbDetector: (String) -> Bool? = ChunkQualityFilter.containsVerb) -> Rejection? {
         let text = normalizingWhitespace(chunk)
 
         if isPageTitle(text) { return .pageTitle }
@@ -102,7 +102,7 @@ enum ChunkQualityFilter {
 
         if body.count < minimumCharacters { return .tooShort }
         if wordCount(body) < minimumWords { return .tooShort }
-        if !containsVerb(body) { return .noVerb }
+        if verbDetector(body) == false { return .noVerb }
 
         return nil
     }
@@ -216,25 +216,30 @@ enum ChunkQualityFilter {
     /// como verbo em `"Fim do Mais lidas"` (falso negativo desta regra, coberto pelo marcador de
     /// navegação e pelo comprimento mínimo) e não acha verbo nenhum na byline da Giulia Vidale
     /// nem na do Eli Elster (onde acerta). Nenhuma regra sozinha responde por todos os casos.
-    private static func containsVerb(_ text: String) -> Bool {
+    static func containsVerb(_ text: String) -> Bool? {
+        guard NLTagger.availableTagSchemes(for: .word, language: .portuguese).contains(.lexicalClass) else { return nil }
         let tagger = NLTagger(tagSchemes: [.lexicalClass])
-        tagger.setLanguage(.portuguese, range: text.startIndex..<text.endIndex)
         tagger.string = text
+        tagger.setLanguage(.portuguese, range: text.startIndex..<text.endIndex)
 
         var found = false
+        var taggedWords = 0
         tagger.enumerateTags(
             in: text.startIndex..<text.endIndex,
             unit: .word,
             scheme: .lexicalClass,
             options: [.omitWhitespace, .omitPunctuation]
         ) { tag, _ in
+            if tag != nil && tag != .other && tag != .otherWord { taggedWords += 1 }
             if tag == .verb {
                 found = true
                 return false
             }
             return true
         }
-        return found
+        // Missing language assets return no usable tags on some Simulator/runtime installs.
+        // Unknown is not evidence that every sentence lacks a verb.
+        return taggedWords == 0 ? nil : found
     }
 
     // MARK: - Utilidades

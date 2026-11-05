@@ -122,7 +122,7 @@ struct VerificationViewModelTests {
         viewModel.verify()
         try await waitUntil { viewModel.result?.claim == secondClaim }
 
-        #expect(search.callCount == 2)
+        #expect(search.callCount == 4) // Primary + complementary query for each selected claim.
         #expect(viewModel.result?.claim == secondClaim)
         #expect(viewModel.claimText == secondClaim)
     }

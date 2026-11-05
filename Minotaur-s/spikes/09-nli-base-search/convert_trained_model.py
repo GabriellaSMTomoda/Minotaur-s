@@ -96,6 +96,7 @@ def main() -> int:
         type=Path,
         default=BUILD_DIR / "training-full" / "checkpoint-best",
     )
+    parser.add_argument("--output-dir", type=Path, help="Isolated candidate artifacts; never overwrite validated baseline")
     args = parser.parse_args()
     checkpoint = args.checkpoint.resolve()
     selection_path = checkpoint / "selection.json"
@@ -139,7 +140,8 @@ def main() -> int:
             global_config=OpLinearQuantizerConfig(mode="linear_symmetric", dtype="int8")
         ),
     )
-    trained_dir = BUILD_DIR / "trained"
+    quantized.user_defined_metadata["model_version"] = training_summary.get("model_version", "bertimbau-base-plue-spike9")
+    trained_dir = args.output_dir.resolve() if args.output_dir else BUILD_DIR / "trained"
     trained_dir.mkdir(parents=True, exist_ok=True)
     output = trained_dir / f"{VARIANT}_int8.mlpackage"
     if output.exists():
@@ -218,7 +220,7 @@ def main() -> int:
             ]
         },
     }
-    (BUILD_DIR / "trained_device_fixture.json").write_text(
+    ((trained_dir if args.output_dir else BUILD_DIR) / "trained_device_fixture.json").write_text(
         json.dumps(fixture, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     print(json.dumps(manifest["parity"], indent=2), flush=True)

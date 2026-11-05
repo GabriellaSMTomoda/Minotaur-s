@@ -2,13 +2,8 @@
 import Foundation
 import NaturalLanguage
 
-/// Reduz a afirmação do usuário à query enviada ao provedor de busca (RF-02.1/RF-02.2).
-///
-/// A estratégia é a **primeira frase truncada em 200 caracteres** (DT-22). O saco-de-palavras
-/// foi testado e descartado: no Spike 5 os vazamentos de domínio se concentraram em buscas
-/// dominadas por um termo genérico isolado, e a frase inteira preserva o contexto sintático
-/// da afirmação. A restrição por domínio não entra aqui — é o `include_domains` da chamada
-/// de busca (RF-02.3), nativo da API.
+/// Builds short, meaning-preserving queries locally. `plan(for:)` is the production
+/// entry point; `query(from:)` preserves the original first-sentence helper for callers.
 enum SearchQueryBuilder {
 
     /// Comprimento máximo da query (RF-02.1/RF-02.2).
@@ -27,6 +22,36 @@ enum SearchQueryBuilder {
 
         let sentence = firstSentence(of: trimmed) ?? trimmed
         return truncate(sentence, to: maxQueryLength)
+    }
+
+    static func plan(for context: ClaimContext) -> [SearchQuery] {
+        var text = context.text
+        let format = DateFormatter()
+        format.locale = Locale(identifier: "pt_BR")
+        format.timeZone = TimeZone(identifier: "America/Sao_Paulo")
+        format.dateFormat = "yyyy-MM-dd"
+        if let start = context.startDate {
+            for relative in ["hoje", "ontem"] {
+                text = text.replacingOccurrences(of: "\\b\(relative)\\b", with: "em " + format.string(from: start),
+                                                options: [.regularExpression, .caseInsensitive])
+            }
+        }
+        let primary = truncate(text, to: maxQueryLength)
+        let contextual: String
+        if text.count > maxQueryLength {
+            // Retain a complete suffix instead of a bag of isolated generic words.
+            let suffix = String(text.suffix(maxQueryLength))
+            contextual = suffix.firstIndex(of: " ").map { String(suffix[suffix.index(after: $0)...]) } ?? suffix
+        } else if context.temporalKind == .current {
+            contextual = truncate(text, to: 175) + " " + format.string(from: context.referenceDate)
+        } else {
+            contextual = primary
+        }
+        let candidates = [SearchQuery(text: primary, kind: .descriptive, context: context),
+                          SearchQuery(text: truncate(contextual, to: 200), kind: .contextual, context: context),
+                          SearchQuery(text: truncate(text, to: 188) + " checagem", kind: .factCheck, context: context)]
+        var seen = Set<String>()
+        return candidates.filter { !$0.text.isEmpty && seen.insert($0.text).inserted }
     }
 
     // MARK: - Segmentação

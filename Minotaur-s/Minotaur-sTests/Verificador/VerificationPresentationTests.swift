@@ -126,7 +126,8 @@ struct VerificationPresentationTests {
         #expect(VerificationPresentation.title(for: .entailment) == "Sustenta")
         #expect(VerificationPresentation.title(for: .contradiction) == "Contradiz")
         #expect(VerificationPresentation.title(for: .neutral) == "Não conclui")
-        #expect(VerificationPresentation.confidenceText(0.93).contains("93"))
+        #expect(!VerificationPresentation.confidenceText(0.93).contains("%"))
+        #expect(VerificationPresentation.confidenceText(0.93).contains("contexto"))
     }
 
     // MARK: - CA-11: aviso de limitação (RF-09.5)

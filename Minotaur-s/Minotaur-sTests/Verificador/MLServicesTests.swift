@@ -14,7 +14,37 @@ import Testing
 /// Estes testes carregam os modelos Core ML do bundle do app (o target de teste roda hospedado
 /// nele). Se `scripts/sync-models.sh` nunca rodou, eles falham com `.modelLoadFailed` — e isso
 /// é informação, não ruído: significa que o app também não conseguiria analisar nada.
+@Suite(.serialized)
 struct MLServicesTests {
+
+    @Test("Pipeline com ambos os modelos reais produz evidência e veredito")
+    func restoredModelsRunCompletePipeline() async throws {
+        // Exact public regression passage already used by the six critical probes below.
+        let text = """
+        Pode parecer mentira, mas em pleno século 21 ainda é necessário insistir que \
+        a Terra é redonda, algo que se sabe há mais de 2 mil anos. Algumas teorias da \
+        conspiração que afirmam que a Terra é plana continuam se espalhando.
+        """
+        let search = BundledModelSearch()
+        let pipeline = VerificationPipeline(
+            search: search, extractor: BundledModelArticle(text: text),
+            embeddings: try EmbeddingService.loadFromBundle(), nli: try NLIService.loadFromBundle()
+        )
+        let result = try await pipeline.verify(claim: "A Terra é plana.")
+        #expect(result.verdict == .contradito)
+        #expect(!result.sources.isEmpty)
+        #expect(result.sources.contains { $0.isEligible && !$0.evidence.isEmpty })
+    }
+
+    @Test("Busca real e modelos locais completam uma verificação", .enabled(if: ProcessInfo.processInfo.environment["VERIFIER_LIVE_SMOKE"] == "1", "Opt-in network smoke test"))
+    func livePipelineSmoke() async throws {
+        let pipeline = try VerificationPipeline.loadFromBundle()
+        let result = try await pipeline.verify(claim: "A Terra é plana.")
+        #expect(result.diagnostics.foundArticles > 0)
+        #expect(result.diagnostics.readArticles > 0)
+        #expect(result.diagnostics.nliPairs > 0)
+        #expect(!result.sources.isEmpty)
+    }
 
     // MARK: - Similaridade de cosseno (RF-06.5)
 
@@ -358,4 +388,17 @@ struct MLServicesTests {
         let service = try NLIService.loadFromBundle()
         #expect(try service.label(for: "qualquer coisa", chunks: []) == nil)
     }
+}
+
+// Network fixtures isolate loading/tokenization/retrieval/NLI/decision from provider availability.
+private struct BundledModelSearch: ArticleSearching {
+    var consultedDomains: [String] { ["bbc.com"] }
+    func search(query: String) async throws -> [SearchResultItem] {
+        [SearchResultItem(title: "O formato da Terra", url: "https://bbc.com/portuguese/model-regression",
+                          content: "", score: 1)]
+    }
+}
+private struct BundledModelArticle: ArticleTextExtracting {
+    let text: String
+    func extractText(from item: SearchResultItem) async -> String? { text }
 }

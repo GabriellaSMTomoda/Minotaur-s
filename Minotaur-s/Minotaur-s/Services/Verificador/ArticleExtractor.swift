@@ -30,7 +30,7 @@ struct ArticleExtractor: Sendable {
     /// Abaixo disso: paywall, conteúdo via JavaScript, ou falha de extração.
     static let minimumTextLength = 200
 
-    /// Timeout por artigo (RF-05.4). Artigo que estoura é descartado sem abortar o fluxo.
+    /// Maximum total per-article attempt allowance: two attempts of up to four seconds.
     static let timeout: TimeInterval = 8
 
     private let session: URLSession
@@ -41,57 +41,113 @@ struct ArticleExtractor: Sendable {
 
     // MARK: - Pipeline por artigo
 
-    /// Texto principal do artigo, pronto para o `TextChunker`.
-    ///
-    /// Ordem de tentativa, conforme RF-05.3 / DT-23:
-    /// 1. extração própria sobre o HTML baixado;
-    /// 2. se render menos de `minimumTextLength`, o `content` da busca como **fallback**;
-    /// 3. se o fallback também for curto, a fonte é inválida.
-    ///
-    /// O `content` da busca **nunca** substitui uma extração bem-sucedida — só resgata o caso
-    /// em que ela falhou.
-    ///
-    /// Não há retry por artigo: continua em aberto (item 14 da seção 7.3), a decidir em fase
-    /// futura. Um 5xx transitório aqui simplesmente descarta a fonte.
-    ///
-    /// - Returns: `nil` quando a fonte deve ser descartada — timeout, erro HTTP, HTML ilegível,
-    ///   ou texto curto demais nas duas vias. Descartar uma fonte nunca aborta a verificação
-    ///   (CA-05 / CA-06); quem decide o que fazer com as fontes restantes é o coordenador.
+    /// Compatibility text-only entry point. Production uses `extract(_:budget:)` so
+    /// snippets, partial bodies, dates and network failures retain their provenance.
     func extractText(from item: SearchResultItem) async -> String? {
-        let extracted = await downloadAndExtract(item: item)
-
-        if let extracted, extracted.count >= Self.minimumTextLength {
-            return extracted
-        }
-
-        let fallback = Self.normalize(item.content)
-        return fallback.count >= Self.minimumTextLength ? fallback : nil
+        await extract(item, budget: VerificationBudget()).article?.text
     }
 
-    private func downloadAndExtract(item: SearchResultItem) async -> String? {
-        guard let url = item.resolvedURL else { return nil }
-
-        var request = URLRequest(url: url)
-        request.timeoutInterval = Self.timeout
-        // Alguns veículos devolvem 403 sem User-Agent de navegador. Os 4 domínios com
-        // bot-blocking duro já saíram da allowlist (RF-03.1), isto cobre o resto.
-        request.setValue(
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15",
-            forHTTPHeaderField: "User-Agent"
-        )
-        request.setValue("pt-BR,pt;q=0.9", forHTTPHeaderField: "Accept-Language")
-
-        do {
-            let (data, response) = try await session.data(for: request)
-            if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
-                return nil
-            }
-            guard let html = Self.decodeHTML(data) else { return nil }
-            return try? Self.mainText(fromHTML: html)
-        } catch {
-            // Inclui `URLError.timedOut` dos 8 s (RF-05.4 / CA-06).
-            return nil
+    func extract(_ item: SearchResultItem, budget: VerificationBudget) async -> ArticleExtraction {
+        guard let url = item.resolvedURL, url.scheme == "https", AllowlistFilter.isAllowed(url) else {
+            return ArticleExtraction(article: nil, discardReason: .disallowedURL)
         }
+        var discard: ArticleDiscardReason = .unusable
+        for attempt in 0..<2 {
+            guard !Task.isCancelled, budget.networkRemaining > 0.1 else { break }
+            var request = URLRequest(url: url)
+            request.timeoutInterval = min(Self.timeout / 2, budget.networkRemaining)
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+            request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15", forHTTPHeaderField: "User-Agent")
+            request.setValue("pt-BR,pt;q=0.9", forHTTPHeaderField: "Accept-Language")
+            do {
+                let (data, response) = try await session.data(for: request)
+                guard let finalURL = response.url, finalURL.scheme == "https", AllowlistFilter.isAllowed(finalURL) else {
+                    return ArticleExtraction(article: nil, discardReason: .disallowedURL)
+                }
+                if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
+                    discard = .network
+                    if attempt == 0 && (500...599).contains(http.statusCode) && budget.networkRemaining > 1 { continue }
+                    break
+                }
+                guard data.count <= 3 * 1024 * 1024, let html = Self.decodeHTML(data) else { break }
+                let article = try Self.article(fromHTML: html, item: item, finalURL: finalURL)
+                if article.text.count >= Self.minimumTextLength {
+                    return ArticleExtraction(article: article)
+                }
+                discard = article.isPartial ? .paywall : .unusable
+                break
+            } catch {
+                if Task.isCancelled { return ArticleExtraction(article: nil, discardReason: .timeout) }
+                let timedOut = (error as? URLError)?.code == .timedOut
+                discard = timedOut ? .timeout : .network
+                if attempt == 0 && timedOut && budget.networkRemaining > 1 { continue }
+                break
+            }
+        }
+        let snippet = Self.normalize(item.content)
+        guard snippet.count >= Self.minimumTextLength else { return ArticleExtraction(article: nil, discardReason: discard) }
+        return ArticleExtraction(article: ExtractedArticle(item: item, text: snippet, finalURL: item.url,
+                                                           provenance: .searchSnippet, isPartial: true), discardReason: discard)
+    }
+
+    static func article(fromHTML html: String, item: SearchResultItem, finalURL: URL) throws -> ExtractedArticle {
+        let document = try SwiftSoup.parse(html)
+        func meta(_ key: String) -> String? {
+            guard let value = try? document.select("meta[property='\(key)'],meta[name='\(key)']").first()?.attr("content"),
+                  !value.isEmpty else { return nil }
+            return value
+        }
+        var structured: [[String: Any]] = []
+        func visit(_ object: Any) {
+            if let array = object as? [Any] { array.forEach(visit); return }
+            guard let dictionary = object as? [String: Any] else { return }
+            let types = (dictionary["@type"] as? [String]) ?? [dictionary["@type"] as? String ?? ""]
+            if types.contains(where: { ["NewsArticle", "Article", "ReportageNewsArticle", "ClaimReview"].contains($0) }) {
+                structured.append(dictionary)
+            }
+            if let graph = dictionary["@graph"] { visit(graph) }
+            if let page = dictionary["mainEntity"] { visit(page) }
+        }
+        for script in try document.select("script[type='application/ld+json']").array() {
+            if let data = script.data().data(using: .utf8), let object = try? JSONSerialization.jsonObject(with: data) { visit(object) }
+        }
+        let data = structured.first ?? [:]
+        let freeValue = data["isAccessibleForFree"]
+        let paywalled = (freeValue as? Bool == false) || (freeValue as? String)?.lowercased() == "false"
+        let visible = try mainText(fromHTML: html)
+        let structuredBody = data["articleBody"] as? String
+        // Never use hidden JSON-LD to recover paid content.
+        let useStructured = !paywalled && visible.count < minimumTextLength && (structuredBody?.count ?? 0) >= minimumTextLength
+        let text = useStructured ? normalize(structuredBody ?? "") : visible
+        let type = meta("og:type") ?? ""
+        // Exact markers only: '-paywall-parent' can be a legitimate free container.
+        let hasPaidMarker = try document.select("[itemprop='isAccessibleForFree'][content='false'],[data-paywall='true'],[data-article-access='paid'],.paywall,.subscription-required,.article-preview").size() > 0
+        let partial = paywalled || type == "website" || hasPaidMarker
+        let canonical = try document.select("link[rel='canonical']").first()?.attr("href")
+        let canonicalURL = canonical.flatMap { URL(string: $0, relativeTo: finalURL)?.absoluteURL }
+        let author = (data["author"] as? [String: Any])?["name"] as? String
+        let original = (data["isBasedOn"] as? String) ?? meta("citation_source")
+        return ExtractedArticle(item: item, text: text, finalURL: finalURL.absoluteString,
+                                canonicalURL: canonicalURL.flatMap { AllowlistFilter.isAllowed($0) && $0.scheme == "https" ? $0.absoluteString : nil },
+                                title: data["headline"] as? String ?? meta("og:title") ?? item.title,
+                                author: author ?? meta("author"),
+                                publishedAt: parseDate(data["datePublished"] as? String ?? meta("article:published_time") ?? item.publishedDate),
+                                modifiedAt: parseDate(data["dateModified"] as? String ?? meta("article:modified_time")),
+                                provenance: useStructured ? .structuredData : .articleBody, isPartial: partial,
+                                originalSource: original)
+    }
+
+    static func parseDate(_ text: String?) -> Date? {
+        guard let text else { return nil }
+        let iso = ISO8601DateFormatter()
+        if let date = iso.date(from: text) { return date }
+        iso.formatOptions.insert(.withFractionalSeconds)
+        if let date = iso.date(from: text) { return date }
+        let simple = DateFormatter()
+        simple.locale = Locale(identifier: "en_US_POSIX")
+        simple.timeZone = TimeZone(secondsFromGMT: 0)
+        simple.dateFormat = "yyyy-MM-dd"
+        return simple.date(from: text)
     }
 
     /// Decodifica o HTML tolerando charset não-UTF-8. Vários veículos brasileiros ainda

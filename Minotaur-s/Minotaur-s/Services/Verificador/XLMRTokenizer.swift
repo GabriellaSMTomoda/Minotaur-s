@@ -97,4 +97,8 @@ struct XLMRTokenizer {
         return [bosTokenId] + body.prefix(max(0, budget)) + [eosTokenId]
     }
 
+    func tokenCount(_ text: String) -> Int {
+        tokenizer.encode(text: text, addSpecialTokens: false).count
+    }
+
 }
