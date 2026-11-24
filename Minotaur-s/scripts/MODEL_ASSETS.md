@@ -9,7 +9,7 @@ Em 04/11/2026, os dois modelos ausentes foram recuperados da instalação de 10/
 
 O hash NLI coincide com o gate físico registrado no Spike 9. Os cinco arquivos de tokenização/labels são idênticos aos da instalação recuperada. A versão legada não tinha `model_version` no metadado Core ML; a identidade é fixada pelo manifesto de hashes e pela política baseline `bertimbau-base-plue-spike9`. Novas conversões devem incluir o metadado.
 
-Os pesos ficam em `Minotaur-s/Resources/Models/`, fora do Git devido ao tamanho. Há uma cópia independente dos caches do simulador em:
+Os `weight.bin` (109 MB e 118 MB) excedem o limite de 100 MB por arquivo do GitHub, então são versionados **fatiados em partes de 45 MiB** em `model-parts/` (`NLI.weight.bin.part00..02`, `Embeddings.weight.bin.part00..02`). Os demais arquivos dos `.mlmodelc` (pequenos) ficam versionados em `Minotaur-s/Resources/Models/`; só o `weight.bin` remontado é ignorado pelo Git. Há também uma cópia independente dos caches do simulador, usada de preferência se existir, em:
 
 `~/Library/Application Support/Minotaur-s/models/bertimbau-base-plue-spike9/`
 
@@ -25,7 +25,7 @@ Para usar uma cópia do mesmo conjunto validado em outro local:
 MINOTAURS_MODEL_BACKUP='/caminho/para/o/conjunto' bash scripts/sync-models.sh
 ```
 
-O script verifica os arquivos em staging antes de substituir os modelos. Não baixa pesos, não treina nem altera o manifesto para aceitar arquivos diferentes. Em outra máquina, é necessário transportar os dois diretórios compilados completos; clonar o Git sozinho não traz os pesos.
+O script verifica os arquivos em staging antes de substituir os modelos (e sai sem mexer em nada se já estiver íntegro). Não baixa pesos, não treina nem altera o manifesto para aceitar arquivos diferentes. Em outra máquina basta `git pull`: sem backup local, o script remonta os pesos de `model-parts/` e confere o SHA-256 do manifesto. A fase de build `Restore model weights` roda esse script sozinha quando falta algum `weight.bin`, então a primeira build após o clone funciona sem passo manual. Se alterar os pesos, regenere as partes com `split -b 45m -d -a 2 <weight.bin> model-parts/<Modelo>.weight.bin.part` e atualize o manifesto.
 
 O target do app tem uma fase obrigatória `Verify local inference assets`, em Debug e Release. Ela confere SHA-256 dos 15 arquivos do modelo/tokenizadores no projeto e no bundle final, incluindo o manifesto. Arquivo ausente ou diferente faz o build falhar. Nunca desabilitar essa fase para contornar erro de empacotamento.
 

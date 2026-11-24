@@ -243,6 +243,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35E24FBD065004614C04F21E /* Build configuration list for PBXNativeTarget "Minotaur-s" */;
 			buildPhases = (
+				FA5E0011000000000000AA01 /* Restore model weights */,
 				34535AE799958938CFB251A6 /* Sources */,
 				FA5E0007000000000000AA01 /* Frameworks */,
 				ECB3BB9297AC8B912A5658A2 /* Resources */,
@@ -331,6 +332,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		FA5E0011000000000000AA01 /* Restore model weights */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Restore model weights";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Os weight.bin ficam fatiados em model-parts/ (limite de 100 MB do GitHub); remonta se faltarem.\nR=\"$SRCROOT/Minotaur-s/Resources/Models\"\nif [ ! -f \"$R/NLI.mlmodelc/weights/weight.bin\" ] || [ ! -f \"$R/Embeddings.mlmodelc/weights/weight.bin\" ]; then\n  /bin/bash \"$SRCROOT/scripts/sync-models.sh\" || exit 1\nfi\n";
+		};
 		FA5E0010000000000000AA01 /* Verify local inference assets */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;

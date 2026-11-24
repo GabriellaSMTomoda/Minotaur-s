@@ -1,0 +1,99 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "storagePrecision" : "Mixed (Float16, Int8)",
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float16",
+        "formattedType" : "MultiArray (Float16)",
+        "shortDescription" : "",
+        "shape" : "[]",
+        "name" : "embedding",
+        "type" : "MultiArray"
+      }
+    ],
+    "modelParameters" : [
+
+    ],
+    "specificationVersion" : 7,
+    "mlProgramOperationTypeHistogram" : {
+      "Transpose" : 48,
+      "Ios16.gather" : 101,
+      "Ios16.softmax" : 12,
+      "Ios16.linear" : 72,
+      "Select" : 4,
+      "Concat" : 50,
+      "Ios16.add" : 38,
+      "Ios16.realDiv" : 5,
+      "Tile" : 3,
+      "Ios16.reduceSum" : 2,
+      "Shape" : 54,
+      "ExpandDims" : 3,
+      "Ios16.constexprAffineDequantize" : 74,
+      "Ios16.cast" : 3,
+      "Ios16.sub" : 1,
+      "Ios16.matmul" : 24,
+      "Ios16.reshape" : 48,
+      "SliceByIndex" : 2,
+      "Ios16.layerNorm" : 25,
+      "Ios16.gelu" : 12,
+      "Ios16.equal" : 3,
+      "Ios16.clip" : 1,
+      "Ios16.maximum" : 1,
+      "Ios16.mul" : 13,
+      "Ios16.reduceL2Norm" : 1
+    },
+    "computePrecision" : "Mixed (Float16, Int32)",
+    "isUpdatable" : "0",
+    "stateSchema" : [
+
+    ],
+    "availability" : {
+      "macOS" : "13.0",
+      "tvOS" : "16.0",
+      "visionOS" : "1.0",
+      "watchOS" : "9.0",
+      "iOS" : "16.0",
+      "macCatalyst" : "16.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_mlProgram"
+    },
+    "userDefinedMetadata" : {
+      "com.github.apple.coremltools.conversion_date" : "2026-07-24",
+      "com.github.apple.coremltools.source" : "torch==2.7.0",
+      "com.github.apple.coremltools.version" : "9.0",
+      "com.github.apple.coremltools.source_dialect" : "TorchScript"
+    },
+    "inputSchema" : [
+      {
+        "dataType" : "Int32",
+        "hasShapeFlexibility" : "1",
+        "isOptional" : "0",
+        "shapeFlexibility" : "1 × 1...512",
+        "shapeRange" : "[[1, 1], [1, 512]]",
+        "formattedType" : "MultiArray (Int32 1 × 32)",
+        "type" : "MultiArray",
+        "shape" : "[1, 32]",
+        "name" : "input_ids",
+        "shortDescription" : ""
+      },
+      {
+        "dataType" : "Int32",
+        "hasShapeFlexibility" : "1",
+        "isOptional" : "0",
+        "shapeFlexibility" : "1 × 1...512",
+        "shapeRange" : "[[1, 1], [1, 512]]",
+        "formattedType" : "MultiArray (Int32 1 × 32)",
+        "type" : "MultiArray",
+        "shape" : "[1, 32]",
+        "name" : "attention_mask",
+        "shortDescription" : ""
+      }
+    ],
+    "generatedClassName" : "Embeddings",
+    "method" : "predict"
+  }
+]

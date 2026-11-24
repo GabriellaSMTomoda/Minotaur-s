@@ -27,5 +27,5 @@ xcuserdata/
 *.swo
 *.orig
 
-# Local Core ML weights; integrity manifest and restore scripts are versioned.
-Minotaur-s/Minotaur-s/Resources/Models/
+# Core ML weights remontados localmente; as partes (<50 MB) ficam em model-parts/ e são versionadas.
+Minotaur-s/Minotaur-s/Resources/Models/**/weights/weight.bin

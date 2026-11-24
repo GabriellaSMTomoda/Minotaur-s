@@ -39,15 +39,15 @@ O aviso de privacidade v2 exige reconhecimento explícito. O estado desse reconh
 
 Abrir `Minotaur-s/Minotaur-s.xcodeproj`. Não regenerar pelo XcodeGen: `project.yml` ainda não representa todas as dependências/configurações do projeto versionado.
 
-Os pesos Core ML não são versionados, mas foram recuperados nesta máquina. O build verifica presença e SHA-256 dos modelos e tokenizadores no projeto e no app empacotado. Para restaurar o backup local, execute `bash Minotaur-s/scripts/sync-models.sh`. Veja [procedência e restauração](Minotaur-s/scripts/MODEL_ASSETS.md).
+Os pesos Core ML (>100 MB, acima do limite do GitHub) são versionados fatiados em `Minotaur-s/model-parts/`. Depois de `git clone`/`git pull`, basta abrir o projeto e buildar: a fase `Restore model weights` remonta os `weight.bin` e o build verifica o SHA-256 dos modelos e tokenizadores no projeto e no app empacotado. Para remontar manualmente (ou se o build reclamar de arquivos ausentes), execute `bash Minotaur-s/scripts/sync-models.sh`. Veja [procedência e restauração](Minotaur-s/scripts/MODEL_ASSETS.md).
 
 ```sh
 cd Minotaur-s
-./scripts/sync-models.sh
+./scripts/sync-models.sh   # opcional; o build faz isso sozinho
 open Minotaur-s.xcodeproj
 ```
 
-O script restaura os dois `.mlmodelc` do backup em `~/Library/Application Support/Minotaur-s/models/bertimbau-base-plue-spike9/`. Ausência ou corrupção dos pesos impede concluir o build. Não substituir o NLI por uma base sem cabeça treinada.
+O script usa o backup local em `~/Library/Application Support/Minotaur-s/models/bertimbau-base-plue-spike9/` se existir; senão remonta de `model-parts/`. Pesos ausentes ou corrompidos impedem concluir o build. Não substituir o NLI por uma base sem cabeça treinada.
 
 A configuração de busca fica em `TavilySearchService.proxyEndpoint`. O app nunca recebe a chave da Tavily. Para testes/deploy do proxy e reconciliação de cota, consultar [proxy/README.md](Minotaur-s/proxy/README.md). O proxy v2 e o contador D1 estão ativos em produção desde 04/11/2026, na mesma URL configurada no app.
 
