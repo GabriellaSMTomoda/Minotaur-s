@@ -1,4 +1,4 @@
-<p align="center"><img src="log.png" alt="Fato ou Farsa" width="96"></p>
+<p align="center"><img src="logo.png" alt="Fato ou Farsa" width="96"></p>
 
 <h1 align="center">Fato ou Farsa</h1>
 
