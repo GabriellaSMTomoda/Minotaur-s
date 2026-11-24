@@ -1,4 +1,79 @@
-# Estado da implementação — 04/11/2026
+# Estado da implementação — 24/11/2026 (evidência v3)
+
+## Por que mudou
+
+Na v0.5 o Verificador respondia "Fontes divergentes" até para fatos triviais. O harness offline (`harness/`) reproduziu o problema e mostrou a causa. Uma única passagem com contradição ≥ 0,5, entre até 24 pares, bastava para DIVERGENTE. E o NLI dá contradição alta para texto fora do tema ("Lula visitou a China" vs. "Brasília é a capital do Brasil": 0,94).
+
+## Resultados medidos — conjunto dev, **não-gold**
+
+`data/dev_claims.jsonl`: 120 afirmações (40 triviais verdadeiras, 36 triviais falsas, 22 boatos e 22 notícias do quiz). Rótulos rascunhados pelo agente, `review_status: pending_user_review`. As regras v3 foram **ajustadas olhando esses mesmos casos**, então os números abaixo são otimistas e não estimam a precisão geral. Uma só coleta de busca por afirmação, mesmas páginas e modelos nas duas colunas. IC de Wilson 95%.
+
+| Métrica | v0.5 (baseline) | v3 (atual) |
+|---|---|---|
+| Acerto (veredito = rótulo dev) | 29/120 = **24,2%** (17,4–32,6) | 74/120 = **61,7%** (52,7–69,9) |
+| "Fontes divergentes" | **77**/120 | **3**/120 |
+| Direção oposta (CONFIRMADO↔CONTRADITO) | 5 | 2 |
+| Precisão direcional (acertos entre vereditos decisivos) | 29/34 = 85,3% (69,9–93,6) | 74/76 = **97,4%** (90,9–99,3) |
+| Cobertura (vereditos decisivos) | 34/120 = 28% | 76/120 = 63% |
+| Triviais verdadeiras | 6/40 | 31/40 |
+| Triviais falsas | 11/36 | 23/36 |
+| Boatos do quiz | 8/22 | 8/22 |
+| Notícias do quiz | 4/22 | 12/22 |
+
+Experimentos descartados, medidos no mesmo conjunto:
+
+| Variante | Resultado | Decisão |
+|---|---|---|
+| Ensemble BERTimbau + MiniLMv2-L6 (média, 70/30, concordância, veto de contradição) | 72–73/120, direção oposta 4–7 | Não embarcar (+103 MB, sem ganho) |
+| Sempre executar a consulta "checagem" (44 afirmações do quiz) | 20/44 com e sem | Manter só como resgate (dobraria créditos) |
+
+Os 44 erros restantes são principalmente SEM_INFORMACAO: a busca não trouxe uma frase que afirme ou negue o fato, ou a única fonte decisiva era parcial. Os erros de direção oposta restantes vêm do NLI: "São Paulo é a capital com maior transparência" lido como apoio a "São Paulo é a capital do Brasil", e "a Terra faz uma rotação em torno de seu eixo" como apoio a "O Sol gira em torno da Terra". O retreino (`../train_nli_v2.py`, pronto e não executado) e a revisão do conjunto dev são os próximos passos.
+
+### Wikipédia PT — medida e **ainda não promovida**
+
+Coleta `collect-wiki` (2 páginas por afirmação, mesmas consultas do Worker), análise `analyze --mode sentence --with-wiki`, agregador v3, mesmas buscas Tavily da coluna v3:
+
+| Variante | Acerto | "Fontes divergentes" | Direção oposta |
+|---|---|---|---|
+| v3 sem Wikipédia (`v3b`) | 74/120 | 3 | 2 |
+| + artigo inteiro (`v3w`, o que a rota `/wiki` devolve hoje) | 73/120 | 9 | 3 |
+| + só a introdução, 1.200 caracteres (`v3w1200`, `--wiki-lead 1200`) | 75/120 | 6 | 1 |
+
+A Wikipédia corrige casos sem informação (Copa de 2002, SUS, "A independência foi em 1500" passa a contradito) e tira São Paulo-capital da direção oposta. Mas o texto enciclopédico é denso no tema e expõe o NLI. Exemplos: "Terra plana é uma concepção arcaica do formato da Terra" sai como apoio 0,95 a "A Terra é plana", e o caso crítico vira DIVERGENTE. "…foi a primeira capital do Brasil Colonial" sai como contradição 0,93. "abolição da monarquia em 1889" sai como apoio a "a independência foi proclamada em 1889". No artigo inteiro também entram frases de outro assunto que passam nos portões ("o painel do Palácio Tiradentes foi executado… em 1926").
+
+Decisão: **não implantar `/wiki` ainda.** Antes: (1) a rota devolver só a introdução; (2) marcadores de descrédito enciclopédico ("concepção arcaica", "pseudociência", "teoria da conspiração") bloqueando apoio, como os de checagem; (3) nova medição sem regressão nos 6 casos críticos. O app já trata o 404 atual como "sem enciclopédia", então o comportamento em produção é o da coluna v3.
+
+## Entregas
+
+- `EvidenceScorer.swift` (novo) e `VerdictAggregator.swift` (reescrito): portões por passagem, soma por origem, DIVERGENTE só com lado oposto real. Espelham `harness/evidence.py`; `EvidenceParityTests` confere 120 passagens reais (anchors inclusos).
+- Premissas por frase (`VerificationPipeline.sentencePremises`) com limpeza de créditos/migalhas; orçamento de 48 pares curtos.
+- Raridade de palavras por `EmbeddingsPieceScores.bin` (Float16, 500 KB, `scripts/export-piece-scores.py`).
+- Alinhamento temporal: afirmação histórica datada aceita matérias posteriores/sem data.
+- `WikipediaSearchService.swift` + rota `POST /wiki` no Worker (`proxy/`, testada, **não implantada**); tipo `encyclopedia`; aviso de privacidade v3.
+- Harness `harness/` (uv, Python 3.12): coleta com cache, análise baseline/v3, relatório com trace por caso, `debug_case.py`, `ensemble.py`, `export_parity_fixture.py`.
+- Spike 10 (MiniLMv2-L6 em Core ML) e `nli_v2/` + `train_nli_v2.py` (retreino retomável, só smoke executado).
+- Skill `.claude/skills/avaliar-verificador` e agente `.claude/agents/analista-erros-verificador`.
+
+## Validação executada em 24/11/2026
+
+| Verificação | Resultado |
+|---|---|
+| Suíte Swift `Minotaur-sTests`, iPhone 17 Pro Simulator | **175 aprovados, 0 falhas, 2 opt-in não executados** |
+| Paridade Swift × Python (`EvidenceParityTests`) | 120/120 passagens |
+| Ferramentas de avaliação, Python | 15 aprovados |
+| Proxy (`npm test`) | 16 aprovados |
+| Aparelho físico | **Não executado** nesta rodada (latência dos 48 pares e RAM pendentes) |
+
+## Pendências
+
+1. **Revisão do conjunto dev pelo usuário** (`data/dev_claims.jsonl`). Até lá, nada aqui é gold.
+2. **Rota `/wiki`**: medida e não promovida (ver acima). Ajustar introdução + marcadores e medir de novo antes de implantar. A implantação é decisão do usuário e exige um contato do projeto no `WIKI_USER_AGENT`, porque a Wikimedia limita User-Agents sem contato.
+3. **Gate físico**: latência p95 com 48 pares e RAM no iPhone 16/13.
+4. **Retreino NLI** (Fase 5) e rótulos de domínio via Ollama local (exige ~15 GB livres; hoje há ~12 GB).
+
+---
+
+# Estado anterior — 04/11/2026
 
 O código do plano foi implementado no verificador, proxy e ferramentas offline. **As metas de acerto ainda não foram medidas. O proxy v2 e o D1 foram implantados e verificados ao vivo em 04/11/2026.** Não houve substituição dos pesos por um modelo sem validação.
 

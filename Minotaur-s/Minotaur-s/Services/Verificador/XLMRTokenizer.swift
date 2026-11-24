@@ -101,4 +101,9 @@ struct XLMRTokenizer {
         tokenizer.encode(text: text, addSpecialTokens: false).count
     }
 
+    /// SentencePiece ids of a single word, without `<s>`/`</s>`.
+    func pieceIDs(_ word: String) -> [Int] {
+        tokenizer.encode(text: word, addSpecialTokens: false)
+    }
+
 }

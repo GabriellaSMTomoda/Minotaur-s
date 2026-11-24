@@ -72,11 +72,11 @@ struct VerificadorView: View {
             }
         }
         .sheet(isPresented: $showsPrivacy) {
-            VerificationPrivacyView(requiresAcceptance: acceptedPrivacyVersion < 2) {
-                acceptedPrivacyVersion = max(2, acceptedPrivacyVersion)
+            VerificationPrivacyView(requiresAcceptance: acceptedPrivacyVersion < VerificationPrivacyView.currentVersion) {
+                acceptedPrivacyVersion = max(VerificationPrivacyView.currentVersion, acceptedPrivacyVersion)
                 showsPrivacy = false
             }
-            .interactiveDismissDisabled(acceptedPrivacyVersion < 2)
+            .interactiveDismissDisabled(acceptedPrivacyVersion < VerificationPrivacyView.currentVersion)
         }
         .sheet(isPresented: Binding(get: { !viewModel.claimCandidates.isEmpty }, set: {
             if !$0 { viewModel.dismissClaimSelection() }
@@ -106,7 +106,7 @@ struct VerificadorView: View {
         // Carrega os modelos ao abrir a tela, fora da main thread (RF-10.3 / NF-04) — não no
         // toque do botão, que somaria segundos ao orçamento da NF-03.
         .task {
-            showsPrivacy = acceptedPrivacyVersion < 2
+            showsPrivacy = acceptedPrivacyVersion < VerificationPrivacyView.currentVersion
             await viewModel.prepare()
         }
     }
@@ -174,7 +174,7 @@ struct VerificadorView: View {
                 .frame(minHeight: 44)
                 .accessibilityLabel("Verificar notícia")
                 .accessibilityHint("Toque para verificar essa notícia contra fontes confiáveis.")
-                .disabled(!viewModel.canVerify || acceptedPrivacyVersion < 2)
+                .disabled(!viewModel.canVerify || acceptedPrivacyVersion < VerificationPrivacyView.currentVersion)
             }
         }
         .frame(maxWidth: .infinity, alignment: .trailing)

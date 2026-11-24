@@ -37,7 +37,7 @@ struct EvidencePipelineTests {
         #expect(context.alignment(publishedAt: nil, text: "Sem data") == .unknown)
     }
 
-    @Test("O orçamento admite no máximo três buscas e 24 pares")
+    @Test("O orçamento admite no máximo três buscas e 48 pares curtos")
     func sharedCounters() async throws {
         let budget = VerificationBudget()
         let successes = await withTaskGroup(of: Bool.self) { group in
@@ -47,7 +47,7 @@ struct EvidencePipelineTests {
             return count
         }
         #expect(successes == 3)
-        try budget.reservePairs(24)
+        try budget.reservePairs(VerificationBudget.maximumPairs)
         #expect(throws: VerificationError.inferenceBudgetExceeded) { try budget.reservePairs() }
     }
 
@@ -168,17 +168,15 @@ struct EvidencePipelineTests {
         #expect(ReviewedFactCatalog.load().entries.allSatisfy { $0.status != "reviewed" || Set($0.reviewerIDs).count >= 2 })
     }
 
-    @Test("Critério de fonte única é aplicado a cada passagem, não ao maior score do artigo")
+    @Test("Refutação fraca do mesmo artigo não vira conflito nem rouba a confiança do apoio")
     func singleThresholdDoesNotBorrowOppositeConfidence() {
-        let policy = EvidencePolicy(version: "fixture", modelVersion: "fixture", temperature: 1,
-                                    minimumConfidence: 0.5, singleSourceMinimumConfidence: 0.9, calibrated: false)
         var source = source(.entailment, origin: "single")
         source.stance = .mixed
         source.evidence = [EvidencePassage(text: "Apoio.", probabilities: .init(entailment: 0.95, neutral: 0.03, contradiction: 0.02), similarity: 0.8),
                            EvidencePassage(text: "Refutação fraca.", probabilities: .init(entailment: 0.15, neutral: 0.20, contradiction: 0.65), similarity: 0.8)]
-        #expect(VerdictAggregator.verdict(for: [source], policy: policy) == .confirmado)
+        #expect(VerdictAggregator.verdict(for: [source]) == .confirmado)
         let neutral = self.source(.neutral, origin: "other")
-        #expect(VerdictAggregator.verdict(for: [source, neutral], policy: policy) == .confirmado)
+        #expect(VerdictAggregator.verdict(for: [source, neutral]) == .confirmado)
     }
 
     @Test("Política calibrada exige versão compatível e digest de calibração")

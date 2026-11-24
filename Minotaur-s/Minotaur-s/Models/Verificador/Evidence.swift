@@ -62,5 +62,6 @@ struct VerificationDiagnostics: Codable {
     var nliPairs = 0
     var elapsedSeconds: Double = 0
     var limitations: [VerificationLimitation] = []
-    var policyVersion = EvidencePolicy.current.version
+    /// NLI policy (temperature/model) plus the evidence rules that turned passages into votes.
+    var policyVersion = EvidencePolicy.current.version + "+" + EvidenceRules.default.version
 }

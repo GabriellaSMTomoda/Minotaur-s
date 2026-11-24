@@ -1,6 +1,6 @@
 # Minotaur-s — Fato ou Farsa
 
-A documentação principal está em [README.md na raiz](../README.md). A especificação vigente do verificador é [spec.md](spec.md), versão 0.5, de 04/11/2026.
+A documentação principal está em [README.md na raiz](../README.md). A especificação vigente do verificador é [spec.md](spec.md), versão 0.6, de 24/11/2026. Decisões e experimentos: [docs/decisoes-tecnicas.md](docs/decisoes-tecnicas.md).
 
 - [Curadoria, treino local, calibração e gates](evaluation/README.md)
 - [Estado da implementação e validações](evaluation/IMPLEMENTATION_STATUS.md)

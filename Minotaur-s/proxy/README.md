@@ -15,6 +15,19 @@ O app envia consultas curtas por POST; o Worker protege a chave Tavily e impõe 
 
 A allowlist está em `src/domains.js`; o teste confere igualdade com o Swift. Alterar os dois cadastros na mesma mudança. Preservar allowlist também no aparelho e validar URLs finais dos artigos.
 
+## Rota `POST /wiki` — Wikipédia PT (gratuita)
+
+Fonte enciclopédica para fatos estáveis/triviais. O Worker consulta `pt.wikipedia.org` em nome do app, de modo que o IP do usuário não chega à Wikimedia. Não usa chave, não chama Tavily nem LLM, não lê nem escreve o D1 e não registra consultas.
+
+- Entrada: `{ "query": string }`, com a mesma validação da busca (JSON, corpo ≤ 8 KiB, 1–200 grafemas). Outros campos são ignorados.
+- Upstream: `list=search` (`srlimit=3`, espaço principal) e, para as duas melhores páginas, `prop=extracts|info|pageprops` com `explaintext=1` e `inprop=url`, uma página por chamada. `exintro` **não** é enviado: na API MediaWiki um booleano presente vale verdadeiro com qualquer valor (inclusive `0`), e o TextExtracts só devolve texto integral de uma página por requisição. Páginas de desambiguação e extratos vazios são descartados.
+- `User-Agent` genérico do projeto (`FatoOuFarsa-Verificador/1.0 …`), sem e-mail ou dados pessoais. Timeout único de 4 s para as três chamadas.
+- Resposta 200 no formato de itens Tavily: `{ "query", "results": [{ "url", "title", "content", "raw_content", "score" }] }`. `url` é sempre `https://pt.wikipedia.org/wiki/…` (canônica da API ou reconstruída do título); `raw_content` traz até 6.000 caracteres do artigo e `content`, até 2.000 (início do mesmo texto). `score` é só a posição na busca (1; 0,67), não confiança. Sem `published_date`: a data de edição não é data de publicação. Busca sem resultados devolve `results: []`.
+- `X-Evaluation-Key` é opcional; se enviado, precisa estar correto (senão 403) e usa uma faixa de rajada separada.
+- Rajada: 30 chamadas/minuto por faixa, contadas **em memória por isolate** (sem D1). É barato e contém rajadas locais, mas não é um teto global.
+- Erros: 400/413 entrada inválida; 403 credencial de avaliação errada; 405 método; 429 + `rate_limited` com `Retry-After: 60`; 502 `upstream_failed` (status ≠ 2xx, erro da API ou falha de rede em qualquer chamada); 504 `upstream_timeout`. Falha de leitura nunca vira lista vazia. `Cache-Control: no-store`.
+- `pt.wikipedia.org` fica em `WIKIPEDIA_HOST` (`src/domains.js`), fora de `ALLOWED_DOMAINS`: aquela lista vai para a Tavily e espelha a allowlist Swift. O app precisa aceitar esse host na sua etapa.
+
 ## Preparação e implantação
 
 ```sh
@@ -57,7 +70,7 @@ O corpo da Tavily é transmitido em streaming, sem log. `Cache-Control: no-store
 
 ## Testes
 
-`npm test` usa SQLite real em memória, sem Cloudflare/Tavily/rede: concorrência no teto de 800, faixa autenticada de 200, rajadas, tentativas incertas, falha fechada, restrição de parâmetros, tamanho e paridade da allowlist. Tipos do binding podem ser gerados com `npx wrangler types`.
+`npm test` usa SQLite real em memória, sem Cloudflare/Tavily/rede: concorrência no teto de 800, faixa autenticada de 200, rajadas, tentativas incertas, falha fechada, restrição de parâmetros, tamanho e paridade da allowlist. A rota `/wiki` é testada com fetch mockado: parâmetros MediaWiki e `User-Agent`, formato/limites/URLs canônicas, validação e faixa de avaliação, D1 intocado, rajada por minuto, desambiguação e erros/timeout como 5xx. Tipos do binding podem ser gerados com `npx wrangler types`.
 
 ## Implantação concluída em 04/11/2026
 

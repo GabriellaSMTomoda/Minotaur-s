@@ -1,0 +1,9 @@
+{
+  "evidence": "config.json id2label de MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli@0a71e92a985b6e1ad1828cf67ce9c459639c1dca",
+  "model_version": "minilmv2-l6-mnli-xnli-v1",
+  "id2label": {
+    "0": "entailment",
+    "1": "neutral",
+    "2": "contradiction"
+  }
+}

@@ -31,4 +31,7 @@ export const ALLOWED_DOMAINS = [
   "tse.jus.br",
   "who.int"
 ];
-export const FACT_CHECK_DOMAINS = ["aosfatos.org", "www.agencialupa.org", "g1.globo.com", "estadao.com.br"];
+// Encyclopedic source served only by POST /wiki. Kept out of ALLOWED_DOMAINS on purpose:
+// that list is sent to Tavily and mirrors the Swift allowlist; the app adds this host in its own stage.
+export const WIKIPEDIA_HOST = "pt.wikipedia.org";
+export const FACT_CHECK_DOMAINS =["aosfatos.org", "www.agencialupa.org", "g1.globo.com", "estadao.com.br"];
