@@ -1,0 +1,23 @@
+[project]
+name = "minotaurs-nli-v2"
+version = "0.1.0"
+description = "Retreino local (Mac/MPS, sem custo externo) do NLI BERTimbau-base do Verificador."
+requires-python = ">=3.11,<3.12"
+# Versões de torch/transformers idênticas às validadas no Spike 9
+# (spikes/09-nli-base-search/requirements-train.txt). FP16 no MPS foi rejeitado
+# lá; o treino continua FP32.
+dependencies = [
+  "torch==2.7.0",
+  "transformers==4.46.3",
+  "numpy>=1.26,<2.3",
+  "pyarrow>=17,<22",
+]
+
+[project.optional-dependencies]
+# Só para exportar o checkpoint com spikes/09-nli-base-search/convert_trained_model.py.
+convert = [
+  "coremltools==9.0",
+]
+
+[tool.uv]
+package = false

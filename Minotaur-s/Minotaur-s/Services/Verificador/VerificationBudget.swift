@@ -31,11 +31,14 @@ final class VerificationBudget: @unchecked Sendable {
             searches += 1
         }
     }
+    /// Sentence-level premises are short (≈40–80 tokens instead of up to 509), so the same time
+    /// budget admits twice the v0.5 cap of 24 pairs. The deadline check still guards each pair.
+    static let maximumPairs = 48
     func reservePairs(_ count: Int = 1) throws {
         try Task.checkCancellation()
         guard remaining > 0.15 else { record(.deadline); throw VerificationError.deadlineExceeded }
         try lock.withLock {
-            guard pairs + count <= 24 else {
+            guard pairs + count <= Self.maximumPairs else {
                 issues.insert(.inferenceBudget)
                 throw VerificationError.inferenceBudgetExceeded
             }

@@ -11,21 +11,14 @@ struct ClaimContext: Codable, Equatable, Sendable {
 
     func alignment(publishedAt: Date?, text: String) -> TemporalAlignment {
         guard temporalKind != .timeless else { return .compatible }
-        guard let publishedAt else { return .unknown }
-        // Publication time is not event time. An explicit event year can rescue a
-        // retrospective report, but a newer publication alone cannot do so.
+        // A dated past event is discussed long after it happened, and the contested element is
+        // the date itself: later or undated publications are compatible. An article published
+        // before the claimed period only counts when it states dates of its own.
         if temporalKind == .historical, let startDate {
-            let year = Calendar(identifier: .gregorian).component(.year, from: startDate)
-            if let endDate, endDate.timeIntervalSince(startDate) > 300 * 86_400,
-               text.contains(String(year)) { return .compatible }
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "pt_BR")
-            formatter.timeZone = TimeZone(identifier: "America/Sao_Paulo")
-            for format in ["dd/MM/yyyy", "yyyy-MM-dd", "d 'de' MMMM 'de' yyyy"] {
-                formatter.dateFormat = format
-                if ClaimAnalyzer.folded(text).contains(ClaimAnalyzer.folded(formatter.string(from: startDate))) { return .compatible }
-            }
+            guard let publishedAt, publishedAt < startDate else { return .compatible }
+            return ClaimAnalyzer.matches(#"\b(1[5-9]|20)\d{2}\b"#, in: text) ? .compatible : .incompatible
         }
+        guard let publishedAt else { return .unknown }
         if let startDate, publishedAt < startDate { return .incompatible }
         if let endDate, publishedAt > endDate { return .incompatible }
         return .compatible

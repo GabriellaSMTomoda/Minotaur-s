@@ -4,6 +4,25 @@ Esta pasta não contém dados dos usuários. `data/pending_candidates.jsonl` con
 
 O alvo de 1.200 afirmações (600 treino, 300 calibração, 300 teste cego) depende de curadoria humana. Não preencher a diferença com paráfrases automáticas nem declarar 90%/70% sem executar a avaliação. `data/known_regressions.jsonl` preserva os 15 pares anteriores; eles nunca são teste cego.
 
+## Harness offline e conjunto dev (24/11/2026)
+
+`harness/` reproduz o pipeline do app em Python usando **os mesmos `.mlmodelc`** (NLI e embeddings) e tokenizadores, com paridade conferida. Buscas (pelo Worker, faixa de avaliação), HTML e respostas da Wikipédia ficam em cache em `snapshots/`; reanalisar não custa créditos. `harness/evidence.py` é a implementação de referência da política de evidência v3, espelhada por `EvidenceScorer.swift` e conferida por `EvidenceParityTests`.
+
+`data/dev_claims.jsonl` tem 120 afirmações para desenvolvimento: 40 fatos triviais verdadeiros, 36 triviais falsos, 22 boatos e 22 notícias do quiz. Todas são `origin: dev_not_gold` e `review_status: pending_user_review`: **não são gold, não são teste cego e não servem para promoção**. Os resultados medidos estão em `IMPLEMENTATION_STATUS.md`.
+
+```sh
+cd harness && uv sync
+.venv/bin/python run_dev.py collect                  # rede: 1 crédito por afirmação sem cache
+.venv/bin/python run_dev.py collect-wiki             # rede: API gratuita da Wikipédia
+HARNESS_OFFLINE=1 .venv/bin/python run_dev.py analyze --mode sentence --run NOME [--with-wiki]
+HARNESS_OFFLINE=1 .venv/bin/python run_dev.py report --run NOME --aggregator v3   # ou baseline (v0.5)
+.venv/bin/python debug_case.py NOME dev-false-07     # cada passagem com E/N/C, portões e motivo do voto
+.venv/bin/python ensemble.py NOME                    # BERTimbau + MiniLMv2-L6 (Spike 10), quatro estratégias
+.venv/bin/python export_parity_fixture.py NOME 120   # regenera a fixture de paridade Swift
+```
+
+O fluxo guiado está na skill `.claude/skills/avaliar-verificador`, e a classificação de erros no agente `.claude/agents/analista-erros-verificador`. Ao ajustar regras olhando o conjunto dev, ele deixa de medir generalização: confirmar qualquer ganho no corpus revisado e no teste cego descritos abaixo.
+
 ## Curadoria
 
 Para cada candidato, conferir a afirmação atômica, data de referência ISO 8601, entidades, números, unidade, atribuição e modalidade. Corrigir `event_id`/`family_id` para agrupar o mesmo evento e suas variantes, inclusive quando os URLs forem diferentes. Remover material que dependa de imagem, áudio ou contexto irrecuperável.

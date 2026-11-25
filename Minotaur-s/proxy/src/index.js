@@ -1,4 +1,4 @@
-import { ALLOWED_DOMAINS, FACT_CHECK_DOMAINS } from "./domains.js";
+import { ALLOWED_DOMAINS, FACT_CHECK_DOMAINS, WIKIPEDIA_HOST } from "./domains.js";
 
 export const RESERVE_SQL = `
 INSERT INTO search_budget(period, production, evaluation, minute, burst)
@@ -50,7 +50,97 @@ async function matchesSecret(supplied, expected) {
   return difference === 0;
 }
 
-export function createWorker({ fetchImpl = fetch, now = () => new Date() } = {}) {
+/** Shared body/query/credential validation for every POST route. Returns a Response on rejection. */
+async function readQuery(request, env) {
+  let input;
+  try { input = await readJSON(request); }
+  catch (error) { return json(error.message === "body_too_large" ? 413 : 400, "invalid_body", "Invalid JSON request."); }
+  if (!input || typeof input !== "object" || Array.isArray(input) || typeof input.query !== "string") {
+    return json(400, "invalid_query", "A query is required.");
+  }
+  const query = input.query.trim();
+  const length = [...new Intl.Segmenter("pt", { granularity: "grapheme" }).segment(query)].length;
+  if (length < 1 || length > 200) return json(400, "invalid_query", "Query must contain 1 to 200 characters.");
+  const suppliedKey = request.headers.get("X-Evaluation-Key");
+  if (suppliedKey && !await matchesSecret(suppliedKey, env.EVALUATION_KEY)) return json(403, "unauthorized", "Invalid evaluation credentials.");
+  return { input, query, evaluation: Boolean(suppliedKey) };
+}
+
+// Wikipedia PT: free, no API key, never touches the Tavily D1 budget.
+const WIKI_API = `https://${WIKIPEDIA_HOST}/w/api.php`;
+const WIKI_PAGES = 2;
+const WIKI_RAW_CHARS = 6000;
+const WIKI_CONTENT_CHARS = 2000; // within the ~2,200-char snippet size the app already expects in `content`
+const WIKI_BURST = 30;
+// Wikimedia requires an identifying User-Agent. Generic project name only: no e-mail, account or device data.
+export const WIKI_USER_AGENT = "FatoOuFarsa-Verificador/1.0 (proxy educacional de checagem; sem dados de usuarios)";
+
+/** Truncate by code points, backing off to the last whitespace so words are not cut. */
+function truncate(text, limit) {
+  const chars = Array.from(text.slice(0, limit * 2));
+  if (chars.length <= limit && text.length <= limit * 2) return text;
+  const cut = chars.slice(0, limit).join("");
+  const space = cut.search(/\s\S*$/);
+  return (space > cut.length * 0.8 ? cut.slice(0, space) : cut).trimEnd();
+}
+
+/** Canonical article URL on pt.wikipedia.org; anything else falls back to the title path. */
+function wikiURL(page) {
+  for (const candidate of [page.canonicalurl, page.fullurl]) {
+    try {
+      const url = new URL(candidate);
+      if (url.protocol === "https:" && url.hostname === WIKIPEDIA_HOST && url.pathname.startsWith("/wiki/") && url.pathname.length > 6) {
+        return `https://${WIKIPEDIA_HOST}${url.pathname}`;
+      }
+    } catch { /* invalid or absent */ }
+  }
+  const path = encodeURIComponent(page.title.replaceAll(" ", "_")).replaceAll("%2F", "/").replaceAll("%3A", ":");
+  return `https://${WIKIPEDIA_HOST}/wiki/${path}`;
+}
+
+async function wikiQuery(fetchImpl, params, signal) {
+  const url = new URL(WIKI_API);
+  for (const [key, value] of Object.entries({ action: "query", format: "json", formatversion: "2", utf8: "1", ...params })) {
+    url.searchParams.set(key, value);
+  }
+  const response = await fetchImpl(url.toString(), { headers: { "User-Agent": WIKI_USER_AGENT, Accept: "application/json" }, signal });
+  if (!response.ok) throw new Error("upstream_status");
+  const data = await response.json();
+  if (data?.error) throw new Error("upstream_error");
+  return data;
+}
+
+async function searchWikipedia(fetchImpl, query, signal) {
+  const search = await wikiQuery(fetchImpl, { list: "search", srsearch: query, srlimit: "3", srnamespace: "0", srprop: "" }, signal);
+  const hits = (search?.query?.search ?? []).filter(hit => Number.isInteger(hit?.pageid)).slice(0, WIKI_PAGES);
+  // One request per page: TextExtracts returns a single full-text extract per request unless
+  // `exintro` is set, and MediaWiki booleans are true when present with any value (even "0"),
+  // so `exintro` is omitted entirely to get the whole article.
+  const pages = await Promise.all(hits.map(hit => wikiQuery(fetchImpl, {
+    prop: "extracts|info|pageprops", explaintext: "1", exsectionformat: "plain", inprop: "url",
+    ppprop: "disambiguation", pageids: String(hit.pageid),
+  }, signal).then(data => (data?.query?.pages ?? []).find(page => page?.pageid === hit.pageid))));
+  const results = [];
+  pages.forEach((page, rank) => {
+    if (!page || page.missing || page.pageprops?.disambiguation !== undefined || typeof page.title !== "string") return;
+    const text = typeof page.extract === "string" ? page.extract.replace(/\n{3,}/g, "\n\n").trim() : "";
+    if (!text) return;
+    // Score is the search rank only (1, 0.67), not a confidence; the app ranks by its own similarity.
+    results.push({ url: wikiURL(page), title: page.title, content: truncate(text, WIKI_CONTENT_CHARS),
+      raw_content: truncate(text, WIKI_RAW_CHARS), score: Math.round((1 - rank / 3) * 100) / 100 });
+  });
+  return results;
+}
+
+export function createWorker({ fetchImpl = fetch, now = () => new Date(), wikiTimeoutMs = 4000 } = {}) {
+  // Per-isolate burst window for /wiki (no D1, no content): cheap, but not a global cap.
+  const wikiBursts = new Map();
+  const takeWikiBurst = (lane, minute) => {
+    const entry = wikiBursts.get(lane);
+    if (!entry || entry.minute !== minute) { wikiBursts.set(lane, { minute, count: 1 }); return true; }
+    if (entry.count >= WIKI_BURST) return false;
+    entry.count++; return true;
+  };
   return {
     async fetch(request, env) {
       // Read-only operator check for reconciliation; never exposes the Tavily secret,
@@ -75,19 +165,24 @@ export function createWorker({ fetchImpl = fetch, now = () => new Date() } = {})
         } catch { return json(503, "usage_unavailable", "Usage is temporarily unavailable."); }
       }
       if (request.method !== "POST") return json(405, "method_not_allowed", "Use POST.");
-      if (!env.TAVILY_API_KEY || !env.SEARCH_BUDGET) return json(503, "configuration", "Search is not configured.");
-      let input;
-      try { input = await readJSON(request); }
-      catch (error) { return json(error.message === "body_too_large" ? 413 : 400, "invalid_body", "Invalid JSON request."); }
-      if (!input || typeof input !== "object" || Array.isArray(input) || typeof input.query !== "string") {
-        return json(400, "invalid_query", "A query is required.");
+      if (new URL(request.url).pathname === "/wiki") {
+        const parsed = await readQuery(request, env);
+        if (parsed instanceof Response) return parsed;
+        if (!takeWikiBurst(parsed.evaluation ? "evaluation" : "production", Math.floor(now().getTime() / 60000))) {
+          return json(429, "rate_limited", "Please wait before searching again.", { "Retry-After": "60" });
+        }
+        try {
+          const results = await searchWikipedia(fetchImpl, parsed.query, AbortSignal.any([request.signal, AbortSignal.timeout(wikiTimeoutMs)]));
+          return Response.json({ query: parsed.query, results }, { headers: { "Cache-Control": "no-store" } });
+        } catch (error) {
+          return error?.name === "TimeoutError" ? json(504, "upstream_timeout", "Encyclopedia request timed out.")
+                                                : json(502, "upstream_failed", "Encyclopedia request failed.");
+        }
       }
-      const query = input.query.trim();
-      const length = [...new Intl.Segmenter("pt", { granularity: "grapheme" }).segment(query)].length;
-      if (length < 1 || length > 200) return json(400, "invalid_query", "Query must contain 1 to 200 characters.");
-      const suppliedKey = request.headers.get("X-Evaluation-Key");
-      if (suppliedKey && !await matchesSecret(suppliedKey, env.EVALUATION_KEY)) return json(403, "unauthorized", "Invalid evaluation credentials.");
-      const evaluation = Boolean(suppliedKey);
+      if (!env.TAVILY_API_KEY || !env.SEARCH_BUDGET) return json(503, "configuration", "Search is not configured.");
+      const parsed = await readQuery(request, env);
+      if (parsed instanceof Response) return parsed;
+      const { input, query, evaluation } = parsed;
       const date = now();
       // Calendar-month UTC; changing the reset requires reconciling the provider cycle.
       const period = date.toISOString().slice(0, 7);

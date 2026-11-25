@@ -126,6 +126,34 @@ struct EmbeddingService {
     func tokenCount(_ text: String) -> Int { tokenizer.tokenCount(text) }
     func prepareClaim(_ claim: String) throws -> [Float]? { try embedding(for: claim) }
 
+    /// Surprisal of a word under the XLM-R unigram model: higher = more specific. Used by
+    /// `ClaimFeatures` to find the anchor words of a claim. `nil` if the score table is missing.
+    func termRarity(_ word: String) -> Double? {
+        guard let scores = Self.pieceScores else { return nil }
+        let ids = tokenizer.pieceIDs(word)
+        guard !ids.isEmpty else { return nil }
+        return ids.reduce(0) { total, id in total - (scores.indices.contains(id) ? Double(scores[id]) : -20) }
+    }
+
+    /// Cosine similarity of each text to the claim vector, reusing the session cache.
+    func similarities(of texts: [String], claimVector: [Float], budget: VerificationBudget) throws -> [Double]? {
+        try texts.map { text in
+            try budget.checkAnalysis()
+            let vector = try budget.embedding(for: text) { try embedding(for: text) }
+            return Self.cosineSimilarity(claimVector, vector)
+        }
+    }
+
+    /// `EmbeddingsPieceScores.bin`: little-endian Float16 log-probabilities, one per piece id,
+    /// exported by `scripts/export-piece-scores.py` from the bundled tokenizer.
+    private static let pieceScores: [Float16]? = {
+        guard let url = Bundle.main.url(forResource: "EmbeddingsPieceScores", withExtension: "bin"),
+              let data = try? Data(contentsOf: url), data.count % 2 == 0 else { return nil }
+        return data.withUnsafeBytes { raw in
+            (0..<(data.count / 2)).map { Float16(bitPattern: raw.loadUnaligned(fromByteOffset: $0 * 2, as: UInt16.self).littleEndian) }
+        }
+    }()
+
     func selectTopChunks(claim: String, chunks: [String], claimVector: [Float]?,
                          budget: VerificationBudget) throws -> [ScoredChunk] {
         guard !chunks.isEmpty else { return [] }

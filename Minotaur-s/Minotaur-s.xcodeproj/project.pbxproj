@@ -332,26 +332,12 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		FA5E0011000000000000AA01 /* Restore model weights */ = {
+		FA5E0010000000000000AA01 /* Verify local inference assets */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-			);
-			name = "Restore model weights";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Os weight.bin ficam fatiados em model-parts/ (limite de 100 MB do GitHub); remonta se faltarem.\nR=\"$SRCROOT/Minotaur-s/Resources/Models\"\nif [ ! -f \"$R/NLI.mlmodelc/weights/weight.bin\" ] || [ ! -f \"$R/Embeddings.mlmodelc/weights/weight.bin\" ]; then\n  /bin/bash \"$SRCROOT/scripts/sync-models.sh\" || exit 1\nfi\n";
-		};
-		FA5E0010000000000000AA01 /* Verify local inference assets */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = ();
 			inputPaths = (
 				"$(SRCROOT)/scripts/verify-model-assets.py",
 				"$(SRCROOT)/Minotaur-s/Resources/Verification/VerificationModelManifest.json",
@@ -388,10 +374,26 @@
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/NLITokenizerConfig.json",
 			);
 			name = "Verify local inference assets";
-			outputPaths = ();
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = " /usr/bin/python3 \"$SRCROOT/scripts/verify-model-assets.py\" --resources \"$SRCROOT/Minotaur-s/Resources\" --bundle \"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\"\n";
+		};
+		FA5E0011000000000000AA01 /* Restore model weights */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Restore model weights";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Os weight.bin ficam fatiados em model-parts/ (limite de 100 MB do GitHub); remonta se faltarem.\nR=\"$SRCROOT/Minotaur-s/Resources/Models\"\nif [ ! -f \"$R/NLI.mlmodelc/weights/weight.bin\" ] || [ ! -f \"$R/Embeddings.mlmodelc/weights/weight.bin\" ]; then\n  /bin/bash \"$SRCROOT/scripts/sync-models.sh\" || exit 1\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

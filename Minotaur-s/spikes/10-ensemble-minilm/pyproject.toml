@@ -1,0 +1,17 @@
+[project]
+name = "spike10-ensemble-minilm"
+version = "0.1.0"
+description = "Spike 10: conversão Core ML do MiniLMv2-L6-mnli-xnli como segundo NLI (ensemble)."
+requires-python = "==3.11.*"
+# Mesmo toolchain do Spike 2/2c (coremltools 9.0 testado até torch 2.7).
+dependencies = [
+    "torch==2.7.0",
+    "transformers==4.46.3",
+    "sentencepiece",
+    "protobuf",
+    "coremltools==9.0",
+    "numpy<2.3",
+]
+
+[tool.uv]
+package = false

@@ -195,7 +195,7 @@ struct TextChunker {
 
     /// Segmenta em frases com `NLTokenizer`, on-device e sem dependência externa.
     /// O idioma é fixado em português — a feature não suporta outros (§5 da spec).
-    private static func sentences(in text: String) -> [String] {
+    static func sentences(in text: String) -> [String] {
         let tokenizer = NLTokenizer(unit: .sentence)
         tokenizer.setLanguage(.portuguese)
         tokenizer.string = text
